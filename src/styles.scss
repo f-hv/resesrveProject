@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+button{
+    width: 60px;
+    padding: 3px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(148, 187, 189);
+}
+button:hover{
+    background-color: rgb(129, 133, 133);
+}
+
+input{
+    border-radius: 5px;
+    padding: 5px;
+}

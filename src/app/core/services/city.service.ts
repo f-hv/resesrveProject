@@ -5,7 +5,10 @@ import { CityModel } from '../models/city.model';
   providedIn: 'root',
 })
 export class CityService {
-  city: CityModel[] = [{ id: 1, name: 'neyshabour' }];
+  city: CityModel[] = [
+    { id: 1, name: 'neyshabour' },
+    { id: 2, name: 'mashhad' },
+  ];
   orginalListCity = [...this.city];
 
   constructor() {}

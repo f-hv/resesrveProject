@@ -30,7 +30,9 @@ export class FormComponent implements OnInit {
     this.navigate();
   }
   navigate() {
-    this.router.navigate(['../list'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['../../list'], { relativeTo: this.activatedRoute });
   }
-  cancel() {}
+  cancel() {
+    this.navigate();
+  }
 }
