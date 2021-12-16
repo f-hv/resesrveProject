@@ -1,0 +1,25 @@
+<!-- <div *ngIf="formCity">
+  <form [formGroup]="formCity">
+    <label>city</label>
+    <input type="text" formControlName="name" required>
+    <button type="submit" (click)="save()">ذخیره</button>
+    <button type="submit" (click)="cancel()">انصراف</button>
+    
+  </form>
+  {{formCity.get('name')?.value|json}}
+</div>-->
+
+
+
+
+
+
+
+<div>
+  <div>
+    <label>city</label>
+    <input type="text" [(ngModel)]="listCity.name"  placeholder="name"/>
+  </div>
+  <button type="submit" (click)="save()">ذخیره</button>
+  <button type="button" (click)="cancel()">انصراف</button>
+</div>
