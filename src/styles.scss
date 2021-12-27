@@ -1,5 +1,12 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
 /* You can add global styles to this file, and also import other style files */
-button{
+button {
     width: 60px;
     padding: 3px;
     font-weight: bold;
@@ -10,11 +17,23 @@ button{
     border: none;
     background-color: rgb(148, 187, 189);
 }
-button:hover{
+button:hover {
     background-color: rgb(129, 133, 133);
 }
 
-input{
+input {
     border-radius: 5px;
     padding: 5px;
+}
+
+table,
+td,
+th {
+    border: 1px solid black;
+    // padding: 5px;
+}
+table {
+    width: 500px;
+    border-collapse: collapse;
+    margin-top: 50px;
 }

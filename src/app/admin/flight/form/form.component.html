@@ -1,0 +1,40 @@
+<div class="container" *ngIf="formFlight">
+  <form  [formGroup]="formFlight">
+    <div class="content">
+      <label>source</label>
+      <ng-multiselect-dropdown 
+          [placeholder]="'مبدا'" 
+          [settings]="dropdownSettings" 
+          [data]="listCity" 
+          (onSelect)="onSourceSelect($event)"
+          formControlName="source">
+      </ng-multiselect-dropdown>
+      <label>distination</label>
+      <ng-multiselect-dropdown 
+          [placeholder]="'مقصد'"  
+          [settings]="dropdownSettings" 
+          [data]="listCity" 
+          (onSelect)="onDistinationSelect($event)" 
+          formControlName="distination">
+      </ng-multiselect-dropdown>
+     <mat-label>تاریخ پرواز</mat-label> 
+     <input nbInput
+                   fullWidth
+                   [nbDatepicker]="datePicker"
+                   placeholder="Date"
+                   formControlName="date">
+      <nb-datepicker #datePicker></nb-datepicker>
+      <label>price</label>
+      <input type="text" formControlName="price" />
+      <label>airlineId</label>
+      <input type="text" formControlName="airlineId" />
+      <label>backFlightId</label>
+      <input type="text" formControlName="backFlightId" />
+      <label>flightNumber</label>
+      <input type="text" formControlName="flightNumber" />
+    </div>
+    <!-- {{formFlight.get('source')?.value|json}} -->
+    <button type="submit" (click)="save()">ذخیره</button>
+    <button type="button" (click)="cancel()">انصراف</button>
+  </form>
+</div>

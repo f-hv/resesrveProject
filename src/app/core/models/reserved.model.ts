@@ -1,6 +1,6 @@
 export interface ReservedModel {
-    id:number
-    flightId: number,
-    paymentId: number,
-    userId: number
+    id:number|null,
+    flightId: number|null,
+    paymentId: number|null,
+    userId: number|null
 }

@@ -1,24 +1,18 @@
-<!-- <div *ngIf="formCity">
-  <form [formGroup]="formCity">
-    <label>city</label>
-    <input type="text" formControlName="name" required>
-    <button type="submit" (click)="save()">ذخیره</button>
-    <button type="submit" (click)="cancel()">انصراف</button>
-    
-  </form>
-  {{formCity.get('name')?.value|json}}
-</div>-->
-
-
-
-
-
-
-
 <div>
   <div>
     <label>city</label>
-    <input type="text" [(ngModel)]="listCity.name"  placeholder="name"/>
+    <input 
+      type="text"  
+      [(ngModel)]="listCity.name" 
+      name="name"
+      >
+      <!-- [ngClass]="{
+        error: (listCity.name === '')
+      }" -->
+    <!-- <app-error-message
+            *ngIf="listCity.name === ''"
+            [message]="'Required'"
+    ></app-error-message> -->
   </div>
   <button type="submit" (click)="save()">ذخیره</button>
   <button type="button" (click)="cancel()">انصراف</button>

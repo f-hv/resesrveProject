@@ -1,18 +1,21 @@
 <div class="container">
-    <div style="padding-bottom: 20px;"><button [routerLink]="'../create'" >شهر جدید</button></div>
-    <form>
-        <tabel>
-            <tr>
-                <th>شهر</th>
-                <th> ---</th>
-            </tr>
-            <tr style="border: 2px solid black;" *ngFor="let item of listCity">
-                <td>{{item.name}} </td>
-                <td>
-                    <button [routerLink]="'../update/'+ item.id">ویرایش</button>
-                    <button (click)="delete(item.id)">حذف</button>
-                </td>
-            </tr>
-        </tabel>
-    </form>
+  <div style="padding-bottom: 20px">
+    <button [routerLink]="'../create'">شهر جدید</button>
+  </div>
+    <tabel>
+      <tr>
+        <th>شهر</th>
+        <th>---</th>
+      </tr>
+      <tr
+        style="border: 2px solid black"
+        *ngFor="let city of listCity; trackBy: cityById"
+      >
+        <td>{{ city.name }}</td>
+        <td>
+          <button [routerLink]="'../update/' + city.id">ویرایش</button>
+          <button (click)="delete(city.id)">حذف</button>
+        </td>
+      </tr>
+    </tabel>
 </div>

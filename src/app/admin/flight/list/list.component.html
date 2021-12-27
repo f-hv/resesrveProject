@@ -1,0 +1,28 @@
+<div class="container">
+  <div style="padding-bottom: 20px">
+    <button [routerLink]="'../create'">پرواز جدید</button>
+  </div>
+    <tabel>
+      <tr>
+        <th>مبدا</th>
+        <th>مقصد</th>
+        <th>مبلغ</th>
+        <th>پرواز</th>
+        <th>تاریخ</th>
+        <th>backFlightId</th>
+        <th></th>
+      </tr>
+      <tr style="border: 2px solid black" *ngFor="let flight of listFlight trackBy:flightById" >
+        <td>{{flight.source}}</td>
+        <td>{{flight.distination}}</td>
+        <td>{{flight.price}}</td>
+        <td>{{flight.airlineId}}</td>
+        <td>{{flight.date}}</td>
+        <td>{{flight.backFlightId}}</td>
+        <td>
+          <button [routerLink]="'../update/' + flight.id">ویرایش</button>
+          <button (click)="delete(flight.id)">حذف</button>
+        </td>
+      </tr>
+    </tabel>
+</div>

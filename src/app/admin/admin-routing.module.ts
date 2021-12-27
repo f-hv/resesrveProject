@@ -10,18 +10,23 @@ const routes: Routes = [
   // },
   {
     path:'',
-    redirectTo:'city',
+    redirectTo:'airline',
   },
   {
     path:'city',
     loadChildren:()=> import ('./city/city.module')
     .then (m => m.CityModule)
   },
-  // {
-  //   path:'flight',
-  //   loadChildren:()=> import ('./')
-  //   .then (m => m.)
-  // },
+  {
+    path:'flight',
+    loadChildren:()=> import ('./flight/flight.module')
+    .then (m => m.FlightModule)
+  },
+  {
+    path:'airline',
+    loadChildren:()=> import ('./airline/airline.module')
+    .then (m => m.AirlineModule)
+  },
   // {
   //   path:'reserve',
   //   loadChildren:()=> import ('./')

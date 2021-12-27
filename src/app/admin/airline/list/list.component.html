@@ -1,0 +1,26 @@
+<div>
+    <div style="padding-bottom: 20px">
+        <button [routerLink]="'../create'"> جدید</button>
+    </div>
+    <tabel>
+        <tr>
+            <th>نام</th>
+            <th>شهر</th>
+            <th>کلاس نرخی</th>
+            <th>وزن بار مجاز</th>
+            <th></th>
+        </tr>
+        <tbody>
+            <tr style="border: 2px solid black" *ngFor="let airline of listAirline trackBy:airlineById">
+                <td>{{airline.name}}</td>
+                <td>{{airline.city}}</td>
+                <td>{{airline.priceClass}}</td>
+                <td>{{airline.loadWeight}}</td>
+                <td>
+                    <button [routerLink]="'../update/' + airline.id">ویرایش</button>
+                    <button (click)="delete(airline.id)">حذف</button>
+                </td>
+            </tr>
+        </tbody>
+    </tabel>
+</div>

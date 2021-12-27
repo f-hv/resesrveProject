@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CityModel } from 'src/app/core/models/city.model';
-import { CityService } from 'src/app/core/services/city.service';
+import { CityModel } from '../../../core/models/city.model';
+import { CityService } from '../../../core/services/city.service';
 
 @Component({
   selector: 'app-list',
@@ -15,16 +15,20 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getData();
-    console.log("list:",this.listCity);
-    
   }
 
   getData() {
-    this.listCity = this.cityService.getData()
+    this.listCity = this.cityService.getData();
+    this.listCity=this.listCity.filter(item => item.deleted === 0);
   }
+
   delete(item: any) {
     this.cityService.delete(item);
     this.getData();
+  }
+  
+  cityById(index:any,city:any){
+    return city.id
   }
 
 

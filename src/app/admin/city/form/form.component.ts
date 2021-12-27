@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CityModel } from 'src/app/core/models/city.model';
-import { CityService } from 'src/app/core/services/city.service';
+import { CityModel } from '../../../core/models/city.model';
+import { CityService } from '../../../core/services/city.service';
 
 @Component({
   selector: 'app-form',
@@ -10,8 +9,9 @@ import { CityService } from 'src/app/core/services/city.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  // listCity: CityModel[] = [];
+  orginalName:any;
   listCity: CityModel;
+
   @Input() id: any;
   constructor(
     private cityService: CityService,
@@ -20,19 +20,28 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.id) this.listCity = this.cityService.getById(this.id);
+    if (this.id) {
+      this.listCity = this.cityService.getById(this.id);
+      this.orginalName=this.listCity.name;
+    }
+    else this.listCity = { id: null, name: null , deleted:null };
+  }
+  getData(){
+    this.listCity = this.cityService.getById(this.id);
   }
   save() {
-    console.log(this.listCity);
       if (this.id) {
         this.cityService.update(this.listCity);
       } else this.cityService.create(this.listCity);
     this.navigate();
   }
   navigate() {
-    this.router.navigate(['../list'], { relativeTo: this.activatedRoute });
+    this.router.navigate([this.id ? '../..' : '..'], {
+			relativeTo: this.activatedRoute,
+		});
   }
   cancel() {
+    this.listCity.name=this.orginalName;
     this.navigate();
   }
 }

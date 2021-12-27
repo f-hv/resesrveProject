@@ -1,0 +1,16 @@
+.content{
+    display: flex;
+    justify-content: center;
+
+}
+.form-class{
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    ng-multiselect-dropdown{
+        width: 110px;
+    }
+}
+

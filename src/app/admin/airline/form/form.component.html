@@ -1,0 +1,24 @@
+<div class="content" *ngIf="formAirline">
+    <form class="form-class" [formGroup]="formAirline">
+        <label>نام</label>
+        <input formControlName="name" [ngClass]="{
+            error: (!formAirline.get('name')?.valid || formAirline.get('name')?.value === '') && isClickOnsaveBtn
+          }" />
+        <app-error-message 
+            *ngIf="formAirline.get('name')?.value === ''" 
+            [message]="'Required'">
+        </app-error-message>
+        <label>شهر</label>
+        <ng-multiselect-dropdown [placeholder]="'شهر'" [settings]="dropdownSettings" [data]="listCity"
+            (onSelect)="onCitySelect($event)" formControlName="city">
+        </ng-multiselect-dropdown>
+        <label>کلاس نرخی</label>
+        <ng-multiselect-dropdown [placeholder]="'کلاس نرخی'" [settings]="dropdownSettings" [data]="listPriceClass"
+            (onSelect)="onPriceClassSelect($event)" formControlName="priceClass">
+        </ng-multiselect-dropdown>
+        <label>وزن مجاز بار</label>
+        <input formControlName="loadWeight">
+        <button type="submit" (click)="save()">ذخیره</button>
+        <button type="button" (click)="cancel">انصراف</button>
+    </form>
+</div>

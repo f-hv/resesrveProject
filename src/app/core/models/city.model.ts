@@ -1,4 +1,5 @@
 export interface CityModel {
-    id: any,
-    name: any,
+    id: number|null,
+    name:string|null,
+    deleted:number|null
 }

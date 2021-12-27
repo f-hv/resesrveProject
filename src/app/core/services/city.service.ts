@@ -6,8 +6,8 @@ import { CityModel } from '../models/city.model';
 })
 export class CityService {
   city: CityModel[] = [
-    { id: 1, name: 'neyshabour' },
-    { id: 2, name: 'mashhad' },
+    { id: 1, name: 'neyshabour',deleted:0 },
+    { id: 2, name: 'mashhad',deleted:0 },
   ];
   orginalListCity = [...this.city];
 
@@ -17,7 +17,7 @@ export class CityService {
     const findItem = this.city.find((item: any) => item.id === id);
     if (findItem) return findItem;
     else {
-      return { id: null, name: null };
+      return { id: null, name: null,deleted:null };
     }
   }
 
@@ -26,6 +26,7 @@ export class CityService {
   }
 
   update(data: any) {
+    debugger
     const editItem = this.city.find((item) => item.id === data.id);
     if (editItem) {
       editItem.name = data.name;
@@ -41,9 +42,11 @@ export class CityService {
   }
 
   create(data: CityModel) {
+    debugger
     this.city.push({
       id: this.city.length + 1,
       name: data.name,
+      deleted:0
     });
   }
 
