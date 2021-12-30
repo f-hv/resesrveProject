@@ -20,13 +20,10 @@ export class CityService {
       return { id: null, name: null,deleted:null };
     }
   }
-
   getData() {
     return this.city;
   }
-
   update(data: any) {
-    debugger
     const editItem = this.city.find((item) => item.id === data.id);
     if (editItem) {
       editItem.name = data.name;
@@ -42,7 +39,6 @@ export class CityService {
   }
 
   create(data: CityModel) {
-    debugger
     this.city.push({
       id: this.city.length + 1,
       name: data.name,

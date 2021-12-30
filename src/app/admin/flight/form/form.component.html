@@ -9,6 +9,13 @@
           (onSelect)="onSourceSelect($event)"
           formControlName="source">
       </ng-multiselect-dropdown>
+      <app-error-message 
+      *ngIf="
+        !formFlight.get('source')?.valid &&
+        isClickOnSaveBtn &&
+        !formFlight.get('source')?.value"
+      [message]="'Required'"
+    ></app-error-message>
       <label>distination</label>
       <ng-multiselect-dropdown 
           [placeholder]="'مقصد'"  
@@ -17,21 +24,53 @@
           (onSelect)="onDistinationSelect($event)" 
           formControlName="distination">
       </ng-multiselect-dropdown>
-     <mat-label>تاریخ پرواز</mat-label> 
-     <input nbInput
-                   fullWidth
-                   [nbDatepicker]="datePicker"
-                   placeholder="Date"
-                   formControlName="date">
-      <nb-datepicker #datePicker></nb-datepicker>
+      <app-error-message 
+        *ngIf="
+          !formFlight.get('distination')?.valid &&
+          isClickOnSaveBtn &&
+          !formFlight.get('distination')?.value"
+        [message]="'Required'"
+      ></app-error-message>
+     <!-- <input
+        [nbDatepicker]="e">
+      <nb-datepicker #e></nb-datepicker> -->
+      <label>date</label>
+      <input type="text" formControlName="date" />
       <label>price</label>
       <input type="text" formControlName="price" />
+      <app-error-message 
+      *ngIf="
+        !formFlight.get('price')?.valid &&
+        isClickOnSaveBtn &&
+        !formFlight.get('price')?.value"
+      [message]="'Required'"
+    ></app-error-message>
       <label>airlineId</label>
-      <input type="text" formControlName="airlineId" />
+      <ng-multiselect-dropdown 
+      [placeholder]="'خط پرواز'"  
+      [settings]="dropdownSettings" 
+      [data]="listAirline" 
+      (onSelect)="onAirlineSelect($event)" 
+      formControlName="airlineId">
+  </ng-multiselect-dropdown>
+  <app-error-message 
+    *ngIf="
+      !formFlight.get('airlineId')?.valid &&
+      isClickOnSaveBtn &&
+      !formFlight.get('airlineId')?.value"
+     [message]="'Required'"
+  ></app-error-message>
       <label>backFlightId</label>
       <input type="text" formControlName="backFlightId" />
       <label>flightNumber</label>
       <input type="text" formControlName="flightNumber" />
+      <app-error-message 
+        *ngIf="
+          !formFlight.get('flightNumber')?.valid &&
+         isClickOnSaveBtn &&
+          !formFlight.get('flightNumber')?.value"
+        [message]="'Required'"
+      ></app-error-message>
     </div>
     <!-- {{formFlight.get('source')?.value|json}} -->
     <button type="submit" (click)="save()">ذخیره</button>

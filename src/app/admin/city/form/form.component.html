@@ -1,19 +1,18 @@
 <div>
-  <div>
+  <div >
     <label>city</label>
     <input 
       type="text"  
       [(ngModel)]="listCity.name" 
-      name="name"
+      required
       >
-      <!-- [ngClass]="{
-        error: (listCity.name === '')
-      }" -->
-    <!-- <app-error-message
-            *ngIf="listCity.name === ''"
-            [message]="'Required'"
-    ></app-error-message> -->
+      <app-error-message 
+      *ngIf="
+        listCity.name === null &&
+        isClickOnSaveBtn"
+        [message]="'required'"
+      ></app-error-message>
   </div>
-  <button type="submit" (click)="save()">ذخیره</button>
+  <button type="submit" (click)="save()" >ذخیره</button>
   <button type="button" (click)="cancel()">انصراف</button>
 </div>

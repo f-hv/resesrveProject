@@ -9,10 +9,10 @@ import { CityService } from '../../../core/services/city.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  @Input() id: any;
   orginalName:any;
   listCity: CityModel;
-
-  @Input() id: any;
+  isClickOnSaveBtn=false;
   constructor(
     private cityService: CityService,
     private router: Router,
@@ -30,9 +30,13 @@ export class FormComponent implements OnInit {
     this.listCity = this.cityService.getById(this.id);
   }
   save() {
-      if (this.id) {
-        this.cityService.update(this.listCity);
-      } else this.cityService.create(this.listCity);
+    this.isClickOnSaveBtn=true;
+    if(this.listCity.name===null || this.listCity.name=== ''){
+      return
+    }
+    if (this.id) {
+       this.cityService.update(this.listCity);
+     } else this.cityService.create(this.listCity);
     this.navigate();
   }
   navigate() {
@@ -44,4 +48,5 @@ export class FormComponent implements OnInit {
     this.listCity.name=this.orginalName;
     this.navigate();
   }
+  
 }

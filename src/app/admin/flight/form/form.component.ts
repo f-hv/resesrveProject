@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDateService } from '@nebular/theme';
+import { AirlineModel } from 'src/app/core/models/airline.model';
+import { AirlineService } from 'src/app/core/services/airline.service';
 import { CityModel } from '../../../core/models/city.model';
 import { FlightModel } from '../../../core/models/flight.model';
 import { CityService } from '../../../core/services/city.service';
@@ -17,30 +19,36 @@ export class FormComponent implements OnInit {
   dataFlight: FlightModel;
   formFlight: FormGroup;
   listCity: CityModel[];
+  listAirline :AirlineModel[];
+  isClickOnSaveBtn = false;
   /////dropdown 
   dropdownSettings = {};
   source: any;
   distination: any;
+  IdAirline:any;
   ///// datepicker
-  min:Date;
-  max:Date;
+  min: Date;
+  max: Date;
+  // formcontrol = new FormControl(new Date());
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
     private cityService: CityService,
+    private airlineService :AirlineService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    protected dateService:NbDateService<Date>
-  ) { 
-    this.min = this.dateService.addMonth(this.dateService.today(), -1);
-    this.max = this.dateService.addMonth(this.dateService.today(), 1);
+    protected dateService: NbDateService<Date>
+  ) {
+    // this.min = this.dateService.addMonth(this.dateService.today(), -1);
+    // this.max = this.dateService.addMonth(this.dateService.today(), 1);
   }
   ngOnInit(): void {
     this.listCity = this.cityService.getData();
+    this.listAirline=this.airlineService.getData();
     console.log(this.listCity);
-    
+
     if (this.id) {
-      this.dataFlight = this.flightService.getById(this.id);  
+      this.dataFlight = this.flightService.getById(this.id);
     }
     else this.dataFlight = {
       id: null,
@@ -51,7 +59,7 @@ export class FormComponent implements OnInit {
       airlineId: null,
       backFlightId: null,
       flightNumber: null,
-      deleted:0
+      deleted: 0
     }
     this.initial();
     this.dropdownSettings = {
@@ -66,13 +74,13 @@ export class FormComponent implements OnInit {
   initial() {
     this.formFlight = this.formBuilder.group({
       id: [this.dataFlight?.id],
-      source: [this.source],
-      distination: [this.distination],
-      airlineId:[this.dataFlight?.airlineId],
+      source: [this.source, Validators.required],
+      distination: [this.distination, Validators.required],
+      airlineId: [this.IdAirline, Validators.required],
       date: [this.dataFlight?.date],
-      price: [this.dataFlight?.price],
+      price: [this.dataFlight?.price, Validators.required,Validators.minLength(5), Validators.maxLength(6)],
       backFlightId: [this.dataFlight?.backFlightId],
-      flightNumber: [this.dataFlight?.flightNumber],
+      flightNumber: [this.dataFlight?.flightNumber, Validators.required],
       deleted: 0
     });
   }
@@ -83,18 +91,31 @@ export class FormComponent implements OnInit {
   save() {
     this.formFlight?.get("source")?.setValue(this.source);
     this.formFlight?.get("distination")?.setValue(this.distination);
-    if (this.id) {
-      const resualt = this.flightService.update(this.formFlight.value);
-      if (resualt)
-        console.log("update succesfull");
-      else
-        console.log("fail update");
-    }
+    this.formFlight?.get("airlineId")?.setValue(this.IdAirline);
+    this.isClickOnSaveBtn = true;
+    if (this.formFlight.invalid)
+      return
     else {
-      this.flightService.create(this.formFlight.value);
-      console.log("create succesfull");
+      if (this.id) {
+        this.update();
+      }
+      else {
+        this.create();
+      }
+      this.navigate();
     }
-    this.navigate();
+  }
+  update(){
+    const resualt = this.flightService.update(this.formFlight.value);
+    if (resualt)
+      console.log("update succesfull");
+    else
+      console.log("fail update");
+  }
+
+  create(){
+    this.flightService.create(this.formFlight.value);
+    console.log("create succesfull");
   }
   navigate() {
     this.router.navigate([this.id ? '../..' : '..'], {
@@ -103,12 +124,16 @@ export class FormComponent implements OnInit {
   }
   //////multiselect Dropdown
   onSourceSelect(item: any) {
-    this.source='';
+    this.source = '';
     const selectedSource = this.listCity.find(city => city.id === item.id);
     this.source = selectedSource?.name;
   }
   onDistinationSelect(item: any) {
     const selectedDistination = this.listCity.find(city => city.id === item.id);
     this.distination = selectedDistination?.name;
+  }
+  onAirlineSelect(item:any){
+    const selectedAirline = this.listAirline.find(airline => airline.id === item.id);
+    this.IdAirline = selectedAirline?.id;
   }
 }

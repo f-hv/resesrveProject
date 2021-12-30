@@ -5,6 +5,7 @@ import { AirlineModel } from '../../../core/models/airline.model';
 import { AirlineService } from '../../../core/services/airline.service';
 import { CityModel } from '../../../core/models/city.model';
 import { CityService } from '../../../core/services/city.service';
+import { loadWeight } from 'src/app/core/models/loadWeight.model';
 
 @Component({
   selector: 'app-form',
@@ -13,9 +14,12 @@ import { CityService } from '../../../core/services/city.service';
 })
 export class FormComponent implements OnInit {
   @Input() id: any;
-  dataAirline: AirlineModel;
   formAirline: FormGroup;
-  listCity: CityModel[];
+  listLoadWeight:loadWeight[]=[
+    { id:1 , weight:20 },
+    { id:2 , weight:25 },
+    { id:3 , weight:30 },
+  ]
   listPriceClass: any[] = [
     { id: 1, name: 'A' },
     { id: 2, name: 'B' },
@@ -36,10 +40,17 @@ export class FormComponent implements OnInit {
     { id: 17, name: 'W' },
     { id: 18, name: 'P' },
   ];
+  dataAirline: AirlineModel;
+  listCity: CityModel[];
+  isClickOnSaveBtn=false;
+  
+    ////////////multiselect Dropdown
   dropdownSettings = {};
+  dropdownSettingsLoad={}
   priceClass: any;
   city: any;
-  isClickOnsaveBtn = false;
+  loadWeight:any;
+
   constructor(
     private airlineService: AirlineService,
     private cityService: CityService,
@@ -64,8 +75,15 @@ export class FormComponent implements OnInit {
       }
     }
     this.initial();
-
     ////////////multiselect Dropdown
+    this.dropdownSettingsLoad = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'weight',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 20,
+    };
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -88,26 +106,32 @@ export class FormComponent implements OnInit {
 
   save() {
     debugger
+    this.isClickOnSaveBtn = true
     if (this.formAirline.invalid) {
       return
     }
     else {
-      this.isClickOnsaveBtn = true
       this.formAirline?.get('priceClass')?.setValue(this.priceClass);
       this.formAirline?.get('city')?.setValue(this.city);
       if (this.id) {
-        const resualt = this.airlineService.update(this.formAirline.value);
-        if (resualt)
-          console.log("update succesfull");
-        else
-          console.log("fail update");
+       this.update();
       }
       else {
-        this.airlineService.create(this.formAirline.value);
-        console.log("create succesfull");
+       this.create();
       }
       this.navigate();
     }
+  }
+  update(){
+    const resualt = this.airlineService.update(this.formAirline.value);
+    if (resualt)
+      console.log("update succesfull");
+    else
+      console.log("fail update");
+  }
+  create(){
+    this.airlineService.create(this.formAirline.value);
+    console.log("create succesfull");
   }
   cancel() {
     this.navigate();
@@ -126,6 +150,10 @@ export class FormComponent implements OnInit {
   onCitySelect(item: any) {
     const selectedCity = this.listCity.find(cityItem => cityItem.id === item.id);
     this.city = selectedCity?.name;
+  }
+  onLoadSelect(item:any){
+    const selectedLoad = this.listLoadWeight.find(load => load.id === item.id);
+    this.loadWeight = selectedLoad?.weight;
   }
 
 }

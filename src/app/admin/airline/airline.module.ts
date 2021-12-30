@@ -8,6 +8,7 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { sharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AirlineRoutingModule,
     NgMultiSelectDropDownModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    sharedModule
   ],
   schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
 })

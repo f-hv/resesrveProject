@@ -7,6 +7,7 @@ import { EditComponent } from './edit/edit.component';
 import { FormComponent } from './form/form.component';
 import { ListComponent } from './list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { sharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CityRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    sharedModule
   ],
   schemas:[NO_ERRORS_SCHEMA , CUSTOM_ELEMENTS_SCHEMA]
 })

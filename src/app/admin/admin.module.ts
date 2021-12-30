@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlightComponent } from './flight/flight.component';
 import { AirlineComponent } from './airline/airline.component';
 import { NbDatepickerModule } from '@nebular/theme';
+import { ErrorMessageComponent } from '../shared/components/error-message/error-message.component';
+import { sharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +18,7 @@ import { NbDatepickerModule } from '@nebular/theme';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NbDatepickerModule.forRoot()
+    NbDatepickerModule.forRoot(),
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA , NO_ERRORS_SCHEMA]
 })
