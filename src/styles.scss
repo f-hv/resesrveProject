@@ -1,33 +1,13 @@
 
 /* You can add global styles to this file, and also import other style files */
-button {
-    width: 60px;
-    padding: 3px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-left: 10px;
-    margin-top: 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: rgb(148, 187, 189);
-}
-button:hover {
-    background-color: rgb(129, 133, 133);
-}
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
-input {
-    border-radius: 5px;
-    padding: 5px;
-}
-
-table,
-td,
-th {
-    border: 1px solid black;
-    // padding: 5px;
-}
-table {
-    width: 500px;
-    border-collapse: collapse;
-    margin-top: 50px;
+@font-face {
+    font-family: sans;
+    src: url(assets/fonts/Sans.ttf) format("truetype");
+  }
+  @import "assets/styles/custom-kit/variable.scss";
+*{
+  font-family: 'sans';
 }

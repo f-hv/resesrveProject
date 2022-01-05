@@ -1,26 +1,59 @@
-<div>
-    <div style="padding-bottom: 20px">
-        <button [routerLink]="'../create'"> جدید</button>
+<div class="container p-1">
+    <div class="row p-4 border-bottom border-2 border-secondary">
+        <div class="col-12 col-sm-12">
+            <button [routerLink]="'../create'"> جدید</button>
+        </div>
     </div>
-    <tabel>
-        <tr>
-            <th>نام</th>
-            <th>شهر</th>
-            <th>کلاس نرخی</th>
-            <th>وزن بار مجاز</th>
-            <th></th>
-        </tr>
-        <tbody>
-            <tr style="border: 2px solid black" *ngFor="let airline of listAirline trackBy:airlineById">
-                <td>{{airline.name}}</td>
-                <td>{{airline.city}}</td>
-                <td>{{airline.priceClass}}</td>
-                <td>{{airline.loadWeight}}</td>
-                <td>
-                    <button [routerLink]="'../update/' + airline.id">ویرایش</button>
-                    <button (click)="delete(airline.id)">حذف</button>
-                </td>
-            </tr>
-        </tbody>
-    </tabel>
+    <div class="row pt-2">
+        <div class="col-12 col-sm-12" style="width: 100%; overflow-x: auto;">
+            <!-- <tabel class="table tabel-danger table-hover align-middle table-striped table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">نام</th>
+                        <th scope="col">شهر</th>
+                        <th scope="col">کلاس نرخی</th>
+                        <th scope="col">وزن بار مجاز</th>
+                        <th scope="col">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border: 2px solid black" *ngFor="let airline of listAirline trackBy:airlineById">
+                        <td>{{airline.name}}</td>
+                        <td>{{airline.city}}</td>
+                        <td>{{airline.priceClass}}</td>
+                        <td>{{airline.loadWeight}}</td>
+                        <td>
+                            <i class="fas fa-edit p-2" [routerLink]="'../update/' + airline.id"></i>
+                            <i class="fas fa-trash p-2" (click)="delete(airline.id)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </tabel> -->
+            <table class="table tabel-danger table-hover align-middle table-striped table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">نام</th>
+                        <th scope="col">شهر</th>
+                        <th scope="col">کلاس نرخی</th>
+                        <th scope="col">وزن بار مجاز</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let airline of listAirline trackBy:airlineById">
+                        <td>1</td>
+                        <td>{{airline.name}}</td>
+                        <td>{{airline.city}}</td>
+                        <td>{{airline.priceClass}}</td>
+                        <td>{{airline.loadWeight}}</td>
+                        <td>
+                            <i class="fas fa-edit p-2" [routerLink]="'../update/' + airline.id"></i>
+                            <i class="fas fa-trash p-2" (click)="delete(airline.id)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
 </div>

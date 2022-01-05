@@ -1,0 +1,52 @@
+@import "../../assets/styles/custom-kit/variable.scss";
+
+
+.icon:hover{
+    cursor: pointer;
+    color:$magenta-90 ;
+    transition:  transform 0.2s ease-out ;// speed to change size 1 to size 2 on HOVER
+    transform: scale(1.2);////size buttom on hover ob self 
+  }
+  
+  button{
+    width: $width-sm;
+    background-color:$teal-30 ;
+    border-radius:$radius-sm !important;
+    // color: $white;
+    border: none;
+    padding: 5px;
+    box-shadow: $box-shadow-sm;
+    font-size: $font-size-2 !important;
+    &:hover{
+    //   background-color: $blue-50 !important;
+      box-shadow: $box-shadow-lg !important;
+    }
+  }
+  table{
+    width: 100%;
+    table-layout: fixed;///overflow td
+    background-color: $cyan-20 !important;
+    // overflow-x:auto;
+    font-size: $font-size-3;
+    vertical-align: middle;
+    td{
+        white-space:pre;
+        overflow: hidden;///overflow td
+    }
+    tbody{
+        tr:hover{
+            background-color: $gray-30;
+            i{
+                color: $blue-80;
+            }
+        }
+    }
+    thead{
+        background-color:$blue-80;
+        color: $white;
+        font-size: $font-size-2;
+        &:hover{
+        background-color:$blue-80;
+        }
+    }
+  }

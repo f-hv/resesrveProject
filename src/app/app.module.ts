@@ -4,10 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbDatepickerModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { sharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,10 +19,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     NgMultiSelectDropDownModule.forRoot(),
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
-    NbLayoutModule,
-    NbEvaIconsModule,
-    NbDatepickerModule.forRoot()
+    RouterModule
   ],
   schemas:[NO_ERRORS_SCHEMA , CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

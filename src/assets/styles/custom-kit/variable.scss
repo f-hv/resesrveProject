@@ -1,0 +1,249 @@
+//carbon design system
+
+//color
+$white: #ffffff;
+$black: #000000;
+
+$red-100: #2d0709;
+$red-90: #520408;
+$red-80: #750e13;
+$red-70: #a2191f;
+$red-60: #da1e28;
+$red-50: #fa4d56;
+$red-40: #ff8389;
+$red-30: #ffb3b8;
+$red-20: #ffd7d9;
+$red-10: #fff1f1;
+
+$magenta-100: #2a0a18;
+$magenta-90: #510224;
+$magenta-80: #740937;
+$magenta-70: #9f1853;
+$magenta-60: #d12771;
+$magenta-50: #ee5396;
+$magenta-40: #ff7eb6;
+$magenta-30: #ffafd2;
+$magenta-20: #ffd6e8;
+$magenta-10: #fff0f7;
+
+$purple-100: #1c0f30;
+$purple-90: #31135e;
+$purple-80: #491d8b;
+$purple-70: #6929c4;
+$purple-60: #8a3ffc;
+$purple-50: #a56eff;
+$purple-40: #be95ff;
+$purple-30: #d4bbff;
+$purple-20: #e8daff;
+$purple-10: #f6f2ff;
+
+$blue-100: #000d1a;
+$blue-90: #001a33;
+$blue-80: #00274c;
+$blue-70: #053766;
+$blue-60: #0d4e80;
+$blue-50: #1f6499;
+$blue-40: #237cb3;
+$blue-30: #3d95cc;
+$blue-20: #8ac6e6;
+$blue-10: #e0f3ff;
+
+$cyan-100: #061727;
+$cyan-90: #012749;
+$cyan-80: #003a6d;
+$cyan-70: #00539a;
+$cyan-60: #0072c3;
+$cyan-50: #1192e8;
+$cyan-40: #33b1ff;
+$cyan-30: #82cfff;
+$cyan-20: #bae6ff;
+$cyan-10: #e5f6ff;
+
+$teal-100: #081a1c;
+$teal-90: #022b30;
+$teal-80: #004144;
+$teal-70: #005d5d;
+$teal-60: #007d79;
+$teal-50: #009d9a;
+$teal-40: #08bdba;
+$teal-30: #3ddbd9;
+$teal-20: #9ef0f0;
+$teal-10: #d9fbfb;
+
+$green-100: #091700;
+$green-90: #0e2400;
+$green-80: #193e00;
+$green-70: #235700;
+$green-60: #3b6e15;
+$green-50: #518729;
+$green-40: #6c9c46;
+$green-30: #7fb555;
+$green-20: #c4e3aa;
+$green-10: #efffe0;
+
+$cool-gray-100: #121619;
+$cool-gray-90: #21272a;
+$cool-gray-80: #343a3f;
+$cool-gray-70: #4d5358;
+$cool-gray-60: #697077;
+$cool-gray-50: #878d96;
+$cool-gray-40: #a2a9b0;
+$cool-gray-30: #c1c7cd;
+$cool-gray-20: #dde1e6;
+$cool-gray-10: #f2f4f8;
+
+$gray-100: #161616;
+$gray-90: #262626;
+$gray-80: #393939;
+$gray-70: #525252;
+$gray-60: #6f6f6f;
+$gray-50: #8d8d8d;
+$gray-40: #a8a8a8;
+$gray-30: #c6c6c6;
+$gray-20: #e0e0e0;
+$gray-10: #f4f4f4;
+$gray-5: #f3f3f3;
+
+$warm-gray-100: #171414;
+$warm-gray-90: #272525;
+$warm-gray-80: #3c3838;
+$warm-gray-70: #565151;
+$warm-gray-60: #736f6f;
+$warm-gray-50: #8f8b8b;
+$warm-gray-40: #ada8a8;
+$warm-gray-30: #cac5c4;
+$warm-gray-20: #e5e0df;
+$warm-gray-10: #f7f3f2;
+
+$yellow-100: #1a0e00;
+$yellow-90: #402300;
+$yellow-80: #663800;
+$yellow-70: #995500;
+$yellow-60: #d28102;
+$yellow-50: #e59a02;
+$yellow-40: #f7c919;
+$yellow-30: #f7da4a;
+$yellow-20: #f7e37c;
+$yellow-10: #fff6e0;
+
+$otange-100: #231000;
+$otange-90: #3e1a00;
+$otange-80: #5e2900;
+$otange-70: #8a3800;
+$otange-60: #ba4e00;
+$otange-50: #eb6200;
+$otange-40: #ff832b;
+$otange-30: #ffb784;
+$otange-20: #ffd9be;
+$otange-10: #fff2e8;
+
+
+$primary-color-1: $green-40;
+$primary-color-2: $blue-40;
+$primary-color-3: $yellow-40;
+
+$error-color: $red-60;
+$danger-color: $red-50;
+$success-color: #24a148;
+$warning-color: #f1c21b;
+$info-color: $blue-60;
+$active-color: $blue-30;
+
+$dark: $gray-100;
+$gray-dark: $gray-80;
+$gray-normal: $gray-70;
+$gray-light: $gray-50;
+
+$blue-dark: $blue-80;
+
+//border
+$border-size-sm: 1px;
+$border-size-lg: 2px;
+
+//radius
+$radius-sm: 6px;
+$radius-lg: 30px;
+
+//z-index
+$modal-ZIndex: 1010;
+
+//font
+$font-size-1: 12px;
+$font-size-2: 14px;
+$font-size-3: 16px;
+$font-size-4: 18px;
+$font-size-5: 20px;
+$font-size-6: 24px;
+$font-size-7: 28px;
+$font-size-8: 32px;
+$font-size-9: 36px;
+
+//spacing
+$spacing-00: 0px;
+$spacing-01: 2px;
+$spacing-02: 4px;
+$spacing-03: 8px;
+$spacing-04: 12px;
+$spacing-05: 16px;
+$spacing-06: 24px;
+$spacing-07: 32px;
+$spacing-08: 40px;
+$spacing-09: 48px;
+$spacing-10: 50px;
+$spacing-11: 64px;
+$spacing-12: 96px;
+$spacing-13: 128px;
+
+//height and width
+$height-sm: 40px;
+$height-md: 48px;
+$height-lg: 64px;
+
+$width-sm: 120px;
+$width-md: 150px;
+$width-lg: 170px;
+
+$modal-xs: 327px;
+$modal-xms: 436px;
+$modal-sm: 491px;
+$modal-md: 656px;
+$modal-lg: 983px;
+
+//shadow
+$box-shadow-xs: 0px 2px 6px rgba($black, 0.2);
+$box-shadow-sm: 0px 2px 6px rgba($black, 0.3);
+$box-shadow-md: 0px 4px 8px rgba($black, 0.1);
+$box-shadow-lg: 0px 4px 8px rgba($black, 0.2);
+$box-shadow-top: 0px -2px 4px rgba($black, 0.1);
+
+// login
+$login-form-width: 415px;
+$search-box-width: 500px;
+
+// category
+$category-box-width: 235px;
+$category-box-height: 295px;
+
+$category-image-width: 220px;
+$category-image-height: 145px;
+
+$box-uploader-width: 95px;
+$box-uploader-height: 370px;
+
+// about-us
+$right-container: 420px;
+$extra-height: 240px;
+
+//pickupStation
+$emptyDiv: 280px;
+
+//main panel
+$right-application-list-space: 60px;
+
+$nav-height: 48px;
+$title-bar-height: 132px;
+$custom-title-bar-height: 100px;
+$normal-page-top-gap: $nav-height + $spacing-05 + $title-bar-height + $spacing-05;
+$custom-page-top-gap: $nav-height + $spacing-05 + $custom-title-bar-height + $spacing-05;
+$normal-right-side-width: 340px;
+$empty-table-div-height: 282px;

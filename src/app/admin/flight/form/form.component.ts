@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbDateService } from '@nebular/theme';
 import { AirlineModel } from 'src/app/core/models/airline.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
 import { CityModel } from '../../../core/models/city.model';
@@ -37,7 +36,6 @@ export class FormComponent implements OnInit {
     private airlineService :AirlineService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    protected dateService: NbDateService<Date>
   ) {
     // this.min = this.dateService.addMonth(this.dateService.today(), -1);
     // this.max = this.dateService.addMonth(this.dateService.today(), 1);

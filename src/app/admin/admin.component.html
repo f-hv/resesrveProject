@@ -1,0 +1,56 @@
+<div dir="rtl" class="container-fluid">
+    <div class="row d-flex flex-row">
+        <div class="col-md-2  col-lg-2 col-md-xl d-flex flex-column align-items-start pt-3 sidebar ">
+            <div class="row d-flex flex-row justify-content-start sidebar-header">
+                <div class="col">
+                    <h5>پنل ادمین</h5>
+                </div>
+            </div>
+            <div class="row sidebar-items">
+                <div class="col-12 pr-2 pt-2  d-flex flex-row justify-content-start align-items-center"
+                    [routerLink]="'./flight'">
+                    <i class="fas fa-plane fa-2x p-2"></i>
+                    <span>پرواز</span>
+                </div>
+                <div class="col-12 pr-2 pt-2 d-flex flex-row justify-content-start align-items-center"
+                    [routerLink]="'./airline'">
+                    <i class="fas fa-suitcase-rolling fa-2x p-2"></i>
+                    <span>خط پرواز</span>
+                </div>
+                <div class="col-12 pr-2 pt-2 d-flex flex-row justify-content-start align-items-center"
+                    [routerLink]="'./city'">
+                    <i class="fas fa-file-alt fa-2x p-2"></i>
+                    <span>شهر</span>
+                </div>
+                <div class="col-12 pr-2 pt-2  d-flex flex-row justify-content-start align-items-center"
+                    [routerLink]="'./reserve'">
+                    <i class="fas fa-file-alt fa-2x p-2"></i>
+                    <span>رزرو شده</span>
+                </div>
+                <div class="col-12 pr-2 pt-2  d-flex flex-row justify-content-start align-items-center">
+                    <i class="fas fa-home fa-2x p-2 "></i>
+                    <span>صفحه اصلی</span>
+                </div>
+                <div class="col pr-2 pt-2 d-flex flex-row justify-content-start align-items-center">
+                    <i class="fas fa-sign-out-alt fa-2x p-2"></i>
+                    <span>خروج</span>
+                </div>
+            </div>
+            <div class="row pt-3 profile">
+                <div class="col-12 d-flex flex-row justify-content-start align-items-center">
+                    <img src="../../assets/pic/profile.jpg" alt="Admin" width="40" height="40"  class="rounded-circle" >
+                    <ng-multiselect-dropdown 
+                        class="p-1 menu-profile"
+                        [placeholder]="'ادمین'" 
+                        [settings]="dropdownSettings" 
+                        [data]="adminData"
+                        (onSelect)="onAdminSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 detail-col p-2 ">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

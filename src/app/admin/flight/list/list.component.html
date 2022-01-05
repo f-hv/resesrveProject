@@ -1,28 +1,40 @@
-<div class="container">
-  <div style="padding-bottom: 20px">
-    <button [routerLink]="'../create'">پرواز جدید</button>
+<div class="container p-1">
+  <div class="row p-4 border-bottom border-2 border-secondary">
+    <div class="col-12 col-sm-12">
+      <button [routerLink]="'../create'">ثبت پرواز</button>
+    </div>
   </div>
-    <tabel>
-      <tr>
-        <th>مبدا</th>
-        <th>مقصد</th>
-        <th>مبلغ</th>
-        <th>پرواز</th>
-        <th>تاریخ</th>
-        <th>backFlightId</th>
-        <th></th>
-      </tr>
-      <tr style="border: 2px solid black" *ngFor="let flight of listFlight trackBy:flightById" >
-        <td>{{flight.source}}</td>
-        <td>{{flight.distination}}</td>
-        <td>{{flight.price}}</td>
-        <td>{{flight.airlineId}}</td>
-        <td>{{flight.date}}</td>
-        <td>{{flight.backFlightId}}</td>
-        <td>
-          <button [routerLink]="'../update/' + flight.id">ویرایش</button>
-          <button (click)="delete(flight.id)">حذف</button>
-        </td>
-      </tr>
-    </tabel>
+  <div class="row pt-2">
+    <div class="col-12 col-sm-12" style="width: 100%; overflow-x: auto;">
+      <table class=" tabel-danger table-hover table align-middle table-striped table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">مبدا</th>
+            <th scope="col">مقصد</th>
+            <th scope="col">مبلغ</th>
+            <th scope="col">تاریخ</th>
+            <th scope="col">خط پرواز</th>
+            <th scope="col">backFlightId</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let flight of listFlight trackBy:flightById">
+            <td scope="col">{{flight.id}}</td>
+            <td >{{flight.source}}</td>
+            <td>{{flight.distination}}</td>
+            <td>{{flight.price}}</td>
+            <td>{{flight.date  | date:'longTime'}}</td>
+            <td>{{flight.airlineId}}</td>
+            <td>{{flight.backFlightId}}</td>
+            <td>
+              <i class="fas fa-edit p-2 icon" [routerLink]="'../update/' + flight.id"></i>
+              <i class="fas fa-trash p-2  icon" (click)="delete(flight.id)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

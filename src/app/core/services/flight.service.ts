@@ -16,6 +16,17 @@ export class FlightService {
       backFlightId: 0,
       flightNumber:6030,
       deleted: 0
+    },
+    {
+      id: 2,
+      source: 'اصفهان',
+      distination: 'شیراز',
+      price: 200,
+      airlineId: 5,
+      date: new Date(),
+      backFlightId: 0,
+      flightNumber:6050,
+      deleted: 0
     }
   ];
   orginalListFlight = [...this.flight]

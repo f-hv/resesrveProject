@@ -14,10 +14,20 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    // const t = this.listFlight
+    // var a = t.split(" ");
+    // var date = a[0];
+    // var time = a[1];
   }
   getData() {
     this.listFlight = this.flightService.getData();
     this.listFlight = this.listFlight.filter(item => item.deleted === 0)
+    // this.listFlight.map(item =>{
+    //   if( item.deleted === 0){
+
+    //   }
+    // })
+
   }
   delete(item: any) {
     const resualt = this.flightService.delete(item);

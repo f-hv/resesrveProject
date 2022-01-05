@@ -8,12 +8,13 @@ export class AirlineService {
   airline: AirlineModel[] = [
     {
       id: 1,
-      name:'کیش ایر',
+      name: 'کیش ایر',
       city: 'کیش',
-      priceClass:'H',
+      priceClass: 'H',
       loadWeight: 20,
       deleted: 0
-  }];
+    }
+  ];
   orginalListAirline = [...this.airline];
 
   constructor() { }
@@ -40,11 +41,11 @@ export class AirlineService {
   update(data: AirlineModel) {
     const editItem = this.airline.find(item => item.id === data.id)
     if (editItem) {
-      editItem.name=data.name,
-      editItem.city=data.city,
-      editItem.priceClass=data.priceClass,
-      editItem.loadWeight=data.loadWeight, 
-      editItem.deleted=0
+      editItem.name = data.name,
+        editItem.city = data.city,
+        editItem.priceClass = data.priceClass,
+        editItem.loadWeight = data.loadWeight,
+        editItem.deleted = 0
       return true;
     } else return false;
   }

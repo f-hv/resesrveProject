@@ -6,19 +6,18 @@ import { CityComponent } from './city/city.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlightComponent } from './flight/flight.component';
 import { AirlineComponent } from './airline/airline.component';
-import { NbDatepickerModule } from '@nebular/theme';
-import { ErrorMessageComponent } from '../shared/components/error-message/error-message.component';
-import { sharedModule } from '../shared/shared.module';
-
+import { AdminComponent } from './admin.component';
+import { ReserveComponent } from './reserve/reserve.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
-  declarations: [CityComponent, FlightComponent, AirlineComponent],
+  declarations: [CityComponent, FlightComponent, AirlineComponent, AdminComponent, ReserveComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NbDatepickerModule.forRoot(),
+    NgMultiSelectDropDownModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA , NO_ERRORS_SCHEMA]
 })

@@ -1,0 +1,67 @@
+@import "../../assets/styles/custom-kit/variable.scss";
+
+.container-fluid{
+    height: 700px;
+    max-height: 700px;
+}
+.detail-col{
+    background-color:$cool-gray-30;
+    // height: 552px;
+    // max-height: 552px !important;
+}
+.sidebar{
+    background-color:$blue-80;
+    color: $white;
+    height: 552px;
+    .sidebar-items{
+        font-size: $font-size-1;
+        text-transform: capitalize;
+        div{
+            &:hover{
+                // background-color:$blue-80;
+                transition:  transform 0.3s ease-out ;// speed to change size 1 to size 2 on HOVER
+                transform: scale(1.1);////size buttom on hover ob self
+                cursor: pointer;
+            }
+            // span{
+            //     font-size: $font-size-2;
+            // }
+        }      
+    }
+}
+    .profile{
+        margin-top: 120px;
+        font-size: $font-size-1;
+        border-top: 1px solid $cyan-70;
+
+        .menu-profile{
+            width: 85px;
+            font-size: $font-size-1;
+            font-weight: bold;
+            border: none !important;
+            border-color: $blue-80 !important;
+
+        }
+    }
+    .sidebar-header{
+        box-sizing: border-box;
+        border-bottom: 1px solid $cyan-70;
+        
+    }
+     // &:focus + .fas {
+            //         color: aqua !important;
+            
+            // }
+            // &:focus + i{
+            //     .fas{
+            //         color: aqua !important;
+            //         background-color: brown !important;
+            //     }
+            // }
+    // .sidebar-items span:focus + i{
+        //     color: aqua !important;
+        //     background-color: brown !important;                
+        // }
+// div:first-child {
+//     border-bottom: 1px solid $cool-gray-30;
+// }        

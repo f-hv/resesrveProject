@@ -8,7 +8,6 @@ import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NbDatepickerDirective, NbDatepickerModule, NbInputModule } from '@nebular/theme';
 import { sharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -24,8 +23,6 @@ import { sharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule,
-    NbDatepickerModule,
-    NbInputModule, 
     sharedModule
   ],
   schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
