@@ -1,21 +1,30 @@
 <div class="container">
-  <div style="padding-bottom: 20px">
-    <button [routerLink]="'../create'">شهر جدید</button>
+  <div class="row p-4 border-bottom border-2 border-secondary">
+    <div class="col-12 col-sm-12">
+      <button [routerLink]="'../create'">شهر جدید</button>
+    </div>
   </div>
-    <tabel>
-      <tr>
-        <th>شهر</th>
-        <th>---</th>
-      </tr>
-      <tr
-        style="border: 2px solid black"
-        *ngFor="let city of listCity; trackBy: cityById"
-      >
-        <td>{{ city.name }}</td>
-        <td>
-          <i class="fas fa-edit p-2" [routerLink]="'../update/' + city.id"></i>
-          <i class="fas fa-trash p-2" (click)="delete(city.id)"></i>
-        </td>
-      </tr>
-    </tabel>
+  <div class="row pt-2">
+    <div class="col-12 col-sm-12" style="overflow-x: auto;">
+      <table class="table tabel-danger table-hover align-middle table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">شهر</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let city of listCity; trackBy: cityById">
+            <td class="shrink">#</td>
+            <td>{{ city.name }}</td>
+            <td>
+              <i class="fas fa-edit p-2" [routerLink]="'../update/' + city.id"></i>
+              <i class="fas fa-trash p-2" (click)="delete(city.id)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

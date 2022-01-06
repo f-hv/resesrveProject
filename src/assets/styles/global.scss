@@ -23,19 +23,19 @@
     }
   }
   table{
-    width: 100%;
     table-layout: fixed;///overflow td
+    border-spacing: 0;
     background-color: $cyan-20 !important;
     // overflow-x:auto;
     font-size: $font-size-3;
     vertical-align: middle;
     td{
-        white-space:pre;
+        white-space:nowrap;
         overflow: hidden;///overflow td
     }
     tbody{
         tr:hover{
-            background-color: $gray-30;
+            background-color: $cool-gray-30;
             i{
                 color: $blue-80;
             }

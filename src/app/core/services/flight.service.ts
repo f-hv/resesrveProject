@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { time } from 'console';
 import { FlightModel } from '../models/flight.model';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class FlightService {
       price: 50,
       airlineId: 5,
       date: new Date(),
+      time:new Date(),
       backFlightId: 0,
       flightNumber:6030,
       deleted: 0
@@ -24,6 +26,7 @@ export class FlightService {
       price: 200,
       airlineId: 5,
       date: new Date(),
+      time:new Date(),
       backFlightId: 0,
       flightNumber:6050,
       deleted: 0
@@ -43,6 +46,7 @@ export class FlightService {
         price:null,
         airlineId:null,
         date: null,
+        time:null,
         backFlightId:null,
         flightNumber:null,
         deleted: null
@@ -62,6 +66,7 @@ export class FlightService {
           editItem.price = data.price,
           editItem.airlineId = data.airlineId,
           editItem.date = data.date,
+          editItem.time=data.time,
           editItem.backFlightId = data.backFlightId,
           editItem.flightNumber=data.flightNumber,
           editItem.deleted = 0
@@ -84,6 +89,7 @@ export class FlightService {
         price: item.price,
         airlineId: item.airlineId,
         date: item.date,
+        time:item.time,
         backFlightId: item.backFlightId,
         flightNumber:item.flightNumber,
         deleted: 0,
