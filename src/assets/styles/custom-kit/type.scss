@@ -1,0 +1,104 @@
+@import "../custom-kit/variable.scss";
+
+.text-white {
+    color: $white;
+  }
+  
+  .text-success {
+    color: $success-color;
+  }
+  
+  .text.warning {
+    color: $warning-color;
+  }
+  
+  .text-error {
+    color: $error-color;
+  }
+  
+  .text-danger {
+    color: $danger-color;
+  }
+  
+  .text-info {
+    color: $info-color;
+  }
+  
+  .text-active {
+    color: $active-color;
+  }
+  
+  .text-primary-1 {
+    color: $primary-color-1;
+  }
+  
+  .text-primary-2 {
+    color: $primary-color-2;
+  }
+  
+  .text-primary-3 {
+    color: $primary-color-3;
+  }
+  
+  .text-gray-100 {
+    color: $cool-gray-100;
+  }
+  
+  .text-gray-90 {
+    color: $cool-gray-90;
+  }
+  
+  .text-gray-80 {
+    color: $cool-gray-80;
+  }
+  
+  .text-gray-70 {
+    color: $cool-gray-70;
+  }
+  
+  .text-gray-60 {
+    color: $cool-gray-60;
+  }
+  
+  .text-gray-50 {
+    color: $cool-gray-50;
+  }
+  
+  .text-gray-40 {
+    color: $cool-gray-40;
+  }
+  
+  .text-gray-30 {
+    color: $cool-gray-30;
+  }
+  
+  .text-gray-20 {
+    color: $cool-gray-20;
+  }
+  
+  .text-gray-10 {
+    color: $cool-gray-10;
+  }
+  
+  .text-blue-dark {
+    color: $cyan-80;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  
+  .text-underline {
+    text-decoration-line: underline;
+  }
+  
+  .text-ellipsis {
+    text-overflow: ellipsis;
+  }
+  
+  .white-space-nowrap {
+    white-space: nowrap;
+  }
+  .font-weight-500 {
+    font-weight: 500;
+  }

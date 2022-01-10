@@ -18,13 +18,15 @@ export class FormComponent implements OnInit {
   dataFlight: FlightModel;
   formFlight: FormGroup;
   listCity: CityModel[];
-  listAirline :AirlineModel[];
+  listAirline: AirlineModel[];
+  listFlight: FlightModel[];
   isClickOnSaveBtn = false;
   /////dropdown 
   dropdownSettings = {};
   source: any;
   distination: any;
-  IdAirline:any;
+  IdAirline: any;
+  backFlightId:any;
   ///// datepicker
   min: Date;
   max: Date;
@@ -33,7 +35,7 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private flightService: FlightService,
     private cityService: CityService,
-    private airlineService :AirlineService,
+    private airlineService: AirlineService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
@@ -42,9 +44,8 @@ export class FormComponent implements OnInit {
   }
   ngOnInit(): void {
     this.listCity = this.cityService.getData();
-    this.listAirline=this.airlineService.getData();
-    console.log(this.listCity);
-
+    this.listAirline = this.airlineService.getData();
+    this.listFlight = this.flightService.getData();
     if (this.id) {
       this.dataFlight = this.flightService.getById(this.id);
     }
@@ -53,7 +54,7 @@ export class FormComponent implements OnInit {
       source: null,
       distination: null,
       date: null,
-      time:null,
+      time: null,
       price: null,
       airlineId: null,
       backFlightId: null,
@@ -77,8 +78,8 @@ export class FormComponent implements OnInit {
       distination: [this.distination, Validators.required],
       airlineId: [this.IdAirline, Validators.required],
       date: [this.dataFlight?.date],
-      time:[this.dataFlight?.time],
-      price: [this.dataFlight?.price, Validators.required,Validators.minLength(5), Validators.maxLength(6)],
+      time: [this.dataFlight?.time],
+      price: [this.dataFlight?.price, Validators.required, Validators.minLength(5), Validators.maxLength(6)],
       backFlightId: [this.dataFlight?.backFlightId],
       flightNumber: [this.dataFlight?.flightNumber, Validators.required],
       deleted: 0
@@ -92,6 +93,8 @@ export class FormComponent implements OnInit {
     this.formFlight?.get("source")?.setValue(this.source);
     this.formFlight?.get("distination")?.setValue(this.distination);
     this.formFlight?.get("airlineId")?.setValue(this.IdAirline);
+    this.formFlight?.get("backFlightId")?.setValue(this.backFlightId);
+
     this.isClickOnSaveBtn = true;
     if (this.formFlight.invalid)
       return
@@ -105,7 +108,7 @@ export class FormComponent implements OnInit {
       this.navigate();
     }
   }
-  update(){
+  update() {
     const resualt = this.flightService.update(this.formFlight.value);
     if (resualt)
       console.log("update succesfull");
@@ -113,7 +116,7 @@ export class FormComponent implements OnInit {
       console.log("fail update");
   }
 
-  create(){
+  create() {
     this.flightService.create(this.formFlight.value);
     console.log("create succesfull");
   }
@@ -132,8 +135,12 @@ export class FormComponent implements OnInit {
     const selectedDistination = this.listCity.find(city => city.id === item.id);
     this.distination = selectedDistination?.name;
   }
-  onAirlineSelect(item:any){
+  onAirlineSelect(item: any) {
     const selectedAirline = this.listAirline.find(airline => airline.id === item.id);
     this.IdAirline = selectedAirline?.id;
+  }
+  onFlightSelect(item: any) {
+    const selectedFlight = this.listFlight.find(flight => flight.id === item.id);
+    this.backFlightId = selectedFlight;
   }
 }

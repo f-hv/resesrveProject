@@ -1,0 +1,17 @@
+@import "../custom-kit/variable.scss";
+
+.shadow-xs {
+    box-shadow: $box-shadow-xs;
+  }
+  
+  .shadow-sm {
+    box-shadow: $box-shadow-sm;
+  }
+  
+  .shadow-md {
+    box-shadow: $box-shadow-md;
+  }
+  
+  .shadow-lg {
+    box-shadow: $box-shadow-lg;
+  }

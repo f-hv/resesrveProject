@@ -1,0 +1,102 @@
+@import '../custom-kit/variable.scss';
+
+
+.bg-white {
+  background-color: rgb(255, 255, 255);
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-success {
+  background-color: $success-color;
+}
+
+.bg-warning {
+  background-color: $warning-color;
+}
+
+.bg-danger {
+  background-color: $danger-color;
+}
+
+.bg-info {
+  background-color: $info-color;
+}
+
+.bg-error {
+  background-color: $error-color;
+}
+
+.bg-active {
+  background-color: $active-color;
+}
+
+.bg-dark {
+  background-color: $dark;
+}
+
+.bg-gray {
+  background-color: $gray-10;
+}
+
+.bg-gray-light {
+  background-color: $gray-5;
+}
+
+.bg-primary-1 {
+  background-color: $primary-color-1;
+}
+
+.bg-primary-2 {
+  background-color: $primary-color-2;
+}
+
+.bg-primary-3 {
+  background-color: $primary-color-3;
+}
+
+.bg-purple-light {
+  background-color: $purple-20;
+}
+
+.bg-purple-dark {
+  background-color: $purple-70;
+}
+
+.bg-green-light {
+  background-color: $green-20;
+}
+
+.bg-cool-gray-light {
+  background-color: $cool-gray-20;
+}
+
+.bg-cool-gray-medium {
+  background-color: $cool-gray-90;
+}
+
+.bg-cool-gray-dark {
+  background-color: $cool-gray-70;
+}
+
+.bg-cyan-light {
+  background-color: $cyan-20;
+}
+
+.bg-cyan-dark {
+  background-color: $cyan-70;
+}
+
+.bg-blue-light {
+  background-color: $blue-10;
+}
+
+.bg-blue-dark {
+  background-color: $blue-80;
+}
+
+.bg-yellow-light {
+  background-color: $yellow-30;
+}

@@ -1,0 +1,144 @@
+@import '../custom-kit/variable.scss';
+@import '../custom-kit/background.scss';
+
+.button {
+  font-weight: 400;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0;
+  line-height: 1.5;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  border-radius:$radius-sm;
+  outline: none;
+  cursor: pointer;
+}
+
+.button-sm-0 {
+  @extend .button;
+  width: $width-xs;
+  height: $height-xs;
+  text-align: center;
+  padding: 0px;
+}
+
+.button-sm-1 {
+  @extend .button;
+  width: $width-sm;
+  height: $height-sm;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-sm-2 {
+  @extend .button;
+  width: $width-md;
+  height: $height-sm;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-sm-3 {
+  @extend .button;
+  width: $width-lg;
+  height: $height-sm;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-md-1 {
+  @extend .button;
+  width: $width-sm;
+  height: $height-md;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-md-2 {
+  @extend .button;
+  width: $width-md;
+  height: $height-md;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-md-3 {
+  @extend .button;
+  width: $width-lg;
+  height: $height-md;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-lg-1 {
+  @extend .button;
+  width: $width-sm;
+  height: $height-lg;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-lg-2 {
+  @extend .button;
+  width: $width-md;
+  height: $height-lg;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-lg-3 {
+  @extend .button;
+  width: $width-lg;
+  height: $height-lg;
+  text-align: left;
+  padding-left: $spacing-05;
+}
+
+.button-disabled {
+  background-color: $teal-30 !important;
+  color: $cool-gray-50 !important;
+
+  i {
+    color: $white;
+  }
+}
+
+.button-primary {
+  background-color:$primary-color-1 ;
+  box-shadow: $box-shadow-sm;
+  color: $white;
+  &:hover {
+    background-color:darken($primary-color-1,12%);
+  }
+
+  
+  &:focus {
+    border-color:$teal-80;
+    box-shadow: inset 0 0 0 1px $gray-40, inset 0 0 0 2px $white;
+  }
+}
+.button-save {
+  width: 30px;
+  display: inline-flex;
+  height: $height-xs;
+  font-size: $font-size-3;
+  color:$white;
+  background-color: $primary-color-1;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius:$radius-sm;
+  box-shadow: $box-shadow-sm;
+}

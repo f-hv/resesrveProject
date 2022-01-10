@@ -1,0 +1,9 @@
+@import '../custom-kit/variable.scss';
+
+.container-fluid {
+  width: 100%;
+  padding-right: $spacing-05;
+  padding-left: $spacing-05;
+  margin-right: auto;
+  margin-left: auto;
+}

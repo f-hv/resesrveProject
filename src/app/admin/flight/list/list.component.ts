@@ -9,7 +9,7 @@ import { FlightService } from 'src/app/core/services/flight.service';
 })
 export class ListComponent implements OnInit {
   listFlight: FlightModel[] = [];
-
+  searchKeyWord: any;
   constructor(private flightService: FlightService) { }
 
   ngOnInit(): void {
@@ -38,6 +38,19 @@ export class ListComponent implements OnInit {
     this.getData();
   }
   flightById(index: any, flight: any) {
-    return flight.id
+    return flight.id;
+  }
+
+  onKeyup(item: any) {
+    if (item.keycode !== 13 || item.keycode !== 8) {
+      this.searchKeyWord = item;
+    }
+    if (this.searchKeyWord.length === 0) {
+      this.listFlight = this.flightService.getOrginalList();
+    }
+    if ( this.searchKeyWord.length>2  && item.keycode !== 13 || item.keycode !== 8) {
+      this.getData();
+      this.listFlight = this.listFlight.filter(flight => flight.source?.includes(item) || flight.distination?.includes(item));
+    }
   }
 }

@@ -3,11 +3,19 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-@font-face {
-    font-family: sans;
-    src: url(assets/fonts/Sans.ttf) format("truetype");
-  }
-  @import "assets/styles/custom-kit/variable.scss";
-*{
-  font-family: 'sans';
-}
+@import "assets/styles/global.scss";
+@import "assets/styles/font.scss";
+@import "assets/styles/custom-kit/variable.scss";
+@import "assets/styles/custom-kit/background.scss";
+@import "assets/styles/custom-kit/botton.scss";
+@import "assets/styles/custom-kit/box-shadow.scss";
+@import "assets/styles/custom-kit/grid.scss";
+@import "assets/styles/custom-kit/spacing.scss";
+@import "assets/styles/custom-kit/style.scss";
+@import "assets/styles/custom-kit/type.scss";
+
+
+
+
+
+

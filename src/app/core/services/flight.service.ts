@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { time } from 'console';
 import { FlightModel } from '../models/flight.model';
 
 @Injectable({

@@ -24,6 +24,7 @@ import { sharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     NgMultiSelectDropDownModule,
     sharedModule,
+    
   ],
   schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
 })

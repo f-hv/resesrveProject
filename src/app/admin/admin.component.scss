@@ -1,53 +1,53 @@
 @import "../../assets/styles/custom-kit/variable.scss";
 
-.container-fluid{
-    height: 700px;
-    max-height: 700px;
-}
-.detail-col{
-    background-color:$cool-gray-30;
-    // height: 552px;
-    // max-height: 552px !important;
-}
-.sidebar{
-    background-color:$blue-80;
-    color: $white;
-    height: 552px;
-    .sidebar-items{
-        font-size: $font-size-1;
-        text-transform: capitalize;
-        div{
-            &:hover{
-                // background-color:$blue-80;
-                transition:  transform 0.3s ease-out ;// speed to change size 1 to size 2 on HOVER
-                transform: scale(1.1);////size buttom on hover ob self
-                cursor: pointer;
-            }
-            // span{
-            //     font-size: $font-size-2;
-            // }
-        }      
-    }
-}
-    .profile{
-        margin-top: 120px;
-        font-size: $font-size-1;
-        border-top: 1px solid $cyan-70;
+// .container-fluid{
+//     height: 700px;
+//     max-height: 700px;
+// }
+// .detail-col{
+//     background-color:$cool-gray-30;
+//     // height: 552px;
+//     // max-height: 552px !important;
+// }
+// .sidebar{
+//     background-color:$blue-80;
+//     color: $white;
+//     height: 552px;
+//     .sidebar-items{
+//         font-size: $font-size-1;
+//         text-transform: capitalize;
+//         div{
+//             &:hover{
+//                 // background-color:$blue-80;
+//                 transition:  transform 0.3s ease-out ;// speed to change size 1 to size 2 on HOVER
+//                 transform: scale(1.1);////size buttom on hover ob self
+//                 cursor: pointer;
+//             }
+//             // span{
+//             //     font-size: $font-size-2;
+//             // }
+//         }      
+//     }
+// }
+//     .profile{
+//         margin-top: 120px;
+//         font-size: $font-size-1;
+//         border-top: 1px solid $cyan-70;
 
-        .menu-profile{
-            width: 85px;
-            font-size: $font-size-1;
-            font-weight: bold;
-            border: none !important;
-            border-color: $blue-80 !important;
+//         .menu-profile{
+//             width: 85px;
+//             font-size: $font-size-1;
+//             font-weight: bold;
+//             border: none !important;
+//             border-color: $blue-80 !important;
 
-        }
-    }
-    .sidebar-header{
-        box-sizing: border-box;
-        border-bottom: 1px solid $cyan-70;
+//         }
+//     }
+//     .sidebar-header{
+//         box-sizing: border-box;
+//         border-bottom: 1px solid $cyan-70;
         
-    }
+//     }
      // &:focus + .fas {
             //         color: aqua !important;
             
@@ -65,3 +65,93 @@
 // div:first-child {
 //     border-bottom: 1px solid $cool-gray-30;
 // }        
+*{
+    font-size: $font-size-1;
+}
+i{
+    font-size: $font-size-4;
+    :hover{
+        cursor: pointer;
+    }
+}
+
+// .container-flude{
+//     width: 100%;
+// }
+#wrapper-page {
+    height:         620px;
+    display:        table;
+    width:          100%;
+    margin-top:     -40px;
+    margin-bottom:  -40px;
+    padding:        40px 0 0 0;
+   -moz-box-sizing: border-box;
+    box-sizing:     border-box;
+}
+
+// #container-navbar {
+//     background-color:red;
+//     height:         48px;
+//     padding:        0;
+// }
+.navbar-top{
+    background-color:$warm-gray-20;
+    height:         48px;
+    padding:        0;
+}
+
+#container-page-row {
+    height:         100%;
+}
+
+#container-sidebar {
+    display:table-cell;
+    background:$blue-dark;
+    color: $white;
+    float:none;
+
+    img{
+        box-shadow: $box-shadow-xl;
+
+    }
+    :first-child span{
+        font-size: $font-size-2;
+        font-weight:bold;
+    }
+    .item-menu {
+        &:hover{
+            transform: scale(1.1);////size  on hover ob self
+            transition:  transform 0.3s ease-out ;// speed to change size 1 to size 2 on HOVER
+            cursor: pointer;
+        }
+    }
+}
+
+#container-content {
+    margin-top: 0px;
+    background:$cool-gray-10;
+
+
+    .header-main{
+        background-color: $gray-10;
+        width: 100%;
+
+        .account{
+            width: 100px !important;
+            padding: 0px;
+        }
+    }
+
+}
+
+#wrapper-footer {
+    height:         40px;
+    background:     #666;
+    display:        block;
+    position:       relative;
+    width:          100%;
+}
+    
+#wrapper-footer p {
+    text-align:     center;
+} 

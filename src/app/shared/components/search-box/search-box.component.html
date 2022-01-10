@@ -1,0 +1,19 @@
+<div  [ngClass]="{
+    'search-box-input-md': size === 'medium',
+    'search-box-input-sm': size === 'small'
+  }" class="position-relative overflow-hidden search-box-input-container">
+  <button  
+   *ngIf="inputSearchKeyword"
+   class="btn-close position-absolute start-0 search-box-input-close-btn " aria-label="Close">
+    <!-- <i class="position-relative icon-close font-size-20 "></i> -->
+  </button>
+  <input type="text" 
+    [ngClass]="{ 'input-md': size === 'medium', 'input-sm': size === 'small' }" 
+    (keyup)="Keyup($event)"
+    [placeholder]="placeHolder" 
+    [(ngModel)]="inputSearchKeyword">
+  
+  <button class="button btn-i-search  position-absolute start-0">
+    <i class="position-relative fas fa-search font-size-20 "></i>
+  </button>
+</div>

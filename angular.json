@@ -35,11 +35,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "assets/fonts",
-              "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
-
-
             ],
             "scripts": []
           },

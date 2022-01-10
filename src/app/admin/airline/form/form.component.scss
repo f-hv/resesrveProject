@@ -1,20 +1,5 @@
 @import "../../../../assets/styles/custom-kit/variable.scss";
-@import "../../../../assets/styles/global.scss";
 
 
-.content{
-    display: flex;
-    justify-content: center;
 
-}
-.form-class{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    ng-multiselect-dropdown{
-        width: 110px;
-    }
-}
 

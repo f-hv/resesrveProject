@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    SearchBoxComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
-  exports:[ErrorMessageComponent]
+  exports:[ErrorMessageComponent , SearchBoxComponent]
 })
 export class sharedModule { }

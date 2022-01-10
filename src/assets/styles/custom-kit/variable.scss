@@ -3,6 +3,8 @@
 //color
 $white: #ffffff;
 $black: #000000;
+$blue-dark: #2a3f54;
+$blue-light: #557daa;
 
 $red-100: #2d0709;
 $red-90: #520408;
@@ -46,7 +48,8 @@ $blue-50: #1f6499;
 $blue-40: #237cb3;
 $blue-30: #3d95cc;
 $blue-20: #8ac6e6;
-$blue-10: #e0f3ff;
+$blue-10: #eaf7ff;
+
 
 $cyan-100: #061727;
 $cyan-90: #012749;
@@ -90,7 +93,7 @@ $cool-gray-50: #878d96;
 $cool-gray-40: #a2a9b0;
 $cool-gray-30: #c1c7cd;
 $cool-gray-20: #dde1e6;
-$cool-gray-10: #f2f4f8;
+$cool-gray-10: #f7f7f7;
 
 $gray-100: #161616;
 $gray-90: #262626;
@@ -101,8 +104,8 @@ $gray-50: #8d8d8d;
 $gray-40: #a8a8a8;
 $gray-30: #c6c6c6;
 $gray-20: #e0e0e0;
-$gray-10: #f4f4f4;
-$gray-5: #f3f3f3;
+$gray-10: #ededed;
+$gray-5: #f2f2f2;
 
 $warm-gray-100: #171414;
 $warm-gray-90: #272525;
@@ -137,9 +140,8 @@ $otange-30: #ffb784;
 $otange-20: #ffd9be;
 $otange-10: #fff2e8;
 
-
-$primary-color-1: $green-40;
-$primary-color-2: $blue-40;
+$primary-color-1: $blue-light;
+$primary-color-2: $blue-dark;
 $primary-color-3: $yellow-40;
 
 $error-color: $red-60;
@@ -195,10 +197,12 @@ $spacing-12: 96px;
 $spacing-13: 128px;
 
 //height and width
+$height-xs: 35px;
 $height-sm: 40px;
 $height-md: 48px;
 $height-lg: 64px;
 
+$width-xs: 60px;
 $width-sm: 120px;
 $width-md: 150px;
 $width-lg: 170px;
@@ -211,9 +215,10 @@ $modal-lg: 983px;
 
 //shadow
 $box-shadow-xs: 0px 2px 6px rgba($black, 0.2);
-$box-shadow-sm: 0px 2px 6px rgba($black, 0.3);
-$box-shadow-md: 0px 4px 8px rgba($black, 0.1);
-$box-shadow-lg: 0px 4px 8px rgba($black, 0.2);
+$box-shadow-sm: 0px 2px 6px rgba($black, 0.5);
+$box-shadow-md: 0px 4px 6px rgba($black, 0.2);
+$box-shadow-lg: 0px 4px 8px rgba($black, 0.3);
+$box-shadow-xl: 0px 4px 6px rgba($black, 0.2);
 $box-shadow-top: 0px -2px 4px rgba($black, 0.1);
 
 // login

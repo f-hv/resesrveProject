@@ -1,0 +1,103 @@
+@import '../../../../assets/styles/custom-kit/variable.scss';
+
+$btn-sm-width: 10px;
+$btn-md-width: 25px;
+
+.input {
+  background-color: $gray-5;
+  height: $height-sm;
+  border: 0;
+  padding-right:$spacing-08;
+  border-radius:$radius-sm;
+  border-bottom: 1px solid $cool-gray-50;
+  outline: none;
+  outline: 2px solid transparent;
+  width: 100%;
+  // padding-left: $spacing-05;
+  font-size: $font-size-1;
+
+  &.error {
+    outline: 2px solid $error-color;
+    outline-offset: -2px;
+  }
+
+  &:focus {
+    outline: 2px solid $active-color;
+    outline-offset: -2px;
+  }
+}
+
+.search-box-input-container {
+  transition: all ease-in-out 0.4s;
+  box-sizing: content-box;
+
+  input {
+    @extend .input;
+    background-color: $white;
+    padding-left: 55px;
+
+    &.input-sm {
+      height: $height-sm;
+    }
+
+    &.input-md {
+      height: $height-md;
+    }
+  }
+
+  &.search-box-input-sm {
+    .search-box-input-btn {
+      top: 0px;
+      left: 0px;
+      height: 22px;
+      width: $btn-sm-width !important;
+
+      i {
+        left: $spacing-05;
+      }
+    }
+
+    .search-box-input-close-btn {
+      top: 0px;
+      right: 10px;
+      height: 100%;
+      width: $btn-sm-width;
+      i {
+        left: $spacing-05;
+      }
+    }
+  }
+
+  &.search-box-input-md {
+    padding: 2px;
+    .search-box-input-btn {
+      top: 0px;
+      left: 0px;
+      height: 25px;
+      width: $btn-md-width;
+
+      i {
+        left: $spacing-05;
+      }
+    }
+
+    .search-box-input-close-btn {
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: $btn-md-width;
+
+      i {
+        left: $spacing-05;
+      }
+    }
+  }
+}
+.btn-i-search{
+  margin-top: 15px;
+  margin-left: 10px;
+
+  i{
+    color: $gray-50;
+  }
+}

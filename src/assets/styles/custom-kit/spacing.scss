@@ -1,0 +1,108 @@
+@import 'variable';
+
+@mixin simpleSpace {
+  // margin and padding values
+  $spacings: (
+    $spacing-00,
+    $spacing-01,
+    $spacing-02,
+    $spacing-03,
+    $spacing-04,
+    $spacing-05,
+    $spacing-06,
+    $spacing-07,
+    $spacing-08,
+    $spacing-09
+  ) !default;
+
+  // margin and padding shorthand prefixes
+  $prefixes: (
+    p: padding,
+    px: (
+      padding-left,
+      padding-right
+    ),
+    py: (
+      padding-top,
+      padding-bottom
+    ),
+    pt: padding-top,
+    pr: padding-right,
+    pb: padding-bottom,
+    pl: padding-left,
+    m: margin,
+    mx: (
+      margin-left,
+      margin-right
+    ),
+    my: (
+      margin-top,
+      margin-bottom
+    ),
+    mt: margin-top,
+    mr: margin-right,
+    mb: margin-bottom,
+    ml: margin-left
+  ) !default;
+}
+
+@include simpleSpace();
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+@import 'variable';
+
+@mixin simpleSpace {
+  // margin and padding values
+  $spacings: (
+    $spacing-00,
+    $spacing-01,
+    $spacing-02,
+    $spacing-03,
+    $spacing-04,
+    $spacing-05,
+    $spacing-06,
+    $spacing-07,
+    $spacing-08,
+    $spacing-09
+  ) !default;
+
+  // margin and padding shorthand prefixes
+  $prefixes: (
+    p: padding,
+    px: (
+      padding-left,
+      padding-right
+    ),
+    py: (
+      padding-top,
+      padding-bottom
+    ),
+    pt: padding-top,
+    pr: padding-right,
+    pb: padding-bottom,
+    pl: padding-left,
+    m: margin,
+    mx: (
+      margin-left,
+      margin-right
+    ),
+    my: (
+      margin-top,
+      margin-bottom
+    ),
+    mt: margin-top,
+    mr: margin-right,
+    mb: margin-bottom,
+    ml: margin-left
+  ) !default;
+}
+
+@include simpleSpace();
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
