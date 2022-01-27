@@ -1,0 +1,44 @@
+<div class="content position-relative ">
+    <div class="btn-collapse position-absolute  ">
+        <button class="button-collapse"  id="sidebarCollapse" (click)="toggleNavbar()"><i class=" fa fa-bars" data-toggle="collapse" data-target="#sidebar"
+                aria-expanded="false" aria-controls="#sidebar"></i></button>
+    </div>
+    <div id="sidebar" class="collapse "  [ngClass]="{ 'active': navbarOpen }">
+        <div class="sidebar-header p-5 profile border-bottom border-1 border-white h-25 ">
+            <div class=" d-flex justify-content-between">
+                
+                <h5>پنل ادمین </h5>
+            </div>
+        </div>
+        <div class="sidebar-items">
+            <div  class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center  item-menu"
+                [routerLink]="'./flight'">
+                <i data-bs-toggle="" class="fas fa-plane fa-2x p-2"></i>
+                <span class="">پرواز</span>
+            </div>
+            <div class=" pr-2 pt-4 d-flex flex-row justify-content-start align-items-center item-menu"
+                [routerLink]="'./airline'">
+                <i data-bs-toggle="" class="fas fa-suitcase-rolling fa-2x p-2"></i>
+                <span class="">خط پرواز</span>
+            </div>
+            <div class=" pr-2 pt-4 d-flex flex-row justify-content-start align-items-center item-menu"
+                [routerLink]="'./city'">
+                <i data-bs-toggle="" class="fas fa-building fa-2x p-2"></i>
+                <span class="">شهــر</span>
+            </div>
+            <div class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center item-menu"
+                [routerLink]="'../admin/reserve'">
+                <i data-bs-toggle="" class="fas fa-file-alt fa-2x p-2"></i>
+                <span class="">رزرو شده</span>
+            </div>
+            <div class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center item-menu">
+                <i data-bs-toggle="" class="fas fa-home fa-2x p-2 "></i>
+                <span class="">داشبورد</span>
+            </div>
+            <div class=" pr-2 pt-4 d-flex flex-row justify-content-start align-items-center item-menu">
+                <i data-bs-toggle="" class="fas fa-sign-out-alt fa-2x p-2"></i>
+                <span class="">خروج</span>
+            </div>
+        </div>
+    </div>
+</div>

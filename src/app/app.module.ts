@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { sharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     CoreModule,
     NgMultiSelectDropDownModule.forRoot(),
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
+    NgbModule,
   ],
   schemas:[NO_ERRORS_SCHEMA , CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

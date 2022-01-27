@@ -6,8 +6,13 @@ import { CityModel } from '../models/city.model';
 })
 export class CityService {
   city: CityModel[] = [
-    { id: 1, name: 'neyshabour',deleted:0 },
-    { id: 2, name: 'mashhad',deleted:0 },
+    { id: 1, name: 'مشهد',deleted:0 },
+    { id: 2, name: 'تهران',deleted:0 },
+    { id: 3, name: 'اصفهان',deleted:0 },
+    { id: 4, name: 'شیراز',deleted:0 },
+    { id: 5, name: 'کیش',deleted:0 },
+    { id:6, name: 'تبریز',deleted:0 },
+    { id: 7, name: 'سبزوار',deleted:0 }
   ];
   orginalListCity = [...this.city];
 

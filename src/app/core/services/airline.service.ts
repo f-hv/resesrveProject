@@ -13,7 +13,47 @@ export class AirlineService {
       priceClass: 'H',
       loadWeight: 20,
       deleted: 0
-    }
+    },
+    {
+      id: 2,
+      name: 'ایران ایر',
+      city: 'تهران',
+      priceClass: 'G',
+      loadWeight: 30,
+      deleted: 0
+    },
+    {
+      id: 3,
+      name: 'آسمان',
+      city: 'تهران',
+      priceClass: 'H',
+      loadWeight: 20,
+      deleted: 0
+    },
+    {
+      id: 4,
+      name: 'آتا',
+      city: 'تبریز',
+      priceClass: 'G',
+      loadWeight: 30,
+      deleted: 0
+    },
+    {
+      id: 5,
+      name: 'کاسپین',
+      city: 'کیش',
+      priceClass: 'H',
+      loadWeight: 20,
+      deleted: 0
+    },
+    {
+      id: 6,
+      name: 'وارش',
+      city: 'مازندران',
+      priceClass: 'G',
+      loadWeight: 30,
+      deleted: 0
+    },
   ];
   orginalListAirline = [...this.airline];
 

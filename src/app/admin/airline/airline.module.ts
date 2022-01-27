@@ -9,6 +9,7 @@ import { UpdateComponent } from './update/update.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { sharedModule } from 'src/app/shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { sharedModule } from 'src/app/shared/shared.module';
     NgMultiSelectDropDownModule,
     ReactiveFormsModule,
     FormsModule,
-    sharedModule
+    sharedModule,
+    NgbModule
   ],
   schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
 })

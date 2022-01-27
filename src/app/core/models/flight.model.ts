@@ -5,8 +5,7 @@ export interface FlightModel {
         price: number|null,
         airlineId: number|null,
         date: Date|null,
-        time:Date|null
-        backFlightId: number|null
+        // time:Date|null
         deleted:number|null,
         flightNumber:number|null
 }

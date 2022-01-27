@@ -1,14 +1,17 @@
 <div  dir="rtl"    class="container p-1">
   <div id="nav-top"  class="row ">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-6 ">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 ">
       <app-search-box
         [placeHolder]="'جستجو'"
         (keyupChange)="onKeyup($event)"
         [size]="'small'"
       ></app-search-box>
     </div>
+    <div class="col-sm-12 col-md-6 col-lg-3 ">
+
+    </div>
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 ">
-      hjghjg
+      Filter Box
     </div>
   </div>
   <div id="content"  class="row pt-2">
@@ -16,41 +19,49 @@
       <table class="table-hover caption-top table align-middle ">
         <caption class="">
           <div class="row flex-row justify-content-between align-items-center p-0">
-            <h6 class="col-md-3 "> لیست پروازها</h6>
-            <div class="btn-save col-md-9 " >
-              <button type="submit" class="button-primary button-sm-0 float-right">SAVE</button>
-              <i class=" button-save fas fa-plus float-left" [routerLink]="'../create'"></i>
+            <h7 class="col-md-2 "> لیست پروازها</h7>
+            <div class="btn-save col-md-10 " >
+              <button type="submit" class="button-primary button-sm-1 " [routerLink]="'../create'">جدید
+                <i class="fas fa-plus float-left"></i>
+              </button>
             </div>            
           </div>
         </caption>
         <thead class=""> 
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">مبدا</th>
-            <th scope="col">مقصد</th>
-            <th scope="col">مبلغ</th>
-            <th scope="col">تاریخ</th>
-            <th scope="col">خط پرواز</th>
-            <th scope="col">backFlightId</th>
-            <th scope="col"></th>
+            <th scope="col" style="width:5%">#</th>
+            <th scope="col" style="width:10%">مبدا</th>
+            <th scope="col" style="width:10%">مقصد</th>
+            <th scope="col" style="width:8%">مبلغ</th>
+            <th scope="col" style="width:18%">تاریخ</th>
+            <th scope="col" style="width:10%">خط پرواز</th>
+            <th scope="col" style="width:39%"></th>
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor="let flight of listFlight trackBy:flightById">
-            <td scope="col">{{flight.id}}</td>
-            <td >{{flight.source}}</td>
-            <td>{{flight.distination}}</td>
-            <td>{{flight.price}}</td>
-            <td>{{flight.date  | date:'longTime'}}</td>
-            <td>{{flight.airlineId}}</td>
-            <td>{{flight.backFlightId}}</td>
-            <td>
+          <tr  *ngFor="let flight of listFlight  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:flightById">
+            <td scope="col" style="width:5%" >{{flight.id}}</td>
+            <td style="width:10%" >{{flight.source}}</td>
+            <td style="width:10%" >{{flight.distination}}</td>
+            <td style="width:8%" >{{flight.price}}</td>
+            <td style="width:18%" >{{flight.date | date:'medium'}}</td> 
+            <!--  |jalali -->
+            <td style="width:10%" >{{flight.airlineId}}</td>
+            <td id="detail-td" style="width:39%">
               <i class="fas fa-edit p-2" [routerLink]="'../update/' + flight.id"></i>
               <i class="fas fa-trash p-2 " (click)="delete(flight.id)"></i>
             </td>
           </tr>
         </tbody>
       </table>
+      <ngb-pagination 
+        [collectionSize]="collectionSize" 
+        [(page)]="currentPage" 
+        [maxSize]="5" 
+        [boundaryLinks]="false"
+        [pageSize]="elementPerpage" 
+        class="d-flex justify-content-end p-2">
+      </ngb-pagination>
     </div>
   </div>
 </div>

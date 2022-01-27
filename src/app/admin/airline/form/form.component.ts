@@ -62,7 +62,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.listCity = this.cityService.getData();
     if (this.id) {
-      this.dataAirline = this.airlineService.getById(this.id);
+      this.dataAirline = this.airlineService.getById(this.id);    
     }
     else {
       this.dataAirline = {

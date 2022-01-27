@@ -1,4 +1,4 @@
-@import "../../assets/styles/custom-kit/variable.scss";
+@import "./custom-kit/variable.scss";
  
 
 *{
@@ -23,6 +23,13 @@ body {
         white-space:nowrap;
         overflow: hidden;///overflow td
     }
+    td ,th{
+      text-align: center;
+      vertical-align: center;
+    }
+    #detail-td{
+      text-align: left;
+    }
     caption{
       background-color: $white !important;
     }
@@ -45,9 +52,6 @@ body {
         background-color:$primary-color-1;
         color: $white;
         font-size: $font-size-2;
-        // &:hover{
-        //    background-color:darken($blue-80,20%);
-        // }
     }
   }
   input{

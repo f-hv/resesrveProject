@@ -1,70 +1,27 @@
-<div class="container-flude">
-    <nav id="container-navbar " class="navbar-top">top-navbar</nav>
-    <div id="wrapper-page" class="container-fluid" dir="rtl">
-        <div id="container-page-row" class="row">
-            <div id="container-sidebar" class="col-lg-2 col-md-2 col-sm-3 pr-7">
-                <div class="row p-5 profile border-bottom border-1 border-white h-25 ">
-                    <div class="col-12 d-flex justify-content-between align-items-center flex-row">
-                        <img src="../../assets/pic/profile.jpg" alt="Admin" width="60" height="60"
-                            class="rounded-circle box-shadow-lg">
-                        <span>ادمین </span>
-                    </div>
-                </div>
-                <div class="col-12 pr-2 pt-2  d-flex flex-row justify-content-start align-items-center  item-menu"
-                    [routerLink]="'./flight'">
-                    <i class="fas fa-plane fa-2x p-2"></i>
-                    <span>پرواز</span>
-                </div>
-                <div class="col-12 pr-2 pt-2 d-flex flex-row justify-content-start align-items-center item-menu"
-                    [routerLink]="'./airline'">
-                    <i class="fas fa-suitcase-rolling fa-2x p-2"></i>
-                    <span>خط پرواز</span>
-                </div>
-                <div class="col-12 pr-2 pt-2 d-flex flex-row justify-content-start align-items-center item-menu"
-                    [routerLink]="'./city'">
-                    <i class="fas fa-building fa-2x p-2"></i>
-                    <span>شهــر</span>
-                </div>
-                <div class="col-12 pr-2 pt-2  d-flex flex-row justify-content-start align-items-center item-menu"
-                    [routerLink]="'./reserve'">
-                    <i class="fas fa-file-alt fa-2x p-2"></i>
-                    <span>رزرو شده</span>
-                </div>
-                <div class="col-12 pr-2 pt-2  d-flex flex-row justify-content-start align-items-center item-menu">
-                    <i class="fas fa-home fa-2x p-2 "></i>
-                    <span>داشبورد</span>
-                </div>
-                <div class="col pr-2 pt-2 d-flex flex-row justify-content-start align-items-center item-menu">
-                    <i class="fas fa-sign-out-alt fa-2x p-2"></i>
-                    <span>خروج</span>
-                </div>
-
-            </div>
-            <div id="container-content" class="col-lg-10 col-md-10 col-sm-9 flex-column  align-items-center">
-                <article class="">
-                    <header class="row header-main ">
-                        <nav class="navTop row flex-row justify-content-between align-items-center">
-                            <div class="menuIcon col-md-2 "><span class="fa fa-bars"></span></div>
-                            <div class="account col-md-10 p-2">
-                                <ng-multiselect-dropdown class=" menu-profile " [placeholder]="'ادمین'"
-                                    [settings]="dropdownSettings" [data]="adminData" (onSelect)="onAdminSelect($event)">
-                                </ng-multiselect-dropdown>
-                            </div>
-                        </nav>
-                    </header>
-                    <section class="row p-3">
-                        <router-outlet></router-outlet>
-                    </section>
-                </article>
-            </div>
+<div class="container-flude  d-flex" dir="rtl ">ّّ
+    <div class="sidebar p-0 ">
+        <!-- <div  ngclass="col-md-3 col-xl-2 px-sm-2 : !navbarOpen"> 
+         <app-sidebar [(size)]="navbarOpen"></app-sidebar> -->
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="w-100"> 
+        <div class=" pl-0 mr-0">
+            <!-- <div class="row p-0">
+                    <div class="col-12"> -->
+            <nav class="navbar-fixed-top  m-0">
+                <app-header></app-header>
+            </nav>
+        </div>
+        <!--  </div> -->
+        <div class=" pl-0 pt-3">
+            <!-- <div class="col-12"> -->
+            <router-outlet></router-outlet>
+            <!-- </div> -->
         </div>
     </div>
-    <footer id="wrapper-footer" class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                <p id="footer-text" class=""><span class="">footer</span>
-                </p>
-            </div>
-        </div>
-    </footer>
 </div>
+<!-- <app-footer></app-footer>
+    <div class="bg-gray panel-main-container w-100">
+        <div class="mx-5 mt-5 bg-white panel-container">
+        </div>
+    </div> -->

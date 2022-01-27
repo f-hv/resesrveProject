@@ -9,6 +9,7 @@ import { AirlineComponent } from './airline/airline.component';
 import { AdminComponent } from './admin.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { sharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [CityComponent, FlightComponent, AirlineComponent, AdminComponent, ReserveComponent],
@@ -17,8 +18,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    sharedModule,
   ],
+  
   schemas:[CUSTOM_ELEMENTS_SCHEMA , NO_ERRORS_SCHEMA]
 })
 export class AdminModule { }

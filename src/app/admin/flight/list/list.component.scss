@@ -1,15 +1,9 @@
 @import "../../../../assets/styles/custom-kit/variable.scss";
 
 caption{
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
+    padding-left: $spacing-09;
+    padding-right: $spacing-02;
     .btn-save{
         width: $width-sm; 
-    }
-    
-    h6{
-        width: $width-md;
-        display: inline-flex;
-        justify-content: start;
     }
 }

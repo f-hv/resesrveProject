@@ -2,3 +2,23 @@
 ng-multiselect-dropdown{
     width: 300px;
 }
+.btn-date{
+    top:7px;
+    right: 17px;
+}
+
+.input-Date{
+    padding-right: 35px;
+    font-size: $font-size-2;
+    color: black;
+    &:read-only{
+        background-color: $white;
+    }
+}
+ngb-timepicker {
+    direction: ltr !important;
+    float: right;
+}
+.error-box{
+    margin-top: -17px;
+}

@@ -12,9 +12,8 @@ export class FlightService {
       distination: 'تهران',
       price: 50,
       airlineId: 5,
-      date: new Date(),
-      time:new Date(),
-      backFlightId: 0,
+      date: new Date(1400, 11, 5, 10, 33, 30),
+      // time:new Date(),
       flightNumber:6030,
       deleted: 0
     },
@@ -25,8 +24,51 @@ export class FlightService {
       price: 200,
       airlineId: 5,
       date: new Date(),
-      time:new Date(),
-      backFlightId: 0,
+      // time:new Date(),
+      flightNumber:6050,
+      deleted: 0
+    },
+    {
+      id: 3,
+      source: 'کیش',
+      distination: 'تهران',
+      price: 50,
+      airlineId: 5,
+      date: new Date(),
+      // time:new Date(),
+      flightNumber:6030,
+      deleted: 0
+    },
+    {
+      id: 4,
+      source: 'اصفهان',
+      distination: 'شیراز',
+      price: 200,
+      airlineId: 5,
+      date: new Date(),
+      // time:new Date(),
+      flightNumber:6050,
+      deleted: 0
+    },
+    {
+      id: 5,
+      source: 'کیش',
+      distination: 'تهران',
+      price: 50,
+      airlineId: 5,
+      date: new Date(),
+      // time:new Date(),
+      flightNumber:6030,
+      deleted: 0
+    },
+    {
+      id: 6,
+      source: 'اصفهان',
+      distination: 'شیراز',
+      price: 200,
+      airlineId: 5,
+      date: new Date(),
+      // time:new Date(),
       flightNumber:6050,
       deleted: 0
     }
@@ -45,8 +87,7 @@ export class FlightService {
         price:null,
         airlineId:null,
         date: null,
-        time:null,
-        backFlightId:null,
+        // time:null,
         flightNumber:null,
         deleted: null
       };
@@ -65,8 +106,7 @@ export class FlightService {
           editItem.price = data.price,
           editItem.airlineId = data.airlineId,
           editItem.date = data.date,
-          editItem.time=data.time,
-          editItem.backFlightId = data.backFlightId,
+          // editItem.time=data.time,
           editItem.flightNumber=data.flightNumber,
           editItem.deleted = 0
         return true;
@@ -88,8 +128,7 @@ export class FlightService {
         price: item.price,
         airlineId: item.airlineId,
         date: item.date,
-        time:item.time,
-        backFlightId: item.backFlightId,
+        // time:item.time,
         flightNumber:item.flightNumber,
         deleted: 0,
       })

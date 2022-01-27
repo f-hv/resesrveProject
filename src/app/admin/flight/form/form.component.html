@@ -1,151 +1,151 @@
-<div class="container" *ngIf="formFlight">
+<div class="container p-3" *ngIf="formFlight">
   <form [formGroup]="formFlight">
-    <div class="row border border-1 rounded-3 p-2 ">
-      <div class="col-md-6 ">
+    <div class="row  rounded-3 p-3 justify-content-md-center border border-1 ">
+      <div class="col col-md-2"> </div>
+      <div class="col-md-8 ">
         <div class="row">
-          <label class="col-form-label-sm col-2">مبدا</label>
-          <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مبدا'" [settings]="dropdownSettings"
-            [data]="listCity" (onSelect)="onSourceSelect($event)" formControlName="source">
-          </ng-multiselect-dropdown>
+          <div class="col-md-6 ">
+            <label class="col-form-label-sm col-2">مبدا</label>
+            <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مبدا'" [settings]="dropdownSettings"
+              [data]="listCity" (onSelect)="onSourceSelect($event)" formControlName="source"
+              [ngClass]="{
+                error: (!formFlight.get('source')?.valid || formFlight.get('source')?.value === '') && isClickOnSaveBtn
+              }">
+            </ng-multiselect-dropdown>
+            <div class="error-box">
+              <app-error-message *ngIf="
+                  !formFlight.get('source')?.valid &&
+                  isClickOnSaveBtn &&
+                  !formFlight.get('source')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-form-label-sm col-3">مقصد</label>
+            <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مقصد'" [settings]="dropdownSettings"
+              [data]="listCity" (onSelect)="onDistinationSelect($event)" formControlName="distination"
+              [ngClass]="{
+                error: (!formFlight.get('distination')?.valid || formFlight.get('distination')?.value === '') && isClickOnSaveBtn
+              }">
+            </ng-multiselect-dropdown>
+            <div  class="error-box">
+              <app-error-message *ngIf="
+                  !formFlight.get('distination')?.valid &&
+                  isClickOnSaveBtn &&
+                  !formFlight.get('distination')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
+          </div>
         </div>
-        <app-error-message *ngIf="
-          !formFlight.get('source')?.valid &&
-          isClickOnSaveBtn &&
-          !formFlight.get('source')?.value" [message]="'Required'">
-        </app-error-message>
-      </div>
-      <div class="col-md-6">
+
         <div class="row ">
-          <label class="col-form-label-sm col-3">مقصد</label>
-          <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مقصد'" [settings]="dropdownSettings"
-            [data]="listCity" (onSelect)="onDistinationSelect($event)" formControlName="distination">
-          </ng-multiselect-dropdown>
+          <div class="col-md-6 ">
+            <label class="col-form-label-sm">خط پرواز</label>
+            <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'خط پرواز'" [settings]="dropdownSettings"
+              [data]="listAirline" (onSelect)="onAirlineSelect($event)" formControlName="airlineId"
+              [ngClass]="{
+                error: (!formFlight.get('airlineId')?.valid || formFlight.get('airlineId')?.value === '') && isClickOnSaveBtn
+              }">
+            </ng-multiselect-dropdown>
+            <div class="error-box">
+              <app-error-message *ngIf="
+                  !formFlight.get('airlineId')?.valid &&
+                  isClickOnSaveBtn &&
+                  !formFlight.get('airlineId')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="col-form-label-sm">شماره پرواز</label>
+            <input class="form-control" type="text" formControlName="flightNumber" 
+            [ngClass]="{
+              error: (!formFlight.get('flightNumber')?.valid || formFlight.get('flightNumber')?.value === '') && isClickOnSaveBtn
+            }"/>
+            <div>
+              <app-error-message *ngIf="
+                !formFlight.get('flightNumber')?.valid &&
+                isClickOnSaveBtn &&
+                !formFlight.get('flightNumber')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
+          </div>
         </div>
-        <app-error-message *ngIf="
-          !formFlight.get('distination')?.valid &&
-          isClickOnSaveBtn &&
-          !formFlight.get('distination')?.value" [message]="'Required'">
-        </app-error-message>
+        <div class="row">
+          <div class="col-md-6 mt-5 position-relative ">
+            <div>
+              <input 
+                class="form-control input-Date"  
+                placeholder="تاریخ" 
+                readonly
+                name="dp" 
+                formControlName="date"
+                ngbDatepicker 
+                #d="ngbDatepicker" 
+                [firstDayOfWeek]="6" 
+                (focus)="d.open()" 
+                [placement]=" placement"
+                [autoClose]="true"
+                [ngClass]="{
+                  error: (!formFlight.get('date')?.valid || formFlight.get('date')?.value === '') && isClickOnSaveBtn
+                }"
+              >
+              <div class="btn-date position-absolute ">
+                <button class="far fa-calendar-alt button-Datepicker" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div>
+              <app-error-message *ngIf="
+                !formFlight.get('date')?.valid &&
+                isClickOnSaveBtn &&
+                !formFlight.get('date')?.value" 
+                [message]="'Required'">
+              </app-error-message>
+            </div>
+          </div>
+          <div class="col-md-6 mt-1 ">
+            <ngb-timepicker formControlName="time"  
+            [ngClass]="{
+              error: (!formFlight.get('time')?.valid || formFlight.get('time')?.value === '') && isClickOnSaveBtn
+            }">
+            </ngb-timepicker>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-md-6">
+            <label for="price" class="col-form-label-sm">قیمت</label>
+            <input class="form-control" type="text" formControlName="price" id="price"
+            [ngClass]="{
+              error: (!formFlight.get('price')?.valid || formFlight.get('price')?.value === '') && isClickOnSaveBtn
+            }"/>
+            <div>
+              <app-error-message *ngIf="
+                !formFlight.get('price')?.valid &&
+                isClickOnSaveBtn &&
+                !formFlight.get('price')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
+          </div>
+          <div class="col-md-6"></div>
+        </div>
+        <div class="row  mt-5">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-4 pl-5">
+                <button class="button button-primary button-sm-1 float-left " type="submit"
+                  (click)="save()">ذخیره</button>
+              </div>
+              <!-- [disabled]="formFlight.invalid" -->
+              <div class="col-md-4">
+                <button class="button button-primary button-sm-1 float-right " type="button"
+                  (click)="cancel()">انصراف</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 btn "></div>
+        </div>
       </div>
+      <div class="col col-md-2"></div>
     </div>
-    <!-- <input
-        [nbDatepicker]="e">
-      <nb-datepicker #e></nb-datepicker> -->
-    <div class="pt-3">
-      <div class="row border border-1 rounded-3 p-2">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-2">
-              <label for="date" class="col-form-label-sm">تاریخ</label>
-            </div>
-            <div class="col-5">
-              <input class="form-control" type="text" id="date" formControlName="date" />
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-3">
-              <label class="col-form-label-sm">ساعت</label>
-            </div>
-            <div class="col-5">
-              <input class="form-control" type="time" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pt-3">
-      <div class="row border border-1 rounded-3 p-2 ">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-2">
-              <label class="col-form-label-sm">خط پرواز</label>
-            </div>
-            <div class="col-5">
-              <ng-multiselect-dropdown class="form-control-sm" [placeholder]="'خط پرواز'" [settings]="dropdownSettings"
-                [data]="listAirline" (onSelect)="onAirlineSelect($event)" formControlName="airlineId">
-              </ng-multiselect-dropdown>
-            </div>
-          </div>
-          <app-error-message *ngIf="
-              !formFlight.get('airlineId')?.valid &&
-              isClickOnSaveBtn &&
-              !formFlight.get('airlineId')?.value" [message]="'Required'">
-          </app-error-message>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-3">
-              <label class="col-form-label-sm col-10">پرواز برگشت</label>
-            </div>
-            <div class="col-5">
-              <ng-multiselect-dropdown class="form-control-sm col-1" [placeholder]="'پرواز برگشت'"
-                [settings]="dropdownSettings" [data]="listFlight" (onSelect)="onFlightSelect($event)"
-                formControlName="backFlightId">
-              </ng-multiselect-dropdown>
-            </div>
-          </div>
-          <app-error-message *ngIf="
-              !formFlight.get('backFlightId')?.valid &&
-              isClickOnSaveBtn &&
-              !formFlight.get('backFlightId')?.value" [message]="'Required'">
-          </app-error-message>
-        </div>
-      </div>
-    </div>
-    <div class="pt-3">
-      <div class="row border border-1 rounded-3 p-3 ">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-3">
-              <label class="col-form-label-sm">شماره پرواز</label>
-            </div>
-            <div class="col-5">
-              <input class="form-control" type="text" formControlName="flightNumber" />
-            </div>
-          </div>
-          <app-error-message *ngIf="
-            !formFlight.get('flightNumber')?.valid &&
-            isClickOnSaveBtn &&
-            !formFlight.get('flightNumber')?.value" 
-            [message]="'Required'">
-          </app-error-message>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-2">
-              <label for="price" class="col-form-label-sm">قیمت</label>
-            </div>
-            <div class="col-5">
-              <input class="form-control" type="text" formControlName="price" id="price" />
-            </div>
-          </div>
-          <app-error-message *ngIf="
-            !formFlight.get('price')?.valid &&
-            isClickOnSaveBtn &&
-            !formFlight.get('price')?.value" 
-            [message]="'Required'">
-          </app-error-message>
-        </div>        
-      </div>
-    </div>
-    <button type="submit" (click)="save()">ذخیره</button>
-    <button type="button" (click)="cancel()">انصراف</button>
   </form>
 </div>
-<!-- {{formFlight.get('source')?.value|json}} -->
-
-
-
-<!-- <div class="pt-3">
-  <div class="row border border-1 rounded-3 p-3 ">
-    <div class="col-md-6">
-      <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10"></div>
-      </div>
-    </div>
-    <div class="col-md-6"></div>
-  </div>
-</div>   -->
+<!-- {{formFlight.get('time')?.value|json}} -->

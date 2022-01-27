@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AirlineModel } from 'src/app/core/models/airline.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
@@ -7,11 +7,29 @@ import { CityModel } from '../../../core/models/city.model';
 import { FlightModel } from '../../../core/models/flight.model';
 import { CityService } from '../../../core/services/city.service';
 import { FlightService } from '../../../core/services/flight.service';
+import { NgbCalendar, NgbCalendarPersian, NgbDatepickerI18n, NgbDate, NgbDateStruct, NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+
+const WEEKDAYS_SHORT = ['د', 'س', 'چ', 'پ', 'ج', 'ش', 'ی'];
+const MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+
+@Injectable()
+export class NgbDatepickerI18nPersian extends NgbDatepickerI18n {
+  getWeekdayLabel(weekday: number) { return WEEKDAYS_SHORT[weekday - 1]; }
+  getMonthShortName(month: number) { return MONTHS[month - 1]; }
+  getMonthFullName(month: number) { return MONTHS[month - 1]; }
+  getDayAriaLabel(date: NgbDateStruct): string { return `${date.year}-${this.getMonthFullName(date.month)}-${date.day}`; }
+}
+
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
+  providers: [
+    NgbInputDatepickerConfig,
+    { provide: NgbCalendar, useClass: NgbCalendarPersian },
+    { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nPersian }
+  ]///datepicker
 })
 export class FormComponent implements OnInit {
   @Input() id: any;
@@ -19,18 +37,20 @@ export class FormComponent implements OnInit {
   formFlight: FormGroup;
   listCity: CityModel[];
   listAirline: AirlineModel[];
-  listFlight: FlightModel[];
   isClickOnSaveBtn = false;
   /////dropdown 
   dropdownSettings = {};
   source: any;
   distination: any;
   IdAirline: any;
-  backFlightId:any;
   ///// datepicker
-  min: Date;
-  max: Date;
-  // formcontrol = new FormControl(new Date());
+  newDate = new Date(1400, 11, 24, 10, 33, 30);
+  x = new Date();
+  editDate = new Date();
+  today = new Date();
+  placement = 'bottom';
+  ////timepicker
+  time: any =null;
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
@@ -38,28 +58,30 @@ export class FormComponent implements OnInit {
     private airlineService: AirlineService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private config: NgbInputDatepickerConfig,
+    private calendar: NgbCalendar,
   ) {
-    // this.min = this.dateService.addMonth(this.dateService.today(), -1);
-    // this.max = this.dateService.addMonth(this.dateService.today(), 1);
+    //  isDisabled = (date: NgbDate, current: {month: number, year: number}) => date.month !== current.month;
+    //  isWeekend = (date: NgbDate) =>  this.calendar.getWeekday(date) >= 6;
   }
   ngOnInit(): void {
     this.listCity = this.cityService.getData();
     this.listAirline = this.airlineService.getData();
-    this.listFlight = this.flightService.getData();
     if (this.id) {
       this.dataFlight = this.flightService.getById(this.id);
+      this.updateValueTimeDate();
     }
-    else this.dataFlight = {
-      id: null,
-      source: null,
-      distination: null,
-      date: null,
-      time: null,
-      price: null,
-      airlineId: null,
-      backFlightId: null,
-      flightNumber: null,
-      deleted: 0
+    else {
+      this.dataFlight = {
+        id: null,
+        source: null,
+        distination: null,
+        date: null,
+        price: null,
+        airlineId: null,
+        flightNumber: null,
+        deleted: 0
+      }
     }
     this.initial();
     this.dropdownSettings = {
@@ -70,6 +92,7 @@ export class FormComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 20,
     };
+
   }
   initial() {
     this.formFlight = this.formBuilder.group({
@@ -77,10 +100,9 @@ export class FormComponent implements OnInit {
       source: [this.source, Validators.required],
       distination: [this.distination, Validators.required],
       airlineId: [this.IdAirline, Validators.required],
-      date: [this.dataFlight?.date],
-      time: [this.dataFlight?.time],
-      price: [this.dataFlight?.price, Validators.required, Validators.minLength(5), Validators.maxLength(6)],
-      backFlightId: [this.dataFlight?.backFlightId],
+      date: [this.dataFlight.date, [Validators.required]],
+      time: [this.time, [Validators.required]],
+      price: [this.dataFlight?.price, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
       flightNumber: [this.dataFlight?.flightNumber, Validators.required],
       deleted: 0
     });
@@ -93,12 +115,13 @@ export class FormComponent implements OnInit {
     this.formFlight?.get("source")?.setValue(this.source);
     this.formFlight?.get("distination")?.setValue(this.distination);
     this.formFlight?.get("airlineId")?.setValue(this.IdAirline);
-    this.formFlight?.get("backFlightId")?.setValue(this.backFlightId);
-
     this.isClickOnSaveBtn = true;
+
     if (this.formFlight.invalid)
-      return
+      return;
     else {
+      this.combineTimeDate();
+      this.formFlight?.get("date")?.setValue(this.newDate);
       if (this.id) {
         this.update();
       }
@@ -120,6 +143,27 @@ export class FormComponent implements OnInit {
     this.flightService.create(this.formFlight.value);
     console.log("create succesfull");
   }
+
+  combineTimeDate() {
+    var time = this.formFlight.get('time')?.value;
+    var date = this.formFlight.get('date')?.value;
+    ////////// SET DATE ///////////
+    if (date) {
+      var day = Number(date.day);
+      var month = Number(date.month);
+      var year = Number(date.year);
+      this.newDate.setMonth(month);
+      this.newDate.setDate(day);
+      this.newDate.setFullYear(year);
+    }
+    ////////// SET TIME ///////////
+    var hour = Number(time.hour);
+    var minute = Number(time.minute);
+    var second = Number(time.second);
+    this.newDate.setHours(hour);
+    this.newDate.setMinutes(minute);
+    
+  }
   navigate() {
     this.router.navigate([this.id ? '../..' : '..'], {
       relativeTo: this.activatedRoute,
@@ -139,8 +183,23 @@ export class FormComponent implements OnInit {
     const selectedAirline = this.listAirline.find(airline => airline.id === item.id);
     this.IdAirline = selectedAirline?.id;
   }
-  onFlightSelect(item: any) {
-    const selectedFlight = this.listFlight.find(flight => flight.id === item.id);
-    this.backFlightId = selectedFlight;
+  updateValueTimeDate() {
+    // debugger
+    if (this.dataFlight.date) {      
+      this.editDate = this.dataFlight.date;
+      var hour = this.editDate.getHours();
+      var minute = this.editDate.getMinutes();
+      this.time = { hour: hour, minute: minute };
+      // var year = this.editDate.getFullYear();
+      // var month = this.editDate.getMonth();
+      // var day = this.editDate.getDate();
+
+      // this.x.setDate(day);
+      // this.x.setFullYear(year);
+      // this.x.setMonth(month);
+      // this.formFlight?.get("date")?.setValue(this.x);
+      // console.log(this.x);
+      // // console.log(this.editDate);
+    }
   }
 }

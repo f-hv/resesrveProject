@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightModel } from 'src/app/core/models/flight.model';
 import { FlightService } from 'src/app/core/services/flight.service';
+// import * as moment from "jalali-moment";
+import * as moment from "moment-jalaali";
+// import fa from "moment/src/locale/fa";
+// moment.locale("fa", fa);
 
 @Component({
   selector: 'app-list',
@@ -10,9 +14,13 @@ import { FlightService } from 'src/app/core/services/flight.service';
 export class ListComponent implements OnInit {
   listFlight: FlightModel[] = [];
   searchKeyWord: any;
+  ///// pagination
+  currentPage :any =1;
+  elementPerpage = 5;
+  collectionSize: number;
   constructor(private flightService: FlightService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {moment.loadPersian();
     this.getData();
     // const t = this.listFlight
     // var a = t.split(" ");
@@ -21,12 +29,9 @@ export class ListComponent implements OnInit {
   }
   getData() {
     this.listFlight = this.flightService.getData();
-    this.listFlight = this.listFlight.filter(item => item.deleted === 0)
-    // this.listFlight.map(item =>{
-    //   if( item.deleted === 0){
-
-    //   }
-    // })
+    this.listFlight = this.listFlight.filter(item => item.deleted === 0);
+    this.collectionSize = this.listFlight.length;
+    // moment().locale('fa').format('YYYY/M/D');
 
   }
   delete(item: any) {
@@ -48,9 +53,15 @@ export class ListComponent implements OnInit {
     if (this.searchKeyWord.length === 0) {
       this.listFlight = this.flightService.getOrginalList();
     }
-    if ( this.searchKeyWord.length>2  && item.keycode !== 13 || item.keycode !== 8) {
-      this.getData();
-      this.listFlight = this.listFlight.filter(flight => flight.source?.includes(item) || flight.distination?.includes(item));
+    if (this.searchKeyWord.length > 1) {
+      if (item.keycode !== 13 || item.keycode !== 8) {
+        this.getData();
+        this.listFlight = this.listFlight.filter(flight => flight.source?.includes(item) || flight.distination?.includes(item));
+      }
     }
   }
 }
+function input(input: any, arg1: string) {
+  throw new Error('Function not implemented.');
+}
+

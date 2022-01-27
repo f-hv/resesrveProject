@@ -1,0 +1,25 @@
+@import "./custom-kit/variable.scss";
+
+ng-multiselect-dropdown{
+
+    &.error {
+        div:nth-of-type(1){
+        outline: $border-size-sm solid $error-color;}
+    }
+}
+
+input{
+    &.error{
+        outline: $border-size-sm solid $error-color;
+        outline-offset: -2px;
+        border-bottom-color: transparent;
+    }
+}
+
+ngb-timepicker{
+    &.error input{
+        outline: $border-size-sm solid $error-color;
+        outline-offset: -2px;
+        border-bottom-color: transparent;
+    }
+}
