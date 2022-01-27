@@ -3,7 +3,7 @@
 ng-multiselect-dropdown{
 
     &.error {
-        div:nth-of-type(1){
+        .multiselect-dropdown{
         outline: $border-size-sm solid $error-color;}
     }
 }

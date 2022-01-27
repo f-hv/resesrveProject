@@ -105,7 +105,6 @@ export class FormComponent implements OnInit {
   }
 
   save() {
-    debugger
     this.isClickOnSaveBtn = true
     if (this.formAirline.invalid) {
       return

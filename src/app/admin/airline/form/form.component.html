@@ -1,12 +1,15 @@
-<div class="content" *ngIf="formAirline">
+<div class="container pt-4" *ngIf="formAirline">
   <form [formGroup]="formAirline">
-    <div class="row  rounded-3 p-3 justify-content-md-center border border-1 ">
+    <div class="row  pb-5 pt-4 justify-content-md-center border border-1 rounded-3 content">
       <div class="col col-md-2"> </div>
       <div class="col-md-8 ">
         <div class="row">
           <div class="col-md-6 ">
             <label class="col-form-label-sm">نام</label>
-            <input class="form-control" formControlName="name"  />
+            <input class="form-control" formControlName="name" 
+              [ngClass]="{
+              error: (!formAirline.get('name')?.valid || formAirline.get('name')?.value === '') && isClickOnSaveBtn}"
+             />
             <app-error-message *ngIf="
                 !formAirline.get('name')?.valid &&
                 isClickOnSaveBtn &&
@@ -15,44 +18,56 @@
           <div class="col-md-6 ">
             <label class="col-form-label-sm">شهر</label>
             <ng-multiselect-dropdown class="form-control-sm" [placeholder]="'شهر'" [settings]="dropdownSettings" [data]="listCity"
-              (onSelect)="onCitySelect($event)" formControlName="city" [ngClass]="{
+              (onSelect)="onCitySelect($event)" formControlName="city" 
+              [ngClass]="{
                     error: (!formAirline.get('city')?.valid || formAirline.get('city')?.value === '') && isClickOnSaveBtn
                   }">
             </ng-multiselect-dropdown>
-            <app-error-message *ngIf="
-              !formAirline.get('city')?.valid &&
-             isClickOnSaveBtn &&
-              !formAirline.get('city')?.value" [message]="'Required'"></app-error-message>
+            <div class="error-box" >
+              <app-error-message *ngIf="
+                !formAirline.get('city')?.valid &&
+               isClickOnSaveBtn &&
+                !formAirline.get('city')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 ">
             <label class="col-form-label-sm">کلاس نرخی</label>
             <ng-multiselect-dropdown class="form-control-sm" [placeholder]="'کلاس نرخی'" [settings]="dropdownSettings" [data]="listPriceClass"
-              (onSelect)="onPriceClassSelect($event)" formControlName="priceClass" [ngClass]="{
+              (onSelect)="onPriceClassSelect($event)" formControlName="priceClass" 
+              [ngClass]="{
                     error: (!formAirline.get('priceClass')?.valid || formAirline.get('priceClass')?.value === '') && isClickOnSaveBtn
                   }">
             </ng-multiselect-dropdown>
-            <app-error-message *ngIf="
-              !formAirline.get('priceClass')?.valid &&
-             isClickOnSaveBtn &&
-              !formAirline.get('priceClass')?.value" [message]="'Required'"></app-error-message>
+            <div class="error-box">
+              <app-error-message *ngIf="
+                !formAirline.get('priceClass')?.valid &&
+               isClickOnSaveBtn &&
+                !formAirline.get('priceClass')?.value" [message]="'Required'">
+              </app-error-message>
+            </div>
           </div>
           <div class="col-md-6 ">
             <label class="col-form-label-sm">وزن مجاز بار</label>
             <ng-multiselect-dropdown class="form-control-sm" [settings]="dropdownSettingsLoad" [placeholder]="'وزن مجاز بار'"
-              [data]="listLoadWeight" (onSelect)="onLoadSelect($event)" formControlName="loadWeight" [ngClass]="{
+              [data]="listLoadWeight" (onSelect)="onLoadSelect($event)" formControlName="loadWeight" 
+              [ngClass]="{
                     error: (!formAirline.get('loadWeight')?.valid || formAirline.get('loadWeight')?.value === '') && isClickOnSaveBtn
                   }">
             </ng-multiselect-dropdown>
-            <app-error-message *ngIf="
+            <div class="error-box">
+              <app-error-message *ngIf="
               !formAirline.get('loadWeight')?.valid &&
               isClickOnSaveBtn &&
               !formAirline.get('loadWeight')?.value" [message]="'The minimum weight load is 20 kg'">
-            </app-error-message>
+              </app-error-message>
+            </div>
+            
           </div>
         </div>
-        <div class="row btn-save mt-5">
+        <div class="row btn-save ">
           <div class="col-md-8">
             <div class="row">
               <div class="col-md-4 pl-5">
@@ -70,93 +85,3 @@
     </div>
   </form>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-      </div>
-        <div class="form-class"> 
-            <label>نام</label>
-            <input formControlName="name" [ngClass]="{
-                error: (!formAirline.get('name')?.valid || formAirline.get('name')?.value === '') && isClickOnSaveBtn
-              }" />
-              <app-error-message 
-              *ngIf="
-                !formAirline.get('name')?.valid &&
-                isClickOnSaveBtn &&
-                !formAirline.get('name')?.value"
-              [message]="'Required'"
-            ></app-error-message>
-            <label>شهر</label>
-            <ng-multiselect-dropdown [placeholder]="'شهر'" [settings]="dropdownSettings" [data]="listCity"
-                (onSelect)="onCitySelect($event)" formControlName="city" [ngClass]="{
-                    error: (!formAirline.get('city')?.valid || formAirline.get('city')?.value === '') && isClickOnSaveBtn
-                  }">
-            </ng-multiselect-dropdown>
-            <app-error-message 
-            *ngIf="
-              !formAirline.get('city')?.valid &&
-             isClickOnSaveBtn &&
-              !formAirline.get('city')?.value"
-            [message]="'Required'"
-          ></app-error-message>
-
-
-
-            <label>کلاس نرخی</label>
-            <ng-multiselect-dropdown [placeholder]="'کلاس نرخی'" [settings]="dropdownSettings" [data]="listPriceClass"
-                (onSelect)="onPriceClassSelect($event)" formControlName="priceClass" [ngClass]="{
-                    error: (!formAirline.get('priceClass')?.valid || formAirline.get('priceClass')?.value === '') && isClickOnSaveBtn
-                  }">
-            </ng-multiselect-dropdown>
-            <app-error-message 
-            *ngIf="
-              !formAirline.get('priceClass')?.valid &&
-             isClickOnSaveBtn &&
-              !formAirline.get('priceClass')?.value"
-            [message]="'Required'"
-            ></app-error-message>
-
-
-
-
-
-            <label>وزن مجاز بار</label>
-            <ng-multiselect-dropdown 
-                [settings]="dropdownSettingsLoad" 
-                [placeholder]="'وزن مجاز بار'"  
-                [data]="listLoadWeight" 
-                (onSelect)="onLoadSelect($event)" 
-                formControlName="loadWeight"
-                [ngClass]="{
-                    error: (!formAirline.get('loadWeight')?.valid || formAirline.get('loadWeight')?.value === '') && isClickOnSaveBtn
-                  }">
-            </ng-multiselect-dropdown>
-            <app-error-message 
-            *ngIf="
-              !formAirline.get('loadWeight')?.valid &&
-              isClickOnSaveBtn &&
-              !formAirline.get('loadWeight')?.value"
-            [message]="'The minimum weight load is 20 kg'"
-          ></app-error-message>
-        </div>
-        <button type="submit" (click)="save()">ذخیره</button>
-        <button type="button" (click)="cancel">انصراف</button>
-    </form>
-</div> -->
