@@ -44,8 +44,8 @@
             <td style="width:10%" >{{flight.source}}</td>
             <td style="width:10%" >{{flight.distination}}</td>
             <td style="width:8%" >{{flight.price}}</td>
-            <td style="width:18%" >{{flight.date | date:'medium'}}</td> 
-            <!--  |jalali -->
+            <td style="width:18%" >{{flight.date |jalali}}</td> 
+            <!--  |  date:'medium'-->
             <td style="width:10%" >{{flight.airlineId}}</td>
             <td id="detail-td" style="width:39%">
               <i class="fas fa-edit p-2" [routerLink]="'../update/' + flight.id"></i>
