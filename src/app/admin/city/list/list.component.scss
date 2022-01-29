@@ -7,10 +7,12 @@ caption{
     .btn-save{
         width: $width-sm; 
     }
-    
-    h6{
-        width: $width-md;
-        display: inline-flex;
-        justify-content: start;
+    .header{
+        padding-right: 10px;
+        h7{
+            width: $width-md;
+            display: inline-flex;
+            justify-content: flex-start;
+        }
     }
 }

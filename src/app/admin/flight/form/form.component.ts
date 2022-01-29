@@ -8,6 +8,7 @@ import { FlightModel } from '../../../core/models/flight.model';
 import { CityService } from '../../../core/services/city.service';
 import { FlightService } from '../../../core/services/flight.service';
 import { NgbCalendar, NgbCalendarPersian, NgbDatepickerI18n, NgbDate, NgbDateStruct, NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 const WEEKDAYS_SHORT = ['د', 'س', 'چ', 'پ', 'ج', 'ش', 'ی'];
 const MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
@@ -39,18 +40,20 @@ export class FormComponent implements OnInit {
   listAirline: AirlineModel[];
   isClickOnSaveBtn = false;
   /////dropdown 
-  dropdownSettings = {};
+  dropdownSettings :IDropdownSettings
+  selectedSource = {};
   source: any;
   distination: any;
   IdAirline: any;
+  data:CityModel|undefined;
   ///// datepicker
   newDate = new Date(1400, 11, 24, 10, 33, 30);
-  x = new Date();
   editDate = new Date();
   today = new Date();
   placement = 'bottom';
+  dateNew:any;
   ////timepicker
-  time: any =null;
+  time: any = null;
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
@@ -69,6 +72,9 @@ export class FormComponent implements OnInit {
     this.listAirline = this.airlineService.getData();
     if (this.id) {
       this.dataFlight = this.flightService.getById(this.id);
+     
+      this.data=this.listCity.find(item =>item.name ===this.dataFlight.source );
+      this.selectedSource = { idField: this.data?.id, textField: this.data?.name };
       this.updateValueTimeDate();
     }
     else {
@@ -78,7 +84,7 @@ export class FormComponent implements OnInit {
         distination: null,
         date: null,
         price: null,
-        airlineId: null,
+        airline: null,
         flightNumber: null,
         deleted: 0
       }
@@ -92,33 +98,42 @@ export class FormComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 20,
     };
-
   }
   initial() {
+    // debugger
     this.formFlight = this.formBuilder.group({
       id: [this.dataFlight?.id],
-      source: [this.source, Validators.required],
-      distination: [this.distination, Validators.required],
-      airlineId: [this.IdAirline, Validators.required],
-      date: [this.dataFlight.date, [Validators.required]],
+      source: [this.dataFlight.source, [Validators.required]],
+      distination: [this.dataFlight.distination, Validators.required],
+      airline: [this.dataFlight.airline, Validators.required],
+      date: [this.dataFlight.date, Validators.required],
       time: [this.time, [Validators.required]],
       price: [this.dataFlight?.price, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
       flightNumber: [this.dataFlight?.flightNumber, Validators.required],
       deleted: 0
-    });
+    });  
+    this.formFlight?.get("date")?.setValue(this.dateNew);
+    console.log("---",this.formFlight?.get("date")?.value);
+    
   }
   cancel() {
     this.navigate();
   }
 
   save() {
-    this.formFlight?.get("source")?.setValue(this.source);
-    this.formFlight?.get("distination")?.setValue(this.distination);
-    this.formFlight?.get("airlineId")?.setValue(this.IdAirline);
+    // debugger
+    if (this.source)
+      this.formFlight?.get("source")?.setValue(this.source);
+    if (this.distination)
+      this.formFlight?.get("distination")?.setValue(this.distination);
+    if (this.IdAirline)
+      this.formFlight?.get("airline")?.setValue(this.IdAirline);
     this.isClickOnSaveBtn = true;
-
-    if (this.formFlight.invalid)
+    if (this.formFlight.invalid) {
+      console.log("not valid form");
       return;
+    }
+
     else {
       this.combineTimeDate();
       this.formFlight?.get("date")?.setValue(this.newDate);
@@ -162,7 +177,6 @@ export class FormComponent implements OnInit {
     var second = Number(time.second);
     this.newDate.setHours(hour);
     this.newDate.setMinutes(minute);
-    
   }
   navigate() {
     this.router.navigate([this.id ? '../..' : '..'], {
@@ -185,21 +199,21 @@ export class FormComponent implements OnInit {
   }
   updateValueTimeDate() {
     // debugger
-    if (this.dataFlight.date) {      
+    if (this.dataFlight.date) {
       this.editDate = this.dataFlight.date;
       var hour = this.editDate.getHours();
       var minute = this.editDate.getMinutes();
       this.time = { hour: hour, minute: minute };
-      // var year = this.editDate.getFullYear();
-      // var month = this.editDate.getMonth();
-      // var day = this.editDate.getDate();
 
-      // this.x.setDate(day);
-      // this.x.setFullYear(year);
-      // this.x.setMonth(month);
-      // this.formFlight?.get("date")?.setValue(this.x);
-      // console.log(this.x);
-      // // console.log(this.editDate);
+      var year = this.editDate.getFullYear();
+      var month = this.editDate.getMonth();
+      var day = this.editDate.getDate();
+      this.dateNew={"year": year, "month": month, "day":day}
+      // dateNew.setDate(day);
+      // dateNew.setFullYear(year);
+      // dateNew.setMonth(month);
+      // { "year": 1400, "month": 11, "day": 22 }
+      console.log(this.dateNew);
     }
   }
 }

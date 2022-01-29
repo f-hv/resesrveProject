@@ -6,8 +6,13 @@
         <div class="row">
           <div class="col-md-6 ">
             <label class="col-form-label-sm col-2">مبدا</label>
-            <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مبدا'" [settings]="dropdownSettings"
-              [data]="listCity" (onSelect)="onSourceSelect($event)" formControlName="source"
+            <ng-multiselect-dropdown 
+              class="form-control-sm col-5" 
+              [placeholder]="'مبدا'" 
+              [settings]="dropdownSettings"
+              [data]="listCity" 
+              (onSelect)="onSourceSelect($event)" 
+              formControlName="source"
               [ngClass]="{
                 error: (!formFlight.get('source')?.valid || formFlight.get('source')?.value === '') && isClickOnSaveBtn
               }">
@@ -16,7 +21,7 @@
               <app-error-message *ngIf="
                   !formFlight.get('source')?.valid &&
                   isClickOnSaveBtn &&
-                  !formFlight.get('source')?.value" [message]="'Required'">
+                  formFlight.get('source')?.value === ''" [message]="'Required'">
               </app-error-message>
             </div>
           </div>
@@ -32,26 +37,31 @@
               <app-error-message *ngIf="
                   !formFlight.get('distination')?.valid &&
                   isClickOnSaveBtn &&
-                  !formFlight.get('distination')?.value" [message]="'Required'">
+                  formFlight.get('distination')?.value === '' " [message]="'Required'">
               </app-error-message>
             </div>
           </div>
         </div>
 
-        <div class="row ">
+        <div class="row mt-4 ">
           <div class="col-md-6 ">
             <label class="col-form-label-sm">خط پرواز</label>
-            <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'خط پرواز'" [settings]="dropdownSettings"
-              [data]="listAirline" (onSelect)="onAirlineSelect($event)" formControlName="airlineId"
+            <ng-multiselect-dropdown 
+              class="form-control-sm dropdown" 
+              [placeholder]="'خط پرواز'" 
+              [settings]="dropdownSettings"
+              [data]="listAirline" 
+              (onSelect)="onAirlineSelect($event)" 
+              formControlName="airline"
               [ngClass]="{
-                error: (!formFlight.get('airlineId')?.valid || formFlight.get('airlineId')?.value === '') && isClickOnSaveBtn
+                error: (!formFlight.get('airline')?.valid || formFlight.get('airline')?.value === '') && isClickOnSaveBtn
               }">
             </ng-multiselect-dropdown>
             <div class="error-box">
               <app-error-message *ngIf="
-                  !formFlight.get('airlineId')?.valid &&
+                  !formFlight.get('airline')?.valid &&
                   isClickOnSaveBtn &&
-                  !formFlight.get('airlineId')?.value" [message]="'Required'">
+                  !formFlight.get('airline')?.value" [message]="'Required'">
               </app-error-message>
             </div>
           </div>
@@ -70,7 +80,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-3">
           <div class="col-md-6 mt-5 position-relative ">
             <div>
               <input 
@@ -86,7 +96,7 @@
                 [placement]=" placement"
                 [autoClose]="true"
                 [ngClass]="{
-                  error: (!formFlight.get('date')?.valid || formFlight.get('date')?.value === '') && isClickOnSaveBtn
+                  error:formFlight.get('date')?.value === '' && isClickOnSaveBtn
                 }"
               >
               <div class="btn-date position-absolute ">
@@ -103,7 +113,7 @@
             </div>
           </div>
           <div class="col-md-6 mt-1 ">
-            <ngb-timepicker formControlName="time"  
+            <ngb-timepicker class="ngtime" formControlName="time"  
             [ngClass]="{
               error: (!formFlight.get('time')?.valid || formFlight.get('time')?.value === '') && isClickOnSaveBtn
             }">
@@ -148,4 +158,4 @@
     </div>
   </form>
 </div>
-<!-- {{formFlight.get('time')?.value|json}} -->
+<!-- {{formFlight.get('time')?.value|jscon}} -->

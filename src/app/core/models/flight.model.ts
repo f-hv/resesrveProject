@@ -3,7 +3,7 @@ export interface FlightModel {
         source: string|null,
         distination: string|null,
         price: number|null,
-        airlineId: number|null,
+        airline: string|null,
         date: Date|null,
         // time:Date|null
         deleted:number|null,

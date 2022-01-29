@@ -1,25 +1,74 @@
 @import "./custom-kit/variable.scss";
 
-ng-multiselect-dropdown{
-
-    &.error {
-        .multiselect-dropdown{
-        outline: $border-size-sm solid $error-color;}
+ng-multiselect-dropdown {
+  &.error {
+    .multiselect-dropdown {
+      outline: $border-size-sm solid $error-color;
     }
+  }
 }
 
-input{
-    &.error{
-        outline: $border-size-sm solid $error-color;
-        outline-offset: -2px;
-        border-bottom-color: transparent;
-    }
+input {
+  background-color: transparent !important;
+  border-color: $gray-40 !important;
+  &.error {
+    outline: $border-size-sm solid $error-color;
+    outline-offset: -2px;
+    border-bottom-color: transparent;
+  }
 }
 
-ngb-timepicker{
-    &.error input{
-        outline: $border-size-sm solid $error-color;
-        outline-offset: -2px;
-        border-bottom-color: transparent;
+ngb-timepicker {
+  &.error input {
+    outline: $border-size-sm solid $error-color;
+    outline-offset: -2px;
+    border-bottom-color: transparent;
+  }
+}
+table {
+  table-layout: fixed; ///overflow td
+  border: 1px solid red;
+  border-spacing: 0;
+  background-color: $white !important;
+  box-shadow: $box-shadow-md;
+  overflow-x: auto;
+  font-size: $font-size-3;
+  font-weight: normal;
+  vertical-align: middle;
+  td {
+    white-space: nowrap;
+    overflow: hidden; ///overflow td
+  }
+  td,
+  th {
+    text-align: center;
+    vertical-align: center;
+  }
+  #detail-td {
+    text-align: left;
+  }
+  caption {
+    background-color: $white !important;
+  }
+  i {
+    color: $primary-color-1;
+    &:hover {
+      color: $blue-dark;
+      cursor: pointer;
+      transition: transform 0.2s ease-out; // speed to change size 1 to size 2 on HOVER
+      transform: scale(1.2); ////size buttom on hover ob self
     }
+  }
+
+  tbody {
+    tr:hover {
+      background-color: $cool-gray-10;
+    }
+  }
+  thead {
+    background-color: $primary-color-1;
+    color: $white;
+    font-size: $font-size-2;
+    font-weight: lighter;
+  }
 }

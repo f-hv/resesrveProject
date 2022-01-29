@@ -32,8 +32,8 @@
             <th scope="col" style="width:10%">نام</th>
             <th scope="col" style="width:10%">شهر</th>
             <th scope="col" style="width:10%">کلاس نرخی</th>
-            <th scope="col" style="width:10%">وزن بار مجاز</th>
-            <th style="width:55%"></th>
+            <th scope="col" style="width:15%"> وزن مجاز /کیلوگرم</th>
+            <th style="width:50%"></th>
           </tr>
         </thead>
         <tbody>
@@ -42,8 +42,8 @@
             <td style="width: 10%">{{airline.name}}</td>
             <td style="width: 10%">{{airline.city}}</td>
             <td style="width: 10%">{{airline.priceClass}}</td>
-            <td style="width: 10%">{{airline.loadWeight}}</td>
-            <td id="detail-td" style="width: 55%">
+            <td style="width: 15%">{{airline.loadWeight}}</td>
+            <td id="detail-td" style="width: 50%">
               <i class="fas fa-edit p-2" [routerLink]="'../update/' + airline.id"></i>
               <i class="fas fa-trash p-2" (click)="delete(airline.id)"></i>
             </td>

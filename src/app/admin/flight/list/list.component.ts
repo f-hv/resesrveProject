@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightModel } from 'src/app/core/models/flight.model';
 import { FlightService } from 'src/app/core/services/flight.service';
-// import * as moment from "jalali-moment";
-import * as moment from "moment-jalaali";
-// import fa from "moment/src/locale/fa";
-// moment.locale("fa", fa);
+import * as moment from "jalali-moment";
+
 
 @Component({
   selector: 'app-list',
@@ -20,12 +18,8 @@ export class ListComponent implements OnInit {
   collectionSize: number;
   constructor(private flightService: FlightService) { }
 
-  ngOnInit(): void {moment.loadPersian();
+  ngOnInit(): void {
     this.getData();
-    // const t = this.listFlight
-    // var a = t.split(" ");
-    // var date = a[0];
-    // var time = a[1];
   }
   getData() {
     this.listFlight = this.flightService.getData();
