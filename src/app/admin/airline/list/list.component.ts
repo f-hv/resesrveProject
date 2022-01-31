@@ -10,10 +10,10 @@ import { AirlineService } from '../../../core/services/airline.service';
 export class ListComponent implements OnInit {
   listAirline: AirlineModel[];
   searchKeyWord: any;
-   ///// pagination
-   currentPage :any =1;
-   elementPerpage = 5;
-   collectionSize: number;
+  ///// pagination
+  currentPage: any = 1;
+  elementPerpage = 5;
+  collectionSize: number;
   constructor(
     private airlineService: AirlineService
   ) { }
@@ -38,16 +38,35 @@ export class ListComponent implements OnInit {
   }
 
   onKeyup(item: any) {
+    // debugger
+    console.log("key:", item);
+
     if (item.keycode !== 13 || item.keycode !== 8) {
       this.searchKeyWord = item;
     }
     if (this.searchKeyWord.length === 0) {
       this.listAirline = this.airlineService.getOrginalList();
     }
-    if (this.searchKeyWord.length > 1) {
-      if ( item.keycode !== 13 || item.keycode !== 8) {
-        this.getData();
-        this.listAirline = this.listAirline.filter(line => line.city?.includes(item) || line.name?.includes(item));
+    if (this.searchKeyWord) {
+      if (this.searchKeyWord.length === 1) {
+        this.searchKeyWord=this.searchKeyWord.toUpperCase();
+        if (item.keycode !== 13 || item.keycode !== 8) {
+          this.getData();
+          var list = this.listAirline.filter(line => line.priceClass?.includes(this.searchKeyWord));
+          if(list.length !== 0) {this.listAirline=list;}
+          return;
+        }
+      }
+      if (this.searchKeyWord.length > 1) {
+        if (item.keycode !== 13 || item.keycode !== 8) {
+          this.getData();
+          this.listAirline = this.listAirline.filter(line =>
+            line.priceClass?.includes(item) ||
+            line.city?.includes(item) || 
+            line.name?.includes(item) || 
+            line.loadWeight == item  
+          );
+        }
       }
     }
   }

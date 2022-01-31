@@ -50,7 +50,12 @@ export class ListComponent implements OnInit {
     if (this.searchKeyWord.length > 1) {
       if (item.keycode !== 13 || item.keycode !== 8) {
         this.getData();
-        this.listFlight = this.listFlight.filter(flight => flight.source?.includes(item) || flight.distination?.includes(item));
+        this.listFlight = this.listFlight.filter(flight =>
+          flight.source?.includes(item) ||
+          flight.distination?.includes(item) ||
+          flight.airline?.includes(item)||
+          flight.price == item
+        );
       }
     }
   }
