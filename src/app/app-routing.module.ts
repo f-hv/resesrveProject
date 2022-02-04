@@ -8,14 +8,14 @@ const routes: Routes = [
     .then(m => m.AdminModule)
   },
   {
-    path:'',
-    redirectTo:'admin',
-    pathMatch: 'full'
-  },
-  {
     path: 'client',
     loadChildren: () => import('./client/client.module')
-      .then(m => m.ClientModule)
+    .then(m => m.ClientModule)
+  },
+  {
+    path:'',
+    redirectTo:'client',
+    pathMatch: 'full'
   },
 ];
 

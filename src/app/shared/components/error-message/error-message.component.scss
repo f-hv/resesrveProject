@@ -1,1 +1,12 @@
- 
+ @import "../../../../assets/styles/custom-kit/variable.scss";
+ div{
+     padding:5px 10px 0px 0px;
+     p{
+         font-size: $font-size-1;
+         padding-right: 5px;
+     }
+     i{
+         font-size: $font-size-1;
+         color: $red-60;
+     }
+ }

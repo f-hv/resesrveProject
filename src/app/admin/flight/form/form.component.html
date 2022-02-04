@@ -21,7 +21,7 @@
               <app-error-message *ngIf="
                   !formFlight.get('source')?.valid &&
                   isClickOnSaveBtn &&
-                  formFlight.get('source')?.value === ''" [message]="'Required'">
+                  formFlight.get('source')?.value === ''" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -37,7 +37,7 @@
               <app-error-message *ngIf="
                   !formFlight.get('distination')?.valid &&
                   isClickOnSaveBtn &&
-                  formFlight.get('distination')?.value === '' " [message]="'Required'">
+                  formFlight.get('distination')?.value === '' " [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -61,7 +61,7 @@
               <app-error-message *ngIf="
                   !formFlight.get('airline')?.valid &&
                   isClickOnSaveBtn &&
-                  !formFlight.get('airline')?.value" [message]="'Required'">
+                  !formFlight.get('airline')?.value" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -75,7 +75,7 @@
               <app-error-message *ngIf="
                 !formFlight.get('flightNumber')?.valid &&
                 isClickOnSaveBtn &&
-                !formFlight.get('flightNumber')?.value" [message]="'Required'">
+                !formFlight.get('flightNumber')?.value" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -108,7 +108,7 @@
                 !formFlight.get('date')?.valid &&
                 isClickOnSaveBtn &&
                 !formFlight.get('date')?.value" 
-                [message]="'Required'">
+                [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -131,7 +131,7 @@
               <app-error-message *ngIf="
                 !formFlight.get('price')?.valid &&
                 isClickOnSaveBtn &&
-                !formFlight.get('price')?.value" [message]="'Required'">
+                !formFlight.get('price')?.value" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>

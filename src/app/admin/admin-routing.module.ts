@@ -30,7 +30,6 @@ const routes: Routes = [
         path:'reserve',
         loadChildren:()=> import ('./reserve/reserve.module')
         .then (m => m.ReserveModule)
-
       }
     ]
   }];

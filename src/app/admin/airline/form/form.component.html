@@ -13,7 +13,7 @@
             <app-error-message *ngIf="
                 !formAirline.get('name')?.valid &&
                 isClickOnSaveBtn &&
-                !formAirline.get('name')?.value" [message]="'Required'"></app-error-message>
+                !formAirline.get('name')?.value" [message]="'فیلد خالی است'"></app-error-message>
           </div>
           <div class="col-md-6 ">
             <label class="col-form-label-sm">شهر</label>
@@ -27,7 +27,7 @@
               <app-error-message *ngIf="
                 !formAirline.get('city')?.valid &&
                isClickOnSaveBtn &&
-                !formAirline.get('city')?.value" [message]="'Required'">
+                !formAirline.get('city')?.value" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -45,7 +45,7 @@
               <app-error-message *ngIf="
                 !formAirline.get('priceClass')?.valid &&
                isClickOnSaveBtn &&
-                !formAirline.get('priceClass')?.value" [message]="'Required'">
+                !formAirline.get('priceClass')?.value" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
@@ -61,7 +61,7 @@
               <app-error-message *ngIf="
               !formAirline.get('loadWeight')?.valid &&
               isClickOnSaveBtn &&
-              !formAirline.get('loadWeight')?.value" [message]="'The minimum weight load is 20 kg'">
+              !formAirline.get('loadWeight')?.value" [message]="'کمترین وزن 20کیلو'">
               </app-error-message>
             </div>
             

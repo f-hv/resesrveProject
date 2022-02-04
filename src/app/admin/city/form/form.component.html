@@ -6,12 +6,12 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <label class="col-md-3 col-form-label-sm">شهر</label>
-          <input class="col-md-3 form-control" type="text" [(ngModel)]="listCity.name" required
+          <input class="col-md-3 form-control" type="text" [(ngModel)]="listCity.name" فیلد خالی است
             [ngClass]="{ error: listCity.name === null && isClickOnSaveBtn }"
            />
           <app-error-message *ngIf="
             listCity.name === null &&
-            isClickOnSaveBtn" [message]="'required'"></app-error-message>
+            isClickOnSaveBtn" [message]="'فیلد خالی است'"></app-error-message>
         </div>
         <div class="col-md-3"></div>
         <div class="row  mt-5">

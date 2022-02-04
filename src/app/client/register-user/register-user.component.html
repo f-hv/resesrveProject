@@ -1,0 +1,96 @@
+<div class="container pt-4" *ngIf="formRegister">
+    <form [formGroup]="formRegister">
+        <div class="row  rounded-3 pb-5 pt-4 justify-content-md-center border border-1 content">
+            <div class="col col-md-2"></div>
+            <div class="col-md-8 ">
+                <div class="row">
+                    <div class="row mt-3">
+                        <div class="col-md-6 ">
+                            <label class="col-form-label-sm col-2">نام</label>
+                            <input class="form-control" type="text" formControlName="firstName"
+                                [ngClass]="{
+                                error: (!formRegister.get('firstName')?.valid || formRegister.get('firstName')?.value === '') && isClickOnSaveBtn}" />
+                            <div class="error-box">
+                                <app-error-message *ngIf="
+                                    !formRegister.get('firstName')?.valid &&
+                                    isClickOnSaveBtn &&
+                                    !formRegister.get('firstName')?.value " [message]="'فیلد خالی است'">
+                                </app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-form-label-sm col-3">نام کاربری</label>
+                            <input class="form-control" type="text" formControlName="userName"
+                                [ngClass]="{
+                                    error: (!formRegister.get('userName')?.valid || formRegister.get('userName')?.value === '') && isClickOnSaveBtn }" />
+                            <div class="error-box">
+                                <app-error-message *ngIf="
+                                    !formRegister.get('userName')?.valid &&
+                                    isClickOnSaveBtn &&
+                                    !formRegister.get('userName')?.value  " [message]="'فیلد خالی است'">
+                                </app-error-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  mt-3">
+                        <div class="col-md-6">
+                            <label class="col-form-label-sm"> رمزعبور</label>
+                            <input class="form-control" type="text" formControlName="password"
+                                [ngClass]="{
+                            error: (!formRegister.get('password')?.valid || formRegister.get('password')?.value === '') && isClickOnSaveBtn}" />
+                            <div class="error-box">
+                                <app-error-message *ngIf="
+                                !formRegister.get('password')?.valid &&
+                                isClickOnSaveBtn &&
+                                !formRegister.get('password')?.value" [message]="'فیلد خالی است'">
+                                </app-error-message>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label class="col-form-label-sm"> تکرار رمزعبور</label>
+                            <input class="form-control" type="text" formControlName="passconfirm" [ngClass]="{ error:                             
+                                (!formRegister.get('passconfirm')?.valid || 
+                                formRegister.get('passconfirm')?.value !== formRegister.get('password')?.value)
+                                && isClickOnSaveBtn}" />
+                            <div class="error-box">
+                                <app-error-message *ngIf=" isClickOnSaveBtn && 
+                                (formRegister.get('passconfirm')?.value !== formRegister.get('password')?.value)
+                                " [message]="'رمز ها یکسان نیستند'">
+                                </app-error-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 ">
+                            <label class="col-form-label-sm">ایمیل </label>
+                            <input class="form-control" type="text" formControlName="email"
+                                [ngClass]="{
+                                error: (!formRegister.get('email')?.valid || formRegister.get('email')?.value === '') && isClickOnSaveBtn}" />
+                            <div class="error-box">
+                                <app-error-message *ngIf="
+                                   ( formRegister.get('email')?.errors ||
+                                    !formRegister.get('email')?.value)&&
+                                    isClickOnSaveBtn 
+                                    " [message]="' ایمیل معتبر نیست'">
+                                </app-error-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5">
+                        <div class="row">
+                            <div class="col-md-4 pl-5">
+                                <button class="button button-primary button-sm-1 float-left " type="submit"
+                                    (click)="save()">ذخیره</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="button button-primary button-sm-1 float-right " type="button"
+                                    (click)="cancel()">انصراف</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 btn "></div>
+        </div>
+    </form>
+</div>
