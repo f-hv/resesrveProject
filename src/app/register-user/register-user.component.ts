@@ -100,4 +100,17 @@ export class RegisterUserComponent implements OnInit {
     const selectedSource = this.listRoles.find(role => role === item);
     this.selectedRole = selectedSource;   
   }
+  checkErrorPassword(): string {
+    if (this.isClickOnSaveBtn) {
+      if (
+        this.formRegister.get('password')?.value &&
+        this.formRegister.get('password')?.value.length < 5
+      ) {
+        return 'حداقل طول رمز عبور 5 کاراکتر هست.';
+      } else if (!this.formRegister.get('password')?.value) {
+        return 'فیلد خالی است';
+      }
+    }
+    return '';
+  }
 }

@@ -40,10 +40,9 @@
                             error: (!formRegister.get('password')?.valid || formRegister.get('password')?.value === '') && isClickOnSaveBtn}" />
                             <div class="error-box">
                                 <app-error-message *ngIf="
-                                !formRegister.get('password')?.valid &&
-                                isClickOnSaveBtn &&
-                                !formRegister.get('password')?.value" [message]="'فیلد خالی است'">
-                                </app-error-message>
+                                 formRegister.get('password')?.invalid && isClickOnSaveBtn"
+                                [message]="checkErrorPassword()" >
+                            </app-error-message> 
                             </div>
                         </div>
                         <div class="col-md-6 ">
