@@ -1,0 +1,31 @@
+@import "../../assets/styles/custom-kit/variable.scss";
+
+
+.container-fluid{
+    background-image:url('../../assets/pic/bg-login.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%; 
+
+}
+
+.card{
+    width: 400px; 
+    height: 500px; 
+    ///***** center card****////
+    margin: 60px auto;
+    float: none; 
+    margin-bottom: 10px;
+    border: none;
+}
+.card-body{
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-lg;
+
+    // background-image:url('../../../assets/pic/login2.jpg');
+    // background-repeat: no-repeat;
+    input{
+        width: 300px; ;
+    }
+    
+}

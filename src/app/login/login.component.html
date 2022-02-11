@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="card card text-right">
+        <div class="card-body">
+            <div [formGroup]="formLogin">
+                <div class="row">
+                    <label class="col-form-label-sm card-text"> نام کاربری</label>
+                    <input class="form-control" type="text" formControlName="userName"
+                        [ngClass]="{
+                          error: formLogin.get('userName')?.value === '' && isClickOnSaveBtn 
+                        }" 
+                    />
+                    <div class="error-box">
+                        <app-error-message *ngIf="
+                        !formLogin.get('userName')?.valid &&
+                        isClickOnSaveBtn &&
+                        formLogin.get('userName')?.value ===''" [message]="'فیلد خالی است'">
+                        </app-error-message>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-form-label-sm card-text"> رمزعبور</label>
+                    <input class="form-control" type="text" formControlName="password"
+                        [ngClass]="{
+                            error:  formLogin.get('password')?.value ==='' && isClickOnSaveBtn
+                        }" 
+                    />
+                    <div class="error-box">
+                        <app-error-message *ngIf="
+                                        !formLogin.get('password')?.valid &&
+                                        isClickOnSaveBtn &&
+                                        formLogin.get('password')?.value ===''" [message]="'فیلد خالی است'">
+                        </app-error-message>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 pl-5">
+                        <button class="button button-primary button-sm-1 float-left " type="submit"
+                            (click)="login()">ورود</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="button button-primary button-sm-1 float-right " type="button"
+                            (click)="logout()">خروج</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

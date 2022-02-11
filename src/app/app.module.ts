@@ -8,6 +8,8 @@ import { sharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { Router, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginModule } from './login/login.module';
+import { RegisterUserModule } from './register-user/register-user.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     RouterModule,
     NgbModule,
+    LoginModule,
+    RegisterUserModule
   ],
   schemas:[NO_ERRORS_SCHEMA , CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

@@ -8,10 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
-
-
-
+import { UserRoleDirective } from './directive/user-role.directive';
 
 @NgModule({
   declarations: [
@@ -20,15 +17,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
+    UserRoleDirective,
     
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
   ],
   schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
-  exports:[ErrorMessageComponent , SearchBoxComponent,HeaderComponent,SidebarComponent],
+  exports:[ErrorMessageComponent , SearchBoxComponent,HeaderComponent,SidebarComponent,UserRoleDirective],
 })
 export class sharedModule { }
