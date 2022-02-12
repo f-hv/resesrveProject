@@ -1,9 +1,11 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from '../core/models/roles.model';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-register-user',
@@ -19,26 +21,29 @@ export class RegisterUserComponent implements OnInit {
     userName: null,
     password: null,
     passConfrim: null,
-    role:null
+    role: null
   }
   isClickOnSaveBtn = false;
   ////directive/////
-  directRole="ADMIN"
+  directRole = "ADMIN"
   //// dropdown/////
-  dropdownSettings:IDropdownSettings;
-  selectedRole:any;
-  enume=Role;
-  listRoles:any[]=[];
+  dropdownSettings: IDropdownSettings;
+  selectedRole: any;
+  enume = Role;
+  listRoles: any[] = [];
+  check = 1
   constructor(
     private fb: FormBuilder,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { 
-    this.listRoles=Object.keys(this.enume);
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
+  ) {
+    this.listRoles = Object.keys(this.enume);
   }
-  ngOnInit(): void {          
+  ngOnInit(): void {
     this.initial()
+    this.setUserValidateRole();
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -55,19 +60,21 @@ export class RegisterUserComponent implements OnInit {
       userName: [this.data.userName, [Validators.required, Validators.minLength(5)]],
       password: [this.data.password, [Validators.required, Validators.minLength(5)]],
       passconfirm: [this.data.passConfrim, Validators.required],
-      role:[this.selectedRole,Validators.required]
+      role: [this.selectedRole]
     })
   }
   cancel() {
     this.navigate();
   }
   save() {
+    debugger
     this.isClickOnSaveBtn = true;
     if (this.formRegister?.valid) {
-      this.formRegister.get('role')?.setValue(this.selectedRole);
+      if(this.selectedRole)
+        this.formRegister.get('role')?.setValue(this.selectedRole);
       if (this.localStorageService.getItem("users") === null) {
         this.localStorageService.setItem("users", JSON.stringify([this.formRegister?.value]));
-        
+
         console.log("کاربر با موفقیت ثبت شد");
         this.navigate();
       }
@@ -89,6 +96,8 @@ export class RegisterUserComponent implements OnInit {
         }
       }
     }
+    console.log(this.formRegister?.value);
+    
   }
   navigate() {
     this.router.navigate(['../login'], {
@@ -98,19 +107,16 @@ export class RegisterUserComponent implements OnInit {
   onRoleSelect(item: any) {
     this.selectedRole = '';
     const selectedSource = this.listRoles.find(role => role === item);
-    this.selectedRole = selectedSource;   
+    this.selectedRole = selectedSource;
   }
-  checkErrorPassword(): string {
-    if (this.isClickOnSaveBtn) {
-      if (
-        this.formRegister.get('password')?.value &&
-        this.formRegister.get('password')?.value.length < 5
-      ) {
-        return 'حداقل طول رمز عبور 5 کاراکتر هست.';
-      } else if (!this.formRegister.get('password')?.value) {
-        return 'فیلد خالی است';
+  setUserValidateRole() {
+    this.authService.currentUser$.subscribe((user: any) => {
+      if (user && user.role !== "ADMIN") {
+        this.formRegister.get('role')?.clearValidators();
+      } else {
+        this.formRegister.get('role')?.setValidators(Validators.required);
       }
-    }
-    return '';
+      this.formRegister.get('role')?.updateValueAndValidity();
+    })
   }
 }

@@ -37,8 +37,11 @@ export class LoginComponent implements OnInit {
     const password=this.formLogin.get('password')?.value;
     const resLogin = this.authService.login(userName,password)
     if(resLogin){  
-      this.navigate();  
+      console.log("login success");        
     }
+    else
+     console.log("login faild");
+     
   }
   logout(){
     this.authService.logout();

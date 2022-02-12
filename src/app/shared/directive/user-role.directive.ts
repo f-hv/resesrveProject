@@ -20,7 +20,7 @@ export class UserRoleDirective {
   }
   changeVisibility() {
     this.authService.currentUser$.subscribe((user: any) => {
-      if (user?.role === this.value)
+      if (user && user?.role === this.value)
         this.viewContainer.createEmbeddedView(this.templateRef);
       else
         this.viewContainer.clear();

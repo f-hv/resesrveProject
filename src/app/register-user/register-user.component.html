@@ -8,26 +8,24 @@
                         <div class="col-md-6 ">
                             <label class="col-form-label-sm col-2">نام</label>
                             <input class="form-control" type="text" formControlName="firstName"
-                                [ngClass]="{
-                                error: (!formRegister.get('firstName')?.valid || formRegister.get('firstName')?.value === '') && isClickOnSaveBtn}" />
+                                [ngClass]="{ error: (formRegister.get('firstName')?.invalid  ) && isClickOnSaveBtn}" />
                             <div class="error-box">
                                 <app-error-message *ngIf="
-                                    !formRegister.get('firstName')?.valid &&
-                                    isClickOnSaveBtn &&
-                                    !formRegister.get('firstName')?.value " [message]="'فیلد خالی است'">
+                                    formRegister.get('firstName')?.invalid &&  isClickOnSaveBtn"
+                                    [message]=" !formRegister.get('firstName')?.value ? 'فیلدخالی است' :''">
                                 </app-error-message>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="col-form-label-sm col-3">نام کاربری</label>
                             <input class="form-control" type="text" formControlName="userName"
-                                [ngClass]="{
-                                    error: (!formRegister.get('userName')?.valid || formRegister.get('userName')?.value === '') && isClickOnSaveBtn }" />
+                                [ngClass]="{ error: formRegister.get('userName')?.invalid && isClickOnSaveBtn }" />
                             <div class="error-box">
                                 <app-error-message *ngIf="
-                                    !formRegister.get('userName')?.valid &&
-                                    isClickOnSaveBtn &&
-                                    !formRegister.get('userName')?.value  " [message]="'فیلد خالی است'">
+                                    formRegister.get('userName')?.invalid && isClickOnSaveBtn"
+                                    [message]="
+                                        !formRegister.get('userName')?.value ? 'فیلدخالی است' :
+                                        5 > formRegister.get('userName')?.value?.length  ?'حداقل طول نام کاربری 5 کاراکتر هست.' :''">
                                 </app-error-message>
                             </div>
                         </div>
@@ -35,75 +33,75 @@
                     <div class="row  mt-3">
                         <div class="col-md-6">
                             <label class="col-form-label-sm"> رمزعبور</label>
-                            <input class="form-control" type="text" formControlName="password"
-                                [ngClass]="{
-                            error: (!formRegister.get('password')?.valid || formRegister.get('password')?.value === '') && isClickOnSaveBtn}" />
+                            <input class="form-control" type="text" formControlName="password" [ngClass]="{
+                            error: formRegister.get('password')?.invalid && isClickOnSaveBtn}" />
                             <div class="error-box">
-                                <app-error-message *ngIf="
-                                 formRegister.get('password')?.invalid && isClickOnSaveBtn"
-                                [message]="checkErrorPassword()" >
-                            </app-error-message> 
+                                <app-error-message *ngIf="formRegister.get('password')?.invalid && isClickOnSaveBtn"
+                                    [message]="
+                                    !formRegister.get('password')?.value ? 'فیلدخالی است' :
+                                    5 > formRegister.get('password')?.value?.length  ?'حداقل طول رمز عبور  5 کاراکتر هست.' :''">
+                                </app-error-message>
                             </div>
                         </div>
                         <div class="col-md-6 ">
                             <label class="col-form-label-sm"> تکرار رمزعبور</label>
-                            <input class="form-control" type="text" formControlName="passconfirm" [ngClass]="{ error:                             
-                                (!formRegister.get('passconfirm')?.valid || 
-                                formRegister.get('passconfirm')?.value !== formRegister.get('password')?.value)
-                                && isClickOnSaveBtn}" />
+                            <input class="form-control" type="text" formControlName="passconfirm"
+                                [ngClass]="{ error:                             
+                                    (formRegister.get('password')?.value !==formRegister.get('passconfirm')?.value|| formRegister.get('passconfirm')?.invalid) && isClickOnSaveBtn }" />
                             <div class="error-box">
-                                <app-error-message *ngIf=" isClickOnSaveBtn && 
-                                (formRegister.get('passconfirm')?.value !== formRegister.get('password')?.value)
-                                " [message]="'رمز ها یکسان نیستند'">
+                                <app-error-message
+                                    *ngIf=" isClickOnSaveBtn && (formRegister.get('passconfirm')?.invalid || formRegister.get('password')?.value !==formRegister.get('passconfirm')?.value)"
+                                    [message]="
+                                        !formRegister.get('passconfirm')?.value ? 'فیلدخالی است' :
+                                        formRegister.get('password')?.value !==formRegister.get('passconfirm')?.value ?'رمز عبور ها یکسان نیست' :''">
                                 </app-error-message>
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
+                    <div class=" row mt-3">
                         <div class="col-md-6 ">
                             <label class="col-form-label-sm">ایمیل </label>
                             <input class="form-control" type="text" formControlName="email"
                                 [ngClass]="{
                                 error: (!formRegister.get('email')?.valid || formRegister.get('email')?.value === '') && isClickOnSaveBtn}" />
                             <div class="error-box">
-                                <app-error-message *ngIf="
-                                   ( formRegister.get('email')?.errors ||
-                                    !formRegister.get('email')?.value)&&
-                                    isClickOnSaveBtn 
-                                    " [message]="' ایمیل معتبر نیست'">
+                                <app-error-message *ngIf="                                   
+                                    formRegister.get('email')?.invalid &&
+                                    isClickOnSaveBtn " [message]="
+                                        !formRegister.get('email')?.value ? 'فیلدخالی است' :
+                                        formRegister.get('email')?.errors?.pattern ?'ایمیل نامعتبر است' :''">
                                 </app-error-message>
                             </div>
                         </div>
-                        <div class="col-md-6"  *userRole="'ADMIN'">
+                        <div class="col-md-6" *userRole="'ADMIN'">
                             <label class="col-form-label-sm col-2">سمت</label>
-                            <ng-multiselect-dropdown  class="form-control-sm col-5" [placeholder]="'سمت'"
+                            <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'سمت'"
                                 [settings]="dropdownSettings" [data]="listRoles" (onSelect)="onRoleSelect($event)"
-                                formControlName="role"
-                                [ngClass]="{
-                                    error: (!formRegister.get('role')?.valid || formRegister.get('role')?.value === '') && isClickOnSaveBtn
+                                formControlName="role" [ngClass]="{
+                                    error: formRegister.get('role')?.invalid && isClickOnSaveBtn
                                   }">
                             </ng-multiselect-dropdown>
-                                
+
                             <div class="error-box">
                                 <app-error-message *ngIf="
-                                  !formRegister.get('role')?.valid &&
-                                  isClickOnSaveBtn &&
-                                  formRegister.get('role')?.value === ''" [message]="'فیلد خالی است'">
-                                </app-error-message> 
+                                  formRegister.get('role')?.invalid &&
+                                  isClickOnSaveBtn" [message]="'فیلد خالی است'">
+                                </app-error-message>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 mt-5">
-                        <div class="row">
-                            <div class="col-md-4 pl-5">
-                                <button class="button button-primary button-sm-1 float-left " type="submit"
-                                    (click)="save()">ذخیره</button>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="button button-primary button-sm-1 float-right " type="button"
-                                    (click)="cancel()">انصراف</button>
-                            </div>
-                            <button class="button button-primary button-sm-1  " type="button" (click)="navigate()">login</button>
+                    <div class="row mt-5">
+                        <div class="col-md-4 ">
+                            <button class="button button-primary button-sm-1 " type="submit"
+                                (click)="save()">ذخیره</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="button button-primary button-sm-1  " type="button"
+                                (click)="cancel()">انصراف</button>
+                        </div>
+                        <div class="col-md-4 ">
+                            <button class=" button button-primary button-sm-1  " type="button"
+                                (click)="navigate()">login</button>
                         </div>
                     </div>
                 </div>
