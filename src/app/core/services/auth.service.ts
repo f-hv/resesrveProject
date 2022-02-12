@@ -31,7 +31,7 @@ export class AuthService {
   }
   logout() {
     debugger
-    this.localStorageService.removeItem('localUser');
+    this.localStorageService.removeItem('currentUser');
     this.currentUser$.next(null);
   }
   isLoggedIn() {
