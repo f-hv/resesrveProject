@@ -112,9 +112,10 @@ export class RegisterUserComponent implements OnInit {
   setUserValidateRole() {
     this.authService.currentUser$.subscribe((user: any) => {
       if (user && user.role === "ADMIN") {
-        this.formRegister.get('role')?.clearValidators();
-      } else {
         this.formRegister.get('role')?.setValidators(Validators.required);
+      } 
+      else {
+        this.formRegister.get('role')?.clearValidators();
       }
       this.formRegister.get('role')?.updateValueAndValidity();
     })
