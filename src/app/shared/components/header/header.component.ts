@@ -1,33 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import {IDropdownSettings } from 'ng-multiselect-dropdown'
+import { ActivatedRoute, Router } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown'
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  dropdownSettings :IDropdownSettings;
-  adminData: any[] = [];
-  constructor() { }
+  dropdownSettings: IDropdownSettings;
+  adminMenu: any[] = [];
+  userName: any;
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
-    this.dropdownSettings= {
+    this.authService.currentUser$.subscribe((user) => {
+      this.userName = user.userName;
+      console.log(this.userName);
+      
+    })
+    this.dropdownSettings = {
       singleSelection: true,
       idField: 'id',
       textField: 'name'
     };
-    this.adminData=[
-      {id:1 , name:'پروفایل'},
-      {id:1 , name:'خروج'}
+    this.adminMenu = [
+      { id: 1, name: 'dashboard' },
+      { id: 2, name: 'logout' }
     ]
   }
-
-
-
-
-onAdminSelect(item: any){
-  // if(item.id===1){
-  //   this.router.navigate([''])
-  // }
-}
+  onAdminSelect(item: any) {
+    if (item.name === "logout") {
+      this.authService.logout();
+      this.router.navigate(['../login'], {
+        relativeTo: this.activatedRoute
+      })
+    }
+    if (item.name =="dashboard") {
+      this.router.navigate(['./dashboard'], {
+        relativeTo: this.activatedRoute
+      })
+    }
+  }
 }

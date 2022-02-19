@@ -38,7 +38,6 @@ export class ListComponent implements OnInit {
   }
 
   onKeyup(item: any) {
-    // debugger
     console.log("key:", item);
 
     if (item.keycode !== 13 || item.keycode !== 8) {

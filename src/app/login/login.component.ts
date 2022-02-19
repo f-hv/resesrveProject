@@ -36,8 +36,13 @@ export class LoginComponent implements OnInit {
     const userName=this.formLogin.get('userName')?.value;
     const password=this.formLogin.get('password')?.value;
     const resLogin = this.authService.login(userName,password)
-    if(resLogin){  
-      console.log("login success");        
+    if(resLogin){ 
+      if (this.authService.redirectUrl) {
+        this.router.navigateByUrl(this.authService.redirectUrl);
+      } 
+      else {
+        this.directToPage();
+      } 
     }
     else
      console.log("login faild");
@@ -50,6 +55,20 @@ export class LoginComponent implements OnInit {
   navigate() {
     this.router.navigate(['../register'], {
       relativeTo: this.activatedRoute
+    })
+  }
+  directToPage(){
+    this.authService.currentUser$.subscribe((user:any)=>{
+      if(user.role === "ADMIN"){
+        this.router.navigate(['../admin'], {
+          relativeTo: this.activatedRoute
+        })
+      }
+      else {
+        this.router.navigate(['../client'], {
+          relativeTo: this.activatedRoute
+        })
+      }
     })
   }
 

@@ -1,10 +1,9 @@
-<div class="container pt-4" *ngIf="formRegister">
-    <form [formGroup]="formRegister">
-        <div class="row  rounded-3 pb-5 pt-4 justify-content-md-center border border-1 content">
-            <div class="col col-md-2"></div>
-            <div class="col-md-8 ">
-                <div class="row">
-                    <div class="row mt-3">
+<div class="container-fluid pt-5" *ngIf="formRegister">
+    <div class="card  ">
+        <div class="card-body p-0">
+            <form [formGroup]="formRegister">
+                <div class="row content">
+                    <div class="row mt-3 ">
                         <div class="col-md-6 ">
                             <label class="col-form-label-sm col-2">نام</label>
                             <input class="form-control" type="text" formControlName="firstName"
@@ -30,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row  mt-3">
+                    <div class="row  mt-4 ">
                         <div class="col-md-6">
                             <label class="col-form-label-sm"> رمزعبور</label>
                             <input class="form-control" type="text" formControlName="password" [ngClass]="{
@@ -58,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" row mt-3">
+                    <div class=" row mt-4 ">
                         <div class="col-md-6 ">
                             <label class="col-form-label-sm">ایمیل </label>
                             <input class="form-control" type="text" formControlName="email"
@@ -75,7 +74,7 @@
                         </div>
                         <div class="col-md-6" *userRole="'ADMIN'">
                             <label class="col-form-label-sm col-2">سمت</label>
-                            <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'سمت'"
+                            <ng-multiselect-dropdown class="form-control-sm col-5 x" [placeholder]="'سمت'"
                                 [settings]="dropdownSettings" [data]="listRoles" (onSelect)="onRoleSelect($event)"
                                 formControlName="role" [ngClass]="{
                                     error: formRegister.get('role')?.invalid && isClickOnSaveBtn
@@ -91,22 +90,21 @@
                         </div>
                     </div>
                     <div class="row mt-5">
-                        <div class="col-md-4 ">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3 ">
                             <button class="button button-primary button-sm-1 " type="submit"
                                 (click)="save()">ذخیره</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <button class="button button-primary button-sm-1  " type="button"
                                 (click)="cancel()">انصراف</button>
                         </div>
-                        <div class="col-md-4 ">
-                            <button class=" button button-primary button-sm-1  " type="button"
-                                (click)="navigate()">login</button>
-                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 btn "></div>
+                <div class="card-footer position-relative">
+                    <span [routerLink]="'../login'">ورود به سیستم</span>
+                  </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>

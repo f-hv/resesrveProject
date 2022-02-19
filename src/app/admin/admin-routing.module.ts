@@ -7,10 +7,10 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'admin',
-      // },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+      },
       {
         path: 'city',
         loadChildren: () => import('./city/city.module')
@@ -30,6 +30,16 @@ const routes: Routes = [
         path:'reserve',
         loadChildren:()=> import ('./reserve/reserve.module')
         .then (m => m.ReserveModule)
+      },
+      {
+        path:'register',
+        loadChildren:()=> import ('../register-user/register-user.module')
+        .then (m => m.RegisterUserModule)
+      },
+      {
+        path:'dashboard',
+        loadChildren:()=> import ('./dashboard/dashboard.module')
+        .then (m => m.DashboardModule)
       }
     ]
   }];

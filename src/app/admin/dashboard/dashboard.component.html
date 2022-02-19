@@ -1,0 +1,58 @@
+<div class="container-fluid" *ngIf="formAdmin">
+    <div class="row p-2">
+        <div class="col">
+            <img src="../../assets/pic/profile-.jpg" alt="Admin" width="120" height="110"
+                class="rounded-circle box-shadow-lg  ">
+        </div>
+    </div>
+    <div class="row p-3 ">
+        <div class="col-md-6 border-col position-relative">
+            <label class="title ">اطلاعات ادمین </label>
+            <form [formGroup]="formAdmin">
+
+                <label class="col-form-label-sm col-2">نام</label>
+                <input class="form-control" type="text" formControlName="firstName"
+                    [ngClass]="{ error: (formAdmin.get('firstName')?.invalid  ) && isClickOnSaveBtn}" />
+
+                <label class="col-form-label-sm col-3">نام کاربری</label>
+                <input class="form-control" type="text" formControlName="userName"
+                    [ngClass]="{ error: formAdmin.get('userName')?.invalid && isClickOnSaveBtn }" />
+
+                <label class="col-form-label-sm">ایمیل </label>
+                <input class="form-control" type="text" formControlName="email"
+                    [ngClass]="{ error: (!formAdmin.get('email')?.valid || formAdmin.get('email')?.value === '') && isClickOnSaveBtn}" />
+
+                <div class="row mt-5 ">
+                    <div class="col-md-4 pl-5">
+                        <button class="button button-primary button-sm-1 float-left " type="submit" (click)="save()">ذخیره</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="button button-primary button-sm-1 float-right " type="button">انصراف</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- RESET PASSWORD -->
+        <div class="col-md-1 "></div>
+        <div class="col-md-5 border-col position-relative">
+            <label class="title "> تغییر رمز عبور</label>
+            <label class="col-form-label-sm"> رمز عبور فعلی</label>
+            <input class="form-control" type="text" [(ngModel)]="passInfo.currentPass"
+                [ngClass]="{error: formAdmin.get('password')?.invalid && isClickOnSaveBtn}" />
+
+            <label class="col-form-label-sm"> رمزعبور جدید</label>
+            <input class="form-control" type="text" [(ngModel)]="passInfo.newPass"
+                [ngClass]="{error: formAdmin.get('password')?.invalid && isClickOnSaveBtn}" />
+            <div class="row mt-5">
+                <div class="col-md-4 ">
+                    <button class="button button-primary button-sm-1 float-left " (click)="resetPassword(passInfo)" type="submit">ذخیره</button>
+                </div>
+
+                <div class="col-md-4">
+                    <button class="button button-primary button-sm-1 float-right " type="button">انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

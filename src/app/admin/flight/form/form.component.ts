@@ -20,8 +20,6 @@ export class NgbDatepickerI18nPersian extends NgbDatepickerI18n {
   getMonthFullName(month: number) { return MONTHS[month - 1]; }
   getDayAriaLabel(date: NgbDateStruct): string { return `${date.year}-${this.getMonthFullName(date.month)}-${date.day}`; }
 }
-
-
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -40,18 +38,18 @@ export class FormComponent implements OnInit {
   listAirline: AirlineModel[];
   isClickOnSaveBtn = false;
   /////dropdown 
-  dropdownSettings :IDropdownSettings
+  dropdownSettings: IDropdownSettings
   selectedSource = {};
   source: any;
   distination: any;
   IdAirline: any;
-  data:CityModel|undefined;
+  data: CityModel | undefined;
   ///// datepicker
   newDate = new Date(1400, 11, 24, 10, 33, 30);
   editDate = new Date();
   today = new Date();
   placement = 'bottom';
-  dateNew:any;
+  dateNew: any;
   ////timepicker
   time: any = null;
   constructor(
@@ -72,8 +70,8 @@ export class FormComponent implements OnInit {
     this.listAirline = this.airlineService.getData();
     if (this.id) {
       this.dataFlight = this.flightService.getById(this.id);
-     
-      this.data=this.listCity.find(item =>item.name ===this.dataFlight.source );
+
+      this.data = this.listCity.find(item => item.name === this.dataFlight.source);
       this.selectedSource = { idField: this.data?.id, textField: this.data?.name };
       this.updateValueTimeDate();
     }
@@ -100,7 +98,6 @@ export class FormComponent implements OnInit {
     };
   }
   initial() {
-    // debugger
     this.formFlight = this.formBuilder.group({
       id: [this.dataFlight?.id],
       source: [this.dataFlight.source, [Validators.required]],
@@ -111,17 +108,16 @@ export class FormComponent implements OnInit {
       price: [this.dataFlight?.price, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
       flightNumber: [this.dataFlight?.flightNumber, Validators.required],
       deleted: 0
-    });  
+    });
     this.formFlight?.get("date")?.setValue(this.dateNew);
-    console.log("---",this.formFlight?.get("date")?.value);
-    
+    console.log("---", this.formFlight?.get("date")?.value);
+
   }
   cancel() {
     this.navigate();
   }
 
   save() {
-    // debugger
     if (this.source)
       this.formFlight?.get("source")?.setValue(this.source);
     if (this.distination)
@@ -198,7 +194,6 @@ export class FormComponent implements OnInit {
     this.IdAirline = selectedAirline?.id;
   }
   updateValueTimeDate() {
-    // debugger
     if (this.dataFlight.date) {
       this.editDate = this.dataFlight.date;
       var hour = this.editDate.getHours();
@@ -208,7 +203,7 @@ export class FormComponent implements OnInit {
       var year = this.editDate.getFullYear();
       var month = this.editDate.getMonth();
       var day = this.editDate.getDate();
-      this.dateNew={"year": year, "month": month, "day":day}
+      this.dateNew = { "year": year, "month": month, "day": day }
       // dateNew.setDate(day);
       // dateNew.setFullYear(year);
       // dateNew.setMonth(month);

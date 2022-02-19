@@ -1,0 +1,23 @@
+@import "../../../assets/styles/custom-kit/variable.scss";
+
+input{
+    width: 350px;
+    border-color: $gray-30 !important;
+}
+.border-col{
+    border: 1px solid $gray-30 ;
+    border-radius: $radius-sm;
+    padding: 20px 20px 30px  ;
+
+}
+.title{
+    position: absolute;
+    border: none;
+    background-color:$warm-gray-10 ;
+    padding: 0px 10px 0px 10px;
+    top:-10px;
+    right: 20px;
+    font-size: $font-size-1;
+    font-weight: bold;
+    color: $blue-30;
+}

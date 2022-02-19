@@ -1,4 +1,4 @@
-import { invalid } from '@angular/compiler/src/render3/view/util';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -56,10 +56,10 @@ export class RegisterUserComponent implements OnInit {
   initial() {
     this.formRegister = this.fb.group({
       firstName: [this.data.firstName, Validators.required],
-      email: [this.data.email, [Validators.required, Validators.pattern("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])")]],
       userName: [this.data.userName, [Validators.required, Validators.minLength(5)]],
       password: [this.data.password, [Validators.required, Validators.minLength(5)]],
       passconfirm: [this.data.passConfrim, Validators.required],
+      email: [this.data.email, [Validators.required, Validators.pattern("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])")]],
       role: [this.selectedRole]
     })
   }
@@ -67,7 +67,7 @@ export class RegisterUserComponent implements OnInit {
     this.navigate();
   }
   save() {
-    debugger
+debugger
     this.isClickOnSaveBtn = true;
     if (this.formRegister?.valid) {
       if(this.selectedRole)

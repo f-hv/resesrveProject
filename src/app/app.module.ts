@@ -10,10 +10,12 @@ import { Router, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModule } from './login/login.module';
 import { RegisterUserModule } from './register-user/register-user.module';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,53 @@
 @import "../../assets/styles/custom-kit/variable.scss";
 
+.container-fluid {
+    background-image   : url('../../assets/pic/bg--login.jpg');
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: center center;
+    height             : calc(100vh - 69px);
+}
 
-.error-box{
+.card {
+    width                 : 700px;
+    height                : 400px;
+    position              : relative;
+    ///***** center card****////
+    // margin             : 60px  auto;
+    background-color      : rgba(245, 232, 212, 0.3);
+    margin                : 25px 50px auto;
+    float                 : none;
+    border                : 0px;
+    border-radius         : $radius-sm;
+    // background         : transparent;
+    box-shadow            : $box-shadow-xl;
+
+    .content{
+        padding: 0px 15px;
+    }
+    .multiselect-dropdown .dropdown-btn , input{
+        border: 1px solid $gray-60 !important;
+    }
+}
+
+.error-box {
     margin-top: -17px;
 }
-.content{
-    border-color: $gray-30 !important;
+.card-footer {
+    position: absolute;
+    bottom: -48px;
+    span {
+        padding     : 0 5px;
+        margin-top  : 10px;
+        margin-right: 20px;
+        color       : $black;
+        font-size   : $font-size-1;
+        font-weight : bold;
+        border-right: 2px outset $gray-50;
+
+        &:hover {
+            cursor: pointer;
+            color : $white;
+        }
+    }
 }
-
-
-  

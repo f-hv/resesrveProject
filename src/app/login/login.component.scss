@@ -1,31 +1,107 @@
 @import "../../assets/styles/custom-kit/variable.scss";
 
 
-.container-fluid{
-    background-image:url('../../assets/pic/bg-login.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%; 
-
+.container-fluid {
+    // position: relative;
+    background-image   : url('../../assets/pic/bg--login.jpg');
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: center center;
+    height             : calc(100vh - 0px);
 }
 
-.card{
-    width: 400px; 
-    height: 500px; 
+.card {
+    width   : 350px;
+    height  : 270px;
+    position: relative;
+
     ///***** center card****////
-    margin: 60px auto;
-    float: none; 
-    margin-bottom: 10px;
-    border: none;
+    // margin             : 60px  auto;
+    // background-color: rgba(177, 142, 118, 0.3);
+    margin       : 20px 90px auto;
+    float        : none;
+    border       : 0px;
+    border-radius: 0px;
+    background   : transparent;
+    box-shadow   : $box-shadow-xl;
+    padding      : 5px 0px 0px 5px;
 }
-.card-body{
-    border-radius: $radius-md;
-    box-shadow: $box-shadow-lg;
 
-    // background-image:url('../../../assets/pic/login2.jpg');
-    // background-repeat: no-repeat;
-    input{
-        width: 300px; ;
+// .card:after{
+// background: inherit;
+//     filter: blur(20px);
+// }
+.card-body {
+    padding: 0px;
+
+    h4 {
+        letter-spacing: -2px;
     }
-    
+
+    input {
+        width        : 200px;
+        border-radius: 0px;
+        border       : 0px;
+        border-bottom: 2px solid $blue-100;
+        outline      : none !important;
+        background   : transparent !important;
+        margin-right : 30px;
+        padding      : 3px;
+        z-index      : 100;
+
+        &:focus , 
+        :active {
+            box-shadow: none !important;
+            outline:none !important;
+            ~label {
+                transform: translate(5%, -80%) scale(0.80);
+            }
+        }
+    }
+
+    label {
+        font-size     : $font-size-1;
+        color         : $gray-80;
+        transition    : .9s !important;
+        pointer-events: none !important;
+        margin-right  : 30px;
+        padding-right : 20px;
+
+        // span {
+        //     right     : 20px;
+        // }
+        i {
+            right    : 0px;
+            font-size: $font-size-2;
+            top      : 5px;
+            color    : $gray-80;
+        }
+    }
+
+    .action-btn {
+        margin-top: 50px;
+
+        button {
+            margin-right: -47px;
+        }
+    }
+
+    .card-footer {
+        bottom: -45px;
+
+        span {
+            padding     : 0 5px;
+            margin-top  : 0px;
+            margin-right: 20px;
+            color       : $blue-100;
+            font-size   : $font-size-1;
+            font-weight : bold;
+            border-right: 2px outset $gray-50;
+
+            &:hover {
+                cursor: pointer;
+                color : $blue-70;
+            }
+        }
+    }
 }

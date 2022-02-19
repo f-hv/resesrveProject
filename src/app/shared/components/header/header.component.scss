@@ -1,10 +1,14 @@
 @import "../../../../assets/styles/custom-kit/variable.scss";
 
-.navbar{
+.navbar {
     // width: 100%;
     background-color: $gray-20;
-    padding:12px 10px 12px 30px;
-    .dropdown{
+    padding         : 12px 10px 12px 30px;
+
+    .dropdown {
         width: 80px !important;
+        .menu:hover {
+                cursor: pointer !important;
+        }
     }
 }

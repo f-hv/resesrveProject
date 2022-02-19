@@ -10,9 +10,10 @@ import { AdminComponent } from './admin.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { sharedModule } from '../shared/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [CityComponent, FlightComponent, AirlineComponent, AdminComponent, ReserveComponent],
+  declarations: [CityComponent, FlightComponent, AirlineComponent, AdminComponent, ReserveComponent, DashboardComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

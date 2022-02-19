@@ -1,0 +1,12 @@
+<div class="container d-flex flex-column  align-items-center pt-5">
+  <h1 class="text-danger fw-bolder"> Access Denied </h1>
+  <p>متاسفانه شما مجوز دسترسی به این صفحه را ندارید!</p>
+  <row class="">
+    <button *ngIf="!isLogedUser" class="btn btn-success float-right m-3 button-sm-1 p-0"
+      [routerLink]="'../login'">ورود
+    </button>
+    <button class="btn btn-secondary float-left m-3 button-sm-1 p-0" (click)="backToUrl()">
+      برگشت <i class="fa fa-arrow-left"></i>
+    </button>
+  </row>
+</div>

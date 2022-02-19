@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Role } from './core/models/roles.model';
 import { AuthGuard } from './core/services/guard/auth.guard';
 
 const routes: Routes = [
@@ -8,9 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module')
     .then(m => m.AdminModule),
     canActivate: [AuthGuard],
-    data: {
-      role: 'ADMIN'
-    }
+    data: { roles: [Role.ADMIN] }
   },
   {
     path: 'client',
@@ -26,6 +25,11 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register-user/register-user.module')
     .then(m => m.RegisterUserModule)
+  },
+  {
+    path: 'accessDenied',
+    loadChildren: () => import('./access-denied/access-denied.module')
+    .then(m => m.AccessDeniedModule)
   },
   {
     path:'',

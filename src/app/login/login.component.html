@@ -1,29 +1,32 @@
-<div class="container-fluid">
-    <div class="card card text-right">
+<div class="container-fluid pt-4">
+    <div class="card ">
         <div class="card-body">
             <div [formGroup]="formLogin">
-                <div class="row">
-                    <label class="col-form-label-sm card-text"> نام کاربری</label>
-                    <input class="form-control" type="text" formControlName="userName"
+                <div class="row mt-2 ">
+                    <input class="form-control  position-relative" autofocus type="text" formControlName="userName"
                         [ngClass]="{
                           error: formLogin.get('userName')?.value === '' && isClickOnSaveBtn 
-                        }" 
-                    />
+                    }" />
+                    <label class="col-form-label-sm card-text position-absolute mt-2">
+                        نام کاربری
+                        <i class="fas fa-user position-absolute"> </i>
+                    </label>
                     <div class="error-box">
                         <app-error-message *ngIf="
-                        !formLogin.get('userName')?.valid &&
-                        isClickOnSaveBtn &&
-                        formLogin.get('userName')?.value ===''" [message]="'فیلد خالی است'">
+                            !formLogin.get('userName')?.valid &&
+                            isClickOnSaveBtn &&
+                            formLogin.get('userName')?.value ===''" [message]="'فیلد خالی است'">
                         </app-error-message>
                     </div>
                 </div>
-                <div class="row">
-                    <label class="col-form-label-sm card-text"> رمزعبور</label>
-                    <input class="form-control" type="text" formControlName="password"
-                        [ngClass]="{
+                <div class="row mt-4 p-0">
+                    <input class="form-control  position-relative" type="text" formControlName="password" [ngClass]="{
                             error:  formLogin.get('password')?.value ==='' && isClickOnSaveBtn
-                        }" 
-                    />
+                        }" />
+                    <label class="col-form-label-sm card-text position-absolute mt-2">
+                        رمزعبور
+                        <i class="fas fa-lock position-absolute"> </i>
+                    </label>
                     <div class="error-box">
                         <app-error-message *ngIf="
                                         !formLogin.get('password')?.valid &&
@@ -32,17 +35,15 @@
                         </app-error-message>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 pl-5">
-                        <button class="button button-primary button-sm-1 float-left " type="submit"
-                            (click)="login()">ورود</button>
+                <div class="action-btn row  ">
+                    <div class="col d-flex  justify-content-center">
+                        <button class="button button-primary button-sm-3 " type="submit" (click)="login()">ورود</button>
                     </div>
-                    <div class="col-md-4">
-                        <button class="button button-primary button-sm-1 float-right " type="button"
-                            (click)="logout()">خروج</button>
-                    </div>
-                </div>
 
+                </div>
+                <div class="card-footer position-relative d-block">
+                    <span [routerLink]="'../register'"> ثبت نام</span>
+                </div>
             </div>
         </div>
     </div>
