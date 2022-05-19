@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CityModel } from '../../../core/models/city.model';
 import { CityService } from '../../../core/services/city.service';
 
@@ -16,7 +17,8 @@ export class FormComponent implements OnInit {
   constructor(
     private cityService: CityService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastrService:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +37,17 @@ export class FormComponent implements OnInit {
       return
     }
     if (this.id) {
-       this.cityService.update(this.listCity);
-     } else this.cityService.create(this.listCity);
+      const resualt = this.cityService.update(this.listCity);
+      if (resualt)
+      this.toastrService.success('update succesfull');
+      else
+      this.toastrService.error('update failed','sorry!');
+     } 
+     else{
+      this.cityService.create(this.listCity);
+      this.toastrService.success('the new city create succesfully','success');
+
+    }
     this.navigate();
   }
   navigate() {

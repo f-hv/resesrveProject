@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from '../core/models/roles.model';
 import { AuthService } from '../core/services/auth.service';
@@ -37,7 +38,8 @@ export class RegisterUserComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastrService: ToastrService
   ) {
     this.listRoles = Object.keys(this.enume);
   }
@@ -67,10 +69,10 @@ export class RegisterUserComponent implements OnInit {
     this.navigate();
   }
   save() {
-debugger
+    debugger
     this.isClickOnSaveBtn = true;
     if (this.formRegister?.valid) {
-      if(this.selectedRole)
+      if (this.selectedRole)
         this.formRegister.get('role')?.setValue(this.selectedRole);
       if (this.localStorageService.getItem("users") === null) {
         this.localStorageService.setItem("users", JSON.stringify([this.formRegister?.value]));
@@ -88,19 +90,17 @@ debugger
           if (!validUser) {
             users.push(this.formRegister.value);
             this.localStorageService.setItem("users", JSON.stringify(users));
-            console.log("کاربر با موفقیت ثبت شد");
+            this.toastrService.success('کاربر با موفقیت ثبت شد.');
             this.navigate();
           }
           else
-            console.log("کاربر با این مشخصات قبلا ثبت نام شده");
+            this.toastrService.error('کاربر با این مشخصات قبلا ثبت نام شده');
         }
       }
     }
-    console.log(this.formRegister?.value);
-    
   }
   navigate() {
-    this.router.navigate(['../login'], {
+    this.router.navigate(['../../login'], {
       relativeTo: this.activatedRoute
     })
   }
@@ -110,10 +110,11 @@ debugger
     this.selectedRole = selectedSource;
   }
   setUserValidateRole() {
+    debugger
     this.authService.currentUser$.subscribe((user: any) => {
       if (user && user.role === "ADMIN") {
         this.formRegister.get('role')?.setValidators(Validators.required);
-      } 
+      }
       else {
         this.formRegister.get('role')?.clearValidators();
       }

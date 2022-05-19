@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -9,46 +10,48 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  formLogin:FormGroup;
+  formLogin: FormGroup;
   data = {
     userName: null,
     password: null,
   }
-  isClickOnSaveBtn=false;
+  isClickOnSaveBtn = false;
   constructor(
-    private fb:FormBuilder,
-    private router:Router,
-    private activatedRoute:ActivatedRoute,
-    private authService:AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.initial();
   }
-  initial(){
-    this.formLogin=this.fb.group({
-      userName:[this.data.userName,Validators.required],
-      password: [this.data.password,Validators.required],
+  initial() {
+    this.formLogin = this.fb.group({
+      userName: [this.data.userName, Validators.required],
+      password: [this.data.password, Validators.required],
     })
   }
-  login(){
-    this.isClickOnSaveBtn=true;
-    const userName=this.formLogin.get('userName')?.value;
-    const password=this.formLogin.get('password')?.value;
-    const resLogin = this.authService.login(userName,password)
-    if(resLogin){ 
+  login() {
+debugger
+    this.isClickOnSaveBtn = true;
+    const userName = this.formLogin.get('userName')?.value;
+    const password = this.formLogin.get('password')?.value;
+    const resLogin = this.authService.login(userName, password)
+    if (resLogin) {
       if (this.authService.redirectUrl) {
         this.router.navigateByUrl(this.authService.redirectUrl);
-      } 
+      }
       else {
         this.directToPage();
-      } 
+      }
     }
     else
-     console.log("login faild");
-     
+      this.toastrService.error('username or password is incorrect.', 'sorry!');
+      this.refreshPage();
   }
-  logout(){
+  logout() {
     this.authService.logout();
     this.navigate();
   }
@@ -57,9 +60,10 @@ export class LoginComponent implements OnInit {
       relativeTo: this.activatedRoute
     })
   }
-  directToPage(){
-    this.authService.currentUser$.subscribe((user:any)=>{
-      if(user.role === "ADMIN"){
+  directToPage() {
+    debugger
+    this.authService.currentUser$.subscribe((user: any) => {
+      if (user.role === "ADMIN") {
         this.router.navigate(['../admin'], {
           relativeTo: this.activatedRoute
         })
@@ -70,6 +74,13 @@ export class LoginComponent implements OnInit {
         })
       }
     })
+  }
+  refreshPage(){
+    this.formLogin .setValue({
+      userName: '',
+      password:'',
+    })
+
   }
 
 }

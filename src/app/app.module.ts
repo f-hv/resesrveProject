@@ -11,7 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModule } from './login/login.module';
 import { RegisterUserModule } from './register-user/register-user.module';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,8 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     RouterModule,
     NgbModule,
     LoginModule,
-    RegisterUserModule
+    RegisterUserModule,
+    ToastrModule.forRoot(),
   ],
   schemas:[NO_ERRORS_SCHEMA , CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

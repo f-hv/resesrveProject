@@ -10,7 +10,6 @@
     <div class="col-sm-12 col-md-6 col-lg-3 ">
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6 ">
-      Filter Box
     </div>
   </div>
   <div id="content"  class="row pt-2">
@@ -20,7 +19,7 @@
           <div class="header row flex-row justify-content-between align-items-center">
             <h7 class="col-md-2 "> لیست شهرها</h7>
             <div class="btn-save col-md-10 " >
-              <button type="submit" class="button-primary button-sm-1 " [routerLink]="'../create'">جدید
+              <button type="submit" class="btn-res button-primary button-sm-1 " [routerLink]="'../create'">جدید
                 <i class="fas fa-plus float-left" ></i>
               </button>
             </div>            
@@ -28,16 +27,18 @@
         </caption>
         <thead>
           <tr>
-            <th scope="col" style="width:5%">#</th>
-            <th scope="col" style="width:10%">شهر</th>
-            <th scope="col" style="width:85%"></th>
+            <th scope="col" style="width:10%">#</th>
+            <th scope="col" style="width:20%">شهر</th>
+            <th scope="col" style="width:45%"></th>
+            <th scope="col" style="width:25%"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let city of listCity  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage  trackBy: cityById">
-            <td class="shrink" style="width:5%">{{city.id}}</td>
-            <td style="width:10%">{{ city.name }}</td>
-            <td id="detail-td" style="width:85%">
+            <td class="shrink" style="width:10%">{{city.id}}</td>
+            <td style="width:20%">{{ city.name }}</td>
+            <td style="width:45%"> </td>
+            <td id="detail-td" style="width:25%">
               <i class="fas fa-edit p-2" [routerLink]="'../update/' + city.id"></i>
               <i class="fas fa-trash p-2" (click)="delete(city.id)"></i>
             </td>

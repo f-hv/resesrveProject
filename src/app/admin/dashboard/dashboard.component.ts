@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
@@ -21,15 +22,18 @@ export class DashboardComponent implements OnInit {
   userName: any;
   email: any;
 
+  isClickSavePassBtn = false;
   isClickOnSaveBtn = false;
   // resetPass////
   passInfo = { currentPass: null, newPass: null };
   currentUserInfo: any;
+  PasswordLC:any;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private toastrService:ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -38,9 +42,9 @@ export class DashboardComponent implements OnInit {
       this.currentUserInfo = user;
       this.userName = user.userName;
       this.email = user.email;
-    })
-    console.log("c", this.currentUserInfo);
+      this.PasswordLC = this.data.password;
 
+    })
     this.initial();
   }
   initial() {
@@ -66,15 +70,15 @@ export class DashboardComponent implements OnInit {
           this.localStorageService.setItem("users", JSON.stringify(users));
           this.localStorageService.setItem("currentUser", JSON.stringify(this.formAdmin?.value));
           this.authService.currentUser$.next(this.formAdmin?.value);
+          this.toastrService.success('Your profile information changed successfully','success');
         }
       });
     }
   }
   resetPassword(item: any) {
-    const password = this.data.password;
-    if (password === item.currentPass) {
+    this.isClickSavePassBtn=true;
+    if (this.PasswordLC === item.currentPass) {
       this.currentUserInfo.password = item.newPass;
-      // console.log("after change pass",this.currentUserInfo);
       const usersLC = this.localStorageService.getItem("users");
       if (usersLC) {
         let users = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
@@ -87,14 +91,19 @@ export class DashboardComponent implements OnInit {
             this.localStorageService.setItem("users", JSON.stringify(users));
             this.localStorageService.setItem("currentUser", JSON.stringify(this.currentUserInfo));
             this.authService.currentUser$.next(this.currentUserInfo);
-            console.log("تغییر پسورد با موفقیت انجام شد");
+            this.toastrService.success('The password changed successfully','success');
+            this.clearForm();
           }
         })
       }
     }
     else 
-      console.log("پسورد فعلی شما صحیح نمی باشد.");
-
-
+    // this.toastrService.error('Your current password is incorrect.');
+    return;
+  }
+  clearForm(){
+    this.passInfo.currentPass=null;
+    this.passInfo.newPass=null;
+    this.isClickSavePassBtn=false;
   }
 }

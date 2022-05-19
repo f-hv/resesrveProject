@@ -3,7 +3,10 @@
         <div class="card-body p-0">
             <form [formGroup]="formRegister">
                 <div class="row content">
-                    <div class="row mt-3 ">
+                    <div class="row mt-1 ">
+                        <div class="col-sm-12 mt-2" style="text-align:center;">
+                            <h6> ثبت نام</h6>
+                        </div>
                         <div class="col-md-6 ">
                             <label class="col-form-label-sm col-2">نام</label>
                             <input class="form-control" type="text" formControlName="firstName"
@@ -89,21 +92,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-md-6"></div>
-                        <div class="col-md-3 ">
+                    <div class="row mt-5 d-inline-flex justify-content-md-center p-0">
+                        <div class="col-sm-4 col-md-6"></div>
+                        <div class="col-sm-4 col-md-3 ">
                             <button class="button button-primary button-sm-1 " type="submit"
                                 (click)="save()">ذخیره</button>
                         </div>
-                        <div class="col-md-3">
-                            <button class="button button-primary button-sm-1  " type="button"
+                        <div class="col-sm-4 col-md-3">
+                            <button class="button button-cancel button-sm-1  " type="button"
                                 (click)="cancel()">انصراف</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer position-relative">
                     <span [routerLink]="'../login'">ورود به سیستم</span>
-                  </div>
+                </div>
             </form>
         </div>
     </div>

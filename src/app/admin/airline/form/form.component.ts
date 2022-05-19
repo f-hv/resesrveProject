@@ -6,6 +6,7 @@ import { AirlineService } from '../../../core/services/airline.service';
 import { CityModel } from '../../../core/models/city.model';
 import { CityService } from '../../../core/services/city.service';
 import { loadWeight } from 'src/app/core/models/loadWeight.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form',
@@ -57,6 +58,7 @@ export class FormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private formBuilder: FormBuilder,
+    private toastrService:ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -124,13 +126,13 @@ export class FormComponent implements OnInit {
   update(){
     const resualt = this.airlineService.update(this.formAirline.value);
     if (resualt)
-      console.log("update succesfull");
+    this.toastrService.success('update succesfull');
     else
-      console.log("fail update");
+    this.toastrService.error('update failed','sorry!');
   }
   create(){
     this.airlineService.create(this.formAirline.value);
-    console.log("create succesfull");
+    this.toastrService.success('The new airline was create successfully','success');
   }
   cancel() {
     this.navigate();

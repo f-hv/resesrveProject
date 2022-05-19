@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ExpiryTimeService } from './expiry-time.service';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -11,9 +12,11 @@ export class AuthService {
   logedUser: any;
   redirectUrl: string
   constructor(
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private expiryTimeService: ExpiryTimeService
   ) { }
   login(userName: any, password: any) {
+    debugger
     const usersLC = this.localStorageService.getItem('users');
     if (usersLC) {
       this.users = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
@@ -23,6 +26,7 @@ export class AuthService {
       if (validUser) {
         this.localStorageService.setItem('currentUser', JSON.stringify(validUser));
         this.currentUser$.next(validUser);
+        this.expiryTimeService.setWithExpiry('expiryTime', 'currentUser',10000);
         return true;
       }
       else return false;
@@ -33,16 +37,25 @@ export class AuthService {
     this.localStorageService.removeItem('currentUser');
     this.currentUser$.next(null);
   }
-  isLoggedIn() {
-    if (this.currentUser$?.value)
-      return true;
+  isLoggedIn() {   
+    if (this.currentUser$?.value) {
+      if (!this.expiryTimeService.getWithExpiry('expiryTime'))
+        return true;
+
+      else
+        return false;
+    }
     else {
       let user = this.localStorageService.getItem('currentUser');
       if (user) {
-        this.logedUser = JSON.parse(user) ? JSON.parse(user) : null;
-        this.logedUser = JSON.parse(this.logedUser);
-        this.currentUser$.next(this.logedUser);
-        return true
+        if (!this.expiryTimeService.getWithExpiry('expiryTime')) {
+          this.logedUser = JSON.parse(user) ? JSON.parse(user) : null;
+          this.logedUser = JSON.parse(this.logedUser);
+          this.currentUser$.next(this.logedUser);
+          return true
+        }
+        else
+          return false;
       }
       else
         return false;

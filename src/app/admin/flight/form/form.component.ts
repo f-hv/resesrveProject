@@ -9,6 +9,7 @@ import { CityService } from '../../../core/services/city.service';
 import { FlightService } from '../../../core/services/flight.service';
 import { NgbCalendar, NgbCalendarPersian, NgbDatepickerI18n, NgbDate, NgbDateStruct, NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 const WEEKDAYS_SHORT = ['د', 'س', 'چ', 'پ', 'ج', 'ش', 'ی'];
 const MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
@@ -61,6 +62,7 @@ export class FormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private config: NgbInputDatepickerConfig,
     private calendar: NgbCalendar,
+    private toastrService:ToastrService
   ) {
     //  isDisabled = (date: NgbDate, current: {month: number, year: number}) => date.month !== current.month;
     //  isWeekend = (date: NgbDate) =>  this.calendar.getWeekday(date) >= 6;
@@ -110,8 +112,6 @@ export class FormComponent implements OnInit {
       deleted: 0
     });
     this.formFlight?.get("date")?.setValue(this.dateNew);
-    console.log("---", this.formFlight?.get("date")?.value);
-
   }
   cancel() {
     this.navigate();
@@ -126,10 +126,8 @@ export class FormComponent implements OnInit {
       this.formFlight?.get("airline")?.setValue(this.IdAirline);
     this.isClickOnSaveBtn = true;
     if (this.formFlight.invalid) {
-      console.log("not valid form");
       return;
     }
-
     else {
       this.combineTimeDate();
       this.formFlight?.get("date")?.setValue(this.newDate);
@@ -145,14 +143,15 @@ export class FormComponent implements OnInit {
   update() {
     const resualt = this.flightService.update(this.formFlight.value);
     if (resualt)
-      console.log("update succesfull");
+    this.toastrService.success('update succesfull');
     else
-      console.log("fail update");
+    this.toastrService.error('update failed','sorry!');
   }
 
   create() {
     this.flightService.create(this.formFlight.value);
-    console.log("create succesfull");
+    this.toastrService.success('The new airline was create successfully','success');
+
   }
 
   combineTimeDate() {
@@ -208,7 +207,6 @@ export class FormComponent implements OnInit {
       // dateNew.setFullYear(year);
       // dateNew.setMonth(month);
       // { "year": 1400, "month": 11, "day": 22 }
-      console.log(this.dateNew);
     }
   }
 }

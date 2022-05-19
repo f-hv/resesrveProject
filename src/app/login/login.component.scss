@@ -2,7 +2,7 @@
 
 
 .container-fluid {
-    // position: relative;
+
     background-image   : url('../../assets/pic/bg--login.jpg');
     background-repeat  : no-repeat;
     background-size    : cover;
@@ -12,12 +12,9 @@
 
 .card {
     width   : 350px;
-    height  : 270px;
+    height  : 300px;
     position: relative;
 
-    ///***** center card****////
-    // margin             : 60px  auto;
-    // background-color: rgba(177, 142, 118, 0.3);
     margin       : 20px 90px auto;
     float        : none;
     border       : 0px;
@@ -27,10 +24,7 @@
     padding      : 5px 0px 0px 5px;
 }
 
-// .card:after{
-// background: inherit;
-//     filter: blur(20px);
-// }
+
 .card-body {
     padding: 0px;
 
@@ -49,10 +43,11 @@
         padding      : 3px;
         z-index      : 100;
 
-        &:focus , 
+        &:focus,
         :active {
             box-shadow: none !important;
-            outline:none !important;
+            outline   : none !important;
+
             ~label {
                 transform: translate(5%, -80%) scale(0.80);
             }
@@ -67,9 +62,6 @@
         margin-right  : 30px;
         padding-right : 20px;
 
-        // span {
-        //     right     : 20px;
-        // }
         i {
             right    : 0px;
             font-size: $font-size-2;
@@ -84,6 +76,9 @@
         button {
             margin-right: -47px;
         }
+    }
+    .error-box{
+        margin-top: -17px !important;
     }
 
     .card-footer {
@@ -103,5 +98,27 @@
                 color : $blue-70;
             }
         }
+    }
+}
+
+/* ---------------------------------------------------
+  MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width:768px) {
+    .container-fluid {
+        background-image            : url('../../assets/pic/mobileModee.jpg');
+        background-repeat           : no-repeat;
+        background-size             : cover;
+        background-attachment       : fixed;
+        background-position         : right bottom;
+        width                       : calc(100% + 55px);
+        height                      : calc(100vh + 105px);
+
+        .card {
+            margin: 20px 70px auto;
+
+        }
+
     }
 }

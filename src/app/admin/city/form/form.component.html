@@ -6,8 +6,8 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <label class="col-md-3 col-form-label-sm">شهر</label>
-          <input class="col-md-3 form-control" type="text" [(ngModel)]="listCity.name" فیلد خالی است
-            [ngClass]="{ error: listCity.name === null && isClickOnSaveBtn }"
+          <input class="col-md-3 form-control" type="text" [(ngModel)]="listCity.name"            
+          [ngClass]="{ error: listCity.name === null && isClickOnSaveBtn }"
            />
           <app-error-message *ngIf="
             listCity.name === null &&
@@ -23,7 +23,7 @@
                   (click)="save()">ذخیره</button>
               </div>
               <div class="col-md-4">
-                <button class="button button-primary button-sm-1 float-right " type="button"
+                <button class="button button-cancel button-sm-1 float-right " type="button"
                   (click)="cancel()">انصراف</button>
               </div>
             </div>

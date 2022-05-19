@@ -1,49 +1,50 @@
-<div class="content position-relative ">
+<div class="col-sm-auto position-relative ">
     <div class="btn-collapse position-absolute  ">
-        <button class="button-collapse"  id="sidebarCollapse" (click)="toggleNavbar()"><i class=" fa fa-bars" data-toggle="collapse" data-target="#sidebar"
-                aria-expanded="false" aria-controls="#sidebar"></i></button>
+        <button class="button-collapse" id="sidebarCollapse" (click)="toggleNavbar()"><i class=" fa fa-bars"
+                data-toggle="collapse" data-target="#sidebar" aria-expanded="false"
+                aria-controls="#sidebar"></i></button>
     </div>
-    <div id="sidebar" class="collapse "  [ngClass]="{ 'active': navbarOpen }">
+    <div id="sidebar" class="collapse " [ngClass]="{ 'active': navbarOpen }">
         <div class="sidebar-header  profile border-bottom border-1 border-white ">
             <div class=" d-flex justify-content-between mt-2">
-                <img src="../../assets/pic/logo2.jpg" alt="Admin" width="120" height="120" class="">
-                <!-- <h5>پنل ادمین </h5> -->
+                <img src="../../assets/pic/profile2.jpg" alt="Admin" width="110" height="110"
+                    class="rounded-circle box-shadow-lg">
             </div>
         </div>
         <div class="sidebar-items">
-            <div  class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center  item-menu"
+            <div class=" pr-2   d-flex flex-row justify-content-start align-items-center  item-menu"
                 [routerLink]="'./flight'">
-                <i data-bs-toggle="" class="fas fa-plane fa-2x p-2"></i>
-                <span class="">پرواز</span>
+                <i data-bs-toggle="" class="fas fa-plane  p-2"></i>
+                <span>پرواز</span>
             </div>
-            <div class=" pr-2 pt-4 d-flex flex-row justify-content-start align-items-center item-menu"
+            <div class=" pr-2  d-flex flex-row justify-content-start align-items-center item-menu"
                 [routerLink]="'./airline'">
-                <i data-bs-toggle="" class="fas fa-suitcase-rolling fa-2x p-2"></i>
-                <span class="">خط پرواز</span>
+                <i data-bs-toggle="" class="fas fa-suitcase-rolling  p-2"></i>
+                <span>خط پرواز</span>
             </div>
-            <div class=" pr-2 pt-4 d-flex flex-row justify-content-start align-items-center item-menu"
+            <div class=" pr-2  d-flex flex-row justify-content-start align-items-center item-menu"
                 [routerLink]="'./city'">
-                <i data-bs-toggle="" class="fas fa-building fa-2x p-2"></i>
-                <span class="">شهــر</span>
+                <i data-bs-toggle="" class="fas fa-building  p-2"></i>
+                <span>شهــر</span>
             </div>
-            <div class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center item-menu"
+            <div class=" pr-2   d-flex flex-row justify-content-start align-items-center item-menu"
                 [routerLink]="'../admin/reserve'">
-                <i data-bs-toggle="" class="fas fa-file-alt fa-2x p-2"></i>
-                <span class="">رزرو شده</span>
+                <i data-bs-toggle="" class="fas fa-file-alt  p-2"></i>
+                <span>رزرو شده</span>
             </div>
-            <div class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center item-menu"
+            <div class=" pr-2   d-flex flex-row justify-content-start align-items-center item-menu"
                 [routerLink]="'./dashboard'">
-                <i data-bs-toggle="" class="fas fa-home fa-2x p-2 "></i>
-                <span class="">داشبورد</span>
+                <i data-bs-toggle="" class="fas fa-home  p-2 "></i>
+                <span>داشبورد</span>
             </div>
-            <div class=" pr-2 pt-4  d-flex flex-row justify-content-start align-items-center item-menu"
+            <div class=" pr-2   d-flex flex-row justify-content-start align-items-center item-menu"
                 [routerLink]="'./register'">
-                <i data-bs-toggle="" class="fas fa-user fa-2x p-2 "></i>
-                <span class="">ثبت کاربر</span>
+                <i data-bs-toggle="" class="fas fa-user  p-2 "></i>
+                <span>ثبت کاربر</span>
             </div>
-            <div class=" pr-2 pt-4 d-flex flex-row justify-content-start align-items-center item-menu">
-                <i data-bs-toggle="" class="fas fa-sign-out-alt fa-2x p-2"></i>
-                <span class="">خروج</span>
+            <div class=" pr-2  d-flex flex-row justify-content-start align-items-center item-menu">
+                <i data-bs-toggle="" class="fas fa-sign-out-alt  p-2"></i>
+                <span>خروج</span>
             </div>
         </div>
     </div>
