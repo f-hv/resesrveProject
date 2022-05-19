@@ -6,6 +6,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Role } from '../core/models/roles.model';
+import { UserModel } from '../core/models/user.model';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
@@ -15,13 +16,14 @@ import { AuthService } from '../core/services/auth.service';
 })
 export class RegisterUserComponent implements OnInit {
   formRegister: FormGroup;
-  users: any[] = [];
+  users: UserModel[];
   data = {
+    id: null,
     firstName: null,
-    email: null,
     userName: null,
     password: null,
     passConfrim: null,
+    email: null,
     role: null
   }
   isClickOnSaveBtn = false;
@@ -33,6 +35,7 @@ export class RegisterUserComponent implements OnInit {
   enume = Role;
   listRoles: any[] = [];
   check = 1
+  isSelectRole:Boolean=false;
   constructor(
     private fb: FormBuilder,
     private localStorageService: LocalStorageService,
@@ -62,22 +65,22 @@ export class RegisterUserComponent implements OnInit {
       password: [this.data.password, [Validators.required, Validators.minLength(5)]],
       passconfirm: [this.data.passConfrim, Validators.required],
       email: [this.data.email, [Validators.required, Validators.pattern("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])")]],
-      role: [this.selectedRole]
+      role: [ this.isSelectRole ?  this.selectedRole : 'USER'],
+      deleted:0
+
     })
   }
   cancel() {
     this.navigate();
   }
   save() {
-    debugger
     this.isClickOnSaveBtn = true;
     if (this.formRegister?.valid) {
       if (this.selectedRole)
         this.formRegister.get('role')?.setValue(this.selectedRole);
       if (this.localStorageService.getItem("users") === null) {
         this.localStorageService.setItem("users", JSON.stringify([this.formRegister?.value]));
-
-        console.log("کاربر با موفقیت ثبت شد");
+        this.toastrService.success('کاربر با موفقیت ثبت شد.');
         this.navigate();
       }
       else {
@@ -100,17 +103,19 @@ export class RegisterUserComponent implements OnInit {
     }
   }
   navigate() {
-    this.router.navigate(['../../login'], {
+    this.router.navigate(['../login'], {
       relativeTo: this.activatedRoute
     })
   }
   onRoleSelect(item: any) {
     this.selectedRole = '';
-    const selectedSource = this.listRoles.find(role => role === item);
-    this.selectedRole = selectedSource;
+    this.isSelectRole=true;
+    const newRole = this.listRoles.find(role => role === item);
+    if (this.selectedRole)
+      this.selectedRole = newRole;
+    else this.selectedRole = "USER"
   }
   setUserValidateRole() {
-    debugger
     this.authService.currentUser$.subscribe((user: any) => {
       if (user && user.role === "ADMIN") {
         this.formRegister.get('role')?.setValidators(Validators.required);

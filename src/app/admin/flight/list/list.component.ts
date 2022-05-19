@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FlightModel } from 'src/app/core/models/flight.model';
 import { FlightService } from 'src/app/core/services/flight.service';
 import * as moment from "jalali-moment";
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,11 @@ export class ListComponent implements OnInit {
   currentPage :any =1;
   elementPerpage = 5;
   collectionSize: number;
-  constructor(private flightService: FlightService) { }
+  constructor(
+    private flightService: FlightService,
+    private toasterService:ToastrService
+
+    ) { }
 
   ngOnInit(): void {
     this.getData();
@@ -31,9 +36,9 @@ export class ListComponent implements OnInit {
   delete(item: any) {
     const resualt = this.flightService.delete(item);
     if (resualt)
-      console.log("delete succesfull");
+      this.toasterService.success('delete succesfull');
     else
-      console.log("fail deleted");
+      this.toasterService.success('fail deleted');
     this.getData();
   }
   flightById(index: any, flight: any) {

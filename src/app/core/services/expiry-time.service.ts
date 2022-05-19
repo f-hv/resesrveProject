@@ -11,8 +11,6 @@ export class ExpiryTimeService {
   ) { }
   setWithExpiry(key: any, value: any, ttl: number) {
     const now = new Date();
-    console.log(now.getTime());
-    
     const item = {
       value: value,
       expiry: now.getTime() + ttl,

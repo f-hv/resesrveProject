@@ -14,7 +14,7 @@ export class FlightService {
       airline: 'کیش ایر',
       date: new Date(1400, 11, 5, 10, 33, 30),
       // time:new Date(),
-      flightNumber:6030,
+      flightNumber: 6030,
       deleted: 0
     },
     {
@@ -25,7 +25,7 @@ export class FlightService {
       airline: 'ایران ایر',
       date: new Date(),
       // time:new Date(),
-      flightNumber:6050,
+      flightNumber: 6050,
       deleted: 0
     },
     {
@@ -33,10 +33,10 @@ export class FlightService {
       source: 'کیش',
       distination: 'تهران',
       price: 50,
-      airline:'کیش ایر',
+      airline: 'کیش ایر',
       date: new Date(),
       // time:new Date(),
-      flightNumber:6030,
+      flightNumber: 6030,
       deleted: 0
     },
     {
@@ -47,7 +47,7 @@ export class FlightService {
       airline: 'وارش ',
       date: new Date(),
       // time:new Date(),
-      flightNumber:6050,
+      flightNumber: 6050,
       deleted: 0
     },
     {
@@ -55,10 +55,10 @@ export class FlightService {
       source: 'کیش',
       distination: 'تهران',
       price: 50,
-      airline:'کیش ایر',
+      airline: 'کیش ایر',
       date: new Date(),
       // time:new Date(),
-      flightNumber:6030,
+      flightNumber: 6030,
       deleted: 0
     },
     {
@@ -69,7 +69,7 @@ export class FlightService {
       airline: 'وارش',
       date: new Date(),
       // time:new Date(),
-      flightNumber:6050,
+      flightNumber: 6050,
       deleted: 0
     }
   ];
@@ -80,62 +80,65 @@ export class FlightService {
     const findItem = this.flight.find((item: any) => item.id === id);
     if (findItem) return findItem;
     else {
-      return { 
+      return {
         id: null,
-        source:null,
-        distination:null,
-        price:null,
-        airline:null,
+        source: null,
+        distination: null,
+        price: null,
+        airline: null,
         date: null,
         // time:null,
-        flightNumber:null,
+        flightNumber: null,
         deleted: null
       };
     }
   }
 
-    getData() {
-      return this.flight;
-    }
-
-    update(data: FlightModel) {
-      const editItem = this.flight.find(item => item.id === data.id)
-      if (editItem) {
-        editItem.source = data.source,
-          editItem.distination = data.distination,
-          editItem.price = data.price,
-          editItem.airline = data.airline,
-          editItem.date = data.date,
-          // editItem.time=data.time,
-          editItem.flightNumber=data.flightNumber,
-          editItem.deleted = 0
-        return true;
-      } else return false;
-    }
-
-    delete (id: any) {
-      const delItem = this.flight.find((item) => item.id === id);
-      this.flight = this.flight.filter(item => item.id !== id)
-      if (delItem) return true;
-      else return false;
-    }
-
-    create(item: FlightModel) {
-      this.flight.push({
-        id: this.flight.length + 1,
-        source: item.source,
-        distination: item.distination,
-        price: item.price,
-        airline: item.airline,
-        date: item.date,
-        // time:item.time,
-        flightNumber:item.flightNumber,
-        deleted: 0,
-      })
-    }
-
-    getOrginalList(){
-      return this.orginalListFlight
-    }
-
+  getData() {
+    return this.flight;
   }
+
+  update(data: FlightModel) {
+    const editItem = this.flight.find(item => item.id === data.id)
+    if (editItem) {
+      editItem.source = data.source,
+        editItem.distination = data.distination,
+        editItem.price = data.price,
+        editItem.airline = data.airline,
+        editItem.date = data.date,
+        // editItem.time=data.time,
+        editItem.flightNumber = data.flightNumber,
+        editItem.deleted = 0
+      return true;
+    } else return false;
+  }
+
+  delete(id: any) {
+    const delItem = this.flight.find((item) => {
+      if (item.id === id)
+        item.deleted = 1;
+    });
+    // this.flight = this.flight.filter(item => item.id !== id)
+    if (delItem) return true;
+    else return false;
+  }
+
+  create(item: FlightModel) {
+    this.flight.push({
+      id: this.flight.length + 1,
+      source: item.source,
+      distination: item.distination,
+      price: item.price,
+      airline: item.airline,
+      date: item.date,
+      // time:item.time,
+      flightNumber: item.flightNumber,
+      deleted: 0,
+    })
+  }
+
+  getOrginalList() {
+    return this.orginalListFlight
+  }
+
+}

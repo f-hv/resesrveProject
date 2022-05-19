@@ -11,9 +11,17 @@ import { ReserveComponent } from './reserve/reserve.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { sharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [CityComponent, FlightComponent, AirlineComponent, AdminComponent, ReserveComponent, DashboardComponent],
+  declarations: [
+    CityComponent,
+    FlightComponent,
+    AirlineComponent,
+    AdminComponent,
+    ReserveComponent,
+    DashboardComponent,
+    UsersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -22,7 +30,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NgMultiSelectDropDownModule,
     sharedModule,
   ],
-  
-  schemas:[CUSTOM_ELEMENTS_SCHEMA , NO_ERRORS_SCHEMA]
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class AdminModule { }

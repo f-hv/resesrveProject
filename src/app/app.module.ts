@@ -15,7 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
   ],
   imports: [
     BrowserModule,

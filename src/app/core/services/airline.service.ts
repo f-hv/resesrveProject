@@ -91,8 +91,11 @@ export class AirlineService {
   }
 
   delete(id: any) {
-    const delItem = this.airline.find((item) => item.id === id);
-    this.airline = this.airline.filter(item => item.id !== id);
+    const delItem = this.airline.find((item) =>{ 
+     if( item.id === id)
+      item.deleted=1;
+    });
+    // this.airline = this.airline.filter(item => item.id !== id);
     if (delItem) return true;
     else return false;
   }

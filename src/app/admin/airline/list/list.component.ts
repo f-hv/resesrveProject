@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AirlineModel } from '../../../core/models/airline.model';
 import { AirlineService } from '../../../core/services/airline.service';
 
@@ -15,7 +16,8 @@ export class ListComponent implements OnInit {
   elementPerpage = 5;
   collectionSize: number;
   constructor(
-    private airlineService: AirlineService
+    private airlineService: AirlineService,
+    private toasterService: ToastrService
   ) { }
   ngOnInit(): void {
     this.getData();
@@ -28,9 +30,9 @@ export class ListComponent implements OnInit {
   delete(item: any) {
     const resualt = this.airlineService.delete(item);
     if (resualt)
-      console.log("delete succesfull");
+      this.toasterService.success('delete succesfull');
     else
-      console.log("fail deleted");
+      this.toasterService.success('fail deleted');
     this.getData();
   }
   airlineById(index: any, line: any) {
@@ -38,8 +40,6 @@ export class ListComponent implements OnInit {
   }
 
   onKeyup(item: any) {
-    console.log("key:", item);
-
     if (item.keycode !== 13 || item.keycode !== 8) {
       this.searchKeyWord = item;
     }
@@ -48,11 +48,11 @@ export class ListComponent implements OnInit {
     }
     if (this.searchKeyWord) {
       if (this.searchKeyWord.length === 1) {
-        this.searchKeyWord=this.searchKeyWord.toUpperCase();
+        this.searchKeyWord = this.searchKeyWord.toUpperCase();
         if (item.keycode !== 13 || item.keycode !== 8) {
           this.getData();
           var list = this.listAirline.filter(line => line.priceClass?.includes(this.searchKeyWord));
-          if(list.length !== 0) {this.listAirline=list;}
+          if (list.length !== 0) { this.listAirline = list; }
           return;
         }
       }
@@ -61,9 +61,9 @@ export class ListComponent implements OnInit {
           this.getData();
           this.listAirline = this.listAirline.filter(line =>
             line.priceClass?.includes(item) ||
-            line.city?.includes(item) || 
-            line.name?.includes(item) || 
-            line.loadWeight == item  
+            line.city?.includes(item) ||
+            line.name?.includes(item) ||
+            line.loadWeight == item
           );
         }
       }

@@ -16,7 +16,6 @@ export class AuthService {
     private expiryTimeService: ExpiryTimeService
   ) { }
   login(userName: any, password: any) {
-    debugger
     const usersLC = this.localStorageService.getItem('users');
     if (usersLC) {
       this.users = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;

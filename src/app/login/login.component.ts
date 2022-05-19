@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
     })
   }
   login() {
-debugger
     this.isClickOnSaveBtn = true;
     const userName = this.formLogin.get('userName')?.value;
     const password = this.formLogin.get('password')?.value;
@@ -61,7 +60,6 @@ debugger
     })
   }
   directToPage() {
-    debugger
     this.authService.currentUser$.subscribe((user: any) => {
       if (user.role === "ADMIN") {
         this.router.navigate(['../admin'], {
