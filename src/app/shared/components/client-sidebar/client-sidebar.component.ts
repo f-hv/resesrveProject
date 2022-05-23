@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: 'app-client-sidebar',
+  templateUrl: './client-sidebar.component.html',
+  styleUrls: ['./client-sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class ClientSidebarComponent implements OnInit {
   @Input() navbarOpen = false;
   constructor(
     private authService:AuthService,
@@ -15,8 +15,7 @@ export class SidebarComponent implements OnInit {
     private activetedRoute:ActivatedRoute
   ) { }
 
-  ngOnInit(): void {  }
-  
+  ngOnInit(): void {}
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
@@ -26,5 +25,5 @@ export class SidebarComponent implements OnInit {
       relativeTo:this.activetedRoute
     })
   }
- 
+
 }

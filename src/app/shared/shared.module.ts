@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UserRoleDirective } from './directive/user-role.directive';
+import { ClientSidebarComponent } from './components/client-sidebar/client-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UserRoleDirective } from './directive/user-role.directive';
     SidebarComponent,
     FooterComponent,
     UserRoleDirective,
+    ClientSidebarComponent,
     
   ],
   imports: [
@@ -27,6 +29,6 @@ import { UserRoleDirective } from './directive/user-role.directive';
     NgMultiSelectDropDownModule,
   ],
   schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
-  exports:[ErrorMessageComponent , SearchBoxComponent,HeaderComponent,SidebarComponent,UserRoleDirective],
+  exports:[ErrorMessageComponent , SearchBoxComponent,HeaderComponent,SidebarComponent,UserRoleDirective,ClientSidebarComponent],
 })
 export class sharedModule { }

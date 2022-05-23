@@ -18,7 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     sharedModule,
     NgMultiSelectDropDownModule,
-    NgbModule
+    NgbModule,
   ],
   exports:[RegisterUserComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

@@ -1,26 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
-import { RegisterUserComponent } from '../register-user/register-user.component';
+import { ReserveComponent } from '../admin/reserve/reserve.component';
 import { ClientComponent } from './client.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component:ClientComponent,
+    component: ClientComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'profile'
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module')
+          .then(m => m.ProfileModule)
+      },
+      {
+        path: 'reserved',
+        loadChildren: () => import('./reserved/reserved.module')
+          .then(m => m.ReservedModule)
+      },
+
+    ]
   }
-  // {
-  //   path: 'register',
-  //   component: RegisterUserComponent,
-  //   loadChildren:()=> import('../register-user/register-user.module')
-  //   .then(m => m.RegisterUserModule)
-  // },
-  // {
-  //   path:'',
-  //   redirectTo:'login',
-  //   pathMatch: 'full'
-  // },
 ];
 
 @NgModule({

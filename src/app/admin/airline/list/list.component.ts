@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
   collectionSize: number;
   constructor(
     private airlineService: AirlineService,
-    private toasterService: ToastrService
+    private toastrService: ToastrService
   ) { }
   ngOnInit(): void {
     this.getData();
@@ -30,9 +30,9 @@ export class ListComponent implements OnInit {
   delete(item: any) {
     const resualt = this.airlineService.delete(item);
     if (resualt)
-      this.toasterService.success('delete succesfull');
+      this.toastrService.success('delete succesfull');
     else
-      this.toasterService.success('fail deleted');
+      this.toastrService.success('failed deleted');
     this.getData();
   }
   airlineById(index: any, line: any) {

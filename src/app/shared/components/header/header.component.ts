@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe((user) => {
-      this.userName = user.userName;      
+      this.userName = user?.userName;      
     })
     this.dropdownSettings = {
       singleSelection: true,

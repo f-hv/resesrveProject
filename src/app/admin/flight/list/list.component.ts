@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
   collectionSize: number;
   constructor(
     private flightService: FlightService,
-    private toasterService:ToastrService
+    private toastrService:ToastrService
 
     ) { }
 
@@ -36,9 +36,9 @@ export class ListComponent implements OnInit {
   delete(item: any) {
     const resualt = this.flightService.delete(item);
     if (resualt)
-      this.toasterService.success('delete succesfull');
+      this.toastrService.success('delete succesfull');
     else
-      this.toasterService.success('fail deleted');
+      this.toastrService.warning('fail deleted');
     this.getData();
   }
   flightById(index: any, flight: any) {

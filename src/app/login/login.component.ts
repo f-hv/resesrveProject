@@ -39,12 +39,9 @@ export class LoginComponent implements OnInit {
     const password = this.formLogin.get('password')?.value;
     const resLogin = this.authService.login(userName, password)
     if (resLogin) {
-      if (this.authService.redirectUrl) {
-        this.router.navigateByUrl(this.authService.redirectUrl);
-      }
-      else {
-        this.directToPage();
-      }
+      if (this.authService.redirectUrl) 
+        this.router.navigateByUrl(this.authService.redirectUrl);     
+      else this.directToPage();
     }
     else
       this.toastrService.error('username or password is incorrect.', 'sorry!');
@@ -78,7 +75,7 @@ export class LoginComponent implements OnInit {
       userName: '',
       password:'',
     })
-
+    this.isClickOnSaveBtn =false
   }
 
 }

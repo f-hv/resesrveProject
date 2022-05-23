@@ -73,7 +73,8 @@ export class FlightService {
       deleted: 0
     }
   ];
-  orginalListFlight = [...this.flight]
+  orginalListFlight = [...this.flight];
+  resualt:Boolean=false;
   constructor() { }
 
   getById(id: any) {
@@ -114,12 +115,14 @@ export class FlightService {
   }
 
   delete(id: any) {
+    debugger
     const delItem = this.flight.find((item) => {
       if (item.id === id)
         item.deleted = 1;
+        this.resualt=true;
+
     });
-    // this.flight = this.flight.filter(item => item.id !== id)
-    if (delItem) return true;
+    if (this.resualt) return true;
     else return false;
   }
 
