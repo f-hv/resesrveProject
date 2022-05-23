@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { UsersModule } from 'src/app/admin/users/users.module';
 import { UserModel } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -18,19 +18,20 @@ export class ProfileComponent implements OnInit {
   isClickOnSaveBtn: Boolean = false;
   /////////ResetPassword////////////
   isClickSavePassBtn: Boolean = false;
-  passLC:any;
+  passLC: any;
   passInfo = { currentPass: null, newPass: null };
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe((user) => {
       this.dataUser = user;
-      this.passLC=user.password;
+      this.passLC = user.password;
     })
     this.listOrginalUser = [...[this.dataUser]];
     this.initial();
@@ -50,30 +51,32 @@ export class ProfileComponent implements OnInit {
     this.isClickOnSaveBtn = true;
     const resualt = this.userService.update(this.formUser.value);
     if (resualt)
-      this.toastrService.success('delete succesfull');
+      this.toastrService.success('update succesfull');
     else
-      this.toastrService.success('failed deleted');
+      this.toastrService.success('failed update');
   }
   cancel() {
     this.dataUser = this.listOrginalUser;
   }
   resetPassword(item: any) {
     this.isClickSavePassBtn = true;
-    if (this.passLC === item.currentPass) {
-      // const currentUserInfo= item.newPass;
-      const usersLC = this.userService.getParseData("users");
-        usersLC.map((user: any) => {
-          if (user.userName === this.dataUser.userName && user.email === this.dataUser.email) {
-            user.password = this.passLC;
-            user.passconfirm = this.passLC;
-            this.localStorageService.setItem("users", JSON.stringify(users));
-            this.localStorageService.setItem("currentUser", JSON.stringify(this.currentUserInfo));
-            this.authService.currentUser$.next(this.currentUserInfo);
-            this.toastrService.success('The password changed successfully', 'success');
-            this.clearForm();
-          }
-        })
+    const usersLC = this.userService.getParseData("users");
+    usersLC.map((user: any) => {
+      if (user.userName === this.dataUser.userName && user.email === this.dataUser.email) {
+        user.password = item;
+        this.dataUser.password = item;
+        this.dataUser.passconfirm = item;
+        this.localStorageService.setItem("users", JSON.stringify(usersLC));
+        this.localStorageService.setItem("currentUser", JSON.stringify(this.dataUser));
+        this.authService.currentUser$.next(usersLC);
+        this.toastrService.success('The password changed successfully', 'success');
+        this.clearForm();
       }
-    }
+    })
+  }
+  clearForm() {
+    this.passInfo.currentPass = null;
+    this.passInfo.newPass = null;
+    this.isClickSavePassBtn = false;
   }
 }

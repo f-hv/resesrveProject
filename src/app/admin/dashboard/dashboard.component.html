@@ -27,10 +27,10 @@
             <label class="title "> تغییر رمز عبور</label>
             <label class="col-form-label-sm "> رمز عبور فعلی</label>
             <input class="form-control" type="text" [(ngModel)]="passInfo.currentPass"
-                [ngClass]="{error: (passInfo.currentPass === null || passInfo.currentPass !== PasswordLC) && isClickSavePassBtn }" />
+                [ngClass]="{error: (passInfo.currentPass === null || passInfo.currentPass !== passLC) && isClickSavePassBtn }" />
             <app-error-message *ngIf="
-                        (passInfo.currentPass === '' ||  passInfo.currentPass !== PasswordLC ) && isClickSavePassBtn"
-                [message]="passInfo.currentPass === null ?'فیلد خالی است': passInfo.currentPass !== PasswordLC ?'رمز عبور صحیح نمی باشد' :'' ">
+                        (passInfo.currentPass === '' ||  passInfo.currentPass !== passLC ) && isClickSavePassBtn"
+                [message]="passInfo.currentPass === null ?'فیلد خالی است': passInfo.currentPass !== passLC ?'رمز عبور صحیح نمی باشد' :'' ">
             </app-error-message>
 
             <label class="col-form-label-sm mt-3"> رمزعبور جدید</label>

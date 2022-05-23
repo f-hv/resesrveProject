@@ -1,0 +1,52 @@
+@import "../../../assets/styles/custom-kit/variable.scss";
+
+// .container{
+//     padding: 20px;
+// }
+.container,
+.content {
+    padding-right     : 15px;
+}
+
+input {
+    max-width   : 320px;
+    border-color: $gray-30 !important;
+}
+
+.border-col {
+    border       : 1px solid $gray-30;
+    border-radius: $radius-sm;
+    padding      : 20px 20px 30px;
+    // max-width: 380px;
+
+}
+
+.title {
+    position        : absolute;
+    border          : none;
+    background-color: $warm-gray-10;
+    padding         : 0px 10px 0px 10px;
+    top             : -10px;
+    right           : 20px;
+    font-size       : $font-size-1;
+    font-weight     : bold;
+    color           : $blue-30;
+}
+
+// .col-info{
+//     padding:25px 60px
+// }
+label,
+input {
+    font-size: 13px;
+}
+
+button {
+    width: 100px !important;
+}
+
+.action-btn {
+    display        : flex;
+    align-content  : center;
+    justify-content: space-evenly;
+}
