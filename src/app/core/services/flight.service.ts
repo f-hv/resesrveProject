@@ -115,7 +115,6 @@ export class FlightService {
   }
 
   delete(id: any) {
-    debugger
     const delItem = this.flight.find((item) => {
       if (item.id === id)
         item.deleted = 1;

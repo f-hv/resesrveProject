@@ -135,15 +135,8 @@ export class RegisterUserComponent implements OnInit {
       this.toastrService.error('کاربر با این مشخصات وجود ندارد');
   }
   create() {
-    if (this.localStorageService.getItem("users") === null) {
-      this.localStorageService.setItem("users", JSON.stringify([this.formRegister?.value]));
-      this.toastrService.success('کاربر با موفقیت ثبت شد.');
-      this.navigate();
-    }
-    const validUser = this.users.find((item: any) => item.userName === this.formRegister?.get('userName')?.value || item.email === this.formRegister?.get('email')?.value);
-    if (!validUser) {
-      this.users.push(this.formRegister.value);
-      this.localStorageService.setItem("users", JSON.stringify(this.users));
+    const resualt = this.userService.create(this.formRegister?.value);
+    if (resualt) {
       this.toastrService.success('کاربر با موفقیت ثبت شد.');
       this.navigate();
     }

@@ -5,7 +5,6 @@ import { ClientRoutingModule } from './client-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientComponent } from './client.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ReservedComponent } from './reserved/reserved.component';
 import { sharedModule } from '../shared/shared.module';
 
 
@@ -13,7 +12,6 @@ import { sharedModule } from '../shared/shared.module';
   declarations: [
     ClientComponent,
     ProfileComponent,
-    ReservedComponent
   ],
   imports: [
     CommonModule,

@@ -7,33 +7,40 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module')
-    .then(m => m.AdminModule),
+      .then(m => m.AdminModule),
     canActivate: [AuthGuard],
     data: { roles: [Role.ADMIN] }
   },
   {
     path: 'client',
     loadChildren: () => import('./client/client.module')
-    .then(m => m.ClientModule)
+      .then(m => m.ClientModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.USER] }
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module')
-    .then(m => m.LoginModule)
+      .then(m => m.LoginModule)
   },
   {
     path: 'register',
     loadChildren: () => import('./register-user/register-user.module')
-    .then(m => m.RegisterUserModule)
+      .then(m => m.RegisterUserModule)
+  },
+  {
+    path: 'reserve',
+    loadChildren: () => import('./reserve/reserve.module')
+      .then(m => m.ReserveModule)
   },
   {
     path: 'accessDenied',
     loadChildren: () => import('./access-denied/access-denied.module')
-    .then(m => m.AccessDeniedModule)
+      .then(m => m.AccessDeniedModule)
   },
   {
-    path:'',
-    redirectTo:'register',
+    path: '',
+    redirectTo: 'register',
     pathMatch: 'full'
   },
 ];

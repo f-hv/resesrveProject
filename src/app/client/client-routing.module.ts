@@ -19,11 +19,11 @@ const routes: Routes = [
         loadChildren: () => import('./profile/profile.module')
           .then(m => m.ProfileModule)
       },
-      {
-        path: 'reserved',
-        loadChildren: () => import('./reserved/reserved.module')
-          .then(m => m.ReservedModule)
-      },
+      // {
+      //   path: 'reserved',
+      //   loadChildren: () => import('./reserved/reserved.module')
+      //     .then(m => m.ReservedModule)
+      // },
 
     ]
   }

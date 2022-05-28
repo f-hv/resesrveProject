@@ -12,6 +12,7 @@ import { LoginModule } from './login/login.module';
 import { RegisterUserModule } from './register-user/register-user.module';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ReserveModule } from './admin/reserve/reserve.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +29,10 @@ import { ToastrModule } from 'ngx-toastr';
     NgbModule,
     LoginModule,
     RegisterUserModule,
+    ReserveModule,
     ToastrModule.forRoot(),
   ],
-  schemas:[NO_ERRORS_SCHEMA , CUSTOM_ELEMENTS_SCHEMA],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

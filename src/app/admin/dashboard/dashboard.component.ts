@@ -38,6 +38,8 @@ export class DashboardComponent implements OnInit {
       this.passLC = user.password;
 
     })
+    console.log("pass:",this.passLC);
+    
     this.initial();
   }
   initial() {
@@ -71,6 +73,7 @@ export class DashboardComponent implements OnInit {
     usersLC.map((user: any) => {
       if (user.userName === this.dataUser.userName && user.email === this.dataUser.email) {
         user.password = item;
+        user.passconfirm =item;
         this.dataUser.password = item;
         this.dataUser.passconfirm = item;
         this.localStorageService.setItem("users", JSON.stringify(usersLC));

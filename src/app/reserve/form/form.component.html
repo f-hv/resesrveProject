@@ -1,0 +1,73 @@
+
+<div class="container p-4" *ngIf="formReserve">
+    <div [formGroup]="formReserve">
+        <div class="row rounded-3 pb-3 justify-content-md-center border border-1 content">
+            <div class="col">
+                <label class="col-form-label-sm">مبدا</label>
+                <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'مبدا'"
+                    [settings]="dropdownSettings" [data]="listCity" (onSelect)="onSourceSelect($event)"
+                    formControlName="source">
+                    <!-- [ngClass]="{
+                    error: (!formReserve.get('source')?.valid || formReserve.get('source')?.value === '') && isClickOnSearchBtn
+                  }" -->
+                </ng-multiselect-dropdown>
+                <!-- <div class="error-box">
+                    <app-error-message *ngIf="
+                      !formReserve.get('source')?.valid &&
+                      isClickOnSearchBtn &&
+                      !formReserve.get('source')?.value" [message]="'فیلد خالی است'">
+                    </app-error-message>
+                </div> -->
+            </div>
+            <div class="col">
+                <label class="col-form-label-sm">مقصد</label>
+                <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'مقصد'"
+                    [settings]="dropdownSettings" [data]="listCity" (onSelect)="onDestinationSelect($event)"
+                    formControlName="destination">
+                    <!-- [ngClass]="{
+                    error: (!formReserve.get('destination')?.valid || formReserve.get('destination')?.value === '') && isClickOnSearchBtn
+                  }" -->
+                </ng-multiselect-dropdown>
+                <!-- <div class="error-box">
+                    <app-error-message *ngIf="
+                      !formReserve.get('destination')?.valid &&
+                      isClickOnSearchBtn &&
+                      !formReserve.get('airline')?.value" [message]="'فیلد خالی است'">
+                    </app-error-message>
+                </div> -->
+            </div>
+            <div class="col">
+                <input class="form-control input-Date" placeholder=" تاریخ رفت" readonly name="dpD"
+                    formControlName="departingDate" ngbDatepicker #d="ngbDatepicker" [firstDayOfWeek]="6"
+                    (focus)="d.open()" [placement]=" placement" [autoClose]="true">
+                <!-- [ngClass]="{
+            error:formFlight.get('date')?.value === '' && isClickOnSaveBtn
+          }" -->
+                <div class="btn-date position-absolute ">
+                    <button class="far fa-calendar-alt button-Datepicker" (click)="d.toggle()" type="button"></button>
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <input class="form-control input-Date" placeholder=" تاریخ برگشت" readonly name="dpR"
+                        formControlName="returnDate" ngbDatepicker #dR="ngbDatepicker" [firstDayOfWeek]="6"
+                        (focus)="d.open()" [placement]=" placement" [autoClose]="true">
+                    <!-- [ngClass]="{
+                    error:formFlight.get('date')?.value === '' && isClickOnSaveBtn
+                     }" -->
+                    <div class="btn-date position-absolute ">
+                        <button class="far fa-calendar-alt button-Datepicker" (click)="dR.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <input class="form-control"  type="number" formControlName="passenger">
+            </div>
+            <div class="col">
+                <button type="submit" (click)="search()">search</button>
+            </div>
+        </div>
+    </div>
+    <!-- {{formReserve.value|json}} -->
+</div>

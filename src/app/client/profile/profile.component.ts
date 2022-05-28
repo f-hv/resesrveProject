@@ -29,9 +29,9 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe((user) => {
-      this.dataUser = user;
-      this.passLC = user.password;
+    this.authService.currentUser$.subscribe((user:any)=>{
+      this.dataUser=user;
+      this.passLC=user.password
     })
     this.listOrginalUser = [...[this.dataUser]];
     this.initial();
@@ -60,10 +60,12 @@ export class ProfileComponent implements OnInit {
   }
   resetPassword(item: any) {
     this.isClickSavePassBtn = true;
+    
     const usersLC = this.userService.getParseData("users");
     usersLC.map((user: any) => {
       if (user.userName === this.dataUser.userName && user.email === this.dataUser.email) {
         user.password = item;
+        user.passconfirm =item;
         this.dataUser.password = item;
         this.dataUser.passconfirm = item;
         this.localStorageService.setItem("users", JSON.stringify(usersLC));

@@ -95,7 +95,6 @@ export class AirlineService {
      if( item.id === id)
       item.deleted=1;
     });
-    // this.airline = this.airline.filter(item => item.id !== id);
     if (delItem) return true;
     else return false;
   }

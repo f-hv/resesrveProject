@@ -23,13 +23,13 @@ export class AuthGuard implements CanActivate {
         return true;
       }
       else  {
-        this.toastrService.error('You are not logged in.','sorry!');
+        this.toastrService.error('please login.','sorry!');
         this.router.navigate(['../login']);
         return false;
       }
     }
     else {
-      this.toastrService.error('You are not logged in.','sorry!');
+      this.toastrService.error('please login.','sorry!');
       this.router.navigate(['../login']);
       return false;
     }
