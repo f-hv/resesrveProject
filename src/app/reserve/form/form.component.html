@@ -44,7 +44,7 @@
                             </app-error-message>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-2 mt-4 position-relative ">
                         <input class="form-control input-Date" placeholder=" تاریخ رفت" readonly name="dpD"
                             formControlName="departingDate" ngbDatepicker #d="ngbDatepicker" [firstDayOfWeek]="6"
@@ -65,16 +65,19 @@
                     </div>
                     <div class="col-md-2 mt-4 position-relative ">
                         <div>
-                            <input class="form-control input-Date" placeholder=" تاریخ برگشت" readonly name="dpR"
+                            <ng-persian-datepicker>
+                                <input type="text" placeholder=" تاریخ برگشت" formControlName="returnDate" />
+                            </ng-persian-datepicker>
+                            <!-- <input class="form-control input-Date" placeholder=" تاریخ برگشت" readonly name="dpR"
                                 formControlName="returnDate" ngbDatepicker #dR="ngbDatepicker" [firstDayOfWeek]="6"
-                                (focus)="d.open()" [placement]=" placement" [autoClose]="true" [disabled]=" formReserve.get('travelMode')?.value === 'یک طرفه'"
-                                [ngClass]="{
+                                (focus)="d.open()" [placement]=" placement" [autoClose]="true"
+                                [disabled]=" formReserve.get('travelMode')?.value === 'یک طرفه'" [ngClass]="{
                                 error:formReserve.get('returnDate')?.value === ''  && isClickOnSearchBtn}">
                             <div class="btn-date position-absolute " [ngClass]="{
                             error:formReserve.get('returnDate')?.value === '' && isClickOnSearchBtn }">
                                 <button class="far fa-calendar-alt button-Datepicker" (click)="dR.toggle()"
                                     type="button"></button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="error-box position-date ">
                             <app-error-message *ngIf="
