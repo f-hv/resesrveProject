@@ -1,1 +1,30 @@
-<p>list works!</p>
+<div class="row p-3">بلیط هواپیما {{source}} به  {{destination}} </div>
+<table>
+    <thead>
+        <tr>
+            <th scope="col" style="width:15%"> زمان </th>
+            <th scope="col" style="width:10%"> پرواز</th>
+            <th scope="col" style="width:10%"> شماره پرواز</th>
+            <th scope="col" style="width:5%"> کلاس نرخی</th>
+            <th scope="col" style="width:5%"> بار مجاز</th>
+            <th scope="col" style="width:10%">صندلی خالی </th>
+            <th scope="col" style="width:10%">مبلغ</th>
+            <th scope="col" style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of searchResualt">
+            <td style="width:15%" class="overflow-hidden">{{item.date | date:"HH:mm" }}</td>
+            <td style="width:10%" class="overflow-hidden">{{item.airline}}</td>
+            <td style="width:10%" class="overflow-hidden">{{item.flightNumber}}</td>
+            <td style="width:5%" class="overflow-hidden">{{item.priceClass}}</td>
+            <td style="width:5%" class="overflow-hidden">{{item.loadWeight}}</td>
+            <td style="width:10%">{{item.emptySeats}} </td>
+            <td style="width:10%" class="overflow-hidden">{{item.price}}</td>
+            <td style="width:10%">
+                <button  class="btn-res button-primary button-sm-0 " type="submit"  (click)="reserve(item)"> انتخاب بلیط</button>
+             </td>
+
+        </tr>
+    </tbody>
+</table>

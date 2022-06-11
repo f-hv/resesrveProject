@@ -1,0 +1,45 @@
+@import "../../../../assets/styles/custom-kit/variable.scss";
+
+.container {
+    background-color: $white;
+    width          : 800px;
+    height         : 400px;
+    top            : 0;
+    left           : 0;
+    display        : flex;
+    justify-content: center;
+    flex-direction : column;
+    position: relative;
+
+    .leftBtn {
+        display   : flex;
+        align-self: flex-end;
+    }
+    button{
+        position: absolute;
+        z-index: 3;
+        background-color: transparent;
+        color: $black;
+        border: 0;
+        opacity: 0.7;
+        cursor: pointer;
+        bottom: 135px;
+        height: 47px;
+        width: 55px;
+        font-size: 40px;
+
+        &:disabled{
+            opacity: 0.2;
+            cursor:not-allowed;
+        }
+    }
+    .slideshowImg{
+        position:absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        // box-sizing: content-box;
+    }
+}

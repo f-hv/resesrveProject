@@ -11,7 +11,7 @@ const routes: Routes = [
     component: ReserveComponent,
     children: [
       {
-        path: 'list/:source/:destination/:passenger',
+        path: 'list/:source/:destination/:adultCount/:childCount/:babyCount/:twoWay',
         component: ListComponent
       },
       {

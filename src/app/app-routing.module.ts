@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: 'reserve',
     loadChildren: () => import('./reserve/reserve.module')
-      .then(m => m.ReserveModule)
+      .then(m => m.ReserveModule),
   },
   {
     path: 'accessDenied',

@@ -60,6 +60,7 @@ export class UserService {
   }
 
   create(data: UserModel) {
+    debugger
     let users = this.getParseData("users");
     if (!this.users) {
       this.localStorageService.setItem("users", JSON.stringify(data));
@@ -68,8 +69,9 @@ export class UserService {
     else {
       const validUser = users.find((item: any) => item.userName === data.userName || item.email === data.email);
       if (!validUser) {
+        
         users.push({
-          id: Number(this.localStorageService.length) + 1,
+          id: data.id,
           firstName: data.firstName,
           userName: data.userName,
           password: data.password,

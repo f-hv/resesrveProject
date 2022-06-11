@@ -28,16 +28,16 @@
           <div class="col-md-6">
             <label class="col-form-label-sm col-3">مقصد</label>
             <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مقصد'" [settings]="dropdownSettings"
-              [data]="listCity" (onSelect)="onDistinationSelect($event)" formControlName="distination"
+              [data]="listCity" (onSelect)="ondestinationSelect($event)" formControlName="destination"
               [ngClass]="{
-                error: (!formFlight.get('distination')?.valid || formFlight.get('distination')?.value === '') && isClickOnSaveBtn
+                error: (!formFlight.get('destination')?.valid || formFlight.get('destination')?.value === '') && isClickOnSaveBtn
               }">
             </ng-multiselect-dropdown>
             <div  class="error-box">
               <app-error-message *ngIf="
-                  !formFlight.get('distination')?.valid &&
+                  !formFlight.get('destination')?.valid &&
                   isClickOnSaveBtn &&
-                  formFlight.get('distination')?.value === '' " [message]="'فیلد خالی است'">
+                  formFlight.get('destination')?.value === '' " [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>

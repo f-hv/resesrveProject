@@ -5,11 +5,55 @@ import { ReservedModel } from '../models/reserved.model';
   providedIn: 'root'
 })
 export class ReservedService {
-  Reserved:ReservedModel[]=[];
-  orginalListReserved=[...this.Reserved];
+  Reserved: ReservedModel[] = [
+    {
+      id: 1,
+      flightId: 512,
+      BackFlightId: 0,
+      paymentId: 501,
+      userId: 2,
+      emptySeats: 20,
+    },
+    {
+      id: 2,
+      flightId: 512,
+      BackFlightId: 152,
+      paymentId: 501,
+      userId: 3,
+      emptySeats: 10,
+    },
+    {
+      id: 3,
+      flightId: 152,
+      BackFlightId: 512,
+      paymentId: 501,
+      userId: 2,
+      emptySeats: 50,
+    },
+    {
+      id: 4,
+      flightId: 153,
+      BackFlightId: 0,
+      paymentId: 501,
+      userId: 3,
+      emptySeats: 2,
+    },
+    {
+      id: 5,
+      flightId: 122,
+      BackFlightId: 0,
+      paymentId: 501,
+      userId: 2,
+      emptySeats: 49,
+    },
+  ];
+  orginalListReserved = [...this.Reserved];
 
   constructor() { }
 
+  getByflightId(id: any) {
+    return this.Reserved.find((item:any) => item.flightId === id);
+  }
   getById(id: any) {
     return this.Reserved.find((item: any) => item.id === id)
   }
@@ -28,14 +72,15 @@ export class ReservedService {
 
   addReserved(data: ReservedModel) {
     this.Reserved.push({
-      id:this.Reserved.length+1,
-      flightId:data.flightId,
-      userId:data.userId,
-      paymentId:data.paymentId
+      id: this.Reserved.length + 1,
+      flightId: data.flightId,
+      userId: data.userId,
+      paymentId: data.paymentId,
+      emptySeats: Number(data.emptySeats) - 1,
+      BackFlightId: data.BackFlightId
     })
   }
-
-  getOrginalList(){
+  getOrginalList() {
     return this.orginalListReserved;
   }
 }

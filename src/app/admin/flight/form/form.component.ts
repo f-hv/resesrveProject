@@ -42,7 +42,7 @@ export class FormComponent implements OnInit {
   dropdownSettings: IDropdownSettings
   selectedSource = {};
   source: any;
-  distination: any;
+  destination: any;
   IdAirline: any;
   data: CityModel | undefined;
   ///// datepicker
@@ -81,7 +81,7 @@ export class FormComponent implements OnInit {
       this.dataFlight = {
         id: null,
         source: null,
-        distination: null,
+        destination: null,
         date: null,
         price: null,
         airline: null,
@@ -103,7 +103,7 @@ export class FormComponent implements OnInit {
     this.formFlight = this.formBuilder.group({
       id: [this.dataFlight?.id],
       source: [this.dataFlight.source, [Validators.required]],
-      distination: [this.dataFlight.distination, Validators.required],
+      destination: [this.dataFlight.destination, Validators.required],
       airline: [this.dataFlight.airline, Validators.required],
       date: [this.dataFlight.date, Validators.required],
       time: [this.time, [Validators.required]],
@@ -120,8 +120,8 @@ export class FormComponent implements OnInit {
   save() {
     if (this.source)
       this.formFlight?.get("source")?.setValue(this.source);
-    if (this.distination)
-      this.formFlight?.get("distination")?.setValue(this.distination);
+    if (this.destination)
+      this.formFlight?.get("destination")?.setValue(this.destination);
     if (this.IdAirline)
       this.formFlight?.get("airline")?.setValue(this.IdAirline);
     this.isClickOnSaveBtn = true;
@@ -184,9 +184,9 @@ export class FormComponent implements OnInit {
     const selectedSource = this.listCity.find(city => city.id === item.id);
     this.source = selectedSource?.name;
   }
-  onDistinationSelect(item: any) {
-    const selectedDistination = this.listCity.find(city => city.id === item.id);
-    this.distination = selectedDistination?.name;
+  ondestinationSelect(item: any) {
+    const selecteddestination = this.listCity.find(city => city.id === item.id);
+    this.destination = selecteddestination?.name;
   }
   onAirlineSelect(item: any) {
     const selectedAirline = this.listAirline.find(airline => airline.id === item.id);

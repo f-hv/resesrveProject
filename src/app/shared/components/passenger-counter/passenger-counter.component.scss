@@ -1,0 +1,37 @@
+@import "../../../../assets/styles/custom-kit/variable.scss";
+
+.container {
+    input {
+        max-width: $width-xs;
+        font-size: $font-size-2;
+        border   : 1px solid $dark !important;
+        padding: 0px;
+        // &:focus {
+        //     border    : 2px $black solid !important;
+        //     box-shadow: none;
+        // }
+    }
+
+    .error-box {
+        margin-top: -22px;
+    }
+}
+
+#countPassenger {
+    display: none;
+    background-color: $white !important;
+    label {
+        font-size  : $font-size-1;
+        font-weight: 600;
+    }
+}
+
+/* ---------------------------------------------------
+Toggling the countPassenger
+----------------------------------------------------- */
+#countPassenger.active {
+    display   : block;
+    min-height: 120px;
+    min-width :260px;
+    line-height: 27px;
+}

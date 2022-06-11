@@ -4,7 +4,9 @@
 $white: #ffffff;
 $black: #000000;
 $blue-dark: #2a3f54;
-$blue-light: #557daa;
+$blue-light: #4f7df1;
+$magent-R:#fbf1fc;
+$cyan-R:#205e71;
 
 $red-100: #2d0709;
 $red-90: #520408;
@@ -33,6 +35,7 @@ $purple-90: #31135e;
 $purple-80: #491d8b;
 $purple-70: #6929c4;
 $purple-60: #8a3ffc;
+
 $purple-50: #a56eff;
 $purple-40: #be95ff;
 $purple-30: #d4bbff;
@@ -140,6 +143,8 @@ $otange-30: #ffb784;
 $otange-20: #ffd9be;
 $otange-10: #fff2e8;
 
+
+
 $primary-color-1: $blue-light;
 $primary-color-2: $blue-dark;
 $primary-color-3: $yellow-40;
@@ -201,12 +206,14 @@ $spacing-12: 96px;
 $spacing-13: 128px;
 
 //height and width
+$height-btn:22px;
 $height-res:30px;
 $height-xs: 35px;
 $height-sm: 40px;
 $height-md: 48px;
 $height-lg: 64px;
 
+$width-btn:25px;
 $width-res:70px;
 $width-xs: 90px;
 $width-sm: 120px;

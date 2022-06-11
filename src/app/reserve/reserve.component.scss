@@ -1,0 +1,19 @@
+@import " ../../../../assets/styles/custom-kit/variable.scss";
+
+.container-fluid {
+    height          : 100%;
+    width           : 100%;
+    background-color: $warm-gray-10;
+
+    .content {
+        position: relative;
+        z-index : 2000 !important;
+    }
+}
+
+@media (max-width:768px) {
+    // .content{
+    //     position: relative;
+    //     z-index: 2000 !important;
+    // }
+}

@@ -1,73 +1,117 @@
-
-<div class="container p-4" *ngIf="formReserve">
-    <div [formGroup]="formReserve">
-        <div class="row rounded-3 pb-3 justify-content-md-center border border-1 content">
-            <div class="col">
-                <label class="col-form-label-sm">مبدا</label>
-                <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'مبدا'"
-                    [settings]="dropdownSettings" [data]="listCity" (onSelect)="onSourceSelect($event)"
-                    formControlName="source">
-                    <!-- [ngClass]="{
+<div class="container-fluid " *ngIf="formReserve">
+    <div class="row header">
+        <div [formGroup]="formReserve">
+            <div class="row content pb-2 pt-2 justify-content-md-center content">
+                <!-- <div class="row">
+            </div> -->
+                <div class="row p-2 ">
+                    <div class="col-md-1">
+                        <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'یک طرفه'"
+                            [settings]="dropdownSettings" [data]=" listTravelMode"
+                            (onSelect)="onTravelModeSelect($event)" formControlName="travelMode"
+                            [ngClass]="{error: (!formReserve.get('travelMode')?.valid || formReserve.get('travelMode')?.value === '') && isClickOnSearchBtn}">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-md-2">
+                        <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'مبدا'"
+                            [settings]="dropdownSettings" [data]="listCity" (onSelect)="onSourceSelect($event)"
+                            formControlName="source" [ngClass]="{
                     error: (!formReserve.get('source')?.valid || formReserve.get('source')?.value === '') && isClickOnSearchBtn
-                  }" -->
-                </ng-multiselect-dropdown>
-                <!-- <div class="error-box">
-                    <app-error-message *ngIf="
+                  }">
+                        </ng-multiselect-dropdown>
+                        <div class="error-box position">
+                            <app-error-message *ngIf="
                       !formReserve.get('source')?.valid &&
                       isClickOnSearchBtn &&
-                      !formReserve.get('source')?.value" [message]="'فیلد خالی است'">
-                    </app-error-message>
-                </div> -->
-            </div>
-            <div class="col">
-                <label class="col-form-label-sm">مقصد</label>
-                <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'مقصد'"
-                    [settings]="dropdownSettings" [data]="listCity" (onSelect)="onDestinationSelect($event)"
-                    formControlName="destination">
-                    <!-- [ngClass]="{
-                    error: (!formReserve.get('destination')?.valid || formReserve.get('destination')?.value === '') && isClickOnSearchBtn
-                  }" -->
-                </ng-multiselect-dropdown>
-                <!-- <div class="error-box">
-                    <app-error-message *ngIf="
+                      !formReserve.get('source')?.value" [message]="'فیلد خالی است'" [fontSize]="12">
+                            </app-error-message>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <i class="fas fa-arrow-circle-right" aria-hidden="true" (click)="changeDestinationSource()"></i>
+                        <i class="fas fa-arrow-circle-left" aria-hidden="true" (click)="changeDestinationSource()"></i>
+                        <ng-multiselect-dropdown class="form-control-sm dropdown x" [placeholder]="'مقصد'"
+                            [settings]="dropdownSettings" [data]="listCity" (onSelect)="onDestinationSelect($event)"
+                            formControlName="destination"
+                            [ngClass]="{
+                        error: (!formReserve.get('destination')?.valid || formReserve.get('destination')?.value === '') && isClickOnSearchBtn}">
+                        </ng-multiselect-dropdown>
+                        <div class="error-box position">
+                            <app-error-message *ngIf="
                       !formReserve.get('destination')?.valid &&
                       isClickOnSearchBtn &&
-                      !formReserve.get('airline')?.value" [message]="'فیلد خالی است'">
-                    </app-error-message>
-                </div> -->
-            </div>
-            <div class="col">
-                <input class="form-control input-Date" placeholder=" تاریخ رفت" readonly name="dpD"
-                    formControlName="departingDate" ngbDatepicker #d="ngbDatepicker" [firstDayOfWeek]="6"
-                    (focus)="d.open()" [placement]=" placement" [autoClose]="true">
-                <!-- [ngClass]="{
-            error:formFlight.get('date')?.value === '' && isClickOnSaveBtn
-          }" -->
-                <div class="btn-date position-absolute ">
-                    <button class="far fa-calendar-alt button-Datepicker" (click)="d.toggle()" type="button"></button>
-                </div>
-            </div>
-            <div class="col">
-                <div>
-                    <input class="form-control input-Date" placeholder=" تاریخ برگشت" readonly name="dpR"
-                        formControlName="returnDate" ngbDatepicker #dR="ngbDatepicker" [firstDayOfWeek]="6"
-                        (focus)="d.open()" [placement]=" placement" [autoClose]="true">
-                    <!-- [ngClass]="{
-                    error:formFlight.get('date')?.value === '' && isClickOnSaveBtn
-                     }" -->
-                    <div class="btn-date position-absolute ">
-                        <button class="far fa-calendar-alt button-Datepicker" (click)="dR.toggle()"
-                            type="button"></button>
+                      !formReserve.get('destination')?.value" [message]="'فیلد خالی است'" [fontSize]="12">
+                            </app-error-message>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2 mt-4 position-relative ">
+                        <input class="form-control input-Date" placeholder=" تاریخ رفت" readonly name="dpD"
+                            formControlName="departingDate" ngbDatepicker #d="ngbDatepicker" [firstDayOfWeek]="6"
+                            (focus)="d.open()" [placement]=" placement" [autoClose]="true" [ngClass]="{
+                            error:formReserve.get('departingDate')?.value === '' && isClickOnSearchBtn
+                    }">
+                        <div class="btn-date position-absolute ">
+                            <button class="far fa-calendar-alt button-Datepicker" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+                        <div class="error-box position-date">
+                            <app-error-message *ngIf="
+                          !formReserve.get('departingDate')?.valid &&
+                          isClickOnSearchBtn &&
+                          !formReserve.get('departingDate')?.value" [message]="'فیلد خالی است'" [fontSize]="12">
+                            </app-error-message>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mt-4 position-relative ">
+                        <div>
+                            <input class="form-control input-Date" placeholder=" تاریخ برگشت" readonly name="dpR"
+                                formControlName="returnDate" ngbDatepicker #dR="ngbDatepicker" [firstDayOfWeek]="6"
+                                (focus)="d.open()" [placement]=" placement" [autoClose]="true" [disabled]=" formReserve.get('travelMode')?.value === 'یک طرفه'"
+                                [ngClass]="{
+                                error:formReserve.get('returnDate')?.value === ''  && isClickOnSearchBtn}">
+                            <div class="btn-date position-absolute " [ngClass]="{
+                            error:formReserve.get('returnDate')?.value === '' && isClickOnSearchBtn }">
+                                <button class="far fa-calendar-alt button-Datepicker" (click)="dR.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                        <div class="error-box position-date ">
+                            <app-error-message *ngIf="
+                          !formReserve.get('returnDate')?.valid &&
+                          isClickOnSearchBtn &&
+                          formReserve.get('travelMode')?.value === 'رفت و برگشت' &&
+                          formReserve.get('returnDate')?.value === ''" [message]="'فیلد خالی است'" [fontSize]="12">
+                            </app-error-message>
+                        </div>
+                    </div>
+                    <div class="col-md-1 mt-3">
+                        <app-passenger-counter (CalculateCountPassenger)="CalculateCountPassenger($event)">
+                        </app-passenger-counter>
+                    </div>
+                    <div class="col-md-2 mt-3 btnDiv">
+                        <button class="button buttonR-primary button-md-1" type="submit"
+                            (click)="search()">جستجو</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <input class="form-control"  type="number" formControlName="passenger">
-            </div>
-            <div class="col">
-                <button type="submit" (click)="search()">search</button>
-            </div>
         </div>
     </div>
-    <!-- {{formReserve.value|json}} -->
+    <div class="justify-content-center d-flex mt-3 slideshowImg ">
+        <app-carousel></app-carousel>
+    </div>
+    <div class="empty mt-3 p-2">
+        Lorem ipsum dolor sit amet consectetur,
+        adipisicing elit. Dolor eum quasi sequi
+        explicabo! Laboriosam distinctio ullam,
+        omnis cum eligendi ipsum porro tempore sequi,
+        temporibus placeat autem rerum itaque quis,
+        ex reprehenderit voluptate. Ratione magni,
+        quidem enim sequi sapiente inventore repudiandae
+        assumenda possimus praesentium itaque a, ipsam
+        provident accusamus tempora esse
+        ullam maiores!
+    </div>
 </div>
+<!-- {{formReserve?.value|json}}  -->
+<!-- {{travelMode|json}}  -->

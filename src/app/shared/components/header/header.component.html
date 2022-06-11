@@ -6,7 +6,7 @@
                 class="rounded-circle box-shadow-lg">
         </div>
         <div class="dropdown">
-            <ng-multiselect-dropdown class="menu" [placeholder]="userName" [settings]="dropdownSettings"
+            <ng-multiselect-dropdown class="menu singleselect" [placeholder]="userName" [settings]="dropdownSettings" [placeholder]="' '"
                 [data]="adminMenu" (onSelect)="onAdminSelect($event)">
             </ng-multiselect-dropdown>
         </div>

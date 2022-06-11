@@ -35,7 +35,7 @@
             *ngFor="let flight of listFlight  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:flightById">
             <td scope="col" style="width:5%" class="overflow-hidden">{{flight.id}}</td>
             <td style="width:14%" class="overflow-hidden" >{{flight.source}}</td>
-            <td style="width:14%" class="overflow-hidden" >{{flight.distination}}</td>
+            <td style="width:14%" class="overflow-hidden" >{{flight.destination}}</td>
             <td style="width:12%" class="overflow-hidden" >{{flight.price}}</td>
             <td style="width:25%" class="overflow-hidden">{{flight.date | date:'short' }}</td>
             <!--  | jalali-->

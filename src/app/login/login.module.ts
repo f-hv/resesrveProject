@@ -14,7 +14,7 @@ import { sharedModule } from 'src/app/shared/shared.module';
     LoginRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    sharedModule,
+    sharedModule
   ],
   exports:[LoginComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

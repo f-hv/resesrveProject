@@ -57,7 +57,7 @@ export class ListComponent implements OnInit {
         this.getData();
         this.listFlight = this.listFlight.filter(flight =>
           flight.source?.includes(item) ||
-          flight.distination?.includes(item) ||
+          flight.destination?.includes(item) ||
           flight.airline?.includes(item)||
           flight.price == item
         );

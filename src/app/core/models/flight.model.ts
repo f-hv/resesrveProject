@@ -1,7 +1,7 @@
 export interface FlightModel {
         id: number|null,
         source: string|null,
-        distination: string|null,
+        destination: string|null,
         price: number|null,
         airline: string|null,
         date: Date|null,

@@ -1,9 +1,9 @@
 
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css";
 @import '~@fortawesome/fontawesome-free/css/all.css';
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/dist/css/bootstrap.css";
 
 @import "assets/styles/global.scss";
 @import "assets/styles/font.scss";

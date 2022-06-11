@@ -6,23 +6,23 @@ import { CityModel } from '../models/city.model';
 })
 export class CityService {
   city: CityModel[] = [
-    { id: 1, name: 'مشهد',deleted:0 },
-    { id: 2, name: 'تهران',deleted:0 },
-    { id: 3, name: 'اصفهان',deleted:0 },
-    { id: 4, name: 'شیراز',deleted:0 },
-    { id: 5, name: 'کیش',deleted:0 },
-    { id:6, name: 'تبریز',deleted:0 },
-    { id: 7, name: 'سبزوار',deleted:0 }
+    { id: 1, name: 'تهران', deleted: 0 },
+    { id: 2, name: 'مشهد', deleted: 0 },
+    { id: 3, name: 'اصفهان', deleted: 0 },
+    { id: 4, name: 'شیراز', deleted: 0 },
+    { id: 5, name: 'کیش', deleted: 0 },
+    { id: 6, name: 'تبریز', deleted: 0 },
+    { id: 7, name: 'مازندران', deleted: 0 }
   ];
   orginalListCity = [...this.city];
 
-  constructor() {}
+  constructor() { }
 
   getById(id: any) {
     const findItem = this.city.find((item: any) => item.id === id);
     if (findItem) return findItem;
     else {
-      return { id: null, name: null,deleted:null };
+      return { id: null, name: null, deleted: null };
     }
   }
   getData() {
@@ -47,7 +47,7 @@ export class CityService {
     this.city.push({
       id: this.city.length + 1,
       name: data.name,
-      deleted:0
+      deleted: 0
     });
   }
 

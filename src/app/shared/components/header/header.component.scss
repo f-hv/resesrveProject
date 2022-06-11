@@ -6,9 +6,39 @@
     padding         : 12px 10px 12px 30px;
 
     .dropdown {
-        width: 80px !important;
+        width     : 100px !important;
+        list-style: none !important;
+
         .menu:hover {
-                cursor: pointer !important;
+            cursor          : pointer !important;
+            font-size       : $font-size-2;
+            // border-radius: $radius-lg !important;
+            // border: none !important;
         }
+    }
+
+    // .multiselect-item-checkbox input[type=checkbox] + div {
+    //     padding: 0px !important;
+    //     display: none !important;
+
+    //     }
+    //     .singleselect input[type=checkbox]+div:before {
+    //     display: none;
+    //     }
+
+    //     .singleselect input[type=checkbox]+div:after {
+    //     display: none;
+    //     }
+
+    //     .singleselect input[type=checkbox]+div {
+    //     padding: 6px 10px !important;
+    //     }
+
+    //     .singleselect input[type=checkbox]:checked+div {
+    //     background-color: #337ab7 !important;
+    //     color: #fff !important;
+    //     }
+    .multiselect-dropdown .dropdown-btn.dropdown-multiselect__caret :before {
+        top     : 69% !important;
     }
 }

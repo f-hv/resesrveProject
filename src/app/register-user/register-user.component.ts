@@ -135,6 +135,8 @@ export class RegisterUserComponent implements OnInit {
       this.toastrService.error('کاربر با این مشخصات وجود ندارد');
   }
   create() {
+    let length = this.localStorageService.length();
+    this.formRegister.get("id")?.setValue(length + 1);
     const resualt = this.userService.create(this.formRegister?.value);
     if (resualt) {
       this.toastrService.success('کاربر با موفقیت ثبت شد.');

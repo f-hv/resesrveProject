@@ -1,0 +1,120 @@
+@import "../../../assets/styles/custom-kit/variable.scss";
+
+.container-fluid {
+    min-width: 100%;
+    height   : 100%;
+
+
+    .header {
+        background-image          : url(../../../assets/pic/back.jpg);
+        background-repeat         : no-repeat;
+        background-size           : cover;
+        background-position       : center center;
+        height                    : calc(100vh - 140px);
+        position: relative;
+        // border-radius: $radius-md;
+        border-bottom-left-radius : $radius-md;
+        border-bottom-right-radius: $radius-md;
+
+        display        : flex;
+        flex-direction : column;
+        justify-content: flex-end;
+        align-content  : center;
+        padding-bottom: 15px;
+    }
+
+    i {
+        color: $cyan-R;
+    }
+
+    .fa-arrow-circle-right {
+        margin-right : -30px;
+        // margin-top: -30px;
+    }
+
+    .position {
+        margin-top: -45px;
+    }
+
+    .position-date {
+        margin-top: -22px;
+
+    }
+
+    .btnDiv {
+        display        : flex;
+        justify-content: flex-end;
+    }
+
+    .content {
+        position: absolute;
+        // background-color: transparent;
+        background-color: $white;
+        width           : calc(100% - 50px);
+        height          : 120px;
+        opacity         : 0.8;
+        margin          : auto 50px 20px auto;
+        box-shadow      : $box-shadow-sm;
+        margin-right    : 28px;
+        z-index: 5000;
+        bottom: 50px;
+    }
+
+    .btn-date {
+        top  : 7px;
+        right: 17px;
+    }
+
+    .input-Date {
+        text-align: left;
+        font-size : $font-size-2;
+        border    : 1px solid $dark !important;
+
+        &:read-only {
+            background-color: $white;
+        }
+
+        &:focus {
+            border    : 1px solid $magenta-80 !important;
+            box-shadow: none !important;
+        }
+
+        &:disabled {
+            border: 1px solid $cool-gray-30 !important;
+            cursor: not-allowed;
+        }
+    }
+    .slideshowImg {
+        min-width           : 100%;
+        height          : auto;
+        background-color: $white;
+        box-shadow      : $box-shadow-sm;
+        // border   : 1px solid $warm-gray-30;
+        border-radius: $radius-md;
+        z-index: 0 !important;
+
+    }
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    border: 1px solid $black !important;
+
+    &:focus {
+        border: 1px solid $magenta-80 !important;
+
+    }
+
+}
+
+@media (max-width:768px) {
+    .container-fluid {
+        min-width: 100%;
+        height   : 100%;
+
+        .header {
+            max-width: 768%;
+            height   : calc(100vh - 745px) !important;
+
+        }
+    }
+}
