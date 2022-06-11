@@ -9,6 +9,7 @@ export class UserService {
   users: UserModel[];
   resualt: Boolean = false;
   userInfo: UserModel;
+  infoLogin:UserModel[]=[];
   constructor(
     private localStorageService: LocalStorageService,
   ) { }
@@ -61,25 +62,24 @@ export class UserService {
 
   create(data: UserModel) {
     debugger
-    let users = this.getParseData("users");
-    if (!this.users) {
+    this.infoLogin .push( this.getParseData("users"));
+    if (!this.infoLogin) {
       this.localStorageService.setItem("users", JSON.stringify(data));
       return true;
     }
     else {
-      const validUser = users.find((item: any) => item.userName === data.userName || item.email === data.email);
-      if (!validUser) {
-        
-        users.push({
+      const validUser = this.infoLogin.find((item: any) => item.userName === data.userName || item.email === data.email);
+      if (!validUser) {        
+        this.infoLogin.push({
           id: data.id,
           firstName: data.firstName,
           userName: data.userName,
           password: data.password,
-          passConfirm: data.passconfirm,
+          email : data.email,
           role: data.role,
           deleted: 0
         });
-        this.localStorageService.setItem("users", JSON.stringify(users));
+        this.localStorageService.setItem("users", JSON.stringify(this.infoLogin));
         return true
       }
       else return false;

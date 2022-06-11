@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ExpiryTimeService } from './expiry-time.service';
 import { LocalStorageService } from './local-storage.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +14,17 @@ export class AuthService {
   redirectUrl: string
   constructor(
     private localStorageService: LocalStorageService,
-    private expiryTimeService: ExpiryTimeService
+    private expiryTimeService: ExpiryTimeService,
+    private userService: UserService
   ) { }
   login(userName: any, password: any) {
-    const usersLC = this.localStorageService.getItem('users');
-    if (usersLC) {
-      this.users = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
-      if (this.users)
-        this.users = JSON.parse(this.users);
-      const validUser = this.users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
-      if (validUser) {
-        this.expiryTimeService.setWithExpiry('expiryTime', 'currentUser', 10000);
-        this.localStorageService.setItem('currentUser', JSON.stringify(validUser));
-        this.currentUser$.next(validUser);
-        return true;
-      }
-      else return false;
+    this.users = this.userService.getParseData("users");
+    const validUser = this.users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
+    if (validUser) {
+      this.expiryTimeService.setWithExpiry('expiryTime', 'currentUser', 10000);
+      this.localStorageService.setItem('currentUser', JSON.stringify(validUser));
+      this.currentUser$.next(validUser);
+      return true;
     }
     else return false;
   }
@@ -38,6 +34,7 @@ export class AuthService {
     this.localStorageService.removeItem("expiryTime");
   }
   isLoggedIn() {
+    debugger
     if (this.currentUser$?.value) {
       if (!this.expiryTimeService.getWithExpiry('expiryTime'))
         return true;
