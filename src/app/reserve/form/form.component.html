@@ -68,6 +68,12 @@
                             <ng-persian-datepicker>
                                 <input type="text" placeholder=" تاریخ برگشت" formControlName="returnDate" />
                             </ng-persian-datepicker>
+                            <!-- in test ast -->
+                            <span *ngIf="1 === flightType.OneWay">
+                                OneWay
+                            </span>
+
+
                             <!-- <input class="form-control input-Date" placeholder=" تاریخ برگشت" readonly name="dpR"
                                 formControlName="returnDate" ngbDatepicker #dR="ngbDatepicker" [firstDayOfWeek]="6"
                                 (focus)="d.open()" [placement]=" placement" [autoClose]="true"
