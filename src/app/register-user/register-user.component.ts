@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { Role } from '../core/models/roles.model';
 import { UserModel } from '../core/models/user.model';
 import { AuthService } from '../core/services/auth.service';
 import { UserService } from '../core/services/user.service';
+import { UserRole } from '../shared/enums/user-role.enum';
 
 @Component({
   selector: 'app-register-user',
@@ -29,7 +29,7 @@ export class RegisterUserComponent implements OnInit {
   //// dropdown/////
   dropdownSettings: IDropdownSettings;
   selectedRole: any;
-  enume = Role;
+  roleUser = UserRole;
   listRoles: any[] = [];
   check = 1
   isSelectRole: Boolean = false;
@@ -42,7 +42,7 @@ export class RegisterUserComponent implements OnInit {
     private toastrService: ToastrService,
     private userService: UserService
   ) {
-    this.listRoles = Object.keys(this.enume);
+    this.listRoles = Object.keys(this.roleUser);
   }
   ngOnInit(): void {
     if (this.id) {
@@ -62,6 +62,7 @@ export class RegisterUserComponent implements OnInit {
   getData() {
     this.dataUser = this.userService.getById(this.id);
   }
+
   initial() {
     this.formRegister = this.fb.group({
       id: [this.dataUser?.id],
@@ -71,6 +72,7 @@ export class RegisterUserComponent implements OnInit {
       passconfirm: [this.dataUser?.passconfirm, Validators.required],
       email: [this.dataUser?.email, [Validators.required, Validators.pattern("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])")]],
       role: [this.isSelectRole ? this.selectedRole : 'USER'],
+      img: ['assets/pic/profile2.jpg'],
       deleted: 0
 
     })
@@ -145,4 +147,5 @@ export class RegisterUserComponent implements OnInit {
     else
       this.toastrService.error('کاربر با این مشخصات قبلا ثبت نام شده');
   }
+
 }

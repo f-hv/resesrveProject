@@ -1,13 +1,14 @@
-<div class="navbar row flex-row justify-content-end align-items-center m-0 ">
-    <div class="menuIcon col-md-10"></div>
-    <div class="col-md-2 d-flex flex-row align-items-center justify-content-around">
+<div class="navbar row m-0 ">
+    <div class="menuIcon col-sm-10"></div>
+    <div class="col-sm-2 content">
         <div class="">
-            <img src="../../assets/pic/profile2.jpg" alt="Admin" width="45" height="40"
+            <img [src]="infoUser.img" alt="Admin" width="45" height="40"
                 class="rounded-circle box-shadow-lg">
         </div>
         <div class="dropdown">
-            <ng-multiselect-dropdown class="menu singleselect" [placeholder]="userName" [settings]="dropdownSettings" [placeholder]="' '"
-                [data]="adminMenu" (onSelect)="onAdminSelect($event)">
+            <ng-multiselect-dropdown class="menu singleselect" [placeholder]="infoUser.userName" 
+            [settings]="dropdownSettings"
+                [data]="userMenu" (onSelect)="onAdminSelect($event)">
             </ng-multiselect-dropdown>
         </div>
 

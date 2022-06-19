@@ -5,6 +5,7 @@ export interface UserModel{
     password:string|null,
     passconfirm?:string|null,
     email:string|null,
+    img?:string|null,
     role:string|null,
     deleted:number|null,
 }

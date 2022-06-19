@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  NgbCalendar,
-  NgbCalendarPersian,
-  NgbInputDatepicker,
-} from '@ng-bootstrap/ng-bootstrap';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CityModel } from 'src/app/core/models/city.model';
 import { CityService } from 'src/app/core/services/city.service';
 import { FlightTypeEnum } from 'src/app/shared/enums/fight-type.enum';
+import { IActiveDate } from 'ng-persian-datepicker';
+import { Jalali } from 'jalali-ts';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -24,7 +20,9 @@ export class FormComponent implements OnInit {
   formReserve: FormGroup;
   listCity: CityModel[];
   isClickOnSearchBtn: Boolean = false;
-  countPassengar: number;
+  ////////passenger////////////////
+  countPassengar: number = 1;
+  dataPassenger: any = { adultCount: 1, childCount: 0, babyCount: 0 };
   ////////dropdown/////////////////
   dropdownSettings: IDropdownSettings;
   selectedSource = {};
@@ -33,27 +31,26 @@ export class FormComponent implements OnInit {
   Reservedata = {
     source: null,
     destination: null,
-    returnDate: null,
-    departingDate: null,
     passenger: 1,
-    travelMode: 'یک طرفه',
+    returnDate: null,
+    departingDate: Date.now(),
+    travelMode: FlightTypeEnum.OneWay,
   };
+  //////////travelMode/////////////
   listTravelMode = [
-    { id: 0, name: 'یک طرفه' },
-    { id: 1, name: 'رفت برگشت' },
+    { id: 1, name: 'یک طرفه' },
+    { id: 2, name: 'رفت برگشت' },
   ];
-  travelMode: any;
-  data: any = { adultCount: 1, childCount: 0, babyCount: 0 };
-  ////datePicker
-  newDate = new Date(1400, 11, 24);
-  time: any = null;
-  placement = 'bottom';
+  travelMode: any = FlightTypeEnum.OneWay;
+  labelTravelMode: string = 'یک طرفه';
+  ////datePicker//////////////////
+  nowDate=Jalali.parse('1396-11-01').valueOf();
   constructor(
     private cityService: CityService,
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
   get flightType() {
     return FlightTypeEnum;
   }
@@ -71,34 +68,35 @@ export class FormComponent implements OnInit {
   }
   initial() {
     this.formReserve = this.formBuilder.group({
+      travelMode: [this.Reservedata.travelMode],
       source: [this.Reservedata.source, Validators.required],
       destination: [this.Reservedata.destination, Validators.required],
       departingDate: [this.Reservedata.departingDate, Validators.required],
       returnDate: [this.Reservedata.returnDate],
-      passenger: [this.Reservedata.passenger, Validators.required],
-      travelMode: [this.Reservedata.travelMode],
+      passenger: [this.countPassengar, Validators.required],
     });
+    this.formReserve.controls['returnDate'].disable();
     this.formReserve.updateValueAndValidity();
   }
-
-  // travelMode: this.formBuilder.group({
-  //   oneWay:[{ value: 'یک طرفه', disabled: true} , Validators.required] ,
-  //   twoWay:['رفت و برگشت', Validators.required]
-  // })
-
   getData() {
     this.listCity = this.cityService.getData();
-    this.travelMode = 'یک طرفه';
   }
   onDestinationSelect(data: any) {
     this.destination = data.name;
-    console.log(this.destination);
   }
   onSourceSelect(data: any) {
     this.source = data.name;
   }
   onTravelModeSelect(data: any) {
-    this.travelMode = data.name;
+    this.labelTravelMode = data.name;
+    if (data.id === FlightTypeEnum.Return) {
+      this.travelMode = FlightTypeEnum.Return;
+      this.formReserve.controls['returnDate'].enable();
+    }
+    else {
+      this.travelMode = FlightTypeEnum.OneWay;
+      this.formReserve.controls['returnDate'].disable();
+    }
     this.formReserve?.get('travelMode')?.setValue(this.travelMode);
   }
   search() {
@@ -106,20 +104,20 @@ export class FormComponent implements OnInit {
     this.formReserve?.get('source')?.setValue(this.source);
     this.formReserve?.get('destination')?.setValue(this.destination);
     this.formReserve?.get('travelMode')?.setValue(this.travelMode);
-    this.formReserve?.get('passengar')?.setValue(this.countPassengar);
+    this.formReserve?.get('passenger')?.setValue(this.countPassengar);
 
     if (this.formReserve.invalid) {
       return;
-    } else {
-      debugger;
+    } 
+    else {
       this.router.navigate(
         [
           '../list',
           this.source,
           this.destination,
-          this.data.adultCount,
-          this.data.childCount,
-          this.data.babyCount,
+          this.dataPassenger.adultCount,
+          this.dataPassenger.childCount,
+          this.dataPassenger.babyCount,
           this.formReserve.get('travelMode')?.value,
         ],
         {
@@ -130,9 +128,8 @@ export class FormComponent implements OnInit {
   }
 
   CalculateCountPassenger(item: any) {
-    this.data = item;
-    this.countPassengar =
-      this.data.adultCount + this.data.childCount + this.data.babyCount;
+    this.dataPassenger = item;
+    this.countPassengar = this.dataPassenger.adultCount + this.dataPassenger.childCount + this.dataPassenger.babyCount;
   }
   changeDestinationSource() {
     const itemDes = this.destination;
@@ -141,25 +138,15 @@ export class FormComponent implements OnInit {
     this.destination = this.source;
     this.source = itemDes;
   }
+  onSelect(event:any) {
+    debugger
+    console.log(event);
+    
+  }
+  // onInitt(event: any){
+  //   console.log("test");
+    
+  //   this.formReserve?.get('departingDate')?.setValue(event);
+  // }
 }
 
-// CalculateDate() {
-//   var departingDate = this.formReserve.get('departingDate')?.value;
-//   var returnDate = this.formReserve.get('returnDate')?.value;
-//   if (departingDate) {
-//     var day = Number(departingDate.day);
-//     var month = Number(departingDate.month);
-//     var year = Number(departingDate.year);
-//     this.newDate.setMonth(month);
-//     this.newDate.setDate(day);
-//     this.newDate.setFullYear(year);
-//   }
-//   if (returnDate) {
-//     var day = Number(returnDate.day);
-//     var month = Number(returnDate.month);
-//     var year = Number(returnDate.year);
-//     this.newDate.setMonth(month);
-//     this.newDate.setDate(day);
-//     this.newDate.setFullYear(year);
-//   }
-// }

@@ -21,8 +21,8 @@ export class AuthService {
     this.users = this.userService.getParseData("users");
     const validUser = this.users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
     if (validUser) {
-      this.expiryTimeService.setWithExpiry('expiryTime', 'currentUser', 10000);
       this.localStorageService.setItem('currentUser', JSON.stringify(validUser));
+      this.expiryTimeService.setWithExpiry('expiryTime', 'currentUser', 500000);
       this.currentUser$.next(validUser);
       return true;
     }
@@ -34,7 +34,6 @@ export class AuthService {
     this.localStorageService.removeItem("expiryTime");
   }
   isLoggedIn() {
-    debugger
     if (this.currentUser$?.value) {
       if (!this.expiryTimeService.getWithExpiry('expiryTime'))
         return true;

@@ -2,99 +2,104 @@
 @import "../custom-kit/background.scss";
 
 .button {
-  font-weight: 400;
-  vertical-align: middle;
+  font-weight        : 400;
+  vertical-align     : middle;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0;
-  line-height: 1.5;
-  box-sizing: border-box;
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  text-align: center;
-  text-decoration: none;
-  border-radius: $radius-sm;
-  outline: none;
-  cursor: pointer;
+  -moz-user-select   : none;
+  -ms-user-select    : none;
+  user-select        : none;
+  background-color   : transparent;
+  border             : 1px solid transparent;
+  padding            : 0;
+  line-height        : 1.5;
+  box-sizing         : border-box;
+  position           : relative;
+  display            : inline-flex;
+  flex-shrink        : 0;
+  align-items        : center;
+  justify-content    : center;
+  margin             : 0;
+  text-align         : center;
+  text-decoration    : none;
+  border-radius      : $radius-sm;
+  outline            : none;
+  cursor             : pointer;
 }
 
 .buttonR-sm-0 {
   @extend .button;
-  width: $width-btn;
-  height: $height-btn;
-  text-align: center;
-  padding: 0px;
-  font-weight: 800;
-  background-color: $cyan-R;
-  // background-color: $magenta-70;
-  color: $white;
-  
-  &:disabled{
+  width           : $width-btn;
+  height          : $height-btn;
+  text-align      : center;
+  padding         : 0px;
+  font-weight     : 800;
+  background-color: $yellow-40;
+  color           : $white;
+
+  &:disabled {
     background-color: $cool-gray-30 !important;
-    color: $cool-gray-50 !important;
+    color           : $cool-gray-50 !important;
   }
+
   &:hover {
     transform       : scale(1.1);
     transition      : transform 0.5s ease-out;
-    background-color: darken($cyan-R , 10%);
-}
-}
-.buttonR-primary{
-  background-color:$cyan-R;
-  box-shadow: $box-shadow-sm;
-  color: $white;
-  font-size: $font-size-2;
-  &:hover {
-    background-color: darken($cyan-R ,15%);
+    background-color: darken($cyan-R, 10%);
   }
+}
+
+.buttonR-primary {
+  background-color: $yellow-40;
+  color           : $cool-gray-70;
+  box-shadow      : $box-shadow-sm;
+  font-size       : $font-size-2;
+  font-weight     : 800;
+  height    : $height-sm !important;
+
+
+  &:hover {
+    // background-color: $yellow-50;
+    // color: $white;
+    transition: transform 0.3s ease-out;
+    transform : scale(1.1); 
+  }
+
   i {
-    color: $white;
+    color    : $white;
     font-size: $font-size-3;
   }
 
-  &:focus {
-    border-color: $teal-80;
-    box-shadow: inset 0 0 0 1px $gray-40, inset 0 0 0 2px $white;
-  }
-  &:disabled{
+  &:disabled {
     background-color: $black !important;
-    color: $cool-gray-50 !important;
+    color           : $cool-gray-50 !important;
   }
 }
 
 .button-sm-0 {
   @extend .button;
-  width: $width-xs;
-  height: $height-xs;
+  width     : $width-xs;
+  height    : $height-xs;
   text-align: center;
-  padding: 0px;
+  padding   : 0px;
 }
 
 .button-sm-1 {
   @extend .button;
-  width: $width-sm;
-  height: $height-sm;
+  width     : $width-sm;
+  height    : $height-sm;
   text-align: right;
 
   i {
-      margin-left: 5px;
-      //  padding-right: 20px;
+    margin-left      : 5px;
+    //  padding-right: 20px;
   }
 }
 
 .button-sm-2 {
   @extend .button;
-  width: $width-md;
-  height: $height-sm;
-  text-align:center;
+  width     : $width-md;
+  height    : $height-sm;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -103,9 +108,9 @@
 
 .button-sm-3 {
   @extend .button;
-  width: $width-lg;
-  height: $height-sm;
-  text-align:center;
+  width     : $width-lg;
+  height    : $height-md;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -114,9 +119,9 @@
 
 .button-md-1 {
   @extend .button;
-  width: $width-sm;
-  height: $height-md;
-  text-align:center;
+  width     : $width-sm;
+  height    : $height-md;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -125,9 +130,9 @@
 
 .button-md-2 {
   @extend .button;
-  width: $width-md;
-  height: $height-md;
-  text-align:center;
+  width     : $width-md;
+  height    : $height-md;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -136,9 +141,9 @@
 
 .button-md-3 {
   @extend .button;
-  width: $width-lg;
-  height: $height-md;
-  text-align:center;
+  width     : $width-lg;
+  height    : $height-md;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -147,9 +152,9 @@
 
 .button-lg-1 {
   @extend .button;
-  width: $width-sm;
-  height: $height-lg;
-  text-align:center;
+  width     : $width-sm;
+  height    : $height-lg;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -158,9 +163,9 @@
 
 .button-lg-2 {
   @extend .button;
-  width: $width-md;
-  height: $height-lg;
-  text-align:center;
+  width     : $width-md;
+  height    : $height-lg;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -169,9 +174,9 @@
 
 .button-lg-3 {
   @extend .button;
-  width: $width-lg;
-  height: $height-lg;
-  text-align:center;
+  width     : $width-lg;
+  height    : $height-lg;
+  text-align: center;
 
   i {
     padding: 5px;
@@ -180,7 +185,7 @@
 
 .button-disabled {
   background-color: $black !important;
-  color: $cool-gray-50 !important;
+  color           : $cool-gray-50 !important;
 
   i {
     color: $white;
@@ -189,69 +194,77 @@
 
 .button-primary {
   background-color: $primary-color-1;
-  box-shadow: $box-shadow-sm;
-  color: $white;
+  box-shadow      : $box-shadow-sm;
+  color           : $white;
+
   &:hover {
     background-color: darken($primary-color-1, 12%);
   }
+
   i {
-    color: $white;
+    color    : $white;
     font-size: $font-size-3;
   }
 
   &:focus {
     border-color: $teal-80;
-    box-shadow: inset 0 0 0 1px $gray-40, inset 0 0 0 2px $white;
+    box-shadow  : inset 0 0 0 1px $gray-40, inset 0 0 0 2px $white;
   }
-  &:disabled{
+
+  &:disabled {
     background-color: $black !important;
-    color: $cool-gray-50 !important;
+    color           : $cool-gray-50 !important;
   }
 }
 
 .button-cancel {
-  background-color:$cool-gray-70;
-  box-shadow: $box-shadow-sm;
-  color: $white;
+  background-color: $cool-gray-70;
+  box-shadow      : $box-shadow-sm;
+  color           : $white;
+
   &:hover {
-    background-color:$cool-gray-90;
+    background-color: $cool-gray-90;
   }
+
   i {
-    color: $white;
+    color    : $white;
     font-size: $font-size-3;
   }
 
   &:focus {
     border-color: $teal-80;
-    box-shadow: inset 0 0 0 1px $gray-40, inset 0 0 0 2px $white;
+    box-shadow  : inset 0 0 0 1px $gray-40, inset 0 0 0 2px $white;
   }
-  &:disabled{
+
+  &:disabled {
     background-color: $black !important;
-    color: $cool-gray-50 !important;
+    color           : $cool-gray-50 !important;
   }
 }
 
-.button-collapse{
+.button-collapse {
   @extend .button-sm-0;
   background-color: transparent;
-  color: $white;
-  font-size: $font-size-3;
-  text-align: left;
-  i:hover{
-      color: $cyan-20;
-      transition:  transform 0.2s ease-out ;// speed to change size 1 to size 2 on HOVER
-      transform: scale(1.2);////size buttom on hover ob self 
-    }
+  color           : $white;
+  font-size       : $font-size-3;
+  text-align      : left;
+
+  i:hover {
+    color     : $cyan-20;
+    transition: transform 0.2s ease-out; // speed to change size 1 to size 2 on HOVER
+    transform : scale(1.2); ////size buttom on hover ob self 
+  }
 }
-.button-Datepicker{
-  border: none;
+
+.button-Datepicker {
+  border          : none;
   background-color: transparent;
-  font-size: $font-size-4;
-  color: $gray-60;
+  font-size       : $font-size-4;
+  color           : $gray-60;
 }
+
 // .responsive-btn{
 //   @extend .button;
-  
+
 
 // }
-

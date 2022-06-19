@@ -83,6 +83,18 @@ table {
 }
 
 
+// ::ng-deep .multiselect-dropdown .dropdown-btn {
+//   border               : 1px solid $black !important;
+//   background-color: rgba(255, 255, 255, 0.7) !important;
+
+
+//   &:focus {
+//     border: 1px solid $magenta-80 !important;
+
+//   }
+
+// }
+
 @media (max-width:768px) {
   table {
     font-size: $font-size-0 !important;
@@ -95,7 +107,7 @@ table {
 
   #searchBox {
     padding: 10px;
-    width: $width-md;
+    width  : $width-md;
   }
 
   thead {
@@ -120,7 +132,54 @@ table {
       }
     }
   }
-  ngb-pagination{
+
+  ngb-pagination {
     font-size: $font-size-0 !important;
+  }
+}
+
+::ng-deep .singleselect .multiselect-item-checkbox {
+  padding: 0px !important;
+}
+
+.singleselect input[type=checkbox]+div:before {
+  display: none;
+}
+
+.singleselect input[type=checkbox]+div:after {
+  display: none;
+}
+
+.singleselect input[type=checkbox]+div {
+  border-bottom: 1px $gray-20 solid !important;
+  padding      : 0px !important;
+}
+
+.singleselect .multiselect-dropdown .dropdown-btn {
+  border: 1px solid $gray-20 !important;
+}
+
+.singleselect .multiselect-dropdown .dropdown-btn span :before {
+  top  : 26px !important;
+  right: 15px !important;
+  color: $blue-dark !important;
+
+}
+
+.multiselect-dropdown .dropdown-btn .dropdown-multiselect--active .dropdown-multiselect__caret {
+  transform: none !important;
+}
+
+// .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret :before{
+//     background-color: red !important;
+//     color: red !important;
+//   }
+.transparent-dropdown .multiselect-dropdown .dropdown-btn {
+  border          : 1px solid $black !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  font-size       : $font-size-2;
+
+  &:focus {
+    border: 1px solid $yellow-60 !important;
   }
 }

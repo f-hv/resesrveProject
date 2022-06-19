@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightModel } from 'src/app/core/models/flight.model';
 import { FlightService } from 'src/app/core/services/flight.service';
-import * as moment from "jalali-moment";
 import { ToastrService } from 'ngx-toastr';
 
 

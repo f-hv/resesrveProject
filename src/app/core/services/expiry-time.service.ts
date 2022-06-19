@@ -15,7 +15,10 @@ export class ExpiryTimeService {
       value: value,
       expiry: now.getTime() + ttl,
     }
+
     this.localStorageService.setItem(key, JSON.stringify(item))
+    console.log("item:",item);
+    
   }
 
   getWithExpiry(key: any) {
@@ -30,6 +33,8 @@ export class ExpiryTimeService {
       const now = new Date();
       if ( now.getTime() < itemExpiry.expiry) {
         this.localStorageService.removeItem(key);
+        console.log("remove item");
+        
         return true;
       }
     }

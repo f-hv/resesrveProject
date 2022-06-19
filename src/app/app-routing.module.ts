@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Role } from './core/models/roles.model';
+import { UserRole } from './shared/enums/user-role.enum';
 import { AuthGuard } from './core/services/guard/auth.guard';
 
 const routes: Routes = [
@@ -9,14 +9,14 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module')
       .then(m => m.AdminModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ADMIN] }
+    data: { roles: [UserRole.ADMIN] }
   },
   {
     path: 'client',
     loadChildren: () => import('./client/client.module')
       .then(m => m.ClientModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.USER] }
+    data: { roles: [UserRole.USER] }
   },
   {
     path: 'login',
@@ -38,11 +38,11 @@ const routes: Routes = [
     loadChildren: () => import('./access-denied/access-denied.module')
       .then(m => m.AccessDeniedModule)
   },
-  {
-    path: '',
-    redirectTo: 'register',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'reserve',
+  //   pathMatch: 'full'
+  // },
 ];
 
 @NgModule({

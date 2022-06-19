@@ -15,6 +15,7 @@ import { ListComponent } from './list/list.component';
 import { ReserveComponent } from './reserve.component';
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 
+
 @NgModule({
   declarations: [
     ReserveComponent,

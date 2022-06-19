@@ -2,14 +2,22 @@
 
 .container {
     input {
-        max-width: $width-xs;
-        font-size: $font-size-2;
-        border   : 1px solid $dark !important;
-        padding: 0px;
-        // &:focus {
-        //     border    : 2px $black solid !important;
-        //     box-shadow: none;
-        // }
+        width           : $width-lg;
+        height          : 38px;
+        font-size       : $font-size-2;
+        border          : 1px solid $dark !important;
+        margin-top      : 4px;
+        padding         : 0px;
+        background-color: rgba(255, 255, 255, 0.5) !important;
+
+        &:focus {
+            border: 1px solid $yellow-60 !important;
+        }
+    }
+
+    input::-webkit-input-placeholder {
+        color  : $black !important;
+        opacity: 1 !important;
     }
 
     .error-box {
@@ -18,8 +26,9 @@
 }
 
 #countPassenger {
-    display: none;
+    display         : none;
     background-color: $white !important;
+
     label {
         font-size  : $font-size-1;
         font-weight: 600;
@@ -30,8 +39,8 @@
 Toggling the countPassenger
 ----------------------------------------------------- */
 #countPassenger.active {
-    display   : block;
-    min-height: 120px;
-    min-width :260px;
+    display    : block;
+    min-height : 120px;
+    min-width  : 260px;
     line-height: 27px;
 }

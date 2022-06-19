@@ -6,105 +6,99 @@
 
 
     .header {
-        background-image          : url(../../../assets/pic/back.jpg);
+        background-image          : url(../../../assets/pic/reserve-header.jpg);
         background-repeat         : no-repeat;
         background-size           : cover;
         background-position       : center center;
         height                    : calc(100vh - 140px);
-        position: relative;
-        // border-radius: $radius-md;
-        border-bottom-left-radius : $radius-md;
-        border-bottom-right-radius: $radius-md;
+        position                  : relative;
+        border-bottom-left-radius : $radius-sm;
+        border-bottom-right-radius: $radius-sm;
 
         display        : flex;
         flex-direction : column;
         justify-content: flex-end;
         align-content  : center;
-        padding-bottom: 15px;
+        padding-bottom : 15px;
     }
 
-    i {
-        color: $cyan-R;
+
+
+    .back-card {
+        position  : absolute;
+        background: rgba(248, 248, 252, 0.5);
+        width     : calc(100% - 50px);
+        height    : 140px;
+        right     : 38px;
+        bottom    : 50px;
+        box-shadow: $box-shadow-sm;
+        z-index   : 30;
     }
 
-    .fa-arrow-circle-right {
-        margin-right : -30px;
-        // margin-top: -30px;
-    }
+    .content-card {
+        margin-top: -37px;
 
-    .position {
-        margin-top: -45px;
-    }
+        i {
+            color: $yellow-40;
+            &:hover {
+                cursor    : pointer;
+                transition: transform 0.2s ease-out; // speed to change size 1 to size 2 on HOVER
+                transform : scale(1.2); ////size buttom on hover ob self
+            }
+        }
 
-    .position-date {
-        margin-top: -22px;
+        .fa-arrow-circle-right {
+            margin-right: -30px;
+        }
 
-    }
+        .position-date {
+            margin-top: -22px;
 
-    .btnDiv {
-        display        : flex;
-        justify-content: flex-end;
-    }
+        }
 
-    .content {
-        position: absolute;
-        // background-color: transparent;
-        background-color: $white;
-        width           : calc(100% - 50px);
-        height          : 120px;
-        opacity         : 0.8;
-        margin          : auto 50px 20px auto;
-        box-shadow      : $box-shadow-sm;
-        margin-right    : 28px;
-        z-index: 5000;
-        bottom: 50px;
-    }
-
-    .btn-date {
-        top  : 7px;
-        right: 17px;
+        .btnDiv {
+            display        : flex;
+            justify-content: flex-end;
+        }
     }
 
     .input-Date {
-        text-align: left;
-        font-size : $font-size-2;
-        border    : 1px solid $dark !important;
+        text-align      : left;
+        font-size       : $font-size-2;
+        border          : 1px solid $black !important;
+        background-color: rgba(255, 255, 255, 0.7) !important;
 
-        &:read-only {
-            background-color: $white;
-        }
 
         &:focus {
-            border    : 1px solid $magenta-80 !important;
+            border    : 1px solid $yellow-60 !important;
             box-shadow: none !important;
         }
 
         &:disabled {
-            border: 1px solid $cool-gray-30 !important;
-            cursor: not-allowed;
+            background-color: rgba(255, 255, 255, 0.4) !important;
+            border          : 1px solid $cool-gray-70 !important;
+            cursor          : not-allowed;
         }
     }
+
     .slideshowImg {
-        min-width           : 100%;
+        min-width       : 100%;
         height          : auto;
-        background-color: $white;
+        background-color: $cool-gray-90;
         box-shadow      : $box-shadow-sm;
-        // border   : 1px solid $warm-gray-30;
-        border-radius: $radius-md;
-        z-index: 0 !important;
-
-    }
-}
-
-:host ::ng-deep .multiselect-dropdown .dropdown-btn {
-    border: 1px solid $black !important;
-
-    &:focus {
-        border: 1px solid $magenta-80 !important;
+        border-radius   : $radius-sm;
+        z-index         : 0 !important;
 
     }
 
+   
+
+    .mode {
+        width: 125px !important;
+    }
+
 }
+
 
 @media (max-width:768px) {
     .container-fluid {
@@ -118,3 +112,12 @@
         }
     }
 }
+// ::ng-deep .multiselect-dropdown .dropdown-btn {
+//     border          : 1px solid $black !important;
+//     background-color: rgba(255, 255, 255, 0.7) !important;
+//     font-size       : $font-size-2;
+
+//     &:focus {
+//         border: 1px solid $yellow-60 !important;
+//     }
+// }
