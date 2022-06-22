@@ -44,7 +44,10 @@ export class FormComponent implements OnInit {
   travelMode: any = FlightTypeEnum.OneWay;
   labelTravelMode: string = 'یک طرفه';
   ////datePicker//////////////////
-  nowDate=Jalali.parse('1396-11-01').valueOf();
+  minDate = Jalali.parse('1401-04-01');
+  maxDate = Jalali.parse('1401-05-01');
+  returnDate:Date;
+  departingDate:Date;
   constructor(
     private cityService: CityService,
     private formBuilder: FormBuilder,
@@ -55,6 +58,9 @@ export class FormComponent implements OnInit {
     return FlightTypeEnum;
   }
   ngOnInit(): void {
+    // this.maxDate.setDate(this.minDate.getMonth() +1);
+    console.log(this.maxDate ,"min:", this.minDate);
+    
     this.getData();
     this.initial();
     this.dropdownSettings = {
@@ -68,11 +74,11 @@ export class FormComponent implements OnInit {
   }
   initial() {
     this.formReserve = this.formBuilder.group({
-      travelMode: [this.Reservedata.travelMode],
-      source: [this.Reservedata.source, Validators.required],
-      destination: [this.Reservedata.destination, Validators.required],
-      departingDate: [this.Reservedata.departingDate, Validators.required],
-      returnDate: [this.Reservedata.returnDate],
+      travelMode: [this.travelMode],
+      source: [this.source, Validators.required],
+      destination: [this.destination, Validators.required],
+      departingDate: [this.departingDate, Validators.required],
+      returnDate: [this.returnDate],
       passenger: [this.countPassengar, Validators.required],
     });
     this.formReserve.controls['returnDate'].disable();
@@ -101,14 +107,14 @@ export class FormComponent implements OnInit {
   }
   search() {
     this.isClickOnSearchBtn = true;
-    this.formReserve?.get('source')?.setValue(this.source);
-    this.formReserve?.get('destination')?.setValue(this.destination);
-    this.formReserve?.get('travelMode')?.setValue(this.travelMode);
+    // this.formReserve?.get('source')?.setValue(this.source);
+    // this.formReserve?.get('destination')?.setValue(this.destination);
+    // this.formReserve?.get('travelMode')?.setValue(this.travelMode);
     this.formReserve?.get('passenger')?.setValue(this.countPassengar);
 
     if (this.formReserve.invalid) {
       return;
-    } 
+    }
     else {
       this.router.navigate(
         [
@@ -138,14 +144,14 @@ export class FormComponent implements OnInit {
     this.destination = this.source;
     this.source = itemDes;
   }
-  onSelect(event:any) {
+  onSelect(event: any) {
     debugger
     console.log(event);
-    
+
   }
   // onInitt(event: any){
   //   console.log("test");
-    
+
   //   this.formReserve?.get('departingDate')?.setValue(event);
   // }
 }

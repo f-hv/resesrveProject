@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngIf="formReserve">
     <div class="row header">
         <div [formGroup]="formReserve">
-            <div class="row back-card pb-2 pt-0 justify-content-md-center content">
+            <div class="row back-card pb-4 pt-0 justify-content-md-center content">
                 <div class="row pt-0">
                     <div class="col-md-2 mode">
                         <ng-multiselect-dropdown class="form-control-sm transparent-dropdown dropdown"
@@ -11,7 +11,7 @@
                         </ng-multiselect-dropdown>
                     </div>
                 </div>
-                <div class="row content-card pt-0 ">
+                <div class="row content-card  ">
                     <div class="col-md-2">
                         <ng-multiselect-dropdown class="form-control-sm transparent-dropdown dropdown"
                             [placeholder]="'مبدا'" [settings]="dropdownSettings" [data]="listCity"
@@ -49,7 +49,7 @@
                         <div>
                             <ng-persian-datepicker>
                                 <input class="form-control input-Date" type="text" placeholder=" تاریخ رفت"
-                                    formControlName="departingDate" (dateOnSelect)="onSelect($event)"
+                                    formControlName="departingDate" (dateOnSelect)="onSelect($event)" [dateMax]="maxDate"  [dateMin]="minDate"
                                     
                                     [ngClass]="{ error:formReserve.get('departingDate')?.value === ''  && isClickOnSearchBtn }" />
                             </ng-persian-datepicker>
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-    {{formReserve.get('departingDate')?.value|json}}
+    <!-- {{formReserve.get('departingDate')?.value|json}} -->
 
     <div class="justify-content-center d-flex mt-2 slideshowImg ">
         <app-carousel></app-carousel>
