@@ -1,6 +1,6 @@
 <div class="container p-1">
-        <input readonly class="button-sm-1 p-2 "  (click)="toggleNavbar()" [placeholder]="sumNemberPassenger +' مسافر '" > 
-    <div id="countPassenger" class="card-open mt-1 border border-2 rounded-3 p-1"  [ngClass]="{ 'active': navbarOpen }">
+    <input readonly class="button-sm-1 p-2 " (click)="toggleNavbar()" [placeholder]="sumNemberPassenger +' مسافر '">
+    <div id="countPassenger" class="card-open mt-1 border border-2 rounded-3 p-1" [ngClass]="{ 'active': navbarOpen }">
         <div class="row p-0">
             <div class="col col-sm-8">
                 <label class="col-form-label-sm ">بزرگسال (12سال به بالا )</label>
@@ -8,7 +8,7 @@
             <div class="col col-sm-4">
                 <button class="button buttonR-sm-0" type="button" (click)="adultAdd()">+</button>
                 <span>{{countPassenger.adultCount}}</span>
-                <button class="button buttonR-sm-0" type="button" (click)="adultLow()" [disabled]="countPassenger.adultCount==0 ||
+                <button class="button buttonR-sm-0" type="button" (click)="adultLow()" [disabled]="countPassenger.adultCount==1 ||
                     (countPassenger.babyCount+countPassenger.childCount ) >= countPassenger.adultCount">-
                 </button>
             </div>
@@ -31,26 +31,25 @@
                 <label class="col-form-label-sm col-md-8"> نوزاد (10روز-2سال)</label>
             </div>
             <div class="col col-sm-4">
-                <button class=" buttonR-sm-0  " type="button" (click)="babyAdd()" [disabled]="isClickOnAddAdult &&(
-                countPassenger.childCount>=countPassenger.babyCount ||
-                countPassenger.adultCount == countPassenger.babyCount)">+
+                <button class=" buttonR-sm-0  " type="button" (click)="babyAdd()" [disabled]="
+                countPassenger.babyCount == countPassenger.adultCount ">+
                 </button>
-                <span >{{countPassenger.babyCount}}</span>
+                <span>{{countPassenger.babyCount}}</span>
                 <button class="button buttonR-sm-0 " type="button" (click)="babyLow()"
                     [disabled]="countPassenger.babyCount==0">-</button>
             </div>
         </div>
         <div class="error-box">
-            <app-error-message *ngIf="countPassenger.adultCount!=0 &&(
-            (countPassenger.babyCount+countPassenger.childCount) /3 >= countPassenger.adultCount||                
-            (countPassenger.childCount>countPassenger.babyCount &&
-            countPassenger.babyCount==countPassenger.adultCount))"
-                [message]="'به ازای هر بزرگسال، ۳ کودک، یا ۲ کودک و یک نوزاد مجاز است.'"
-                [fontSize]="10">
+            <app-error-message *ngIf="
+            (countPassenger.babyCount+countPassenger.childCount) /3 >= countPassenger.adultCount &&
+            countPassenger.babyCount==countPassenger.adultCount"
+                [message]="'به ازای هر بزرگسال، ۳ کودک، یا ۲ کودک و یک نوزاد مجاز است.'" [fontSize]="10">
             </app-error-message>
         </div>
     </div>
 </div>
-<!-- {{countPassenger.babyCount|json }}
-{{countPassenger.childCount|json }}-->
+<!-- B{{countPassenger.babyCount|json }}
+CH{{countPassenger.childCount|json }}
+A{{countPassenger.adultCount|json }} -->
+
 <!-- {{navbarOpen|json }}  -->
