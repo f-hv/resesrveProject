@@ -7,15 +7,15 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   data = {
     userName: null,
     password: null,
-    captcha :null
-  }
+    captcha: null,
+  };
   isClickOnSaveBtn = false;
   constructor(
     private fb: FormBuilder,
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private toastrService: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initial();
@@ -32,23 +32,22 @@ export class LoginComponent implements OnInit {
     this.formLogin = this.fb.group({
       userName: [this.data.userName, Validators.required],
       password: [this.data.password, Validators.required],
-      captcha:[this.data.captcha,Validators.required]
-    })
+      captcha: [false, Validators.required],
+    });
   }
   login() {
     this.isClickOnSaveBtn = true;
     const userName = this.formLogin.get('userName')?.value;
     const password = this.formLogin.get('password')?.value;
-    const resLogin = this.authService.login(userName, password)
+    const resLogin = this.authService.login(userName, password);
     if (resLogin) {
-      // if (this.authService.redirectUrl) 
-      //   this.router.navigateByUrl(this.authService.redirectUrl);     
-      // else 
+      // if (this.authService.redirectUrl)
+      //   this.router.navigateByUrl(this.authService.redirectUrl);
+      // else
       this.directToPage();
-    }
-    else
+    } else
       this.toastrService.error('username or password is incorrect.', 'sorry!');
-      this.refreshPage();
+    this.refreshPage();
   }
   logout() {
     this.authService.logout();
@@ -56,36 +55,34 @@ export class LoginComponent implements OnInit {
   }
   navigate() {
     this.router.navigate(['../register'], {
-      relativeTo: this.activatedRoute
-    })
+      relativeTo: this.activatedRoute,
+    });
   }
   directToPage() {
     this.authService.currentUser$.subscribe((user: any) => {
-      if (user.role === "ADMIN") {
+      if (user.role === 'ADMIN') {
         this.router.navigate(['../admin'], {
-          relativeTo: this.activatedRoute
-        })
-      }
-      else {
+          relativeTo: this.activatedRoute,
+        });
+      } else {
         this.router.navigate(['../client'], {
-          relativeTo: this.activatedRoute
-        })
+          relativeTo: this.activatedRoute,
+        });
       }
-    })
+    });
   }
-  refreshPage(){
-    this.formLogin .setValue({
+  refreshPage() {
+    this.formLogin.setValue({
       userName: '',
-      password:'',
-    })
-    this.isClickOnSaveBtn =false
+      password: '',
+    });
+    this.isClickOnSaveBtn = false;
   }
   onScriptLoad() {
-    console.log('Google reCAPTCHA loaded and is ready for use!')
-}
+    console.log('Google reCAPTCHA loaded and is ready for use!');
+  }
 
-onScriptError() {
-    console.log('Something went long when loading the Google reCAPTCHA')
-}
-
+  onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA');
+  }
 }
