@@ -1,7 +1,6 @@
 <div class="container" [@animImageSlider]="counter">
   <ng-container *ngFor="let img of images; let i=index">
     <div class=""  *ngIf="i===counter">
-      <!-- <h1>Hello {{i}} </h1> -->
 			<img [src]="img" class="slideshowImg"/>
     </div>
 	</ng-container>

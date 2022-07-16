@@ -13,6 +13,7 @@ import { RegisterUserModule } from './register-user/register-user.module';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ReserveModule } from './admin/reserve/reserve.module';
+import { RecaptchaModule } from 'angular-google-recaptcha';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,9 @@ import { ReserveModule } from './admin/reserve/reserve.module';
     RegisterUserModule,
     ReserveModule,
     ToastrModule.forRoot(),
+    RecaptchaModule.forRoot({
+      siteKey: '6LcwT_QgAAAAAONLy7KoVmnKxH5TN_Pt5ad35u6n',
+    })
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
   providers: [],

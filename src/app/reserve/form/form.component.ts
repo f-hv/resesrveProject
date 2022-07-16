@@ -31,9 +31,9 @@ export class FormComponent implements OnInit {
   Reservedata = {
     source: null,
     destination: null,
-    passenger: 1,
+    countPassengar: 1,
     returnDate: null,
-    departingDate: Date.now(),
+    departingDate: null,
     travelMode: FlightTypeEnum.OneWay,
   };
   //////////travelMode/////////////
@@ -44,10 +44,10 @@ export class FormComponent implements OnInit {
   travelMode: any = FlightTypeEnum.OneWay;
   labelTravelMode: string = 'یک طرفه';
   ////datePicker//////////////////
-  minDate = Jalali.parse('1401-04-01');
+  minDate = Jalali.parse('1400-04-01');
   maxDate = Jalali.parse('1401-05-01');
-  returnDate:Date;
-  departingDate:Date;
+  returnDate: Date;
+  departingDate: any = ('1400/04/01');
   constructor(
     private cityService: CityService,
     private formBuilder: FormBuilder,
@@ -58,9 +58,6 @@ export class FormComponent implements OnInit {
     return FlightTypeEnum;
   }
   ngOnInit(): void {
-    // this.maxDate.setDate(this.minDate.getMonth() +1);
-    console.log(this.maxDate ,"min:", this.minDate);
-    
     this.getData();
     this.initial();
     this.dropdownSettings = {
@@ -87,29 +84,12 @@ export class FormComponent implements OnInit {
   getData() {
     this.listCity = this.cityService.getData();
   }
-  onDestinationSelect(data: any) {
-    this.destination = data.name;
-  }
-  onSourceSelect(data: any) {
-    this.source = data.name;
-  }
-  onTravelModeSelect(data: any) {
-    this.labelTravelMode = data.name;
-    if (data.id === FlightTypeEnum.Return) {
-      this.travelMode = FlightTypeEnum.Return;
-      this.formReserve.controls['returnDate'].enable();
-    }
-    else {
-      this.travelMode = FlightTypeEnum.OneWay;
-      this.formReserve.controls['returnDate'].disable();
-    }
-    this.formReserve?.get('travelMode')?.setValue(this.travelMode);
-  }
+
   search() {
     this.isClickOnSearchBtn = true;
-    // this.formReserve?.get('source')?.setValue(this.source);
-    // this.formReserve?.get('destination')?.setValue(this.destination);
-    // this.formReserve?.get('travelMode')?.setValue(this.travelMode);
+    this.formReserve?.get('source')?.setValue(this.source);
+    this.formReserve?.get('destination')?.setValue(this.destination);
+    this.formReserve?.get('travelMode')?.setValue(this.travelMode);
     this.formReserve?.get('passenger')?.setValue(this.countPassengar);
 
     if (this.formReserve.invalid) {
@@ -124,7 +104,8 @@ export class FormComponent implements OnInit {
           this.dataPassenger.adultCount,
           this.dataPassenger.childCount,
           this.dataPassenger.babyCount,
-          this.formReserve.get('travelMode')?.value,
+          this.travelMode,
+          this.departingDate
         ],
         {
           relativeTo: this.activatedRoute,
@@ -132,7 +113,24 @@ export class FormComponent implements OnInit {
       );
     }
   }
-
+  onDestinationSelect(data: any) {
+    this.destination = data.id;
+  }
+  onSourceSelect(data: any) {
+    this.source = data.id;
+  }
+  onTravelModeSelect(data: any) {
+    this.labelTravelMode = data.name;
+    if (data.id === FlightTypeEnum.Return) {
+      this.travelMode = FlightTypeEnum.Return;
+      this.formReserve.controls['returnDate'].enable();
+    }
+    else {
+      this.travelMode = FlightTypeEnum.OneWay;
+      this.formReserve.controls['returnDate'].disable();
+    }
+    this.formReserve?.get('travelMode')?.setValue(this.travelMode);
+  }
   CalculateCountPassenger(item: any) {
     this.dataPassenger = item;
     this.countPassengar = this.dataPassenger.adultCount + this.dataPassenger.childCount + this.dataPassenger.babyCount;
@@ -145,14 +143,8 @@ export class FormComponent implements OnInit {
     this.source = itemDes;
   }
   onSelect(event: any) {
-    debugger
     console.log(event);
-
   }
-  // onInitt(event: any){
-  //   console.log("test");
 
-  //   this.formReserve?.get('departingDate')?.setValue(event);
-  // }
 }
 

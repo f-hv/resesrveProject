@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   data = {
     userName: null,
     password: null,
+    captcha :null
   }
   isClickOnSaveBtn = false;
   constructor(
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.formLogin = this.fb.group({
       userName: [this.data.userName, Validators.required],
       password: [this.data.password, Validators.required],
+      captcha:[this.data.captcha,Validators.required]
     })
   }
   login() {
@@ -78,5 +80,12 @@ export class LoginComponent implements OnInit {
     })
     this.isClickOnSaveBtn =false
   }
+  onScriptLoad() {
+    console.log('Google reCAPTCHA loaded and is ready for use!')
+}
+
+onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA')
+}
 
 }

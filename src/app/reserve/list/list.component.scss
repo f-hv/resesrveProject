@@ -1,0 +1,145 @@
+@import "../../../assets/styles/custom-kit/variable.scss";
+
+.container-fluid {
+    min-width: 100%;
+    height   : 700px;
+
+    .header-info {
+        position        : fixed;
+        overflow-y      : scroll;
+        background-color: $white;
+        top             : 0px;
+
+        // bottom:0;
+    }
+
+    .content-card {
+        margin-top     : 40px;
+        display        : flex;
+        align-items    : flex-start;
+        justify-content: space-between;
+
+        .menu-right {
+            max-width       : 320px;
+            background-color: $white;
+            border-radius   : $radius-sm;
+        }
+    }
+
+    .content {
+        display          : flex;
+        flex-direction   : column;
+        align-items      : center;
+        // color         : $cool-gray-70;
+        color            : $cyan-R;
+
+        .content-items {
+            background-color: $white;
+            border-radius   : $radius-sm;
+            height          : 160px;
+            display         : flex;
+            flex-direction  : row;
+            align-content   : center;
+            align-items     : center;
+
+            i,
+            .line {
+                color: $cool-gray-30;
+            }
+
+            .fa-circle {
+                font-weight: lighter;
+            }
+
+            .pric {
+                // margin-top: -40px;
+                text-align : center;
+                color      : $red-80;
+                font-size  : $font-size-4;
+                font-weight: 800;
+            }
+
+            .details {
+                font-size: $font-size-2;
+                color    : $gray-50;
+            }
+
+            a {
+                font-size: $font-size-2;
+                color    : $red-80;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .time {
+                color      : darken($yellow-40, 7%);
+                font-size  : $font-size-6;
+                font-weight: 900;
+            }
+            .tabbable{
+                margin-top: -20px !important;
+                width: 77%;
+            }
+            .nav-tabs li span{
+                font-size: $font-size-1;
+            }
+
+            .tab-pane {
+                display: none;
+                span{
+                    font-size: $font-size-1;
+                }
+                table {
+                    border    : none;
+                    box-shadow: none;
+                    color     : $black;
+
+                    thead {
+                        color           : $gray-70;
+                        background-color: $white;
+                    }
+
+                    tbody {
+                        :hover {
+                            background-color: $white;
+                        }
+                    }
+                }
+            }
+
+            .tab-pane.active {
+                height: 80px;
+                display: block;
+            }
+
+            .card-info {
+                display: flex;
+
+                .refund {
+                    padding-left  : 1rem;
+                    padding-right : 1rem;
+                    padding-top   : 0;
+                    padding-bottom: 0;
+                    text-align    : center;
+
+                    .refund__percent {
+                        text-align: center;
+                        font-size : $font-size-4;
+                        font-weight: 900;
+                        color     : #dc3545;
+                    }
+
+                    .refund__text {
+                        font-size: .75rem;
+                        color    : #4b5259;
+                    }
+                }
+            }
+        }
+        .content-items.active{
+            height: 210px;
+        }
+    }
+}

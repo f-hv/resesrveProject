@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FlightModel } from 'src/app/core/models/flight.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
+import { CityService } from 'src/app/core/services/city.service';
 import { FlightService } from 'src/app/core/services/flight.service';
 import { ReservedService } from 'src/app/core/services/reserved.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -16,14 +17,19 @@ export class ListComponent implements OnInit {
   listFlight: FlightModel[];
   searchResualt: any[] = [];
   destination: any;
-  listR: any;
+  listReserved: any;
+  departingDate: any;
+  detailsOpen: boolean[]=[];
+  infoOpen: boolean[]=[];
+  params: any
   source: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private flightService: FlightService,
     private airlineService: AirlineService,
     private reservedService: ReservedService,
-    private userService: UserService
+    private userService: UserService,
+    private cityService: CityService
   ) { }
 
   ngOnInit(): void {
@@ -31,15 +37,18 @@ export class ListComponent implements OnInit {
   }
   getData() {
     /////
-    this.listR = this.reservedService.getData();
+    this.listReserved = this.reservedService.getData();
     /////
-    const prams = this.activatedRoute.snapshot.paramMap;
-    this.destination = prams.get('destination');
-    this.source = prams.get('source');
+    const params = this.activatedRoute.snapshot.paramMap;
+    console.log(params);
+    this.departingDate = params.get('departingDate');
+    this.destination = params.get('destination');
+    this.source = this.cityService.getById(Number(params.get('source')));
+    this.destination = this.cityService.getById(Number(params.get('destination')));
     this.listFlight = this.flightService.getData();
     const airlineResualt = this.airlineService.getData();
     this.listFlight.map((item) => {
-      if (item.source == this.source && item.destination === this.destination && item.deleted === 0) {
+      if (item.source == this.source.name && item.destination === this.destination.name && item.deleted === 0) {
         let dataReserved = this.reservedService.getByflightId(item.flightNumber);
         if (dataReserved) {
           airlineResualt.find((line: any) => {
@@ -50,8 +59,7 @@ export class ListComponent implements OnInit {
                 flightNumber: item.flightNumber,
                 airline: item.airline,
                 loadWeight: line.loadWeight,
-                priceClass: line.priceClass,
-                emptySeats: dataReserved?.emptySeats
+                emptySeats: dataReserved?.emptySeats,
               })
             }
           })
@@ -69,5 +77,13 @@ export class ListComponent implements OnInit {
       reserveInfo.BackFlightId = 0;
       this.reservedService.addReserved(reserveInfo)
     }
+  }
+  detailTabOpen(item:any) {
+    this.infoOpen[item]=false;
+    this.detailsOpen[item] = !this.detailsOpen[item];
+  }
+  infoTabOpen(item:any) {
+    this.detailsOpen[item]=false;
+    this.infoOpen[item] = !this.infoOpen[item];
   }
 }
