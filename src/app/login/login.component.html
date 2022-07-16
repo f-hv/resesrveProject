@@ -35,12 +35,10 @@
                         </app-error-message>
                     </div>
                 </div>
-                <div class="captcha">
-                    <recaptcha  formControlName="captcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()" ></recaptcha>
-                </div>
+                <div nbRecaptcha key="public key" formControlName="captcha"></div>
                 <div class="action-btn row">
                     <div class="col-sm-12">
-                        <button class="button button-primary button-sm-3 " type="submit" (click)="login()">ورود</button>
+                        <button class="button button-primary button-sm-3 " [disabled]="formLogin.invalid" value="Submit" type="submit" (click)="login()">ورود</button>
                     </div>
 
                 </div>
