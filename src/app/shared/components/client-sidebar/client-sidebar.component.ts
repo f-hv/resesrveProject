@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class ClientSidebarComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private activetedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private localStorageService:LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class ClientSidebarComponent implements OnInit {
       if (user)
         this.userImg = user.img;
       else {
-        let userLC = this.userService.getParseData('currentUser');
+        let userLC = LocalStorageService.read('currentUser');
         if (userLC)
           this.userImg = user.img;
         else

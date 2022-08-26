@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private localStorageService:LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
         this.infoUser.img = user.img;
       }
       else {
-        let userLC = this.userService.getParseData('currentUser');
+        let userLC = LocalStorageService.read('currentUser');
         if (userLC) {
           this.infoUser.userName = userLC.userName
           this.infoUser.password = userLC?.password;

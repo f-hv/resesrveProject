@@ -17,49 +17,42 @@ export class AuthService {
     private expiryTimeService: ExpiryTimeService,
     private userService: UserService
   ) { }
+
   login(userName: any, password: any) {
-    this.users = this.userService.getParseData("users");
-    const validUser = this.users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
+    const users =LocalStorageService.read("users");
+    const validUser = users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
     if (validUser) {
-      this.localStorageService.setItem('currentUser', JSON.stringify(validUser));
-      // this.expiryTimeService.setWithExpiry('expiryTime', 'currentUser', 500000);
+      LocalStorageService.save('currentUser', JSON.stringify(validUser));
+      this.expiryTimeService.setExpiry('expiryTime', 'currentUser', 50);
       this.currentUser$.next(validUser);
       return true;
     }
     else return false;
   }
+
   logout() {
-    this.localStorageService.removeItem('currentUser');
+    debugger
+    LocalStorageService.delete('currentUser');
+    LocalStorageService.delete("expiryTime");
     this.currentUser$.next(null);
-    this.localStorageService.removeItem("expiryTime");
   }
+
   isLoggedIn() {
     if (this.currentUser$?.value) {
-      //   if (!this.expiryTimeService.getWithExpiry('expiryTime'))
-      console.log(true);
-      return true;
+      if (this.expiryTimeService.getExpiry('expiryTime'))
+        return true;
     }
-    else
-      return true
-
-
-    // else
-    //   return false;
-    // }
-    // else {
-    //   let user = this.localStorageService.getItem('currentUser');
-    //   if (user) {
-    // if (!this.expiryTimeService.getWithExpiry('expiryTime')) {
-    //   this.logedUser = JSON.parse(user) ? JSON.parse(user) : null;
-    //   this.logedUser = JSON.parse(this.logedUser);
-    //   this.currentUser$.next(this.logedUser);
-    //     return true
-    //   }
-    //   else
-    //     return false;
-    // }
-    // else
-    //   return false;
-  // }
+    else {
+      let user =JSON.parse( LocalStorageService.read('currentUser')|| 'null');
+      if (user) {
+        if (this.expiryTimeService.getExpiry('expiryTime')) {
+          this.currentUser$.next(user);
+          return true
+        }
+        else
+          return false;
+      }
+    }
+    return false;
   }
 }

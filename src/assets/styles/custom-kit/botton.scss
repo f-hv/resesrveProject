@@ -49,8 +49,8 @@
 }
 
 .buttonR-primary {
-  background-color: $yellow-40;
-  color           : $cool-gray-70;
+  background-color: $blue-80;
+  color           : $white;
   box-shadow      : $box-shadow-sm;
   font-size       : $font-size-2;
   font-weight     : 800;
@@ -70,8 +70,10 @@
   }
 
   &:disabled {
-    background-color: $black !important;
+    background-color: $gray-40 !important;
     color           : $cool-gray-50 !important;
+    cursor: not-allowed !important;
+     
   }
 }
 
@@ -186,7 +188,7 @@
 .button-disabled {
   background-color: $black !important;
   color           : $cool-gray-50 !important;
-
+  
   i {
     color: $white;
   }

@@ -9,30 +9,33 @@ export class UserService {
   users: UserModel[];
   resualt: Boolean = false;
   userInfo: UserModel;
-  infoLogin:UserModel[]=[];
+  infoLogin: UserModel[] = [];
   constructor(
     private localStorageService: LocalStorageService,
   ) { }
 
-  getParseData(item: any) {
-    const usersLC = this.localStorageService.getItem(item);
-    if (usersLC) {
-      let dataUser = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
-      if (dataUser)
-        return this.users = JSON.parse(dataUser) ? JSON.parse(dataUser) : null;
-    }
-    else return false;
+  // getParseData(item: any) {
+  //   const usersLC = LocalStorageService.read(item);
+  //   if (usersLC) {
+  //     let dataUser = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
+  //     if (dataUser)
+  //       return this.users = JSON.parse(dataUser) ? JSON.parse(dataUser) : null;
+  //   }
+  //   else return false;
+  // }
+  getData() {
+    return this.users = JSON.parse(LocalStorageService.read("users") || null);
   }
   getById(id: any) {
-    this.getParseData("users");
+    this.getData();
     return this.users.find((user: any) => user.id === id)
   }
   delete(item: any) {
-    this.getParseData("users")
+    this.getData();
     this.users.find((user) => {
       if (user.userName === item.userName && user.email === item.email) {
         user.deleted = 1;
-        this.localStorageService.setItem("users", JSON.stringify(this.users));
+        LocalStorageService.save("users", JSON.stringify(this.users));
         this.resualt = true;
       }
     });
@@ -40,11 +43,8 @@ export class UserService {
     else return false;
   }
 
-  getOrginalList() {
-    return this.getParseData("users");
-  }
   update(data: any) {
-    this.getParseData("users")
+    this.getData();
     this.users.find((user) => {
       if (user.id === data.id) {
         user.userName = data.userName,
@@ -52,7 +52,7 @@ export class UserService {
           user.password = data.password,
           user.passconfirm = data.passconfirm,
           user.email = data.email
-        this.localStorageService.setItem("users", JSON.stringify(this.users));
+        LocalStorageService.save("users", JSON.stringify(this.users));
         this.resualt = true;
       }
     });
@@ -61,28 +61,34 @@ export class UserService {
   }
 
   create(data: UserModel) {
-    debugger
-    this.infoLogin .push( this.getParseData("users"));
-    if (!this.infoLogin) {
-      this.localStorageService.setItem("users", JSON.stringify(data));
-      return true;
-    }
-    else {
-      const validUser = this.infoLogin.find((item: any) => item.userName === data.userName || item.email === data.email);
-      if (!validUser) {        
-        this.infoLogin.push({
-          id: data.id,
-          firstName: data.firstName,
-          userName: data.userName,
-          password: data.password,
-          email : data.email,
-          role: data.role,
-          deleted: 0
-        });
-        this.localStorageService.setItem("users", JSON.stringify(this.infoLogin));
-        return true
-      }
-      else return false;
-    }
+    return LocalStorageService.addToArray("users", data);
   }
 }
+  // this.infoLogin .push( this.getParseData("users"));
+    // console.log("info",this.infoLogin);
+
+    // if (!this.infoLogin) {
+    //   LocalStorageService.save("users", JSON.stringify(data));
+    //   return true;
+    // }
+    // else {
+    //   const validUser = this.infoLogin.find((item: any) => item.userName === data.userName || item.email === data.email);
+    //   if (!validUser) {        
+    //     this.infoLogin.push({
+    //       id: data.id,
+    //       firstName: data.firstName,
+    //       userName: data.userName,
+    //       password: data.password,
+    //       email : data.email,
+    //       role: data.role,
+    //       deleted: 0
+    //     });
+    //     LocalStorageService.save("users", JSON.stringify(this.infoLogin));
+    //     return true
+    //   }
+    //   else return false;
+    // }
+
+  //  } 
+
+

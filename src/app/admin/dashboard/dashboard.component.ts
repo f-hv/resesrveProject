@@ -54,14 +54,14 @@ export class DashboardComponent implements OnInit {
     })
   }
   save() {
-    const users = this.userService.getParseData("users");
+    const users = LocalStorageService.read("users");
     users.map((user: any) => {
       if (user.userName === this.userName && user.email === this.email) {
         user.firstName = this.formAdmin.get('firstName')?.value;
         user.userName = this.formAdmin.get('userName')?.value;
         user.email = this.formAdmin.get('email')?.value;
-        this.localStorageService.setItem("users", JSON.stringify(users));
-        this.localStorageService.setItem("currentUser", JSON.stringify(this.formAdmin?.value));
+        LocalStorageService.save("users", JSON.stringify(users));
+        LocalStorageService.save("currentUser", JSON.stringify(this.formAdmin?.value));
         this.authService.currentUser$.next(this.formAdmin?.value);
         this.toastrService.success('Your profile information changed successfully', 'success');
       }
@@ -69,15 +69,15 @@ export class DashboardComponent implements OnInit {
   }
   resetPassword(item: any) {
     this.isClickSavePassBtn = true;
-    const usersLC = this.userService.getParseData("users");
+    const usersLC = LocalStorageService.read("users");
     usersLC.map((user: any) => {
       if (user.userName === this.dataUser.userName && user.email === this.dataUser.email) {
         user.password = item;
         user.passconfirm =item;
         this.dataUser.password = item;
         this.dataUser.passconfirm = item;
-        this.localStorageService.setItem("users", JSON.stringify(usersLC));
-        this.localStorageService.setItem("currentUser", JSON.stringify(this.dataUser));
+        LocalStorageService.save("users", JSON.stringify(usersLC));
+        LocalStorageService.save("currentUser", JSON.stringify(this.dataUser));
         this.authService.currentUser$.next(usersLC);
         this.toastrService.success('The password changed successfully', 'success');
         this.clearForm();

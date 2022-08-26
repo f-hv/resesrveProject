@@ -4,6 +4,7 @@ import { FlightModel } from 'src/app/core/models/flight.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
 import { CityService } from 'src/app/core/services/city.service';
 import { FlightService } from 'src/app/core/services/flight.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { ReservedService } from 'src/app/core/services/reserved.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -29,7 +30,8 @@ export class ListComponent implements OnInit {
     private airlineService: AirlineService,
     private reservedService: ReservedService,
     private userService: UserService,
-    private cityService: CityService
+    private cityService: CityService,
+    private localStorageService:LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +74,7 @@ export class ListComponent implements OnInit {
       ////////
     }
     else {
-      const currentUser = this.userService.getParseData("currentUser");
+      const currentUser = LocalStorageService.read("currentUser");
       reserveInfo.userId = currentUser.id;
       reserveInfo.BackFlightId = 0;
       this.reservedService.addReserved(reserveInfo)

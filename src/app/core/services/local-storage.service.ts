@@ -4,26 +4,39 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor() {}
-    // The value is stored as a JSON string. This method does not return anything
-  
-    public setItem(key: string, value: string) {
-      const jsonData = JSON.stringify(value);
-      localStorage.setItem(key, jsonData);
-    }
-    public getItem(key: string) {
+  constructor() { }
+
+  static read<T>(key: string) {
+    try {
+      return JSON.parse(localStorage.getItem(key)||'null');
+    } catch (e) {
       return localStorage.getItem(key);
     }
-    public removeItem(key: string) {
-      localStorage.removeItem(key);
-    }
-    public clear() {
-      localStorage.clear();
-    }
-    public length(): number {
-      return localStorage.length;
-    }
-    public key(index: number) {
-      return localStorage.key(index);
-    }
+  }
+
+  static save<T>(key: string, itemValue: T): void {
+    localStorage.setItem(key, JSON.stringify(itemValue));
+  }
+
+  static delete(key: string): void {
+    localStorage.removeItem(key);
+  }
+
+  static addToArray<T>(key: string, value: T): boolean {
+    let storage = this.read<T[]>(key) || [];
+    storage.push(value);
+    this.save(key, storage);
+    return storage;
+  }
+
+  static removeFromArray<T>(key: string, index: number): boolean {
+    let storage = this.read<T[]>(key) || [];
+    if (index == -1) return storage;
+    storage.splice(index, 1);
+    this.save(key, storage);
+    return storage;
+  }
+  public length(): number {
+    return localStorage.length;
+  }
 }

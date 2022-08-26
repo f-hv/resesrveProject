@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
     this.getData();
   }
   getData() {
-    const usersLC = this.localStorageService.getItem("users");
+    const usersLC = LocalStorageService.read("users");
     if (usersLC) {
       let users = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
       if (users)
@@ -51,7 +51,7 @@ export class ListComponent implements OnInit {
       this.searchKeyWord = item;
     }
     if (this.searchKeyWord.length === 0) {
-      this.listUsers = this.userService.getOrginalList();
+      this.listUsers = this.userService.getData();
     }
     if (this.searchKeyWord.length > 1) {
       if (item.keycode !== 13 || item.keycode !== 8) {

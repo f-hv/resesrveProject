@@ -1,8 +1,11 @@
-<div class="container-fluid pt-4">
+<div class="container-fluid pt-4" >
     <div [formGroup]="formLogin">
         <div class="card p-0 ">
             <div class="card-body">
-                <div class="row mt-2 ">
+                <div class="row"> 
+                    <h5 class="card-title">LOGIN</h5>
+                </div>
+                <div class="row ">
                     <input class="form-control  position-relative" autofocus type="text" formControlName="userName"
                         [ngClass]="{
                           error: formLogin.get('userName')?.value === '' && isClickOnSaveBtn 
@@ -19,7 +22,7 @@
                         </app-error-message>
                     </div>
                 </div>
-                <div class="row pt-4 mt-4">
+                <div class="row pt-0 mt-4">
                     <input class="form-control  position-relative" type="text" formControlName="password" [ngClass]="{
                             error:  formLogin.get('password')?.value ==='' && isClickOnSaveBtn
                         }" required />
@@ -35,12 +38,11 @@
                         </app-error-message>
                     </div>
                 </div>
-                <!-- <div nbRecaptcha key="public key" formControlName="captcha"></div> -->
-                <recaptcha formControlName="captcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()">
+                <recaptcha class="mt-4 "  formControlName="captcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()">
                 </recaptcha>
                 <div class="action-btn row">
                     <div class="col-sm-12">
-                        <button class="button button-primary button-sm-3 " [disabled]="formLogin.invalid" value="Submit"
+                        <button class="button buttonR-primary button-sm-3 " [disabled]="formLogin.invalid" value="Submit"
                             type="submit" (click)="login()">ورود</button>
                     </div>
 

@@ -8,12 +8,13 @@
     background-size    : cover;
     background-position: center center;
     position           : fixed;
-    height             : calc(100vh - 0px);
+    height             : 800px;
+    overflow-y:auto;
 }
 
 .card {
-    width      : 350px;
-    height     : 300px;
+    width      : 370px;
+    height     : 420px;
     position       : relative;
     display        : flex;
     flex-direction : column;
@@ -26,7 +27,9 @@
     box-shadow     : $box-shadow-sm;
 }
 
-
+.card-title{
+    letter-spacing: 200px;
+}
 .card-body {
     position       : relative;
     padding        : 0px;
@@ -44,7 +47,6 @@
         position      : absolute;
         font-size     : $font-size-1;
         color         : $gray-80;
-        transition    : .9s !important;
         pointer-events: none !important;
         right         : 30px;
         padding-right : 20px;
@@ -65,29 +67,13 @@
         outline      : none !important;
         background   : transparent !important;
         margin-right : 30px;
-        padding      : 3px;
-        z-index      : 100;
-
-        // &:focus,:valid {
-        // box-shadow: none !important;
-        // outline   : none !important;
-
-        // }
+        padding-right: 85px;
     }
      input:focus {
         box-shadow: none !important;
         outline   : none !important;
     }
-    
-     input:focus+label,
-     input:valid+label {
-        transform   : translate(4%, -110%) scale(.9);
-        color: $cyan-R;
-        font-weight: 600;
-        i{
-            color:$cyan-R ;
-        }
-    }
+
     .action-btn {
         display       : flex;
         align-items   : center;
@@ -128,6 +114,7 @@
 
 
 
+
 /* ---------------------------------------------------
   MEDIAQUERIES
 ----------------------------------------------------- */
@@ -160,4 +147,5 @@
         }
 
     }
+    
 }

@@ -20,7 +20,7 @@ import { RecaptchaModule } from 'angular-google-recaptcha';
     FormsModule,
     sharedModule,
     RecaptchaModule.forRoot({
-      siteKey: '6LcwT_QgAAAAAONLy7KoVmnKxH5TN_Pt5ad35u6n',
+      siteKey: '6LdRBfggAAAAAHoBAgdy-_TQPGXnFBtO0FbqBlHZ',
     }),
   ],
   exports: [LoginComponent],

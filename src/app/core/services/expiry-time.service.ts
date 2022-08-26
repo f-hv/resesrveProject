@@ -9,35 +9,25 @@ export class ExpiryTimeService {
   constructor(
     private localStorageService: LocalStorageService
   ) { }
-  setWithExpiry(key: any, value: any, ttl: number) {
-    const now = new Date();
+  setExpiry(key: any, value: any, ttl: number) {
     const item = {
       value: value,
-      expiry: now.getTime() + ttl,
+      expiry: Date.now() + (ttl*1000),
     }
-
-    this.localStorageService.setItem(key, JSON.stringify(item))
-    console.log("item:",item);
-    
+    LocalStorageService.save(key, JSON.stringify(item))
+    console.log("item:", item);
   }
 
-  getWithExpiry(key: any) {
-    const itemStr = this.localStorageService.getItem(key)
-    if (!itemStr) {
-      return true;
+  getExpiry(key: any) {
+    const expireKey = JSON.parse(LocalStorageService.read(key)||'null');    
+    if (!expireKey) {
+      return false;
     }
-    const item = JSON.parse(itemStr) ? JSON.parse(itemStr) : null;
-    if (item) {
-      const itemExpiry = JSON.parse(item) ? JSON.parse(item) : null;
-      // const now = Math.floor(Date.now() / 1000)
-      const now = new Date();
-      if ( now.getTime() < itemExpiry.expiry) {
-        this.localStorageService.removeItem(key);
-        console.log("remove item");        
-        return true;
-      }
+    if (Date.now() > expireKey.ttl) {
+      LocalStorageService.delete(key);
+      console.log("remove item");
+      return false;
     }
-    // return item.value
-    return false;
+    return true /////no expired
   }
 }

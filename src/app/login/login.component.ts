@@ -11,18 +11,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
-  data = {
-    userName: null,
-    password: null,
-    captcha: null,
-  };
   isClickOnSaveBtn = false;
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -30,9 +25,9 @@ export class LoginComponent implements OnInit {
   }
   initial() {
     this.formLogin = this.fb.group({
-      userName: [this.data.userName, Validators.required],
-      password: [this.data.password, Validators.required],
-      captcha: [false, Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      captcha: ['', Validators.required],
     });
   }
   login() {
@@ -78,6 +73,7 @@ export class LoginComponent implements OnInit {
     });
     this.isClickOnSaveBtn = false;
   }
+  // `/products?sort=${sort}`
   onScriptLoad() {
     console.log('Google reCAPTCHA loaded and is ready for use!');
   }
