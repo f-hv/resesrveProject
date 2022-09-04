@@ -1,0 +1,138 @@
+<div class="container">
+    <div id="stepperPassenger" class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div class="line"></div>
+            <div class="step" data-target="#ticket">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">انتخاب پرواز</span>
+                </label>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#passengers">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label">مشخصات مسافران</span>
+                </label>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#Confirm-information">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label">تایید اطلاعات</span>
+                </label>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#final-ticket">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">4</span>
+                    <span class="bs-stepper-label"> صدور بلیط</span>
+                </label>
+            </div>
+        </div>
+        <div class="bs-stepper-content card-design mt-2 p-4">
+           
+            <div id="passengers" class="content">
+                <div [formGroup]="passengersForm">
+                    <div class="col-md-2 mt-2" style="text-align:center;">
+                        <h6> مشخصات مسافران</h6>
+                    </div>
+                    <div formArrayName="passengers">
+                        <div *ngFor="let item of passengersAsControls; let i= index " [formGroupName]="i"
+                            class="row content-passenger mt-1 p-2">
+                            <h6>{{passengerTitle}} </h6>
+                            <div class="col-md-3 ">
+                                <label class="col-form-label-sm col-2">نام</label>
+                                <input class="form-control" type="text" formControlName="fName"
+                                    [ngClass]="{ error: (passengersForm.get('fName')?.invalid && isclickOnNext) }" />
+                                <div class="error-box">
+                                    <app-error-message *ngIf="
+                                                passengersForm.get('fName')?.invalid && isclickOnNext"
+                                        [message]=" !passengersForm.get('fName')?.value ? 'این فیلد الزامی است' :'' ">
+                                    </app-error-message>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-form-label-sm ">نام خانوادگی </label>
+                                <input class="form-control" type="text" formControlName="lName"
+                                    [ngClass]="{ error: passengersForm.get('lName')?.invalid  && isclickOnNext}" />
+                                <div class="error-box">
+                                    <app-error-message *ngIf="
+                                                passengersForm.get('lName')?.invalid && isclickOnNext" [message]="
+                                                    !passengersForm.get('lName')?.value ? ' این فیلد الزامی است' :''">
+                                    </app-error-message>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-form-label-sm col-3">سن</label>
+                                <input type="number" class="form-control" formControlName="age" [min]="min" [max]="max"
+                                    [ngClass]="{ error: passengersForm.get('age')?.invalid  && isclickOnNext}" />
+                                <div class="error-box">
+                                    <app-error-message *ngIf="
+                                                passengersForm.get('age')?.invalid && isclickOnNext" [message]="
+                                                    !passengersForm.get('age')?.value ? ' این فیلد الزامی است' :''">
+                                    </app-error-message>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-form-label-sm col-2">جنسیت</label>
+                                <ng-multiselect-dropdown class="form-control-sm col-5 x" [settings]="dropdownSettings"
+                                    [data]="Genderlist" (onSelect)="onRoleSelectGender($event , i)"
+                                    formControlName="gender" [placeholder]="selectedItem" [ngClass]="{
+                                    error: passengersForm.get('gender')?.invalid && isclickOnNext
+                                }">
+                                </ng-multiselect-dropdown>
+                                <div class="error-box-g">
+                                    <app-error-message *ngIf="
+                                passengersForm.get('gender')?.invalid && isclickOnNext" [message]="'فیلد خالی'">
+                                    </app-error-message>
+                                </div>
+                            </div>
+                            <div class="pt-2 mt-5">
+                                <button type="button" class="button-Del button-sm-0 float-left "
+                                    (click)="deletePassenger(i)">
+                                    <span>حذف </span>
+                                    <i class="fa fa-trash p-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button (click)="next()" class="btn btn-primary mt-3">Next</button>
+            </div>
+            <div id="ticket" class="content">
+                <div class="row">
+                    <span class="details mt-2">{{tripInfo.date}} تاریخ بلیط</span>
+                    <div class="col-md-2 align-text-center">{{airline.name}}</div>
+                    <div class="col-md-7">
+                        {{source.name}}
+                        <span class="p-2 time">7:00</span>
+                        <i class="fas fa-plane fa-rotate-180"></i>
+                        <span class="line">-----------------------</span>
+                        <i class="fas fa-circle"></i>
+                        <span class="p-2 time"> 8:20</span>
+                        {{destination.name}}
+                    </div>
+                    <div class="col-md-3 pric d-flex flex-column align-items-center">
+                        <span>ریال {{price}}</span>
+                        <span>بزرگسال ({{tripInfo.adult}}) {{ travelPrice.adultTicketPrice}}</span>
+                        <span>کودک ({{tripInfo.child}}) {{travelPrice.childTicketPrice}} </span>
+                        <span>نوزاد ({{tripInfo.baby}}) {{travelPrice.babyTicketPrice}} </span>
+                        <button class="button buttonR-primary button-md-1 mt-2" type="submit" (click)="changeTicket()">
+                            تغییر پرواز</button>
+                    </div>
+                </div>
+                <button (click)="next()" class="btn btn-primary mt-3">Next</button>
+            </div>
+            <div id="Confirm-information" class="content">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="gender" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <button (click)="next()" class="btn btn-primary mt-5">تایید اطلاعات</button>
+            </div>
+            <div id="final-ticket" class="content text-center">
+                <label for="exampleInputPassword1">صدور بلیط</label>
+            </div>
+        </div>
+    </div>
+</div>
+{{passengersForm?.value|json}}
