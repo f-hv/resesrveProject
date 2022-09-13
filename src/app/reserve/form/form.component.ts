@@ -9,8 +9,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CityModel } from 'src/app/core/models/city.model';
 import { CityService } from 'src/app/core/services/city.service';
 import { FlightTypeEnum } from 'src/app/shared/enums/fight-type.enum';
-import { IActiveDate } from 'ng-persian-datepicker';
-import { Jalali } from 'jalali-ts';
+import * as moment from 'jalali-moment'
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -44,8 +43,6 @@ export class FormComponent implements OnInit {
   travelMode: any = FlightTypeEnum.OneWay;
   labelTravelMode: string = 'یک طرفه';
   ////datePicker//////////////////
-  minDate = Jalali.parse('1400-04-01');
-  maxDate = Jalali.parse('1401-05-01');
   returnDate: Date;
   departingDate: any = ('1400/04/01');
   constructor(
@@ -68,7 +65,14 @@ export class FormComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 20,
     };
+    this.formReserve.get('departingDate')?.valueChanges.subscribe((value: any) => {
+      this.departingDate = value;
+      console.log(this.departingDate);
+      
+      // console.log( moment(v,'jYYYY/jMM/jDD'));
+    })
   }
+  /////////validator custome
   initial() {
     this.formReserve = this.formBuilder.group({
       travelMode: [this.travelMode],
@@ -91,28 +95,33 @@ export class FormComponent implements OnInit {
     this.formReserve?.get('destination')?.setValue(this.destination);
     this.formReserve?.get('travelMode')?.setValue(this.travelMode);
     this.formReserve?.get('passenger')?.setValue(this.countPassengar);
+    this.formReserve?.get('departingDate')?.setValue(this.departingDate);
+    this.formReserve?.get('returnDate')?.setValue(this.returnDate);
 
     if (this.formReserve.invalid) {
       return;
     }
     else {
       this.router.navigate(
-        [
-          '../list',
-          this.source,
-          this.destination,
-          this.dataPassenger.adultCount,
-          this.dataPassenger.childCount,
-          this.dataPassenger.babyCount,
-          this.travelMode,
-          this.departingDate
-        ],
+        ['../list'],
         {
+          queryParams:
+          {
+            'source': this.source,
+            'destination': this.destination,
+            'adult': this.dataPassenger.adultCount,
+            'child': this.dataPassenger.childCount,
+            'baby': this.dataPassenger.babyCount,
+            'travelMode': this.travelMode,
+            'departingDate': this.departingDate,
+            'returnDate' : this.returnDate? this.returnDate : ''
+          },
           relativeTo: this.activatedRoute,
         }
       );
     }
   }
+
   onDestinationSelect(data: any) {
     this.destination = data.id;
   }
@@ -133,6 +142,7 @@ export class FormComponent implements OnInit {
   }
   CalculateCountPassenger(item: any) {
     this.dataPassenger = item;
+
     this.countPassengar = this.dataPassenger.adultCount + this.dataPassenger.childCount + this.dataPassenger.babyCount;
   }
   changeDestinationSource() {
@@ -141,9 +151,6 @@ export class FormComponent implements OnInit {
     this.formReserve?.get('destination')?.setValue(this.source);
     this.destination = this.source;
     this.source = itemDes;
-  }
-  onSelect(event: any) {
-    console.log(event);
   }
 
 }

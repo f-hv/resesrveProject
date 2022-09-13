@@ -49,8 +49,7 @@
                         <div>
                             <ng-persian-datepicker>
                                 <input class="form-control input-Date" type="text" placeholder=" تاریخ رفت"
-                                    formControlName="departingDate" (dateOnSelect)="onSelect($event)" [dateMax]="maxDate" 
-                                    
+                                    formControlName="departingDate" (dateOnSelect)="onSelectdepartingDate($event)" [dateMax]="maxDate" 
                                     [ngClass]="{ error:formReserve.get('departingDate')?.value === ''  && isClickOnSearchBtn }" />
                             </ng-persian-datepicker>
                         </div>
@@ -63,14 +62,6 @@
                         </div>
                     </div>
                     <div class="col-md-2 mt-4 ">
-                        <!-- <div>
-                            <ng-persian-datepicker>
-                                <input class="form-control input-Date" type="text" placeholder=" تاریخ برگشت"
-                                    formControlName="returnDate"
-                                    [ngClass]="{ error:formReserve.get('returnDate')?.value === ''  && isClickOnSearchBtn }" />
-                            </ng-persian-datepicker>
-
-                        </div> -->
                         <div class="error-box position-date ">
                             <app-error-message *ngIf="
                                 !formReserve.get('returnDate')?.valid &&
@@ -92,7 +83,7 @@
             </div>
         </div>
     </div>
-    <!-- {{formReserve?.value|json}} -->
+    {{formReserve?.value|json}}
 
     <div class="justify-content-center d-flex mt-2 slideshowImg ">
         <app-carousel></app-carousel>
@@ -110,7 +101,6 @@
         ullam maiores!
     </div>
 </div>
-<!-- {{travelMode|json}}  -->
-<span *ngIf="1 === flightType.OneWay">
+<!-- <span *ngIf="1 === flightType.OneWay">
     OneWay
-</span> 
+</span>  -->

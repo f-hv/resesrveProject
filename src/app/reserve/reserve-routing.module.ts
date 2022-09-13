@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from '../admin/city/create/create.component';
 import { FormComponent } from './form/form.component';
 import { ListComponent } from './list/list.component';
+import { ReserveStepComponent } from './reserve-step/reserve-step.component';
 import { ReserveComponent } from './reserve.component';
 
 const routes: Routes = [
@@ -11,16 +12,20 @@ const routes: Routes = [
     component: ReserveComponent,
     children: [
       {
-        path: 'list/:source/:destination/:adultCount/:childCount/:babyCount/:travelMode/:departingDate',
+        path: 'list',
         component: ListComponent
       },
       {
-        path:'form',
-        component:FormComponent
+        path: 'form',
+        component: FormComponent
+      },
+      {
+        path: 'reserveStep',
+        component: ReserveStepComponent
       },
       {
         path: '',
-        redirectTo:'form'
+        redirectTo: 'form'
       }
     ]
   }

@@ -14,22 +14,15 @@ export class UserService {
     private localStorageService: LocalStorageService,
   ) { }
 
-  // getParseData(item: any) {
-  //   const usersLC = LocalStorageService.read(item);
-  //   if (usersLC) {
-  //     let dataUser = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
-  //     if (dataUser)
-  //       return this.users = JSON.parse(dataUser) ? JSON.parse(dataUser) : null;
-  //   }
-  //   else return false;
-  // }
   getData() {
     return this.users = JSON.parse(LocalStorageService.read("users") || null);
   }
+
   getById(id: any) {
     this.getData();
     return this.users.find((user: any) => user.id === id)
   }
+  
   delete(item: any) {
     this.getData();
     this.users.find((user) => {

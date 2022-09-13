@@ -4,6 +4,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown'
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { UserRoleEnum } from '../../enums/user-role.enum';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class HeaderComponent implements OnInit {
   dropdownSettings: IDropdownSettings;
   userMenu: any[] = [];
-  infoUser: any = { name: null, userName: null, password: null, email: null, img: null };
+  infoUser: any = { name: null, img: null, role: null };
   userName: any;
   p: any = 1;
   constructor(
@@ -20,26 +21,25 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private localStorageService:LocalStorageService
+    private localStorageService: LocalStorageService
   ) { }
+  get roleUser() {
+    return UserRoleEnum
+  }
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe((user) => {
       if (user) {
-        this.infoUser.userName = user?.userName;
-        this.infoUser.password = user?.password;
         this.infoUser.name = user?.name;
-        this.infoUser.email = user.email;
         this.infoUser.img = user.img;
+        this.infoUser.role = user.role
       }
       else {
-        let userLC = LocalStorageService.read('currentUser');
+        let userLC =JSON.parse( LocalStorageService.read('currentUser'));
         if (userLC) {
-          this.infoUser.userName = userLC.userName
-          this.infoUser.password = userLC?.password;
-          this.infoUser.name = userLC?.name;
-          this.infoUser.email = userLC?.email;
+          this.infoUser.name = userLC?.userName;
           this.infoUser.img = userLC?.img;
+          this.infoUser.role = userLC.role
         }
         else
           this.authService.logout();
@@ -64,9 +64,14 @@ export class HeaderComponent implements OnInit {
       })
     }
     if (item.name == "dashboard") {
-      this.router.navigate(['./dashboard'], {
-        relativeTo: this.activatedRoute
-      })
+      if (this.infoUser.role == UserRoleEnum.ADMIN)
+        this.router.navigate(['../admin/dashboard'], {
+          relativeTo: this.activatedRoute
+        })
+        if (this.infoUser.role == UserRoleEnum.USER )
+        this.router.navigate(['../client/profile'], {
+          relativeTo: this.activatedRoute
+        })
     }
   }
 }

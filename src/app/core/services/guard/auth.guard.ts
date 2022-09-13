@@ -12,11 +12,11 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private toastrService:ToastrService,
     ) { }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(activatedRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.checkLoggedIn(state.url) === true) {
       const user = this.authService.currentUser$.value;
       if (user) {
-        if (route.data.roles && route.data.roles.indexOf(user.role) === -1) {
+        if (activatedRoute.data.roles && activatedRoute.data.roles.indexOf(user.role) === -1) {
           this.router.navigate(['../accessDenied']);
           return false;
         }        

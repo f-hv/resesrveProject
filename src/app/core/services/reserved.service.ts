@@ -11,8 +11,7 @@ export class ReservedService {
       flightId: 512,
       BackFlightId: 0,
       paymentId: 501,
-      userId: 2,
-      emptySeats: 20,
+      userId: 2,      
     },
     {
       id: 2,
@@ -20,7 +19,6 @@ export class ReservedService {
       BackFlightId: 0,
       paymentId: 501,
       userId: 2,
-      emptySeats: 5,
     },
     {
       id: 3,
@@ -28,7 +26,6 @@ export class ReservedService {
       BackFlightId: 0,
       paymentId: 501,
       userId: 2,
-      emptySeats: 1,
     },
     {
       id: 4,
@@ -36,7 +33,6 @@ export class ReservedService {
       BackFlightId: 152,
       paymentId: 501,
       userId: 3,
-      emptySeats: 10,
     },
     {
       id: 5,
@@ -44,7 +40,6 @@ export class ReservedService {
       BackFlightId: 512,
       paymentId: 501,
       userId: 2,
-      emptySeats: 50,
     },
     {
       id: 6,
@@ -52,7 +47,6 @@ export class ReservedService {
       BackFlightId: 0,
       paymentId: 501,
       userId: 3,
-      emptySeats: 2,
     },
     {
       id: 7,
@@ -60,7 +54,6 @@ export class ReservedService {
       BackFlightId: 0,
       paymentId: 501,
       userId: 2,
-      emptySeats: 49,
     },
   ];
   orginalListReserved = [...this.Reserved];
@@ -92,7 +85,6 @@ export class ReservedService {
       flightId: data.flightId,
       userId: data.userId,
       paymentId: data.paymentId,
-      emptySeats: Number(data.emptySeats) - 1,
       BackFlightId: data.BackFlightId
     })
   }

@@ -75,7 +75,7 @@
                                 </app-error-message>
                             </div>
                         </div>
-                        <div class="col-md-6" *userRole="'ADMIN'">
+                        <div class="col-md-6" *UserRoleEnum="'ADMIN'">
                             <label class="col-form-label-sm col-2">سمت</label>
                             <ng-multiselect-dropdown class="form-control-sm col-5 x" [placeholder]="'سمت'"
                                 [settings]="dropdownSettings" [data]="listRoles" (onSelect)="onRoleSelect($event)"

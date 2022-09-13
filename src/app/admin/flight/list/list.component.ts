@@ -28,6 +28,8 @@ export class ListComponent implements OnInit {
   getData() {
     this.listFlight = this.flightService.getData();
     this.listFlight = this.listFlight.filter(item => item.deleted === 0);
+    console.log(this.listFlight);
+    
     this.collectionSize = this.listFlight.length;
     // moment().locale('fa').format('YYYY/M/D');
 
@@ -57,8 +59,7 @@ export class ListComponent implements OnInit {
         this.listFlight = this.listFlight.filter(flight =>
           flight.source?.includes(item) ||
           flight.destination?.includes(item) ||
-          flight.airline?.includes(item)||
-          flight.price == item
+          flight.airline?.includes(item)
         );
       }
     }

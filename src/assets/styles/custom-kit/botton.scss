@@ -77,6 +77,31 @@
   }
 }
 
+.button-Del {
+  background-color: $white;
+  color           : $red-70;
+  box-shadow      : $box-shadow-xs;
+  font-size       : $font-size-1;
+  font-weight     : 800;
+
+
+  &:hover {
+    transition: transform 0.3s ease-out;
+    transform : scale(1.1); 
+  }
+
+  i {
+    color    : $red-70;
+    font-size: $font-size-3;
+  }
+
+  &:disabled {
+    background-color: $gray-40 !important;
+    color           : $cool-gray-50 !important;
+    cursor: not-allowed !important;     
+  }
+}
+
 .button-sm-0 {
   @extend .button;
   width     : $width-xs;

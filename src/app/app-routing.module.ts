@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserRole } from './shared/enums/user-role.enum';
 import { AuthGuard } from './core/services/guard/auth.guard';
+import { UserRoleEnum } from './shared/enums/user-role.enum';
 
 const routes: Routes = [
   {
@@ -9,14 +9,14 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module')
       .then(m => m.AdminModule),
     canActivate: [AuthGuard],
-    data: { roles: [UserRole.ADMIN] }
+    data: { roles: [UserRoleEnum.ADMIN] }
   },
   {
     path: 'client',
     loadChildren: () => import('./client/client.module')
       .then(m => m.ClientModule),
     canActivate: [AuthGuard],
-    data: { roles: [UserRole.USER] }
+    data: { roles: [UserRoleEnum.USER] }
   },
   {
     path: 'login',

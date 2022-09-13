@@ -6,14 +6,8 @@
         <div class="row">
           <div class="col-md-6 ">
             <label class="col-form-label-sm col-2">مبدا</label>
-            <ng-multiselect-dropdown 
-              class="form-control-sm col-5" 
-              [placeholder]="'مبدا'" 
-              [settings]="dropdownSettings"
-              [data]="listCity" 
-              (onSelect)="onSourceSelect($event)" 
-              formControlName="source"
-              [ngClass]="{
+            <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مبدا'" [settings]="dropdownSettings"
+              [data]="listCity" (onSelect)="onSourceSelect($event)" formControlName="source" [ngClass]="{
                 error: (!formFlight.get('source')?.valid || formFlight.get('source')?.value === '') && isClickOnSaveBtn
               }">
             </ng-multiselect-dropdown>
@@ -28,12 +22,11 @@
           <div class="col-md-6">
             <label class="col-form-label-sm col-3">مقصد</label>
             <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مقصد'" [settings]="dropdownSettings"
-              [data]="listCity" (onSelect)="ondestinationSelect($event)" formControlName="destination"
-              [ngClass]="{
+              [data]="listCity" (onSelect)="ondestinationSelect($event)" formControlName="destination" [ngClass]="{
                 error: (!formFlight.get('destination')?.valid || formFlight.get('destination')?.value === '') && isClickOnSaveBtn
               }">
             </ng-multiselect-dropdown>
-            <div  class="error-box">
+            <div class="error-box">
               <app-error-message *ngIf="
                   !formFlight.get('destination')?.valid &&
                   isClickOnSaveBtn &&
@@ -46,14 +39,9 @@
         <div class="row mt-4 ">
           <div class="col-md-6 ">
             <label class="col-form-label-sm">خط پرواز</label>
-            <ng-multiselect-dropdown 
-              class="form-control-sm dropdown" 
-              [placeholder]="'خط پرواز'" 
-              [settings]="dropdownSettings"
-              [data]="listAirline" 
-              (onSelect)="onAirlineSelect($event)" 
-              formControlName="airline"
-              [ngClass]="{
+            <ng-multiselect-dropdown class="form-control-sm dropdown" [placeholder]="'خط پرواز'"
+              [settings]="dropdownSettings" [data]="listAirline" (onSelect)="onAirlineSelect($event)"
+              formControlName="airline" [ngClass]="{
                 error: (!formFlight.get('airline')?.valid || formFlight.get('airline')?.value === '') && isClickOnSaveBtn
               }">
             </ng-multiselect-dropdown>
@@ -67,10 +55,9 @@
           </div>
           <div class="col-md-6">
             <label class="col-form-label-sm">شماره پرواز</label>
-            <input class="form-control" type="text" formControlName="flightNumber" 
-            [ngClass]="{
+            <input class="form-control" type="text" formControlName="flightNumber" [ngClass]="{
               error: (!formFlight.get('flightNumber')?.valid || formFlight.get('flightNumber')?.value === '') && isClickOnSaveBtn
-            }"/>
+            }" />
             <div>
               <app-error-message *ngIf="
                 !formFlight.get('flightNumber')?.valid &&
@@ -83,59 +70,26 @@
         <div class="row mt-3">
           <div class="col-md-6 mt-5 position-relative ">
             <div>
-              <input 
-                class="form-control input-Date"  
-                placeholder="تاریخ" 
-                readonly
-                name="dp" 
-                formControlName="date"
-                ngbDatepicker 
-                #d="ngbDatepicker" 
-                [firstDayOfWeek]="6" 
-                (focus)="d.open()" 
-                [placement]=" placement"
-                [autoClose]="true"
-                [ngClass]="{
-                  error:formFlight.get('date')?.value === '' && isClickOnSaveBtn
-                }"
-              >
-              <div class="btn-date position-absolute ">
-                <button class="far fa-calendar-alt button-Datepicker" (click)="d.toggle()" type="button"></button>
-              </div>
+              <ng-persian-datepicker>
+                <input class="form-control input-Date" type="text" placeholder=" تاریخ" formControlName="date"
+                 [dateMax]="maxDate" [timeEnable]=true
+                  [ngClass]="{  error:formFlight.get('date')?.value === '' && isClickOnSaveBtn }" />
+              </ng-persian-datepicker>
             </div>
             <div>
               <app-error-message *ngIf="
                 !formFlight.get('date')?.valid &&
                 isClickOnSaveBtn &&
-                !formFlight.get('date')?.value" 
-                [message]="'فیلد خالی است'">
+                !formFlight.get('date')?.value" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>
           <div class="col-md-6 mt-1 ">
-            <ngb-timepicker class="ngtime" formControlName="time"  
-            [ngClass]="{
+            <ngb-timepicker class="ngtime" formControlName="time" (ngModelChange)="onTimeChange($event)" [ngClass]="{
               error: (!formFlight.get('time')?.valid || formFlight.get('time')?.value === '') && isClickOnSaveBtn
             }">
             </ngb-timepicker>
           </div>
-        </div>
-        <div class="row ">
-          <div class="col-md-6">
-            <label for="price" class="col-form-label-sm">قیمت</label>
-            <input class="form-control" type="text" formControlName="price" id="price"
-            [ngClass]="{
-              error: (!formFlight.get('price')?.valid || formFlight.get('price')?.value === '') && isClickOnSaveBtn
-            }"/>
-            <div>
-              <app-error-message *ngIf="
-                !formFlight.get('price')?.valid &&
-                isClickOnSaveBtn &&
-                !formFlight.get('price')?.value" [message]="'فیلد خالی است'">
-              </app-error-message>
-            </div>
-          </div>
-          <div class="col-md-6"></div>
         </div>
         <div class="row  mt-5">
           <div class="col-md-8">
@@ -158,4 +112,4 @@
     </div>
   </form>
 </div>
-<!-- {{formFlight.get('time')?.value|jscon}} -->
+{{formFlight?.value|json}}

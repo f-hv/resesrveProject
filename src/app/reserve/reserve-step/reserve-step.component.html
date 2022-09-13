@@ -1,18 +1,19 @@
 <div class="container">
     <div id="stepperPassenger" class="bs-stepper">
         <div class="bs-stepper-header">
-            <div class="line"></div>
-            <div class="step" data-target="#ticket">
-                <label class="step-trigger">
-                    <span class="bs-stepper-circle">1</span>
-                    <span class="bs-stepper-label">انتخاب پرواز</span>
-                </label>
-            </div>
+
             <div class="line"></div>
             <div class="step" data-target="#passengers">
                 <label class="step-trigger">
                     <span class="bs-stepper-circle">2</span>
                     <span class="bs-stepper-label">مشخصات مسافران</span>
+                </label>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#ticket">
+                <label class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">انتخاب پرواز</span>
                 </label>
             </div>
             <div class="line"></div>
@@ -31,69 +32,77 @@
             </div>
         </div>
         <div class="bs-stepper-content card-design mt-2 p-4">
-           
+
             <div id="passengers" class="content">
                 <div [formGroup]="passengersForm">
                     <div class="col-md-2 mt-2" style="text-align:center;">
                         <h6> مشخصات مسافران</h6>
                     </div>
                     <div formArrayName="passengers">
-                        <div *ngFor="let item of passengersAsControls; let i= index " [formGroupName]="i"
+                        <div *ngFor="let item of passengersAsControls; let i= index "
                             class="row content-passenger mt-1 p-2">
-                            <h6>{{passengerTitle}} </h6>
-                            <div class="col-md-3 ">
-                                <label class="col-form-label-sm col-2">نام</label>
-                                <input class="form-control" type="text" formControlName="fName"
-                                    [ngClass]="{ error: (passengersForm.get('fName')?.invalid && isclickOnNext) }" />
-                                <div class="error-box">
-                                    <app-error-message *ngIf="
-                                                passengersForm.get('fName')?.invalid && isclickOnNext"
-                                        [message]=" !passengersForm.get('fName')?.value ? 'این فیلد الزامی است' :'' ">
-                                    </app-error-message>
+                            <div class="d-flex" [formGroup]="item">
+                                <div class="row d-flex">
+                                    <h6>{{passengerType[item.get('type').value]}} </h6>
+                                    <div class="col-md-3 ">
+                                        <label class="col-form-label-sm col-2">نام</label>
+                                        <input class="form-control" type="text" formControlName="fName"
+                                            [ngClass]="{ error: (passengersForm.get('fName')?.invalid && isclickOnNext) }" />
+                                        <div class="error-box">
+                                            <app-error-message *ngIf="
+                                                    passengersForm.get('fName')?.invalid && isclickOnNext"
+                                                [message]=" !passengersForm.get('fName')?.value ? 'این فیلد الزامی است' :'' ">
+                                            </app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="col-form-label-sm ">نام خانوادگی </label>
+                                        <input class="form-control" type="text" formControlName="lName"
+                                            [ngClass]="{ error: passengersForm.get('lName')?.invalid  && isclickOnNext}" />
+                                        <div class="error-box">
+                                            <app-error-message *ngIf="
+                                                    passengersForm.get('lName')?.invalid && isclickOnNext"
+                                                [message]="
+                                                        !passengersForm.get('lName')?.value ? ' این فیلد الزامی است' :''">
+                                            </app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="col-form-label-sm col-3">سن</label>
+                                        <input type="number" class="form-control" formControlName="age" [min]="min"
+                                            [max]="max"
+                                            [ngClass]="{ error: passengersForm.get('age')?.invalid  && isclickOnNext}" />
+                                        <div class="error-box">
+                                            <app-error-message *ngIf="
+                                                    passengersForm.get('age')?.invalid && isclickOnNext"
+                                                [message]="
+                                                        !passengersForm.get('age')?.value ? ' این فیلد الزامی است' :''">
+                                            </app-error-message>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="col-form-label-sm col-2">جنسیت</label>
+                                        <ng-multiselect-dropdown class="form-control-sm col-5 x"
+                                            [settings]="dropdownSettings" [data]="Genderlist"
+                                            (onSelect)="onRoleSelectGender($event,item)" [ngClass]="{
+                                        error: passengersForm.get('gender')?.invalid && isclickOnNext
+                                    }">
+
+                                        </ng-multiselect-dropdown>
+                                        <div class="error-box-g">
+                                            <app-error-message *ngIf="
+                                    passengersForm.get('gender')?.invalid && isclickOnNext" [message]="'فیلد خالی'">
+                                            </app-error-message>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="col-form-label-sm ">نام خانوادگی </label>
-                                <input class="form-control" type="text" formControlName="lName"
-                                    [ngClass]="{ error: passengersForm.get('lName')?.invalid  && isclickOnNext}" />
-                                <div class="error-box">
-                                    <app-error-message *ngIf="
-                                                passengersForm.get('lName')?.invalid && isclickOnNext" [message]="
-                                                    !passengersForm.get('lName')?.value ? ' این فیلد الزامی است' :''">
-                                    </app-error-message>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="col-form-label-sm col-3">سن</label>
-                                <input type="number" class="form-control" formControlName="age" [min]="min" [max]="max"
-                                    [ngClass]="{ error: passengersForm.get('age')?.invalid  && isclickOnNext}" />
-                                <div class="error-box">
-                                    <app-error-message *ngIf="
-                                                passengersForm.get('age')?.invalid && isclickOnNext" [message]="
-                                                    !passengersForm.get('age')?.value ? ' این فیلد الزامی است' :''">
-                                    </app-error-message>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="col-form-label-sm col-2">جنسیت</label>
-                                <ng-multiselect-dropdown class="form-control-sm col-5 x" [settings]="dropdownSettings"
-                                    [data]="Genderlist" (onSelect)="onRoleSelectGender($event , i)"
-                                    formControlName="gender" [placeholder]="selectedItem" [ngClass]="{
-                                    error: passengersForm.get('gender')?.invalid && isclickOnNext
-                                }">
-                                </ng-multiselect-dropdown>
-                                <div class="error-box-g">
-                                    <app-error-message *ngIf="
-                                passengersForm.get('gender')?.invalid && isclickOnNext" [message]="'فیلد خالی'">
-                                    </app-error-message>
-                                </div>
-                            </div>
-                            <div class="pt-2 mt-5">
-                                <button type="button" class="button-Del button-sm-0 float-left "
-                                    (click)="deletePassenger(i)">
-                                    <span>حذف </span>
-                                    <i class="fa fa-trash p-2"></i>
-                                </button>
+                                    <div class="row pt-2 mt-5">
+                                        <button type="button" class="button-Del button-sm-0 float-left "
+                                            (click)="deletePassenger(i)">
+                                            <span>حذف </span>
+                                            <i class="fa fa-trash p-2"></i>
+                                        </button>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -126,7 +135,48 @@
             </div>
             <div id="Confirm-information" class="content">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="gender" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <table class="table-hover caption-top table align-middle ">
+                    <caption class="">
+                        <div class="header row flex-row justify-content-between align-items-center">
+                            <h7 class="col-md-2 ">اطلاعات </h7>
+                        </div>
+                    </caption>
+                    <tbody>
+                        <td>
+                            <tr scope="col" style="width:10%">مبدا</tr>
+                            <tr scope="col" style="width:20%">مقصد</tr>
+                            <tr scope="col" style="width:45%">شرکت هواپیمایی</tr>
+                            <tr scope="col" style="width:25%">تاریخ و ساعت پرواز</tr>
+                            <tr scope="col" style="width:25%">شماره پرواز</tr>
+                            <tr scope="col" style="width:25%">بازه سنی</tr>
+                            <tr scope="col" style="width:25%">نام و نام خانوادگی</tr>
+                            <tr scope="col" style="width:25%">جنسیت</tr>
+                            <tr scope="col" style="width:25%">قیمت</tr>
+                        </td>
+                        <td>
+                            <tr class="shrink" style="width:10%">{{source}}</tr>
+                            <tr style="width:20%">{{ destination }}</tr>
+                            <tr style="width:45%">{{airline.name}}</tr>
+                            <tr style="width:25%">{{tripInfo.date}}</tr>
+                            <tr style="width:45%">{{airline.name}}</tr>
+                            <tr style="width:45%">{{airline.name}}</tr>
+                            <tr style="width:45%">{{airline.name}}</tr>
+                            <tr style="width:45%">{{airline.name}}</tr>
+                            <tr style="width:45%">{{airline.name}}</tr>
+                        </td>
+                    </tbody>
+                    <!-- <tbody>
+                      <tr *ngFor="let city of listCity  ">
+                        <td class="shrink" style="width:10%">{{city.id}}</td>
+                        <td style="width:20%">{{ city.name }}</td>
+                        <td style="width:45%"> </td>
+                        <td id="detail-td" style="width:25%">
+                          <i class="fas fa-edit p-2" ></i>
+                          <i class="fas fa-trash p-2"></i>
+                        </td>
+                      </tr>
+                    </tbody> -->
+                </table>
                 <button (click)="next()" class="btn btn-primary mt-5">تایید اطلاعات</button>
             </div>
             <div id="final-ticket" class="content text-center">
@@ -135,4 +185,3 @@
         </div>
     </div>
 </div>
-{{passengersForm?.value|json}}

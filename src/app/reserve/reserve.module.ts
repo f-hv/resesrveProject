@@ -14,6 +14,8 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { ReserveComponent } from './reserve.component';
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
+import { ReserveStepComponent } from './reserve-step/reserve-step.component';
+
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
     FormComponent,
     CreateComponent,
     ListComponent,
+    ReserveStepComponent,
   ],
   imports: [
     CommonModule,

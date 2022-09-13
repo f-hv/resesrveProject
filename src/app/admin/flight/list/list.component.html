@@ -24,7 +24,6 @@
             <th scope="col" style="width:5%">#</th>
             <th scope="col" style="width:14%">مبدا</th>
             <th scope="col" style="width:14%">مقصد</th>
-            <th scope="col" style="width:10%">مبلغ</th>
             <th scope="col" style="width:25%"> زمان </th>
             <th scope="col" style="width:15%"> پرواز</th>
             <th scope="col" style="width:17%"></th>
@@ -36,8 +35,7 @@
             <td scope="col" style="width:5%" class="overflow-hidden">{{flight.id}}</td>
             <td style="width:14%" class="overflow-hidden" >{{flight.source}}</td>
             <td style="width:14%" class="overflow-hidden" >{{flight.destination}}</td>
-            <td style="width:12%" class="overflow-hidden" >{{flight.price}}</td>
-            <td style="width:25%" class="overflow-hidden">{{flight.date | date:'short' }}</td>
+            <td style="width:25%" class="overflow-hidden">{{flight.date | date:'short' }}{{ flight.time}}</td>
             <!--  | jalali-->
             <td style="width:15%" class="overflow-hidden">{{flight.airline}}</td>
               <td id="detail-td" style="width:17%">
@@ -52,4 +50,5 @@
       </ngb-pagination>
     </div>
   </div>
+  {{listFlight}}
 </div>

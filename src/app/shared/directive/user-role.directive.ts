@@ -2,9 +2,9 @@ import { Directive,  Input, TemplateRef, ViewContainerRef } from '@angular/core'
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Directive({
-  selector: '[userRole]'
+  selector: '[UserRoleEnum]'
 })
-export class UserRoleDirective {
+export class UserRoleEnumDirective {
   @Input() inputRole: string;
   constructor(
     private authService: AuthService,
@@ -15,7 +15,7 @@ export class UserRoleDirective {
     this.changeVisibility();
   }
   value: string = '';
-  @Input() set userRole(data: string) {
+  @Input() set UserRoleEnum(data: string) {
     this.value = data;
   }
   changeVisibility() {

@@ -1,10 +1,10 @@
 <div class="container-fluid positionn-relative">
-    <div class="row header-info p-3 d-inline-block w-100 navbar-fixed-top navbar-expand-md">       
-         <span> بلیط هواپیما</span>
-        <span>{{source.name}}</span>  -
+    <div class="row header-info p-3 d-inline-block w-100 navbar-fixed-top navbar-expand-md'">
+        <span> بلیط هواپیما</span>
+        <span>{{source.name}}</span> -
         <span>{{destination.name}} </span>
         <i class="fas fa-calendar-alt"></i>
-         <span>{{departingDate}} </span> 
+        <span>{{departingDate}} </span>
     </div>
     <div class="row content-card">
         <div class="col-md-3 menu-right pt-5 mt-2">
@@ -18,13 +18,12 @@
         </div>
         <div class="col-md-9 list-flight">
             <div class="row content" *ngFor="let item of searchResualt;  let i = index">
-                <div class="row content-items mt-2 pt-3 pb-3"  [ngClass]="{'active':(detailsOpen[i] || infoOpen[i])}">
-                    <div class="row firstrow">
-
-                        <div class="col-md-2 align-text-center">{{item.airline}}</div>
+                <div class="row content-items mt-2 p-1 d-flex" [ngClass]="{'active':(detailsOpen[i] || infoOpen[i])}">
+                    <div class="row firstRow">
+                        <div class="col-md-2 align-text-center">{{item.airline.name}}</div>
                         <div class="col-md-7">
                             {{source.name}}
-                            <span class="p-2 time">7:00</span>
+                            <span class="p-2 time">{{ item.date}}</span>
                             <i class="fas fa-plane fa-rotate-180"></i>
                             <span class="line">-----------------------</span>
                             <i class="fas fa-circle"></i>
@@ -32,11 +31,9 @@
                             {{destination.name}}
                         </div>
                         <div class="col-md-3 pric d-flex flex-column align-items-center">
-                            <span> {{item.price |currency:'تومان' }}</span>
+                            <span>ریال {{travelPrice}}</span>
                             <button class="button buttonR-primary button-md-3 mt-2" type="submit" (click)="reserve(item)">
-                                انتخاب
-                                پرواز</button>
-                            <span class="details mt-2">{{item.emptySeats}} صندلی خالی</span>
+                             انتخاب پرواز</button>                            
                             <!-- de{{detailsOpen[i] }}info{{ infoOpen[i]}} -->
                         </div>
                     </div>
@@ -44,7 +41,8 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><span data-target="#details-{{i}}" data-toggle="tab" role="tab"
                                     (click)="detailTabOpen(i)">اطلاعات پرواز</span></li>
-                            <li class="mx-5"><span data-target="#info-{{i}}" data-toggle="tab" role="tab" (click)="infoTabOpen(i)">قوانین استرداد</span>
+                            <li class="mx-5"><span data-target="#info-{{i}}" data-toggle="tab" role="tab"
+                                    (click)="infoTabOpen(i)">قوانین استرداد</span>
                             </li>
                         </ul>
                         <!-- [ngStyle]="{'display':detailsOpen[i]?'block':'none' ;{ 'display':detailsOpen[i]?height:100px: height:0px} -->
@@ -65,20 +63,23 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane" id="info-{{i}}" [ngClass]="{'active': infoOpen[i]}" >
+                            <div class="tab-pane" id="info-{{i}}" [ngClass]="{'active': infoOpen[i]}">
                                 <div class="flex w-full mb-2  text-2">
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    
-                                     <span>درصد جریمه کسر شده بر اساس زمان اعلام کنسلی
-                                    قوانین استرداد</span></div>
+
+                                    <span>درصد جریمه کسر شده بر اساس زمان اعلام کنسلی
+                                        قوانین استرداد</span>
+                                </div>
                                 <div class="card-info">
                                     <div class="refund">
                                         <div class="refund__percent">60%</div>
-                                        <span class="refund__text">از زمان صدور بلیط تا  12:00 ظهر 1 روز قبل از پرواز</span>
+                                        <span class="refund__text">از زمان صدور بلیط تا 12:00 ظهر 1 روز قبل از
+                                            پرواز</span>
                                     </div>
                                     <div class="refund">
                                         <div class="refund__percent">70%</div>
-                                        <span class="refund__text">از 12:00 ظهر 1 روز قبل از پرواز تا 4 ساعت قبل از پرواز</span>
+                                        <span class="refund__text">از 12:00 ظهر 1 روز قبل از پرواز تا 4 ساعت قبل از
+                                            پرواز</span>
                                     </div>
                                     <div class="refund">
                                         <div class="refund__percent">80%</div>

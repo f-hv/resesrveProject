@@ -5,16 +5,10 @@
     height   : 700px;
 
     .header-info {
-        position        : fixed;
-        overflow-y      : scroll;
         background-color: $white;
-        top             : 0px;
-
-        // bottom:0;
     }
 
     .content-card {
-        margin-top     : 40px;
         display        : flex;
         align-items    : flex-start;
         justify-content: space-between;
@@ -42,6 +36,10 @@
             align-content   : center;
             align-items     : center;
 
+            .firstRow{
+                max-height: 55px;
+                margin-top: -35px;
+            }
             i,
             .line {
                 color: $cool-gray-30;
@@ -79,11 +77,11 @@
                 font-weight: 900;
             }
             .tabbable{
-                margin-top: -20px !important;
                 width: 77%;
             }
             .nav-tabs li span{
                 font-size: $font-size-1;
+                cursor: pointer;
             }
 
             .tab-pane {

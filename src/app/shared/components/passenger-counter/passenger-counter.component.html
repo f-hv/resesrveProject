@@ -7,7 +7,7 @@
             </div>
             <div class="col col-sm-4">
                 <button class="button buttonR-sm-0" type="button" (click)="adultAdd()">+</button>
-                <span>{{countPassenger.adultCount}}</span>
+                <span class="pe-1 ps-1">{{countPassenger.adultCount}}</span>
                 <button class="button buttonR-sm-0" type="button" (click)="adultLow()" [disabled]="countPassenger.adultCount==1 ||
                     (countPassenger.babyCount+countPassenger.childCount ) >= countPassenger.adultCount">-
                 </button>
@@ -21,7 +21,7 @@
                 <button class="button buttonR-sm-0" type="button" (click)="childAdd()"
                     [disabled]="(countPassenger.babyCount+countPassenger.childCount) /3 == countPassenger.adultCount">+
                 </button>
-                <span>{{countPassenger.childCount}}</span>
+                <span class="pe-1 ps-1">{{countPassenger.childCount}}</span>
                 <button class="buttonR-sm-0" type="button" (click)="childLow()"
                     [disabled]="countPassenger.childCount==0">-</button>
             </div>
@@ -34,7 +34,7 @@
                 <button class=" buttonR-sm-0  " type="button" (click)="babyAdd()" [disabled]="
                 countPassenger.babyCount == countPassenger.adultCount ">+
                 </button>
-                <span>{{countPassenger.babyCount}}</span>
+                <span class="pe-1 ps-1 ">{{countPassenger.babyCount}}</span>
                 <button class="button buttonR-sm-0 " type="button" (click)="babyLow()"
                     [disabled]="countPassenger.babyCount==0">-</button>
             </div>

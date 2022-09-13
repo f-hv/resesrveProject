@@ -8,7 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { UserRoleDirective } from './directive/user-role.directive';
+import { UserRoleEnumDirective } from './directive/user-role.directive';
 import { ClientSidebarComponent } from './components/client-sidebar/client-sidebar.component';
 import { PassengerCounterComponent } from './components/passenger-counter/passenger-counter.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
@@ -20,7 +20,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    UserRoleDirective,
+    UserRoleEnumDirective,
     ClientSidebarComponent,
     PassengerCounterComponent,
     CarouselComponent
@@ -38,7 +38,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
      SearchBoxComponent,
      HeaderComponent,
      SidebarComponent,
-     UserRoleDirective,
+     UserRoleEnumDirective,
      ClientSidebarComponent,
      PassengerCounterComponent,
      CarouselComponent

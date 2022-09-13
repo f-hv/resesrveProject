@@ -5,7 +5,7 @@
                 <div class="row"> 
                     <h5 class="card-title">LOGIN</h5>
                 </div>
-                <div class="row ">
+                <div class="row mt-4">
                     <input class="form-control  position-relative" autofocus type="text" formControlName="userName"
                         [ngClass]="{
                           error: formLogin.get('userName')?.value === '' && isClickOnSaveBtn 
@@ -38,9 +38,9 @@
                         </app-error-message>
                     </div>
                 </div>
-                <recaptcha class="mt-4 "  formControlName="captcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()">
+                <recaptcha class="mt-3 pt-2 "  formControlName="captcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()">
                 </recaptcha>
-                <div class="action-btn row">
+                <div class="action-btn row mt-3">
                     <div class="col-sm-12">
                         <button class="button buttonR-primary button-sm-3 " [disabled]="formLogin.invalid" value="Submit"
                             type="submit" (click)="login()">ورود</button>

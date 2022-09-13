@@ -14,7 +14,7 @@
 
 .card {
     width      : 370px;
-    height     : 420px;
+    height     : 400px;
     position       : relative;
     display        : flex;
     flex-direction : column;
@@ -28,16 +28,14 @@
 }
 
 .card-title{
-    letter-spacing: 200px;
+    letter-spacing: 20px;
 }
 .card-body {
     position       : relative;
-    padding        : 0px;
     display        : flex;
     flex-direction : column;
     align-items    : center;
     justify-content: flex-end;
-    padding: 10px 5px 5px 5px;
 
     h4 {
         letter-spacing: -2px;
@@ -110,7 +108,9 @@
             }
         }
     }
+   
 }
+
 
 
 

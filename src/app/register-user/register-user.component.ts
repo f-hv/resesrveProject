@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 import { UserModel } from '../core/models/user.model';
 import { AuthService } from '../core/services/auth.service';
 import { UserService } from '../core/services/user.service';
-import { UserRole } from '../shared/enums/user-role.enum';
+import { UserRoleEnum } from '../shared/enums/user-role.enum';
 
 @Component({
   selector: 'app-register-user',
@@ -29,7 +29,7 @@ export class RegisterUserComponent implements OnInit {
   //// dropdown/////
   dropdownSettings: IDropdownSettings;
   selectedRole: any;
-  roleUser = UserRole;
+  roleUser = UserRoleEnum;
   listRoles: any[] = [];
   check = 1
   isSelectRole: Boolean = false;
@@ -44,6 +44,7 @@ export class RegisterUserComponent implements OnInit {
   ) {
     this.listRoles = Object.keys(this.roleUser);
   }
+  
   ngOnInit(): void {
     if (this.id) {
       this.getData();

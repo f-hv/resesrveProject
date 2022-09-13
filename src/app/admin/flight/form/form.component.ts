@@ -10,17 +10,8 @@ import { FlightService } from '../../../core/services/flight.service';
 import { NgbCalendar, NgbCalendarPersian, NgbDatepickerI18n, NgbDate, NgbDateStruct, NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
-
-const WEEKDAYS_SHORT = ['د', 'س', 'چ', 'پ', 'ج', 'ش', 'ی'];
-const MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
-
+import * as moment from 'jalali-moment'
 @Injectable()
-export class NgbDatepickerI18nPersian extends NgbDatepickerI18n {
-  getWeekdayLabel(weekday: number) { return WEEKDAYS_SHORT[weekday - 1]; }
-  getMonthShortName(month: number) { return MONTHS[month - 1]; }
-  getMonthFullName(month: number) { return MONTHS[month - 1]; }
-  getDayAriaLabel(date: NgbDateStruct): string { return `${date.year}-${this.getMonthFullName(date.month)}-${date.day}`; }
-}
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -28,7 +19,6 @@ export class NgbDatepickerI18nPersian extends NgbDatepickerI18n {
   providers: [
     NgbInputDatepickerConfig,
     { provide: NgbCalendar, useClass: NgbCalendarPersian },
-    { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nPersian }
   ]///datepicker
 })
 export class FormComponent implements OnInit {
@@ -43,16 +33,17 @@ export class FormComponent implements OnInit {
   selectedSource = {};
   source: any;
   destination: any;
-  IdAirline: any;
+  airline: any;
   data: CityModel | undefined;
   ///// datepicker
-  newDate = new Date(1400, 11, 24, 10, 33, 30);
+  newDate = new Date();
   editDate = new Date();
   today = new Date();
   placement = 'bottom';
   dateNew: any;
   ////timepicker
   time: any = null;
+  newTime: string ;
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
@@ -62,7 +53,7 @@ export class FormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private config: NgbInputDatepickerConfig,
     private calendar: NgbCalendar,
-    private toastrService:ToastrService
+    private toastrService: ToastrService
   ) {
     //  isDisabled = (date: NgbDate, current: {month: number, year: number}) => date.month !== current.month;
     //  isWeekend = (date: NgbDate) =>  this.calendar.getWeekday(date) >= 6;
@@ -72,9 +63,6 @@ export class FormComponent implements OnInit {
     this.listAirline = this.airlineService.getData();
     if (this.id) {
       this.dataFlight = this.flightService.getById(this.id);
-
-      this.data = this.listCity.find(item => item.name === this.dataFlight.source);
-      this.selectedSource = { idField: this.data?.id, textField: this.data?.name };
       this.updateValueTimeDate();
     }
     else {
@@ -83,13 +71,20 @@ export class FormComponent implements OnInit {
         source: null,
         destination: null,
         date: null,
-        price: null,
+        time: null,
         airline: null,
         flightNumber: null,
         deleted: 0
       }
     }
+
     this.initial();
+    this.formFlight?.get('date')?.valueChanges.subscribe((value: any) => {
+      this.newDate = value;
+      // moment(value,'jYYYY/jMM/jDD') ;
+      console.log(value);
+      
+    })
     this.dropdownSettings = {
       singleSelection: true,
       idField: 'id',
@@ -98,6 +93,7 @@ export class FormComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 20,
     };
+
   }
   initial() {
     this.formFlight = this.formBuilder.group({
@@ -106,73 +102,59 @@ export class FormComponent implements OnInit {
       destination: [this.dataFlight.destination, Validators.required],
       airline: [this.dataFlight.airline, Validators.required],
       date: [this.dataFlight.date, Validators.required],
-      time: [this.time, [Validators.required]],
-      price: [this.dataFlight?.price, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
+      time: [this.dataFlight.time, [Validators.required]],
       flightNumber: [this.dataFlight?.flightNumber, Validators.required],
       deleted: 0
     });
-    this.formFlight?.get("date")?.setValue(this.dateNew);
   }
   cancel() {
     this.navigate();
   }
 
   save() {
-    if (this.source)
-      this.formFlight?.get("source")?.setValue(this.source);
-    if (this.destination)
-      this.formFlight?.get("destination")?.setValue(this.destination);
-    if (this.IdAirline)
-      this.formFlight?.get("airline")?.setValue(this.IdAirline);
     this.isClickOnSaveBtn = true;
     if (this.formFlight.invalid) {
       return;
     }
-    else {
-      this.combineTimeDate();
-      this.formFlight?.get("date")?.setValue(this.newDate);
-      if (this.id) {
-        this.update();
-      }
-      else {
-        this.create();
-      }
-      this.navigate();
+
+    //  const newDate=  this.combineTimeDate();
+    debugger
+    this.formFlight?.get('date')?.setValue(this.dateNew);
+    this.formFlight?.get('time')?.setValue(this.newTime);
+    this.formFlight?.get('destination')?.setValue(this.destination);
+    this.formFlight?.get('source')?.setValue(this.source);
+    this.formFlight.get('airline')?.setValue(this.airline)
+    if (this.id) {
+      this.update();
     }
+    else {
+      this.create();
+    }
+    this.navigate();
   }
+
   update() {
     const resualt = this.flightService.update(this.formFlight.value);
     if (resualt)
-    this.toastrService.success('update succesfull');
+      this.toastrService.success('update succesfull');
     else
-    this.toastrService.error('update failed','sorry!');
+      this.toastrService.error('update failed', 'sorry!');
   }
 
   create() {
     this.flightService.create(this.formFlight.value);
-    this.toastrService.success('The new airline was create successfully','success');
+    this.toastrService.success('The new airline was create successfully', 'success');
 
   }
 
-  combineTimeDate() {
-    var time = this.formFlight.get('time')?.value;
-    var date = this.formFlight.get('date')?.value;
-    ////////// SET DATE ///////////
-    if (date) {
-      var day = Number(date.day);
-      var month = Number(date.month);
-      var year = Number(date.year);
-      this.newDate.setMonth(month);
-      this.newDate.setDate(day);
-      this.newDate.setFullYear(year);
-    }
-    ////////// SET TIME ///////////
-    var hour = Number(time.hour);
-    var minute = Number(time.minute);
-    var second = Number(time.second);
-    this.newDate.setHours(hour);
-    this.newDate.setMinutes(minute);
-  }
+  // combineTimeDate() {
+  //   debugger
+  //   var time = this.formFlight.get('time')?.value;
+  //   var date = this.formFlight.get('date')?.value;
+  //   this.newDate.setDate(date);
+  //   this.newDate.setTime(time);
+  //   return this.newDate;
+  // }
   navigate() {
     this.router.navigate([this.id ? '../..' : '..'], {
       relativeTo: this.activatedRoute,
@@ -180,17 +162,13 @@ export class FormComponent implements OnInit {
   }
   //////multiselect Dropdown
   onSourceSelect(item: any) {
-    this.source = '';
-    const selectedSource = this.listCity.find(city => city.id === item.id);
-    this.source = selectedSource?.name;
+    this.source = item.name;
   }
   ondestinationSelect(item: any) {
-    const selecteddestination = this.listCity.find(city => city.id === item.id);
-    this.destination = selecteddestination?.name;
+    this.destination = item.name;
   }
   onAirlineSelect(item: any) {
-    const selectedAirline = this.listAirline.find(airline => airline.id === item.id);
-    this.IdAirline = selectedAirline?.id;
+    this.airline = item.name;
   }
   updateValueTimeDate() {
     if (this.dataFlight.date) {
@@ -203,10 +181,10 @@ export class FormComponent implements OnInit {
       var month = this.editDate.getMonth();
       var day = this.editDate.getDate();
       this.dateNew = { "year": year, "month": month, "day": day }
-      // dateNew.setDate(day);
-      // dateNew.setFullYear(year);
-      // dateNew.setMonth(month);
-      // { "year": 1400, "month": 11, "day": 22 }
     }
   }
+  onTimeChange(value: { hour: string, minute: string }) {
+    this.newTime = `${value.hour}:${value.minute}`;
+  }
+  onDateChange(value:any){}
 }

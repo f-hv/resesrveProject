@@ -1,0 +1,57 @@
+@import "../../../assets/styles/custom-kit/variable.scss";
+
+.container{
+    height          : 100%;
+    width           : 100%;
+    background-color:  $gray-20;
+}
+
+.bs-stepper-header{
+    border-radius: 8px;
+    box-shadow: $box-shadow-xs;
+    border: solid 1px $gray-30;
+    background-color: $white;
+    border-radius: 8px;
+    
+}
+
+.card-design{
+    border-radius: 8px;
+    box-shadow: $box-shadow-xs;
+    border: solid 1px $gray-30;
+    background-color: $white;
+    border-radius: 8px;
+    font-size: $font-size-2 !important;
+}
+.pric{
+    border-right: 2px solid $gray-30;
+}
+.bs-stepper-content{
+
+    .title-btn{
+        border-radius: $radius-md;
+    }
+    .a-card-title span{
+        font-size: $font-size-4 !important;
+        font-weight: 800;
+    }
+    .error-box{
+        margin-top: -18px;
+    }
+    .error-box-g{
+        margin-top: -36px;
+
+    }
+    .content-passenger{
+        min-height: 180px;
+        max-height: 115px;
+        border-bottom: solid 1px $gray-30 ;
+    }
+}
+
+label{
+    pointer-events: none;
+}
+p {
+    font-family: Lato;
+  }

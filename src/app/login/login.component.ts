@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
     this.formLogin.setValue({
       userName: '',
       password: '',
+      captcha:''
     });
     this.isClickOnSaveBtn = false;
   }
