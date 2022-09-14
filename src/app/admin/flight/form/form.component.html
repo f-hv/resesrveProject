@@ -72,7 +72,7 @@
             <div>
               <ng-persian-datepicker>
                 <input class="form-control input-Date" type="text" placeholder=" تاریخ" formControlName="date"
-                 [dateMax]="maxDate" [timeEnable]=true
+                (ngModelChange)="onDateChange($event)" [dateMax]="maxDate" [timeEnable]=true
                   [ngClass]="{  error:formFlight.get('date')?.value === '' && isClickOnSaveBtn }" />
               </ng-persian-datepicker>
             </div>

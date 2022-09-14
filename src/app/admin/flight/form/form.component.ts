@@ -119,7 +119,7 @@ export class FormComponent implements OnInit {
 
     //  const newDate=  this.combineTimeDate();
     debugger
-    this.formFlight?.get('date')?.setValue(this.dateNew);
+    this.formFlight?.get('date')?.setValue(this.newDate);
     this.formFlight?.get('time')?.setValue(this.newTime);
     this.formFlight?.get('destination')?.setValue(this.destination);
     this.formFlight?.get('source')?.setValue(this.source);
@@ -186,5 +186,8 @@ export class FormComponent implements OnInit {
   onTimeChange(value: { hour: string, minute: string }) {
     this.newTime = `${value.hour}:${value.minute}`;
   }
-  onDateChange(value:any){}
+  onDateChange(value:any){
+    this.newDate = value;
+    
+  }
 }

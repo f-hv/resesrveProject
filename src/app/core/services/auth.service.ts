@@ -8,6 +8,7 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class AuthService {
+  resualt: boolean = false;
   public currentUser$: BehaviorSubject<any> = new BehaviorSubject(null);
   users: any;
   logedUser: any;
@@ -19,7 +20,7 @@ export class AuthService {
   ) { }
 
   login(userName: any, password: any) {
-    const users =LocalStorageService.read("users");
+    const users = LocalStorageService.read("users");
     const validUser = users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
     if (validUser) {
       LocalStorageService.save('currentUser', JSON.stringify(validUser));
@@ -36,22 +37,20 @@ export class AuthService {
     this.currentUser$.next(null);
   }
 
+
   isLoggedIn() {
-    if (this.currentUser$?.value) {
-      if (this.expiryTimeService.getExpiry('expiryTime'))
-        return true;
-    }
+    if (this.currentUser$?.value)
+      this.resualt = this.expiryTimeService.getExpiry('expiryTime') ? true : false;
     else {
-      let user =JSON.parse( LocalStorageService.read('currentUser')|| 'null');
+      var user = JSON.parse(LocalStorageService.read('currentUser') || 'null');
       if (user) {
         if (this.expiryTimeService.getExpiry('expiryTime')) {
           this.currentUser$.next(user);
-          return true
+          this.resualt = true
         }
-        else
-          return false;
+        else this.resualt = false;
       }
     }
-    return false;
+    return this.resualt
   }
 }

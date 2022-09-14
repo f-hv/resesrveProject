@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.authService.isLoggedIn() ? this.directToPage() : '';
     this.initial();
   }
   initial() {
