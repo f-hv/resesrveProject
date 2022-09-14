@@ -20,12 +20,10 @@ export class CityService {
 
   getById(id: any) {
     const findItem = this.city.find((item: any) => item.id === id);
-    if (findItem) return findItem;
-    else {
-      return { id: null, name: null, deleted: null };
-    }
+    return findItem ? findItem : { id: null, name: null, deleted: null };
   }
   getData() {
+    debugger
     return this.city;
   }
   update(data: any) {

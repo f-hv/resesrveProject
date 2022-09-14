@@ -6,11 +6,11 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <label class="col-md-3 col-form-label-sm">شهر</label>
-          <input class="col-md-3 form-control" type="text" [(ngModel)]="listCity.name"            
-          [ngClass]="{ error: listCity.name === null && isClickOnSaveBtn }"
+          <input class="col-md-3 form-control" type="text" [(ngModel)]="city.name"            
+          [ngClass]="{ error: city.name === null && isClickOnSaveBtn }"
            />
           <app-error-message *ngIf="
-            listCity.name === null &&
+            city.name === null &&
             isClickOnSaveBtn" [message]="'فیلد خالی است'"></app-error-message>
         </div>
         <div class="col-md-3"></div>
@@ -34,3 +34,7 @@
     </div>
     <div class="col col-md-2"> </div>
   </div>
+  {{listCity|json}}
+
+  -------------------------
+  {{city|json}}
