@@ -14,15 +14,16 @@ export class UserService {
     private localStorageService: LocalStorageService,
   ) { }
 
+
   getData() {
-    return this.users = JSON.parse(LocalStorageService.read("users") || null);
+    return this.users =LocalStorageService.read("users");
   }
 
   getById(id: any) {
     this.getData();
     return this.users.find((user: any) => user.id === id)
   }
-  
+
   delete(item: any) {
     this.getData();
     this.users.find((user) => {
@@ -49,39 +50,20 @@ export class UserService {
         this.resualt = true;
       }
     });
-    if (this.resualt) return true;
-    else return false;
+    return this.resualt ? true : false;
   }
 
   create(data: UserModel) {
-    return LocalStorageService.addToArray("users", data);
+    debugger
+    this.getData();
+    if (this.users === null) {
+      LocalStorageService.save("users", JSON.stringify(data));
+      return true
+    }
+    else {
+      const validUser = this.users.find((item: any) => item.userName === data.userName || item.email === data.email)
+      return validUser ? false : LocalStorageService.addToArray("users", data) && true ;
+    }
   }
 }
-  // this.infoLogin .push( this.getParseData("users"));
-    // console.log("info",this.infoLogin);
-
-    // if (!this.infoLogin) {
-    //   LocalStorageService.save("users", JSON.stringify(data));
-    //   return true;
-    // }
-    // else {
-    //   const validUser = this.infoLogin.find((item: any) => item.userName === data.userName || item.email === data.email);
-    //   if (!validUser) {        
-    //     this.infoLogin.push({
-    //       id: data.id,
-    //       firstName: data.firstName,
-    //       userName: data.userName,
-    //       password: data.password,
-    //       email : data.email,
-    //       role: data.role,
-    //       deleted: 0
-    //     });
-    //     LocalStorageService.save("users", JSON.stringify(this.infoLogin));
-    //     return true
-    //   }
-    //   else return false;
-    // }
-
-  //  } 
-
 

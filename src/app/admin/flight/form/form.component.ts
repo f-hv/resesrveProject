@@ -81,9 +81,7 @@ export class FormComponent implements OnInit {
     this.initial();
     this.formFlight?.get('date')?.valueChanges.subscribe((value: any) => {
       this.newDate = value;
-      // moment(value,'jYYYY/jMM/jDD') ;
-      console.log(value);
-      
+      // moment(value,'jYYYY/jMM/jDD') ;      
     })
     this.dropdownSettings = {
       singleSelection: true,
@@ -116,9 +114,6 @@ export class FormComponent implements OnInit {
     if (this.formFlight.invalid) {
       return;
     }
-
-    //  const newDate=  this.combineTimeDate();
-    debugger
     this.formFlight?.get('date')?.setValue(this.newDate);
     this.formFlight?.get('time')?.setValue(this.newTime);
     this.formFlight?.get('destination')?.setValue(this.destination);
@@ -142,25 +137,15 @@ export class FormComponent implements OnInit {
   }
 
   create() {
-    this.flightService.create(this.formFlight.value);
-    this.toastrService.success('The new airline was create successfully', 'success');
-
+    this.formFlight.get('id')?.setValue(this.listAirline.length+1)
+    const resualt = this.flightService.create(this.formFlight.value);
+    resualt ?  this.toastrService.success('پرواز با موفقیت ثبت شد', 'success') && this.navigate(): this.toastrService.warning('این پرواز قبلا ثبت شده');
   }
-
-  // combineTimeDate() {
-  //   debugger
-  //   var time = this.formFlight.get('time')?.value;
-  //   var date = this.formFlight.get('date')?.value;
-  //   this.newDate.setDate(date);
-  //   this.newDate.setTime(time);
-  //   return this.newDate;
-  // }
   navigate() {
     this.router.navigate([this.id ? '../..' : '..'], {
       relativeTo: this.activatedRoute,
     });
   }
-  //////multiselect Dropdown
   onSourceSelect(item: any) {
     this.source = item.name;
   }
@@ -184,10 +169,9 @@ export class FormComponent implements OnInit {
     }
   }
   onTimeChange(value: { hour: string, minute: string }) {
-    this.newTime = `${value.hour}:${value.minute}`;
+    this.newTime = value?.hour +":" + value?.minute;   
   }
   onDateChange(value:any){
-    this.newDate = value;
-    
+    this.newDate = value;    
   }
 }

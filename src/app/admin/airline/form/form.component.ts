@@ -21,26 +21,6 @@ export class FormComponent implements OnInit {
     { id:2 , weight:25 },
     { id:3 , weight:30 },
   ]
-  listPriceClass: any[] = [
-    { id: 1, name: 'A' },
-    { id: 2, name: 'B' },
-    { id: 3, name: 'D' },
-    { id: 4, name: 'F' },
-    { id: 5, name: 'H' },
-    { id: 6, name: 'J' },
-    { id: 7, name: 'K' },
-    { id: 8, name: 'L' },
-    { id: 9, name: 'M' },
-    { id: 10, name: 'N' },
-    { id: 11, name: 'O' },
-    { id: 12, name: 'P' },
-    { id: 13, name: 'Q' },
-    { id: 14, name: 'R' },
-    { id: 15, name: 'S' },
-    { id: 16, name: 'Y' },
-    { id: 17, name: 'W' },
-    { id: 18, name: 'P' },
-  ];
   dataAirline: AirlineModel;
   listCity: CityModel[];
   isClickOnSaveBtn=false;
@@ -48,7 +28,6 @@ export class FormComponent implements OnInit {
     ////////////multiselect Dropdown
   dropdownSettings = {};
   dropdownSettingsLoad={}
-  priceClass: any;
   city: any;
   loadWeight:any;
 
@@ -71,7 +50,6 @@ export class FormComponent implements OnInit {
         id: null,
         name: null,
         city: null,
-        priceClass: null,
         loadWeight: null,
         deleted: null
       }
@@ -101,7 +79,6 @@ export class FormComponent implements OnInit {
       id: [this.dataAirline?.id],
       name: [this.dataAirline?.name, Validators.required],
       city: [this.dataAirline?.city, Validators.required],
-      priceClass: [this.dataAirline?.priceClass, Validators.required],
       loadWeight: [this.dataAirline?.loadWeight, Validators.required],
     })
   }
@@ -112,8 +89,9 @@ export class FormComponent implements OnInit {
       return
     }
     else {
-      this.formAirline?.get('priceClass')?.setValue(this.priceClass);
       this.formAirline?.get('city')?.setValue(this.city);
+      this.formAirline?.get('loadWeight')?.setValue(this.loadWeight);
+
       if (this.id) {
        this.update();
       }
@@ -142,19 +120,11 @@ export class FormComponent implements OnInit {
       relativeTo: this.activatedRoute,
     })
   }
-
-  ////////////multiselect Dropdown
-  onPriceClassSelect(item: any) {
-    const selectedPClass = this.listPriceClass.find(pClass => pClass.id === item.id);
-    this.priceClass = selectedPClass?.name;
-  }
   onCitySelect(item: any) {
-    const selectedCity = this.listCity.find(cityItem => cityItem.id === item.id);
-    this.city = selectedCity?.name;
+    this.city = item.name;
   }
   onLoadSelect(item:any){
-    const selectedLoad = this.listLoadWeight.find(load => load.id === item.id);
-    this.loadWeight = selectedLoad?.weight;
+    this.loadWeight = item.weight;
   }
 
 }

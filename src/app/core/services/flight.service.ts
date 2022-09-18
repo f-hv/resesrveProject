@@ -1,192 +1,85 @@
 import { Injectable } from '@angular/core';
 import { FlightModel } from '../models/flight.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlightService {
-  flight: FlightModel[] = [
-    {
-      id: 1,
-      source: 'کیش',
-      destination: 'تهران',
-      airline: 'ایران ایر',
-      date: new Date(1400, 1, 25, 21,10),
-      flightNumber: 512,
-      deleted: 0
-    },
-    {
-      id: 1,
-      source: 'کیش',
-      destination: 'تهران',
-      airline: 'آتا',
-      date: new Date(1400, 11, 5, 10, 33),
-      // time:new Date(),
-      flightNumber: 514,
-      deleted: 0
-    },
-    {
-      id: 1,
-      source: 'کیش',
-      destination: 'تهران',
-      airline: 'کیش ایر',
-      date: new Date(1400, 11, 5, 10, 33, 30),
-      // time:new Date(),
-      flightNumber: 511,
-      deleted: 0
-    },
-    {
-      id: 2,
-      source: 'اصفهان',
-      destination: 'شیراز',
-      airline: 'ایران ایر',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 342,
-      deleted: 0
-    },
-    {
-      id: 3,
-      source: 'شیراز',
-      destination: 'اصفهان',
-      airline: 'آتا',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 434,
-      deleted: 0
-    },
-    {
-      id: 4,
-      source: 'کیش',
-      destination: 'تهران',
-      airline: 'کیش ایر',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 512,
-      deleted: 0
-    },
-    {
-      id: 5,
-      source: 'تهران',
-      destination: 'مازندران',
-      airline: 'وارش ',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 176,
-      deleted: 0
-    },
-    {
-      id: 6,
-      source: 'تهران',
-      destination: 'کیش',
-      airline: 'ایران ایر',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 152,
-      deleted: 0
-    },
-    {
-      id: 7,
-      source: 'تهران',
-      destination: 'کیش',
-      airline: 'آسمان',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 153,
-      deleted: 0
-    },
-    {
-      id:8 ,
-      source: 'تهران',
-      destination: 'کیش',
-      airline: 'آتا',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 154,
-      deleted: 0
-    },
-    {
-      id: 9,
-      source: 'مشهد',
-      destination: 'تهران',
-      airline: 'ایراان ایر',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 122,
-      deleted: 0
-    },
-    {
-      id: 10,
-      source: 'تهران',
-      destination: 'مشهد',
-      airline: 'آتا',
-      date: new Date(),
-      // time:new Date(),
-      flightNumber: 124,
-      deleted: 0
-    }
-  ];
+  flight: FlightModel[] = [];
   orginalListFlight = [...this.flight];
-  resualt:Boolean=false;
-  constructor() { }
+  resualt: Boolean = false;
+  constructor(
+    private localStorageService: LocalStorageService
+  ) { }
 
   getById(id: any) {
+    this.getData();
     const findItem = this.flight.find((item: any) => item.id === id);
-    if (findItem) return findItem;
-    else {
-      return {
-        id: null,
-        source: null,
-        destination: null,
-        airline: null,
-        date: null,
-        // time:null,
-        flightNumber: null,
-        deleted: null
-      };
-    }
+    return findItem ? findItem : {
+      id: null,
+      source: null,
+      destination: null,
+      airline: null,
+      date: null,
+      time: null,
+      flightNumber: null,
+      deleted: null
+    };
   }
 
   getData() {
-    return this.flight;
+    debugger
+    let data = LocalStorageService.read("flights");
+    let A1=JSON.parse( JSON.parse(data));
+    console.log(data,A1);
+    return data
+
+    
   }
 
   update(data: FlightModel) {
-    const editItem = this.flight.find(item => item.id === data.id)
-    if (editItem) {
-      editItem.source = data.source,
-        editItem.destination = data.destination,
-        editItem.airline = data.airline,
-        editItem.date = data.date,
-        // editItem.time=data.time,
-        editItem.flightNumber = data.flightNumber,
-        editItem.deleted = 0
-      return true;
-    } else return false;
+    this.getData();
+    this.flight.find((item: any) => {
+      if (item.id === data.id) {
+        item.source = data.source,
+          item.destination = data.destination,
+          item.airline = data.airline,
+          item.date = data.date,
+          item.time = data.time,
+          item.flightNumber = data.flightNumber,
+          item.deleted = 0
+        LocalStorageService.save("flights", JSON.stringify(this.flight));
+        this.resualt = true;
+      }
+    })
+    return this.resualt ? true : false;
   }
 
   delete(id: any) {
-    const delItem = this.flight.find((item) => {
-      if (item.id === id)
+    this.getData()
+    this.flight = this.flight.filter((item) => {
+      if (item.id === id) {
         item.deleted = 1;
-        this.resualt=true;
-
+        this.resualt = true;
+      }
+      LocalStorageService.save("flights", JSON.stringify(this.flight));
     });
-    if (this.resualt) return true;
-    else return false;
+    return this.resualt ? true : false;
   }
 
-  create(item: FlightModel) {
-    this.flight.push({
-      id: this.flight.length + 1,
-      source: item.source,
-      destination: item.destination,
-      airline: item.airline,
-      date: item.date,
-      time:item.time,
-      flightNumber: item.flightNumber,
-      deleted: 0,
-    })
+  create(data: FlightModel) {
+    this.flight =JSON.parse( LocalStorageService.read("flights"));
+    if (this.flight==null) {
+      const list:FlightModel[]=[];
+      list.push(data);
+      LocalStorageService.save("flights", JSON.stringify(list));
+      return true
+    }
+    else {
+      const validUser = this.flight.find((item: any) => item.source === data.source && item.destination === data.destination)
+      return validUser ? false : LocalStorageService.addToArray("flights",data) && true;
+    }
   }
 
   getOrginalList() {

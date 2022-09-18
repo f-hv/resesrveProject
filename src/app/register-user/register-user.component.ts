@@ -44,11 +44,12 @@ export class RegisterUserComponent implements OnInit {
   ) {
     this.listRoles = Object.keys(this.roleUser);
   }
-  
+
   ngOnInit(): void {
     if (this.id) {
       this.getData();
     }
+    this.users = LocalStorageService.read('users');
     this.initial()
     this.setUserValidateRole();
     this.dropdownSettings = {
@@ -138,16 +139,10 @@ export class RegisterUserComponent implements OnInit {
       this.toastrService.error('کاربر با این مشخصات وجود ندارد');
   }
   create() {
-    let length =this.localStorageService.length();
-    this.formRegister.get("id")?.setValue(length + 1);
-    console.log(this.formRegister.value);
+    this.formRegister.get("id")?.setValue(this.users.length + 1);
     const resualt = this.userService.create(this.formRegister?.value);
-    if (resualt) {
-      this.toastrService.success('کاربر با موفقیت ثبت شد.');
-      this.navigate();
-    }
-    else
-      this.toastrService.error('کاربر با این مشخصات قبلا ثبت نام شده');
+    resualt ? this.toastrService.error('کاربر با این مشخصات قبلا ثبت نام شده') :this.toastrService.success('کاربر با موفقیت ثبت شد.') && this.navigate();
   }
-
 }
+
+

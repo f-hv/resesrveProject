@@ -12,11 +12,6 @@ const routes: Routes = [
         redirectTo: 'dashboard',
       },
       {
-        path: 'city',
-        loadChildren: () => import('./city/city.module')
-          .then(m => m.CityModule)
-      },
-      {
         path: 'flight',
         loadChildren: () => import('./flight/flight.module')
           .then(m => m.FlightModule)

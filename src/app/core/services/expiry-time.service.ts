@@ -15,7 +15,6 @@ export class ExpiryTimeService {
       expiry: Date.now() + (ttl*1000),
     }
     LocalStorageService.save(key, JSON.stringify(item))
-    console.log("item:", item);
   }
 
   getExpiry(key: any) {
@@ -25,7 +24,6 @@ export class ExpiryTimeService {
     }
     if (Date.now() > expireKey.ttl) {
       LocalStorageService.delete(key);
-      console.log("remove item");
       return false;
     }
     return true /////no expired

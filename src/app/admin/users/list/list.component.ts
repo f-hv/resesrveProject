@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/app/core/models/user.model';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { UserRoleEnum } from 'src/app/shared/enums/user-role.enum';
 
 @Component({
   selector: 'app-list',
@@ -22,18 +23,14 @@ export class ListComponent implements OnInit {
     private toastrService: ToastrService,
     private userService: UserService
   ) { }
-
+  get roleUser() {
+    return UserRoleEnum
+  }
   ngOnInit(): void {
     this.getData();
   }
   getData() {
-    const usersLC = LocalStorageService.read("users");
-    if (usersLC) {
-      let users = JSON.parse(usersLC) ? JSON.parse(usersLC) : null;
-      if (users)
-        this.listUsers = JSON.parse(users) ? JSON.parse(users) : null;
-      this.listUsers = this.listUsers.filter(item => item.deleted === 0);
-    }
+    this.listUsers =this.userService.getData();
   }
   usersById(index: any, line: any) {
     return line.id;
@@ -50,19 +47,17 @@ export class ListComponent implements OnInit {
     if (item.keycode !== 13 || item.keycode !== 8) {
       this.searchKeyWord = item;
     }
-    if (this.searchKeyWord.length === 0) {
-      this.listUsers = this.userService.getData();
-    }
-    if (this.searchKeyWord.length > 1) {
-      if (item.keycode !== 13 || item.keycode !== 8) {
-        this.getData();
-        this.listUsers = this.listUsers.filter(user =>
-          user.userName?.includes(item) ||
-          user.firstName?.includes(item) ||
-          user.password?.includes(item) ||
-          user.email?.includes(item)
-        );
-      }
+    this.searchKeyWord.length === 0 ? this.listUsers = this.userService.getData() : '';
+    if (this.searchKeyWord.length > 1 && (item.keycode !== 13 || item.keycode !== 8)) {
+      this.getData();
+      this.listUsers = this.listUsers.filter(user =>
+        user.userName?.includes(item) ||
+        user.firstName?.includes(item) ||
+        user.password?.includes(item) ||
+        user.email?.includes(item) ||
+        user.role?.includes(item)
+      );
     }
   }
 }
+

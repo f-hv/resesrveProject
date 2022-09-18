@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ReserveRoutingModule } from './reserve-routing.module';
 import { ListComponent } from './list/list.component';
+import { sharedModule } from 'src/app/shared/shared.module';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ListComponent } from './list/list.component';
   ],
   imports: [
     CommonModule,
-    ReserveRoutingModule
+    ReserveRoutingModule,
+    sharedModule,
+    NgbPaginationModule
   ]
 })
 export class ReserveModule { }

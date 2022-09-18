@@ -49,8 +49,6 @@ export class ListComponent implements OnInit {
   getData() {
     this.listReserved = this.reservedService.getData();
     this.activatedRoute.queryParamMap.subscribe(params => this.params = params);
-    console.log("list",this.params);
-    // this.params = this.activatedRoute.snapshot.paramMap;
     this.departingDate = this.params.get('departingDate');
     this.adultCount = Number(this.params.get('adult'));
     this.childCount = Number(this.params.get('child'));

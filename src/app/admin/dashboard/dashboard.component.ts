@@ -37,9 +37,7 @@ export class DashboardComponent implements OnInit {
       this.dataUser = user;
       this.passLC = user.password;
 
-    })
-    console.log("pass:",this.passLC);
-    
+    })    
     this.initial();
   }
   initial() {

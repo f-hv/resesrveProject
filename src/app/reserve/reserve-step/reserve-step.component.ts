@@ -11,7 +11,7 @@ import { AirlineService } from 'src/app/core/services/airline.service';
 export enum passengerType {
   adult = 1,
   child = 2,
-  baby= 3
+  baby = 3
 }
 @Component({
   selector: 'app-reserve-step',
@@ -20,12 +20,12 @@ export enum passengerType {
 })
 
 export class ReserveStepComponent implements OnInit {
-  passengerType:typeof passengerType = passengerType;
+  passengerType: typeof passengerType = passengerType;
   passengersForm: FormGroup;
   stepper: Stepper;
   tripInfo: any;
   isclickOnNext: Boolean = false;
-  passengerTitle:string;
+  passengerTitle: string;
   /////// params /////////
   source: CityModel;
   destination: CityModel;
@@ -81,22 +81,21 @@ export class ReserveStepComponent implements OnInit {
       this.adultCount = Number(this.tripInfo.adult);
       this.childCount = Number(this.tripInfo.child);
       this.babyCount = Number(this.tripInfo.baby);
-      console.log("reserveStep", params);
     });
     this.initial()
     this.TravelPriceCalculation();
     this.passengersAsControls.pop();
     if (this.adultCount > 0) {
-      for (let i = 0; i < this.adultCount; i++) {        
-        this.passengerTitle='بزرگسال'
+      for (let i = 0; i < this.adultCount; i++) {
+        this.passengerTitle = 'بزرگسال'
         this.passengersAsArray.push(this.createPassengerFormGroup(1));
         this.min = 13;
         this.max = 100;
       }
     }
     if (this.childCount > 0) {
-      for (let i = 0; i < this.childCount; i++) {        
-        this.passengerTitle='کودک'
+      for (let i = 0; i < this.childCount; i++) {
+        this.passengerTitle = 'کودک'
         this.min = 2;
         this.max = 12;
         this.passengersAsArray.push(this.createPassengerFormGroup(2));
@@ -104,14 +103,12 @@ export class ReserveStepComponent implements OnInit {
     }
     if (this.babyCount > 0) {
       for (let i = 0; i < this.babyCount; i++) {
-        this.passengerTitle='ک'
+        this.passengerTitle = 'ک'
         this.min = 0;
         this.max = 2;
         this.passengersAsArray.push(this.createPassengerFormGroup(3));
       }
     }
-    console.log(this.passengersAsArray);
-    
     var selection = document.querySelector('#stepperPassenger');
     if (selection)
       this.stepper = new Stepper(selection, {
@@ -119,17 +116,6 @@ export class ReserveStepComponent implements OnInit {
         animation: true
       })
   }
-  // adult: "2"
-  // airline: "ایران ایر"
-  // baby: "1"
-  // child: "1"
-  // date: "1400/04/01"
-  // destination: "5"
-  // flightNumber: "152"
-  // price: "30000000"
-  // source: "1"
-  // travelMode: "0"
-
   initial() {
     this.passengersForm = this.formBuilder.group({
       ticket: this.formBuilder.group({
@@ -143,7 +129,7 @@ export class ReserveStepComponent implements OnInit {
       passengers: this.formBuilder.array([this.createPassengerFormGroup(0)])
     })
   }
-  private createPassengerFormGroup(type:number): FormGroup {
+  private createPassengerFormGroup(type: number): FormGroup {
     return new FormGroup({
       'fName': new FormControl('', [Validators.required]),
       'lName': new FormControl('', [Validators.required]),
@@ -170,7 +156,7 @@ export class ReserveStepComponent implements OnInit {
       })
   }
 
- 
+
   deletePassenger(index: any) {
     this.passengersAsArray.removeAt(index);
   }
@@ -184,7 +170,7 @@ export class ReserveStepComponent implements OnInit {
   onSubmit() {
     return false;
   }
-  onRoleSelectGender(event:any,item:FormGroup ){
+  onRoleSelectGender(event: any, item: FormGroup) {
     item.get('gender')?.setValue(event.id);
   }
 }

@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
     });
     this.isClickOnSaveBtn = false;
   }
-  // `/products?sort=${sort}`
   onScriptLoad() {
     console.log('Google reCAPTCHA loaded and is ready for use!');
   }

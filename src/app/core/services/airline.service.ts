@@ -10,7 +10,6 @@ export class AirlineService {
       id: 1,
       name: 'کیش ایر',
       city: 'کیش',
-      priceClass: 'H',
       loadWeight: 20,
       deleted: 0
     },
@@ -18,7 +17,6 @@ export class AirlineService {
       id: 2,
       name: 'ایران ایر',
       city: 'تهران',
-      priceClass: 'G',
       loadWeight: 30,
       deleted: 0
     },
@@ -26,7 +24,6 @@ export class AirlineService {
       id: 3,
       name: 'آسمان',
       city: 'تهران',
-      priceClass: 'H',
       loadWeight: 20,
       deleted: 0
     },
@@ -34,7 +31,6 @@ export class AirlineService {
       id: 4,
       name: 'آتا',
       city: 'تبریز',
-      priceClass: 'G',
       loadWeight: 30,
       deleted: 0
     },
@@ -42,7 +38,6 @@ export class AirlineService {
       id: 5,
       name: 'کاسپین',
       city: 'کیش',
-      priceClass: 'H',
       loadWeight: 20,
       deleted: 0
     },
@@ -50,7 +45,6 @@ export class AirlineService {
       id: 6,
       name: 'وارش',
       city: 'مازندران',
-      priceClass: 'G',
       loadWeight: 30,
       deleted: 0
     },
@@ -67,7 +61,6 @@ export class AirlineService {
         id: null,
         name: null,
         city: null,
-        priceClass: null,
         loadWeight: null,
         deleted: null
       };
@@ -83,7 +76,6 @@ export class AirlineService {
     if (editItem) {
       editItem.name = data.name,
         editItem.city = data.city,
-        editItem.priceClass = data.priceClass,
         editItem.loadWeight = data.loadWeight,
         editItem.deleted = 0
       return true;
@@ -104,7 +96,6 @@ export class AirlineService {
       id: this.airline.length + 1,
       name: data.name,
       city: data.city,
-      priceClass: data.priceClass,
       loadWeight: data.loadWeight,
       deleted: 0
     })

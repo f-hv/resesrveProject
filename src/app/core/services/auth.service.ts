@@ -20,7 +20,7 @@ export class AuthService {
   ) { }
 
   login(userName: any, password: any) {
-    const users = LocalStorageService.read("users");
+    const users =JSON.parse( LocalStorageService.read("users"));
     const validUser = users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
     if (validUser) {
       LocalStorageService.save('currentUser', JSON.stringify(validUser));

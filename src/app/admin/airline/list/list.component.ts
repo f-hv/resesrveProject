@@ -40,33 +40,17 @@ export class ListComponent implements OnInit {
   }
 
   onKeyup(item: any) {
-    if (item.keycode !== 13 || item.keycode !== 8) {
-      this.searchKeyWord = item;
-    }
-    if (this.searchKeyWord.length === 0) {
-      this.listAirline = this.airlineService.getOrginalList();
-    }
-    if (this.searchKeyWord) {
-      if (this.searchKeyWord.length === 1) {
-        this.searchKeyWord = this.searchKeyWord.toUpperCase();
-        if (item.keycode !== 13 || item.keycode !== 8) {
-          this.getData();
-          var list = this.listAirline.filter(line => line.priceClass?.includes(this.searchKeyWord));
-          if (list.length !== 0) { this.listAirline = list; }
-          return;
-        }
-      }
-      if (this.searchKeyWord.length > 1) {
-        if (item.keycode !== 13 || item.keycode !== 8) {
-          this.getData();
-          this.listAirline = this.listAirline.filter(line =>
-            line.priceClass?.includes(item) ||
-            line.city?.includes(item) ||
-            line.name?.includes(item) ||
-            line.loadWeight == item
-          );
-        }
-      }
+    (item.keycode !== 13 || item.keycode !== 8)?  this.searchKeyWord = item: '';
+    this.searchKeyWord.length === 0 ? this.listAirline = this.airlineService.getOrginalList() : '';
+    if (this.searchKeyWord)
+      this.searchKeyWord.length === 1 && (item.keycode !== 13 || item.keycode !== 8) ? this.getData() : ''
+    if (this.searchKeyWord.length > 1 && (item.keycode !== 13 || item.keycode !== 8)) {
+      this.getData();
+      this.listAirline = this.listAirline.filter(line =>
+        line.city?.includes(item) ||
+        line.name?.includes(item) ||
+        line.loadWeight == item
+      );
     }
   }
 }

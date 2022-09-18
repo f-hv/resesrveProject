@@ -1,1 +1,48 @@
-<p>list works!</p>
+
+<div dir="rtl" class="container p-1">
+    <div id="nav-top" class="row ">
+        <div class="col-sm-12" style="text-align:center;">
+            <h6> لیست کاربرها</h6>
+        </div>
+    </div>
+    <div id="content" class="row pt-2">
+        <div class="col-sm-12" style="width: 100%; overflow-x: auto;">
+            <table class="table-hover caption-top table align-middle ">
+                <caption>
+                    <div id="header-card" class="X row p-0 ">
+                        <div id="searchBox" class="X col-sm-10 col-md-6 ">
+                            <app-search-box [placeHolder]="'جستجو'" (keyupChange)="onKeyup($event)" [size]="'small'">
+                            </app-search-box>
+                        </div>                        
+                    </div>
+                </caption>
+                <thead class="">
+                    <tr>
+                        <th scope="col" style="width:5%">#</th>
+                        <th scope="col" style="width:10%"> کاربر</th>
+                        <th scope="col" style="width:15%">مبدا</th>
+                        <th scope="col" style="width:15%"> مقصد</th>
+                        <th scope="col" style="width:20%">تاریخ</th>
+                        <th scope="col" style="width:5%">تعداد مسافر</th>
+                        <th style="width:30%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let item of listReserved  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage ">
+                        <td style="width: 5%">{{item.id}}</td>
+                        <td style="width: 10%">{{item.userName}}</td>
+                        <td style="width: 15%">{{item.source}}</td>
+                        <td style="width: 15%">{{item.destination}}</td>
+                        <td style="width: 20%">{{item.date}}</td>
+                        <td style="width: 5%">{{item.passengerCount}}</td>
+                        <td id="detail-td" style="width: 30%"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="5"
+                [boundaryLinks]="false" [pageSize]="elementPerpage" class="d-flex justify-content-end p-2">
+            </ngb-pagination>
+        </div>
+    </div>
+</div>

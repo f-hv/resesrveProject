@@ -1,53 +1,50 @@
 <div dir="rtl" class="container p-1">
   <div id="nav-top" class="row ">
     <div class="col-sm-12" style="text-align:center;">
-        <h6> لیست خط پروازها</h6>
+      <h6> لیست خط پروازها</h6>
     </div>
   </div>
-<div id="content" class="row pt-2">
-  <div class="col-sm-12" style="width: 100%; overflow-x: auto;">
-    <table class="table-hover caption-top table align-middle ">
-      <caption >
-        <div id="header-card" class="X row p-0 ">
-          <div id="searchBox" class="X col-sm-10 col-md-6 ">
-            <app-search-box [placeHolder]="'جستجو'" (keyupChange)="onKeyup($event)" [size]="'small'"></app-search-box>
+  <div id="content" class="row pt-2">
+    <div class="col-sm-12" style="width: 100%; overflow-x: auto;">
+      <table class="table-hover caption-top table align-middle ">
+        <caption>
+          <div id="header-card" class="row p-0 ">
+            <div id="searchBox" class="col-sm-10 col-md-6 ">
+              <app-search-box [placeHolder]="'جستجو'" (keyupChange)="onKeyup($event)" [size]="'small'"></app-search-box>
+            </div>
+            <div class="btn-save col-sm-2 col-md-6   ">
+              <button type="submit" class="btn-res button-primary button-sm-0 " [routerLink]="'../create'">جدید
+                <i class="fas fa-plus "></i>
+              </button>
+            </div>
           </div>
-          <!-- <div class="col-sm-2 col-md-2 " ></div> -->
-          <div  class="X btn-save col-sm-2 col-md-6   ">
-            <button type="submit"  class="btn-res button-primary button-sm-0 " [routerLink]="'../create'">جدید
-              <i class="fas fa-plus "></i>
-            </button>
-          </div>
-        </div>
-      </caption>
-      <thead class="">
-        <tr>
-          <th scope="col" style="width:5%">#</th>
-          <th scope="col" style="width:15%">نام</th>
-          <th scope="col" style="width:20%">شهر</th>
-          <th scope="col" style="width:25%">کلاس نرخی</th>
-          <th scope="col" style="width:10%"> وزن</th>
-          <th style="width:25%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let airline of listAirline | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:airlineById">
-          <td style="width: 5%">{{airline.id}}</td>
-          <td style="width: 15%">{{airline.name}}</td>
-          <td style="width: 15%">{{airline.city}}</td>
-          <td style="width: 25%">{{airline.priceClass}}</td>
-          <td style="width: 10%">{{airline.loadWeight}}</td>
-          <td id="detail-td" style="width: 25%">
-            <i class="fas fa-edit p-2" [routerLink]="'../update/' + airline.id"></i>
-            <i class="fas fa-trash p-2" (click)="delete(airline.id)"></i>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="5" [boundaryLinks]="false"
-      [pageSize]="elementPerpage" class="d-flex justify-content-end p-2" >
-    </ngb-pagination>
+        </caption>
+        <thead class="">
+          <tr>
+            <th scope="col" style="width:5%">#</th>
+            <th scope="col" style="width:15%">نام</th>
+            <th scope="col" style="width:15%">شهر</th>
+            <th scope="col" style="width:10%"> وزن</th>
+            <th style="width:55%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let airline of listAirline | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:airlineById">
+            <td style="width: 5%">{{airline.id}}</td>
+            <td style="width: 15%">{{airline.name}}</td>
+            <td style="width: 15%">{{airline.city}}</td>
+            <td style="width: 10%">{{airline.loadWeight}}</td>
+            <td id="detail-td" style="width: 55%">
+              <i class="fas fa-edit p-2" [routerLink]="'../update/' + airline.id"></i>
+              <i class="fas fa-trash p-2" (click)="delete(airline.id)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="5" [boundaryLinks]="false"
+        [pageSize]="elementPerpage" class="d-flex justify-content-end p-2">
+      </ngb-pagination>
+    </div>
   </div>
-</div>
 </div>
