@@ -16,7 +16,7 @@ export class UserService {
 
 
   getData() {
-    return this.users =LocalStorageService.read("users");
+    return this.users = LocalStorageService.read("users");
   }
 
   getById(id: any) {
@@ -55,14 +55,16 @@ export class UserService {
 
   create(data: UserModel) {
     debugger
-    this.getData();
-    if (this.users === null) {
-      LocalStorageService.save("users", JSON.stringify(data));
+    this.users = JSON.parse(LocalStorageService.read("users"));
+    if (this.users == null) {
+      const list: UserModel[] = [];
+      list.push(data);
+      LocalStorageService.save("users", JSON.stringify(list));
       return true
     }
     else {
       const validUser = this.users.find((item: any) => item.userName === data.userName || item.email === data.email)
-      return validUser ? false : LocalStorageService.addToArray("users", data) && true ;
+      return validUser ? false : LocalStorageService.addToArray("users", data) && true;
     }
   }
 }

@@ -26,7 +26,9 @@ export class ListComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.listFlight =this.flightService.getData();       
+    this.listFlight =this.flightService.getData(); 
+    console.log("list",this.listFlight);
+          
     this.collectionSize = this.listFlight.length;
     // moment().locale('fa').format('YYYY/M/D');
 

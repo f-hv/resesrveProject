@@ -31,9 +31,16 @@ export class FlightService {
   getData() {
     debugger
     let data = LocalStorageService.read("flights");
-    let A1=JSON.parse( JSON.parse(data));
-    console.log(data,A1);
-    return data
+    let A1 = JSON.parse(data);
+    console.log("A1",A1);
+    console.log("data",data);
+  
+    
+    try{
+      return A1;
+    }catch (e) {
+      return data;
+    }
 
     
   }

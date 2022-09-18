@@ -50,6 +50,8 @@ export class RegisterUserComponent implements OnInit {
       this.getData();
     }
     this.users = LocalStorageService.read('users');
+    console.log(this.users);
+    
     this.initial()
     this.setUserValidateRole();
     this.dropdownSettings = {
@@ -139,9 +141,9 @@ export class RegisterUserComponent implements OnInit {
       this.toastrService.error('کاربر با این مشخصات وجود ندارد');
   }
   create() {
-    this.formRegister.get("id")?.setValue(this.users.length + 1);
+    this.formRegister.get("id")?.setValue(this.users?.length + 1);
     const resualt = this.userService.create(this.formRegister?.value);
-    resualt ? this.toastrService.error('کاربر با این مشخصات قبلا ثبت نام شده') :this.toastrService.success('کاربر با موفقیت ثبت شد.') && this.navigate();
+    resualt ? this.toastrService.success('کاربر با موفقیت ثبت شد.') && this.navigate() :this.toastrService.error('کاربر با این مشخصات قبلا ثبت نام شده') ;
   }
 }
 
