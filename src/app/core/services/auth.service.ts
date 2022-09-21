@@ -20,7 +20,7 @@ export class AuthService {
   ) { }
 
   login(userName: any, password: any) {
-    const users =JSON.parse( LocalStorageService.read("users"));
+    const users = JSON.parse(LocalStorageService.read("users"));
     const validUser = users.find((data: any) => (userName === data.userName && password === data.password && data.deleted === 0));
     if (validUser) {
       LocalStorageService.save('currentUser', JSON.stringify(validUser));
@@ -43,14 +43,10 @@ export class AuthService {
       this.resualt = this.expiryTimeService.getExpiry('expiryTime') ? true : false;
     else {
       var user = JSON.parse(LocalStorageService.read('currentUser') || 'null');
-      if (user) {
-        if (this.expiryTimeService.getExpiry('expiryTime')) {
-          this.currentUser$.next(user);
-          this.resualt = true
-        }
-        else this.resualt = false;
-      }
+      if (user)
+        this.expiryTimeService.getExpiry('expiryTime') ? (this.resualt = true) && (this.currentUser$.next(user)) : this.resualt = false;
     }
+    console.log("loged",this.resualt);    
     return this.resualt
   }
 }

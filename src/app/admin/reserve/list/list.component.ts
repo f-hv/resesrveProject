@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { peymentModel } from 'src/app/core/models/peyment.model';
 import { ReservedModel } from 'src/app/core/models/reserved.model';
+import { PeymentService } from 'src/app/core/services/peyment.service';
 import { ReservedService } from 'src/app/core/services/reserved.service';
 
 @Component({
@@ -9,6 +11,7 @@ import { ReservedService } from 'src/app/core/services/reserved.service';
 })
 export class ListComponent implements OnInit {
   listReserved:ReservedModel[];
+  listPeyment:peymentModel[];
   reserveData:any[]=[];
    ///// pagination
    currentPage: any = 1;
@@ -18,12 +21,16 @@ export class ListComponent implements OnInit {
   searchKeyWord: any;
   constructor(
     private reservService:ReservedService,
+    private peymentService:PeymentService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.getData();
+  }
 
   getData(){
-
+    this.listReserved = this.reservService.getData();
+    this.listPeyment=this.peymentService.getData();
   }
 
   onKeyup(item: any) {

@@ -12,13 +12,13 @@ export class ReservedService {
   getByflightId(id: any) {
     this.getData();
     const findItem = this.Reserved.find((item: any) => item.flightId === id);
-    return findItem ? findItem : { id: null, flightId: null, userId: null, };
+    return findItem ? findItem : { id: null, flightId: null, userId: null,peymentId :null };
   }
 
   getById(id: any) {
     this.getData();
     const findItem = this.Reserved.find((item: any) => item.id === id)
-    return findItem ? findItem : { id: null, flightId: null, userId: null, };
+    return findItem ? findItem : { id: null, flightId: null, userId: null,peymentId :null };
   }
 
   getData() {
@@ -26,6 +26,7 @@ export class ReservedService {
   }
 
   addReserved(data: ReservedModel) {
+    debugger
     this.getData();
     if (this.Reserved == null) {
       data.id = 1;

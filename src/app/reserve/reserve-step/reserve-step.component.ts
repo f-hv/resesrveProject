@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Directive, OnInit } from '@angular/core';
 import Stepper from 'bs-stepper';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { genderEnum } from 'src/app/shared/enums/gender.enum';
 import { CityService } from 'src/app/core/services/city.service';
 import { CityModel } from 'src/app/core/models/city.model';
 import { AirlineModel } from 'src/app/core/models/airline.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
 import { ReservedService } from 'src/app/core/services/reserved.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { relative } from '@angular/compiler-cli/src/ngtsc/file_system';
+import { PeymentService } from 'src/app/core/services/peyment.service';
+import { passengersModel } from 'src/app/core/models/passengers.model';
 export enum passengerType {
   adult = 1,
   child = 2,
@@ -24,7 +27,7 @@ export class ReserveStepComponent implements OnInit {
   passengerType: typeof passengerType = passengerType;
   passengersForm: FormGroup;
   stepper: Stepper;
-  reserveData: any = { id: null, flightId: null, userId: null };
+  reserveData: any = { id: null, flightId: null, userId: null, peymentId: null };
   tripInfo: any;
   isclickOnNext: Boolean = false;
   passengerTitle: string;
@@ -60,17 +63,19 @@ export class ReserveStepComponent implements OnInit {
   min: number = 0;
   max: number = 0;
   ///// new Form Control /////
-  listPassengersData: any[] = [];
+  listPassengersData: passengersModel[];
   ///// pagination
   currentPage: any = 1;
   elementPerpage = 7;
   collectionSize: number;
   constructor(
     private formBuilder: FormBuilder,
-    private reservedSErvice: ReservedService,
+    private reservedService: ReservedService,
     private activatedRoute: ActivatedRoute,
     private airlineService: AirlineService,
     private cityService: CityService,
+    private authService: AuthService,
+    private peymentService: PeymentService,
     private router: Router,
   ) { }
   get gender() {
@@ -87,14 +92,16 @@ export class ReserveStepComponent implements OnInit {
     this.getData();
     this.initial()
     this.passengersAsControls.pop();
-    this.passengersForm.get('passengers')?.valueChanges.subscribe((value: any) => {
-      this.listPassengersData = value;
-      this.listPassengersData.map((item: any) => {
-        if (item.gender == 1)
-          item.gender = 'زن'
-        else item.gender = 'مرد'
-      })
-    })
+    // this.passengersForm.get('passengers')?.valueChanges.subscribe((value: any) => {
+    //   debugger
+    //   this.listPassengersData = value;
+    //   this.listPassengersData.map((item: any) => {
+    //     if (item.gender == 1) 
+    //       item.gender = 'زن'
+    //     else 
+    //       item.gender = 'مرد'
+    //   })
+    // })
     this.insertControls();
   }
   getData() {
@@ -148,11 +155,10 @@ export class ReserveStepComponent implements OnInit {
       passengers: this.formBuilder.array([this.createPassengerFormGroup(0)])
     })
   }
-  getCurrentUser(){
-    
-  }
+
   private createPassengerFormGroup(type: number): FormGroup {
     return new FormGroup({
+      'id' : new FormControl(),
       'fName': new FormControl('', [Validators.required]),
       'lName': new FormControl('', [Validators.required]),
       'age': new FormControl(this.age, [Validators.required]),
@@ -184,8 +190,11 @@ export class ReserveStepComponent implements OnInit {
 
   next() {
     this.isclickOnNext = true;
-    if (this.passengersForm.valid)
+    if (this.passengersForm.valid) {
+      this.listPassengersData = this.passengersForm.get('passengers')?.value;
+      console.log(this.listPassengersData);
       this.stepper.next();
+    }
   }
 
   onSubmit() {
@@ -195,9 +204,17 @@ export class ReserveStepComponent implements OnInit {
     item.get('gender')?.setValue(event.id);
   }
   reserveFlight() {
-    // id: null, flightId: null, userId: null, 
-    this.reserveData = { flightId: this.flightNumber, userId:};
-
-    this.reservedSErvice.Reserved()
+    debugger
+    const resualt = this.authService.isLoggedIn();
+    var userIsLoged: any;
+    resualt ? userIsLoged = this.authService.currentUser$.value : this.DirectToLogin();
+    const peymentId = this.peymentService.addPeyment(this.listPassengersData);
+    this.reserveData = { id: null, flightId: this.flightNumber, userId: userIsLoged.id, peymentId: peymentId };
+    this.reservedService.addReserved(this.reserveData);
+  }
+  DirectToLogin() {
+    this.router.navigate(['../login'], {
+      relativeTo: this.activatedRoute
+    })
   }
 }
