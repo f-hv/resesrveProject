@@ -9,6 +9,7 @@ export class FlightService {
   flight: FlightModel[] = [];
   orginalListFlight = [...this.flight];
   resualt: Boolean = false;
+  stringList: any;
   constructor(
     private localStorageService: LocalStorageService
   ) { }
@@ -24,25 +25,28 @@ export class FlightService {
       date: null,
       time: null,
       flightNumber: null,
+      price:null,
       deleted: null
     };
   }
 
   getData() {
-    debugger
-    let data = LocalStorageService.read("flights");
-    let A1 = JSON.parse(data);
-    console.log("A1",A1);
-    console.log("data",data);
-  
-    
-    try{
-      return A1;
-    }catch (e) {
-      return data;
+    return this.stringList = JSON.parse(LocalStorageService.read("flights"));
+  }
+  create(data: FlightModel) {   
+    this.flight = JSON.parse(LocalStorageService.read("flights"));
+    if (this.flight == null) {
+      data.id = 1;
+      const list: FlightModel[] = [];
+      list.push(data);
+      LocalStorageService.save("flights", JSON.stringify(list));
+      return true
     }
-
-    
+    else {
+      data.id = this.flight.length + 1;
+      const validUser = this.flight.find((item: any) => item.source === data.source && item.destination === data.destination && item.date === data.date && item.time === data.time)
+      return validUser ? this.update(data) && true : LocalStorageService.addToArray("flights", data) && true;
+    }
   }
 
   update(data: FlightModel) {
@@ -54,6 +58,7 @@ export class FlightService {
           item.airline = data.airline,
           item.date = data.date,
           item.time = data.time,
+          item.price =data.price,
           item.flightNumber = data.flightNumber,
           item.deleted = 0
         LocalStorageService.save("flights", JSON.stringify(this.flight));
@@ -75,19 +80,7 @@ export class FlightService {
     return this.resualt ? true : false;
   }
 
-  create(data: FlightModel) {
-    this.flight =JSON.parse( LocalStorageService.read("flights"));
-    if (this.flight==null) {
-      const list:FlightModel[]=[];
-      list.push(data);
-      LocalStorageService.save("flights", JSON.stringify(list));
-      return true
-    }
-    else {
-      const validUser = this.flight.find((item: any) => item.source === data.source && item.destination === data.destination)
-      return validUser ? false : LocalStorageService.addToArray("flights",data) && true;
-    }
-  }
+
 
   getOrginalList() {
     return this.orginalListFlight

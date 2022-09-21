@@ -8,6 +8,7 @@ import { CityService } from 'src/app/core/services/city.service';
 import { CityModel } from 'src/app/core/models/city.model';
 import { AirlineModel } from 'src/app/core/models/airline.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
+import { ReservedService } from 'src/app/core/services/reserved.service';
 export enum passengerType {
   adult = 1,
   child = 2,
@@ -23,9 +24,11 @@ export class ReserveStepComponent implements OnInit {
   passengerType: typeof passengerType = passengerType;
   passengersForm: FormGroup;
   stepper: Stepper;
+  reserveData: any = { id: null, flightId: null, userId: null };
   tripInfo: any;
   isclickOnNext: Boolean = false;
   passengerTitle: string;
+  age: string;
   /////// params /////////
   source: CityModel;
   destination: CityModel;
@@ -35,6 +38,9 @@ export class ReserveStepComponent implements OnInit {
   babyCount: number;
   price: number;
   airline: AirlineModel;
+  flightNumber: number;
+  date: any;
+  time: any;
   //// dropdown/////
   // dropdownSettings: IDropdownSettings;
   dropdownSettings = {
@@ -53,8 +59,15 @@ export class ReserveStepComponent implements OnInit {
   //////range age //////////
   min: number = 0;
   max: number = 0;
+  ///// new Form Control /////
+  listPassengersData: any[] = [];
+  ///// pagination
+  currentPage: any = 1;
+  elementPerpage = 7;
+  collectionSize: number;
   constructor(
     private formBuilder: FormBuilder,
+    private reservedSErvice: ReservedService,
     private activatedRoute: ActivatedRoute,
     private airlineService: AirlineService,
     private cityService: CityService,
@@ -68,10 +81,23 @@ export class ReserveStepComponent implements OnInit {
   }
   get passengersAsArray() {
     return this.passengersForm.get('passengers') as FormArray;
-
   }
 
   ngOnInit() {
+    this.getData();
+    this.initial()
+    this.passengersAsControls.pop();
+    this.passengersForm.get('passengers')?.valueChanges.subscribe((value: any) => {
+      this.listPassengersData = value;
+      this.listPassengersData.map((item: any) => {
+        if (item.gender == 1)
+          item.gender = 'زن'
+        else item.gender = 'مرد'
+      })
+    })
+    this.insertControls();
+  }
+  getData() {
     this.activatedRoute.queryParams.subscribe(params => {
       this.tripInfo = params;
       this.price = Number(params.price);
@@ -81,31 +107,24 @@ export class ReserveStepComponent implements OnInit {
       this.adultCount = Number(this.tripInfo.adult);
       this.childCount = Number(this.tripInfo.child);
       this.babyCount = Number(this.tripInfo.baby);
+      this.date = this.tripInfo.date;
+      this.time = this.tripInfo.time;
+      this.flightNumber = Number(this.tripInfo.flightNumber);
     });
-    this.initial()
-    this.TravelPriceCalculation();
-    this.passengersAsControls.pop();
+  }
+  insertControls() {
     if (this.adultCount > 0) {
       for (let i = 0; i < this.adultCount; i++) {
-        this.passengerTitle = 'بزرگسال'
         this.passengersAsArray.push(this.createPassengerFormGroup(1));
-        this.min = 13;
-        this.max = 100;
       }
     }
     if (this.childCount > 0) {
       for (let i = 0; i < this.childCount; i++) {
-        this.passengerTitle = 'کودک'
-        this.min = 2;
-        this.max = 12;
         this.passengersAsArray.push(this.createPassengerFormGroup(2));
       }
     }
     if (this.babyCount > 0) {
       for (let i = 0; i < this.babyCount; i++) {
-        this.passengerTitle = 'ک'
-        this.min = 0;
-        this.max = 2;
         this.passengersAsArray.push(this.createPassengerFormGroup(3));
       }
     }
@@ -129,17 +148,17 @@ export class ReserveStepComponent implements OnInit {
       passengers: this.formBuilder.array([this.createPassengerFormGroup(0)])
     })
   }
+  getCurrentUser(){
+    
+  }
   private createPassengerFormGroup(type: number): FormGroup {
     return new FormGroup({
       'fName': new FormControl('', [Validators.required]),
       'lName': new FormControl('', [Validators.required]),
-      'age': new FormControl('', [Validators.required]),
+      'age': new FormControl(this.age, [Validators.required]),
       'gender': new FormControl('', [Validators.required]),
       'type': new FormControl(type)
     })
-  }
-  TravelPriceCalculation() {
-    this.travelPrice = { adultTicketPrice: this.tripInfo.adult * 900, childTicketPrice: this.tripInfo.child * 700, babyTicketPrice: this.tripInfo.baby * 500 };
   }
   changeTicket() {
     this.router.navigate(['../list'],
@@ -155,7 +174,9 @@ export class ReserveStepComponent implements OnInit {
         }
       })
   }
-
+  onDataChange(item: any) {
+    this.age = item;
+  }
 
   deletePassenger(index: any) {
     this.passengersAsArray.removeAt(index);
@@ -172,5 +193,11 @@ export class ReserveStepComponent implements OnInit {
   }
   onRoleSelectGender(event: any, item: FormGroup) {
     item.get('gender')?.setValue(event.id);
+  }
+  reserveFlight() {
+    // id: null, flightId: null, userId: null, 
+    this.reserveData = { flightId: this.flightNumber, userId:};
+
+    this.reservedSErvice.Reserved()
   }
 }

@@ -22,30 +22,33 @@
         <thead class="">
           <tr>
             <th scope="col" style="width:5%">#</th>
-            <th scope="col" style="width:14%">مبدا</th>
-            <th scope="col" style="width:14%">مقصد</th>
-            <th scope="col" style="width:25%"> زمان </th>
-            <th scope="col" style="width:15%"> پرواز</th>
-            <th scope="col" style="width:17%"></th>
+            <th scope="col" style="width:10%">مبدا</th>
+            <th scope="col" style="width:10%">مقصد</th>
+            <th scope="col" style="width:15%"> زمان </th>
+            <th scope="col" style="width:10%">شماره پرواز</th>
+            <th scope="col" style="width:10%">خط پرواز</th>
+            <th scope="col" style="width:10%">قیمت</th>
+            <th scope="col" style="width:30%"></th>
           </tr>
         </thead>
         <tbody>
           <tr
-            *ngFor="let flight of listFlight  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:flightById">
+            *ngFor="let flight of flightData  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:flightById">
             <td scope="col" style="width:5%" class="overflow-hidden">{{flight.id}}</td>
-            <td style="width:14%" class="overflow-hidden" >{{flight.source}}</td>
-            <td style="width:14%" class="overflow-hidden" >{{flight.destination}}</td>
-            <td style="width:25%" class="overflow-hidden">{{flight.date | date:'YYY/MM/dd' }}  {{ flight.time }}</td>
+            <td style="width:10%" class="overflow-hidden" >{{flight.source}}</td>
+            <td style="width:10%" class="overflow-hidden" >{{flight.destination}}</td>
+            <td style="width:15%" class="overflow-hidden">{{flight.date | date:'YYY/MM/dd' }}  {{ flight.time }}</td>
             <!--  | jalali-->
-            <td style="width:15%" class="overflow-hidden">{{flight.airline}}</td>
-              <td id="detail-td" style="width:17%">
+            <td style="width:10%" class="overflow-hidden">{{flight.flightNumber}}</td>
+            <td style="width:10%" class="overflow-hidden">{{flight.airline}}</td>
+            <td style="width:10%" class="overflow-hidden">{{flight.price}}</td>
+              <td id="detail-td" style="width:40%">
               <i class="fas fa-edit p-2" [routerLink]="'../update/' + flight.id"></i>
               <i class="fas fa-trash p-2 " (click)="delete(flight.id)"></i>
             </td>
           </tr>
         </tbody>
       </table>
-      {{listFlight}}
       <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="5" [boundaryLinks]="false"
         [pageSize]="elementPerpage" class="d-flex justify-content-end p-2">
       </ngb-pagination>

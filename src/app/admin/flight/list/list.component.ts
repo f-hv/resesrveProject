@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FlightModel } from 'src/app/core/models/flight.model';
 import { FlightService } from 'src/app/core/services/flight.service';
 import { ToastrService } from 'ngx-toastr';
+import { AirlineService } from 'src/app/core/services/airline.service';
+import { CityService } from 'src/app/core/services/city.service';
 
 
 @Component({
@@ -11,24 +13,42 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListComponent implements OnInit {
   listFlight: FlightModel[] = [];
+  flightData: any[] = [];
   searchKeyWord: any;
   ///// pagination
   currentPage: any = 1;
   elementPerpage = 7;
   collectionSize: number;
   constructor(
+    private toastrService: ToastrService,
     private flightService: FlightService,
-    private toastrService: ToastrService
-
+    private airlineService: AirlineService,
+    private cityService: CityService
   ) { }
 
   ngOnInit(): void {
     this.getData();
   }
   getData() {
-    this.listFlight =this.flightService.getData(); 
-    console.log("list",this.listFlight);
-          
+    this.listFlight = this.flightService.getData();
+    this.listFlight = this.listFlight.filter(item => item.deleted == 0);
+    this.listFlight.map((item: any) => {
+      const source = this.cityService.getById(item.source);
+      const destination = this.cityService.getById(item.destination);
+      const airline = this.airlineService.getById(item.airline);
+      this.flightData.push({
+        id: item.id,
+        source: source .name,
+        destination: destination.name,
+        airline: airline.name,
+        flightNumber: item.flightNumber,
+        time: item.time,
+        date: item.date,
+        price:item.price,
+      })
+    })
+    console.log("list:", this.flightData);
+
     this.collectionSize = this.listFlight.length;
     // moment().locale('fa').format('YYYY/M/D');
 

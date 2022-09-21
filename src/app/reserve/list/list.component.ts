@@ -21,10 +21,11 @@ export class ListComponent implements OnInit {
   @Input() twoWay: Boolean;
   listFlight: FlightModel[];
   searchResualt: any[] = [];
+  flightData: any[] = [];
   destination: any;
   listReserved: any;
   departingDate: any;
-  travelPrice: number;
+  travelPrice: any;
   adultCount: number;
   childCount: number;
   babyCount: number;
@@ -37,72 +38,81 @@ export class ListComponent implements OnInit {
     private router: Router,
     private flightService: FlightService,
     private airlineService: AirlineService,
+    private userService:UserService,
     private reservedService: ReservedService,
     private cityService: CityService,
     private authService: AuthService,
-    private toastrService:ToastrService
   ) { }
 
   ngOnInit(): void {
     this.getData();
   }
   getData() {
-    this.listReserved = this.reservedService.getData();
     this.activatedRoute.queryParamMap.subscribe(params => this.params = params);
     this.departingDate = this.params.get('departingDate');
     this.adultCount = Number(this.params.get('adult'));
     this.childCount = Number(this.params.get('child'));
     this.babyCount = Number(this.params.get('baby'));
-    this.TravelPriceCalculation();
     this.source = this.cityService.getById(Number(this.params.get('source')));
     this.destination = this.cityService.getById(Number(this.params.get('destination')));
     this.listFlight = this.flightService.getData();
     const airlineResualt = this.airlineService.getData();
     this.listFlight.map((item) => {
-      if (item.source == this.source.name && item.destination === this.destination.name && item.deleted === 0) {
-        let dataReserved = this.reservedService.getByflightId(item.flightNumber);
-        if (dataReserved) {
-          airlineResualt.find((line: any) => {
-            if (line.name === item.airline) {
-              this.searchResualt.push({
-                price: this.travelPrice,
-                date:item.date? moment(item.date,'jYY/jM/jD') : '',
-                flightNumber: item.flightNumber,
-                airline: line,
-                loadWeight: line.loadWeight,
-              })
-            }
-          })
-        }
+      if (item.source == this.source.id && item.destination === this.destination.id &&
+        item.date == this.departingDate && item.deleted === 0) {
+        this.TravelPriceCalculation(item.price);
+        this.flightData.push({
+          id: item.id,
+          source: this.source.name,
+          destination: this.destination.name,
+          airline: this.airlineService.getById(item.airline),
+          flightNumber: item.flightNumber,
+          time: item.time,
+          date: this.departingDate,
+          price: this.travelPrice,
+        })
       }
     });
   }
+
+  // let dataReserved = this.reservedService.getByflightId(item.flightNumber);
+  // if (dataReserved) {
+  //   airlineResualt.find((line: any) => {
+  //     if (line.name === item.airline) {
+  //       this.searchResualt.push({
+  //         price: this.travelPrice,
+  //         date:item.date? moment(item.date,'YY/MM/DD') : '',
+  //         flightNumber: item.flightNumber,
+  //         airline: line,
+  //         loadWeight: line.loadWeight,
+  //       })
+  //     }
+  //   })
+  // }
+
+
   reserve(reserveInfo: any) {
+    debugger
     if (this.authService.isLoggedIn()) {
-      if (this.twoWay) {
-        ////////
-      }
-      else {
-        const currentUser = JSON.parse(LocalStorageService.read("currentUser"));
-        reserveInfo.userId = currentUser.id;
-        reserveInfo.BackFlightId = 0;
-        this.router.navigate(['reserve/reserveStep'],
-          {
-            queryParams: {
-              'source': this.source.id,
-              'destination': this.destination.id,
-              'travelMode': Number(this.params.get('travelMode')),
-              'date': this.departingDate,
-              'adult': this.adultCount,
-              'child': this.childCount,
-              'baby': this.babyCount,
-              'flightNumber': reserveInfo.flightNumber,
-              'price': this.travelPrice,
-              'airline': reserveInfo.airline.id
-            }
+      const currentUser =this.userService.getData();
+      reserveInfo.userId = currentUser.id;
+      this.router.navigate(['reserve/reserveStep'],
+        {
+          queryParams: {
+            'source': this.source.id,
+            'destination': this.destination.id,
+            // 'travelMode': Number(this.params.get('travelMode')),
+            'date': this.departingDate,
+            'time': reserveInfo.time,
+            'adult': this.adultCount,
+            'child': this.childCount,
+            'baby': this.babyCount,
+            'flightNumber': reserveInfo.flightNumber,
+            'price': String(reserveInfo.price),
+            'airline': reserveInfo.airline.id
           }
-        );
-      }
+        }
+      );
     }
     else {
       this.router.navigate(['../login'], {
@@ -110,8 +120,8 @@ export class ListComponent implements OnInit {
       })
     }
   }
-  TravelPriceCalculation() {
-    this.travelPrice = ((this.adultCount * 900) + (this.childCount * 700) + (this.babyCount * 500)) * 10000;
+  TravelPriceCalculation(price: any) {
+    this.travelPrice = ((this.adultCount * price) + (this.childCount * price) + (this.babyCount * price)) * 10000;
   }
   detailTabOpen(item: any) {
     this.infoOpen[item] = false;

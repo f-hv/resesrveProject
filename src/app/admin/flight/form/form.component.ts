@@ -72,6 +72,7 @@ export class FormComponent implements OnInit {
         destination: null,
         date: null,
         time: null,
+        price :null,
         airline: null,
         flightNumber: null,
         deleted: 0
@@ -87,9 +88,7 @@ export class FormComponent implements OnInit {
       singleSelection: true,
       idField: 'id',
       textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 20,
+      allowSearchFilter: true,
     };
 
   }
@@ -102,6 +101,7 @@ export class FormComponent implements OnInit {
       date: [this.dataFlight.date, Validators.required],
       time: [this.dataFlight.time, [Validators.required]],
       flightNumber: [this.dataFlight?.flightNumber, Validators.required],
+      price: [this.dataFlight?.price, Validators.required],
       deleted: 0
     });
   }
@@ -130,14 +130,10 @@ export class FormComponent implements OnInit {
 
   update() {
     const resualt = this.flightService.update(this.formFlight.value);
-    if (resualt)
-      this.toastrService.success('update succesfull');
-    else
-      this.toastrService.error('update failed', 'sorry!');
+    resualt? this.toastrService.success('ویرایش انجام شد '): this.toastrService.error('خطایی رخ داده است');
   }
 
   create() {
-    this.formFlight.get('id')?.setValue(this.listAirline.length+1)
     const resualt = this.flightService.create(this.formFlight.value);
     resualt ?  this.toastrService.success('پرواز با موفقیت ثبت شد', 'success') && this.navigate(): this.toastrService.warning('این پرواز قبلا ثبت شده');
   }
@@ -147,13 +143,15 @@ export class FormComponent implements OnInit {
     });
   }
   onSourceSelect(item: any) {
-    this.source = item.name;
+    this.source = item.id;
   }
   ondestinationSelect(item: any) {
-    this.destination = item.name;
+    this.destination = item.id;
   }
   onAirlineSelect(item: any) {
-    this.airline = item.name;
+    console.log(item);
+    
+    this.airline = item.id;
   }
   updateValueTimeDate() {
     if (this.dataFlight.date) {

@@ -16,34 +16,36 @@ import { ToastrService } from 'ngx-toastr';
 export class FormComponent implements OnInit {
   @Input() id: any;
   formAirline: FormGroup;
-  listLoadWeight:loadWeight[]=[
-    { id:1 , weight:20 },
-    { id:2 , weight:25 },
-    { id:3 , weight:30 },
+  listLoadWeight: loadWeight[] = [
+    { id: 1, weight: 20 },
+    { id: 2, weight: 25 },
+    { id: 3, weight: 30 },
   ]
   dataAirline: AirlineModel;
   listCity: CityModel[];
-  isClickOnSaveBtn=false;
-  
-    ////////////multiselect Dropdown
-  dropdownSettings = {};
-  dropdownSettingsLoad={}
-  city: any;
-  loadWeight:any;
+  isClickOnSaveBtn = false;
 
+  ////////////multiselect Dropdown
+  dropdownSettings = {};
+  dropdownSettingsLoad = {}
+  city: any;
+  loadWeight: any;
+  airlineId :number;
   constructor(
     private airlineService: AirlineService,
     private cityService: CityService,
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private formBuilder: FormBuilder,
-    private toastrService:ToastrService
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.listCity = this.cityService.getData();
     if (this.id) {
-      this.dataAirline = this.airlineService.getById(this.id);    
+      this.dataAirline = this.airlineService.getById(this.id);
+      console.log(this.dataAirline);
+      
     }
     else {
       this.dataAirline = {
@@ -51,7 +53,7 @@ export class FormComponent implements OnInit {
         name: null,
         city: null,
         loadWeight: null,
-        deleted: null
+        deleted: 0
       }
     }
     this.initial();
@@ -60,8 +62,6 @@ export class FormComponent implements OnInit {
       singleSelection: true,
       idField: 'id',
       textField: 'weight',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
       itemsShowLimit: 20,
     };
     this.dropdownSettings = {
@@ -70,6 +70,7 @@ export class FormComponent implements OnInit {
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
+      allowSearchFilter: true,
       itemsShowLimit: 20,
     };
   }
@@ -80,6 +81,7 @@ export class FormComponent implements OnInit {
       name: [this.dataAirline?.name, Validators.required],
       city: [this.dataAirline?.city, Validators.required],
       loadWeight: [this.dataAirline?.loadWeight, Validators.required],
+      deleted: 0
     })
   }
 
@@ -93,24 +95,22 @@ export class FormComponent implements OnInit {
       this.formAirline?.get('loadWeight')?.setValue(this.loadWeight);
 
       if (this.id) {
-       this.update();
+        this.update();
       }
       else {
-       this.create();
+        this.create();
       }
       this.navigate();
     }
   }
-  update(){
+  update() {
     const resualt = this.airlineService.update(this.formAirline.value);
-    if (resualt)
-    this.toastrService.success('update succesfull');
-    else
-    this.toastrService.error('update failed','sorry!');
+    resualt ? this.toastrService.success('ویرایش انجام شد ') : this.toastrService.error('خطایی رخ داده است');
   }
-  create(){
-    this.airlineService.create(this.formAirline.value);
-    this.toastrService.success('The new airline was create successfully','success');
+  create() { 
+    const resualt = this.airlineService.create(this.formAirline.value);
+    resualt ? this.toastrService.success(' با موفقیت ثبت شد', 'success') && this.navigate() : this.toastrService.warning('خطایی رخ داده است');
+
   }
   cancel() {
     this.navigate();
@@ -123,7 +123,7 @@ export class FormComponent implements OnInit {
   onCitySelect(item: any) {
     this.city = item.name;
   }
-  onLoadSelect(item:any){
+  onLoadSelect(item: any) {
     this.loadWeight = item.weight;
   }
 

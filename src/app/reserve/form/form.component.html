@@ -2,7 +2,7 @@
     <div class="row header">
         <div [formGroup]="formReserve">
             <div class="row back-card pb-4 pt-0 justify-content-md-center content">
-                <div class="row pt-0">
+                <!-- <div class="row pt-0">
                     <div class="col-md-2 mode">
                         <ng-multiselect-dropdown class="form-control-sm transparent-dropdown dropdown"
                             [placeholder]="labelTravelMode" [settings]="dropdownSettings" [data]=" listTravelMode"
@@ -10,8 +10,8 @@
                             [ngClass]="{error: (!formReserve.get('travelMode')?.valid || formReserve.get('travelMode')?.value === '') && isClickOnSearchBtn}">
                         </ng-multiselect-dropdown>
                     </div>
-                </div>
-                <div class="row content-card  ">
+                </div> -->
+                <!-- <div class="row content-card  "> -->
                     <div class="col-md-2">
                         <ng-multiselect-dropdown class="form-control-sm transparent-dropdown dropdown"
                             [placeholder]="'مبدا'" [settings]="dropdownSettings" [data]="listCity"
@@ -79,7 +79,7 @@
                         <button class="button buttonR-primary button-md-3" type="submit"
                             (click)="search()">جستجو</button>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>

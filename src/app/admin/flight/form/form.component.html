@@ -4,7 +4,7 @@
       <div class="col col-md-2"> </div>
       <div class="col-md-8 ">
         <div class="row">
-          <div class="col-md-6 ">
+          <div class="col-md-4 ">
             <label class="col-form-label-sm col-2">مبدا</label>
             <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مبدا'" [settings]="dropdownSettings"
               [data]="listCity" (onSelect)="onSourceSelect($event)" formControlName="source" [ngClass]="{
@@ -19,7 +19,7 @@
               </app-error-message>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label class="col-form-label-sm col-3">مقصد</label>
             <ng-multiselect-dropdown class="form-control-sm col-5" [placeholder]="'مقصد'" [settings]="dropdownSettings"
               [data]="listCity" (onSelect)="ondestinationSelect($event)" formControlName="destination" [ngClass]="{
@@ -31,6 +31,19 @@
                   !formFlight.get('destination')?.valid &&
                   isClickOnSaveBtn &&
                   formFlight.get('destination')?.value === '' " [message]="'فیلد خالی است'">
+              </app-error-message>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-form-label-sm">قیمت </label>
+            <input class="form-control" type="text" formControlName="price" [ngClass]="{
+              error: (!formFlight.get('price')?.valid || formFlight.get('price')?.value === '') && isClickOnSaveBtn
+            }" />
+            <div>
+              <app-error-message *ngIf="
+                !formFlight.get('price')?.valid &&
+                isClickOnSaveBtn &&
+                !formFlight.get('price')?.value > 0" [message]="'فیلد خالی است'">
               </app-error-message>
             </div>
           </div>

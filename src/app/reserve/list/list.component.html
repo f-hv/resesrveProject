@@ -17,21 +17,21 @@
             Nulla quas enim possimus eligendi maxime error soluta aperiam obcaecati eos.
         </div>
         <div class="col-md-9 list-flight">
-            <div class="row content" *ngFor="let item of searchResualt;  let i = index">
+            <div class="row content" *ngFor="let item of flightData;  let i = index">
                 <div class="row content-items mt-2 p-1 d-flex" [ngClass]="{'active':(detailsOpen[i] || infoOpen[i])}">
                     <div class="row firstRow">
                         <div class="col-md-2 align-text-center">{{item.airline.name}}</div>
                         <div class="col-md-7">
-                            {{source.name}}
-                            <span class="p-2 time">{{ item.date}}</span>
+                            {{item.source}}
+                            <span class="p-2 time">{{ item.departingDate}}</span>
+                            <span class="p-2 time">{{item.time}}</span>
                             <i class="fas fa-plane fa-rotate-180"></i>
                             <span class="line">-----------------------</span>
                             <i class="fas fa-circle"></i>
-                            <span class="p-2 time"> 8:20</span>
-                            {{destination.name}}
+                            {{item.destination}}
                         </div>
                         <div class="col-md-3 pric d-flex flex-column align-items-center">
-                            <span>ریال {{travelPrice}}</span>
+                            <span>ریال {{item.price}}</span>
                             <button class="button buttonR-primary button-md-3 mt-2" type="submit" (click)="reserve(item)">
                              انتخاب پرواز</button>                            
                             <!-- de{{detailsOpen[i] }}info{{ infoOpen[i]}} -->
@@ -58,7 +58,7 @@
                                     <tbody>
                                         <tr>
                                             <td style="width:10%" class="overflow-hidden">{{item.flightNumber}}</td>
-                                            <td style="width:5%" class="overflow-hidden"> {{item.loadWeight}}</td>
+                                            <td style="width:5%" class="overflow-hidden"> {{item.airline.loadWeight}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

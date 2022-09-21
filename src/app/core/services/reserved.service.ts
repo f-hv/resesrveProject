@@ -1,94 +1,51 @@
 import { Injectable } from '@angular/core';
 import { ReservedModel } from '../models/reserved.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservedService {
-  Reserved: ReservedModel[] = [
-    {
-      id: 1,
-      flightId: 512,
-      BackFlightId: 0,
-      paymentId: 501,
-      userId: 2,      
-    },
-    {
-      id: 2,
-      flightId: 513,
-      BackFlightId: 0,
-      paymentId: 501,
-      userId: 2,
-    },
-    {
-      id: 3,
-      flightId: 514,
-      BackFlightId: 0,
-      paymentId: 501,
-      userId: 2,
-    },
-    {
-      id: 4,
-      flightId: 511,
-      BackFlightId: 152,
-      paymentId: 501,
-      userId: 3,
-    },
-    {
-      id: 5,
-      flightId: 152,
-      BackFlightId: 512,
-      paymentId: 501,
-      userId: 2,
-    },
-    {
-      id: 6,
-      flightId: 153,
-      BackFlightId: 0,
-      paymentId: 501,
-      userId: 3,
-    },
-    {
-      id: 7,
-      flightId: 122,
-      BackFlightId: 0,
-      paymentId: 501,
-      userId: 2,
-    },
-  ];
-  orginalListReserved = [...this.Reserved];
-
+  Reserved: ReservedModel[] = [];
   constructor() { }
 
   getByflightId(id: any) {
-    return this.Reserved.find((item:any) => item.flightId === id);
+    this.getData();
+    const findItem = this.Reserved.find((item: any) => item.flightId === id);
+    return findItem ? findItem : { id: null, flightId: null, userId: null, };
   }
+
   getById(id: any) {
-    return this.Reserved.find((item: any) => item.id === id)
+    this.getData();
+    const findItem = this.Reserved.find((item: any) => item.id === id)
+    return findItem ? findItem : { id: null, flightId: null, userId: null, };
   }
 
   getData() {
-    return this.Reserved;
-  }
-
-  edit(data: ReservedModel) {
-    const editItem = this.Reserved.find(item => item.id === data.id)
-  }
-
-  delete(id: any) {
-    this.Reserved = this.Reserved.filter(item => item.id === id)
+    return this.Reserved = JSON.parse(LocalStorageService.read("reserved"));
   }
 
   addReserved(data: ReservedModel) {
-    this.Reserved.push({
-      id: this.Reserved.length + 1,
-      flightId: data.flightId,
-      userId: data.userId,
-      paymentId: data.paymentId,
-      BackFlightId: data.BackFlightId
-    })
+    this.getData();
+    if (this.Reserved == null) {
+      data.id = 1;
+      const list: ReservedModel[] = [];
+      list.push(data);
+      LocalStorageService.save("reserved", JSON.stringify(list));
+      return true
+    }
+    else {
+      data.id = this.Reserved.length + 1;
+      return LocalStorageService.addToArray("reserved", data) && true;
+    }
   }
-  getOrginalList() {
-    return this.orginalListReserved;
-  }
+  // update(data: ReservedModel) {
+  //   const editItem = this.Reserved.find(item => item.id === data.id)
+  // }
+
+  // delete(id: any) {
+  //   this.Reserved = this.Reserved.filter(item => item.id === id)
+  // }
+
+
 }

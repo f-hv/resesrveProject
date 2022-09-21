@@ -7,7 +7,7 @@ export class LocalStorageService {
   constructor() { }
 
   static read<T>(key: string) {
-    return JSON.parse(localStorage.getItem(key)||'null'); 
+    return JSON.parse(localStorage.getItem(key) || 'null');
   }
 
   static save<T>(key: string, itemValue: T): void {
@@ -19,10 +19,9 @@ export class LocalStorageService {
   }
 
   static addToArray<T>(key: string, value: T): boolean {
-    debugger
-    let storage =JSON.parse( this.read<T[]>(key) || []);
+    let storage = JSON.parse(this.read<T[]>(key) || []);
     storage.push(value);
-    this.save(key, storage);
+    this.save(key, JSON.stringify(storage));
     return storage;
   }
 
@@ -33,7 +32,7 @@ export class LocalStorageService {
     this.save(key, storage);
     return storage;
   }
-  public length(): number {    
+  public length(): number {
     return localStorage.length;
   }
 }

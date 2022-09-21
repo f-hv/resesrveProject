@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
   }
   getData() {
     this.listAirline = this.airlineService.getData();
-    this.listAirline = this.listAirline.filter(item => item.deleted === 0);
+    this.listAirline = this.listAirline.filter(item => item.deleted == 0);
     this.collectionSize = this.listAirline.length;
   }
   delete(item: any) {
