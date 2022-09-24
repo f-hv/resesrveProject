@@ -48,6 +48,7 @@ export class ListComponent implements OnInit {
     this.getData();
   }
   getData() {
+    debugger
     this.activatedRoute.queryParamMap.subscribe(params => this.params = params);
     this.departingDate = this.params.get('departingDate');
     this.adultCount = Number(this.params.get('adult'));
@@ -74,25 +75,7 @@ export class ListComponent implements OnInit {
       }
     });
   }
-
-  // let dataReserved = this.reservedService.getByflightId(item.flightNumber);
-  // if (dataReserved) {
-  //   airlineResualt.find((line: any) => {
-  //     if (line.name === item.airline) {
-  //       this.searchResualt.push({
-  //         price: this.travelPrice,
-  //         date:item.date? moment(item.date,'YY/MM/DD') : '',
-  //         flightNumber: item.flightNumber,
-  //         airline: line,
-  //         loadWeight: line.loadWeight,
-  //       })
-  //     }
-  //   })
-  // }
-
-
   reserve(reserveInfo: any) {
-    debugger
     if (this.authService.isLoggedIn()) {
       const currentUser =this.userService.getData();
       reserveInfo.userId = currentUser.id;

@@ -6,7 +6,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class PeymentService {
-  peymentList:peymentModel[];
+  peymentList: peymentModel[];
   constructor() { }
 
   getById(id: any) {
@@ -16,22 +16,14 @@ export class PeymentService {
   }
 
   getData() {
-    return this.peymentList = JSON.parse(LocalStorageService.read("peymentList"));
+    return this.peymentList = JSON.parse(LocalStorageService.read("peyment"));
+    //  data ? data : [];
   }
 
   addPeyment(data: any) {
     debugger
     this.getData();
-    if (this.peymentList == null) {
-      data.id = 1;
-      const list: peymentModel[] = [];
-      list.push(data);
-      LocalStorageService.save("peyment", JSON.stringify(list));
-      return data.id
-    }
-    else {
-      data.id = this.peymentList.length + 1;
-      return LocalStorageService.addToArray("peyment", data) && data.id ;
-    }
+    this.peymentList == null ? LocalStorageService.save("peyment", JSON.stringify(data)) : LocalStorageService.addToArray("peyment", data);
+    return true;
   }
 }

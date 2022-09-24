@@ -9,9 +9,11 @@ import { AirlineModel } from 'src/app/core/models/airline.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
 import { ReservedService } from 'src/app/core/services/reserved.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { relative } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { PeymentService } from 'src/app/core/services/peyment.service';
 import { passengersModel } from 'src/app/core/models/passengers.model';
+import { peymentModel } from 'src/app/core/models/peyment.model';
+import { ToastrService } from 'ngx-toastr';
+import { UserRoleEnum } from 'src/app/shared/enums/user-role.enum';
 export enum passengerType {
   adult = 1,
   child = 2,
@@ -30,12 +32,13 @@ export class ReserveStepComponent implements OnInit {
   reserveData: any = { id: null, flightId: null, userId: null, peymentId: null };
   tripInfo: any;
   isclickOnNext: Boolean = false;
+  travelPrice: any = {};
   passengerTitle: string;
   age: string;
+  lengthPeyment: number;
   /////// params /////////
   source: CityModel;
   destination: CityModel;
-  travelPrice: any = {};
   adultCount: number;
   childCount: number;
   babyCount: number;
@@ -73,9 +76,10 @@ export class ReserveStepComponent implements OnInit {
     private reservedService: ReservedService,
     private activatedRoute: ActivatedRoute,
     private airlineService: AirlineService,
+    private peymentService: PeymentService,
+    private toastService: ToastrService,
     private cityService: CityService,
     private authService: AuthService,
-    private peymentService: PeymentService,
     private router: Router,
   ) { }
   get gender() {
@@ -87,24 +91,18 @@ export class ReserveStepComponent implements OnInit {
   get passengersAsArray() {
     return this.passengersForm.get('passengers') as FormArray;
   }
-
+  get userRole(){
+    return UserRoleEnum;
+  }
   ngOnInit() {
     this.getData();
     this.initial()
     this.passengersAsControls.pop();
-    // this.passengersForm.get('passengers')?.valueChanges.subscribe((value: any) => {
-    //   debugger
-    //   this.listPassengersData = value;
-    //   this.listPassengersData.map((item: any) => {
-    //     if (item.gender == 1) 
-    //       item.gender = 'زن'
-    //     else 
-    //       item.gender = 'مرد'
-    //   })
-    // })
     this.insertControls();
   }
   getData() {
+    var peymentList = this.peymentService.getData();
+    peymentList == null ? this.lengthPeyment = 1 : this.lengthPeyment = peymentList.length + 1;
     this.activatedRoute.queryParams.subscribe(params => {
       this.tripInfo = params;
       this.price = Number(params.price);
@@ -157,8 +155,9 @@ export class ReserveStepComponent implements OnInit {
   }
 
   private createPassengerFormGroup(type: number): FormGroup {
+    // const lenght = (this.passengersForm?.get('passengers') as FormArray).controls.length;    
     return new FormGroup({
-      'id' : new FormControl(),
+      'id': new FormControl(''),
       'fName': new FormControl('', [Validators.required]),
       'lName': new FormControl('', [Validators.required]),
       'age': new FormControl(this.age, [Validators.required]),
@@ -183,6 +182,15 @@ export class ReserveStepComponent implements OnInit {
   onDataChange(item: any) {
     this.age = item;
   }
+  ongenderChange(item: any) {
+    debugger
+    this.listPassengersData.map((item: any) => {
+      if (item.gender == 1)
+        item.gender = 'زن'
+      else
+        item.gender = 'مرد'
+    })
+  }
 
   deletePassenger(index: any) {
     this.passengersAsArray.removeAt(index);
@@ -192,7 +200,6 @@ export class ReserveStepComponent implements OnInit {
     this.isclickOnNext = true;
     if (this.passengersForm.valid) {
       this.listPassengersData = this.passengersForm.get('passengers')?.value;
-      console.log(this.listPassengersData);
       this.stepper.next();
     }
   }
@@ -204,13 +211,19 @@ export class ReserveStepComponent implements OnInit {
     item.get('gender')?.setValue(event.id);
   }
   reserveFlight() {
-    debugger
     const resualt = this.authService.isLoggedIn();
     var userIsLoged: any;
     resualt ? userIsLoged = this.authService.currentUser$.value : this.DirectToLogin();
-    const peymentId = this.peymentService.addPeyment(this.listPassengersData);
-    this.reserveData = { id: null, flightId: this.flightNumber, userId: userIsLoged.id, peymentId: peymentId };
-    this.reservedService.addReserved(this.reserveData);
+    var peymentData: peymentModel;
+    peymentData = {
+      id: this.lengthPeyment,
+      price: this.price,
+      passengers: this.listPassengersData
+    }
+    this.reserveData = { id: null, flightId: this.flightNumber, userId: userIsLoged.id, peymentId: this.lengthPeyment };
+    const dataResualt = this.reservedService.addReserved(this.reserveData);
+    dataResualt ? this.peymentService.addPeyment(peymentData) : this.toastService.warning('خطایی در رزرو رخ داده است');
+    this.router.navigate([userIsLoged.role == this.userRole.ADMIN ?'admin/reserve' : 'client/reserved']);
   }
   DirectToLogin() {
     this.router.navigate(['../login'], {

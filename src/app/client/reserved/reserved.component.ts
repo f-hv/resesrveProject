@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { passengersModel } from 'src/app/core/models/passengers.model';
 import { peymentModel } from 'src/app/core/models/peyment.model';
 import { ReservedModel } from 'src/app/core/models/reserved.model';
-import { reserveDataModel } from 'src/app/core/models/reserveData.model';
 import { AirlineService } from 'src/app/core/services/airline.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CityService } from 'src/app/core/services/city.service';
 import { FlightService } from 'src/app/core/services/flight.service';
 import { PeymentService } from 'src/app/core/services/peyment.service';
@@ -11,13 +11,13 @@ import { ReservedService } from 'src/app/core/services/reserved.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: 'app-reserved',
+  templateUrl: './reserved.component.html',
+  styleUrls: ['./reserved.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ReservedComponent implements OnInit {
   listReserved: any[] = [];
-  listPeyment: peymentModel[]=[];
+  listPeyment: peymentModel[] = [];
   reservedData: ReservedModel[] = [];
   listPassengers: passengersModel[] = [];
   ///// pagination
@@ -32,7 +32,8 @@ export class ListComponent implements OnInit {
     private userService: UserService,
     private flightService: FlightService,
     private cityService: CityService,
-    private airlineService: AirlineService
+    private airlineService: AirlineService,
+    private authService:AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,13 +41,13 @@ export class ListComponent implements OnInit {
   }
 
   getData() {
-    debugger
     this.reservedData = this.reservService.getData();
     this.listPeyment = this.peymentService.getData();
     if (this.reservedData && this.listPeyment) {
+      var userIsLoged = this.authService.currentUser$.value;
       this.reservedData.map((reservItem: any) => {
         this.listPeyment.map((peyItem: any) => {
-          if (reservItem.peymentId == peyItem.id) {
+          if (reservItem.peymentId == peyItem.id && reservItem.userId == userIsLoged.id ) {
             const itemUserName = this.userService.getById(reservItem.userId);
             var dataFlight = this.flightService.getById(reservItem.flightId);
             const itemSource = this.cityService.getById(dataFlight.source);
@@ -62,7 +63,7 @@ export class ListComponent implements OnInit {
               date: dataFlight.date,
               time: dataFlight.time,
               flightNumber: reservItem.flightId,
-              listPassengers :peyItem.passengers
+              listPassengers: peyItem.passengers
             })
           }
         })

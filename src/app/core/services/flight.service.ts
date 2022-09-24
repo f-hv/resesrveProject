@@ -16,7 +16,8 @@ export class FlightService {
 
   getById(id: any) {
     this.getData();
-    const findItem = this.flight.find((item: any) => item.id === id);
+    // debugger
+    const findItem = this.stringList.find((item: any) => item.flightNumber == id);
     return findItem ? findItem : {
       id: null,
       source: null,

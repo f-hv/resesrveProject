@@ -107,7 +107,7 @@
                                         <label class="col-form-label-sm col-2">جنسیت</label>
                                         <ng-multiselect-dropdown class="form-control-sm col-5 x"
                                             [settings]="dropdownSettings" [data]="Genderlist"
-                                            (ngModelChange)="onDataChange($event)"
+                                            (ngModelChange)="ongenderChange($event)"
                                             (onSelect)="onRoleSelectGender($event,item)" [ngClass]="{
                                         error: passengersForm.get('gender')?.invalid && isclickOnNext
                                     }">
@@ -214,7 +214,8 @@
                                 <td scope="col" style="width:5%" class="overflow-hidden"></td>
                                 <td style="width:10%" class="overflow-hidden">{{item.fName}}</td>
                                 <td style="width:12%" class="overflow-hidden">{{item.lName}}</td>
-                                <td style="width:10%" class="overflow-hidden">{{item.gender}}</td>
+                                <td style="width:10%" class="overflow-hidden" *ngIf="item.gender== gender.female">خانم</td>
+                                <td style="width:10%" class="overflow-hidden" *ngIf="item.gender== gender.male">آقا</td>
                                 <td style="width:5%" class="overflow-hidden">{{item.age}}</td>
                                 <td style="width:58"></td>
                             </tr>

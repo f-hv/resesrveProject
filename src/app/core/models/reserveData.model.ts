@@ -1,3 +1,5 @@
+import { passengersModel } from "./passengers.model";
+
 export interface reserveDataModel {
     id: number | null,
     source: string | null,
@@ -5,7 +7,7 @@ export interface reserveDataModel {
     price: number | null,
     airline: string | null,
     flightNumber: number | null
-    loadWeight: number | null,
     date?: Date | null,
-    priceClass: string|null,
+    time: Date | null,
+    passengers: passengersModel[];
 }
