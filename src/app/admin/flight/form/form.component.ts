@@ -55,15 +55,12 @@ export class FormComponent implements OnInit {
     private calendar: NgbCalendar,
     private toastrService: ToastrService
   ) {
-    //  isDisabled = (date: NgbDate, current: {month: number, year: number}) => date.month !== current.month;
-    //  isWeekend = (date: NgbDate) =>  this.calendar.getWeekday(date) >= 6;
   }
   ngOnInit(): void {
     this.listCity = this.cityService.getData();
     this.listAirline = this.airlineService.getData();
     if (this.id) {
       this.dataFlight = this.flightService.getById(this.id);
-      this.updateValueTimeDate();
     }
     else {
       this.dataFlight = {
@@ -130,7 +127,7 @@ export class FormComponent implements OnInit {
 
   update() {
     const resualt = this.flightService.update(this.formFlight.value);
-    resualt? this.toastrService.success('ویرایش انجام شد '): this.toastrService.error('خطایی رخ داده است');
+    resualt? this.toastrService.success('ویرایش انجام شد ') && this.navigate() : this.toastrService.error('خطایی رخ داده است');
   }
 
   create() {
@@ -149,23 +146,9 @@ export class FormComponent implements OnInit {
     this.destination = item.id;
   }
   onAirlineSelect(item: any) {
-    console.log(item);
-    
     this.airline = item.id;
   }
-  updateValueTimeDate() {
-    if (this.dataFlight.date) {
-      this.editDate = this.dataFlight.date;
-      var hour = this.editDate.getHours();
-      var minute = this.editDate.getMinutes();
-      this.time = { hour: hour, minute: minute };
 
-      var year = this.editDate.getFullYear();
-      var month = this.editDate.getMonth();
-      var day = this.editDate.getDate();
-      this.dateNew = { "year": year, "month": month, "day": day }
-    }
-  }
   onTimeChange(value: { hour: string, minute: string }) {
     this.newTime = value?.hour +":" + value?.minute;   
   }

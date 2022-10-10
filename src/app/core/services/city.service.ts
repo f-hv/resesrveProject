@@ -6,12 +6,11 @@ import { CityModel } from '../models/city.model';
 })
 export class CityService {
   city: CityModel[] = [
-    { id: 1, name: 'ارک', deleted: 0 },
+    { id: 1, name: 'اراک', deleted: 0 },
     { id: 2, name: 'اردبیل', deleted: 0 },
     { id: 3, name: 'ارومیه', deleted: 0 },
     { id: 4, name: 'اصفهان', deleted: 0 },
     { id: 5, name: 'اهواز', deleted: 0 },
-    { id: 5, name: 'ایلام', deleted: 0 },
     { id: 6, name: 'بجنورد', deleted: 0 },
     { id: 7, name: 'بندرعباس', deleted: 0 },
     { id: 8, name: 'بوشهر', deleted: 0 },
@@ -21,7 +20,7 @@ export class CityService {
     { id: 12, name: 'خرم آباد', deleted: 0 },
     { id: 13, name: 'رشت', deleted: 0 },
     { id: 14, name: 'زاهدان', deleted: 0 },
-    { id: 15, name: 'زنجان', deleted: 0 },
+    { id: 15, name: ' خانمجان', deleted: 0 },
     { id: 16, name: 'ساری', deleted: 0 },
     { id: 17, name: 'سمنان', deleted: 0 },
     { id: 18, name: 'سنندج', deleted: 0 },

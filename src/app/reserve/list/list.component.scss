@@ -2,16 +2,27 @@
 
 .container-fluid {
     min-width: 100%;
-    height   : 700px;
+    height   : 100%;
 
     .header-info {
-        background-color: $white;
+        background-color: $yellow-40;
+        height          : 60px;
+
+        span {
+            font-size  : $font-size-4;
+            font-weight: bolder;
+        }
     }
 
     .content-card {
         display        : flex;
         align-items    : flex-start;
         justify-content: space-between;
+
+        .list-flight {
+            height    : 450px;
+            overflow-y: scroll;
+        }
 
         .menu-right {
             max-width       : 320px;
@@ -21,123 +32,255 @@
     }
 
     .content {
-        display          : flex;
-        flex-direction   : column;
-        align-items      : center;
-        // color         : $cool-gray-70;
-        color            : $cyan-R;
+        display       : flex;
+        flex-direction: column;
+        align-items   : center;
+        color         : $cyan-R;
+
+    }
+
+    .content-items {
+        background-color: $white;
+        border-radius   : $radius-sm;
+        height          : 160px;
+        display         : flex;
+        flex-direction  : row;
+        align-content   : center;
+        align-items     : center;
+
+        .fa-exclamation-triangle {
+            font-size: 20px;
+        }
+
+        .firstRow {
+            max-height: 55px;
+        }
+
+        i,
+        .line {
+            color: $cool-gray-30;
+        }
+
+        .fa-circle {
+            font-weight: lighter;
+        }
+
+        .pric {
+            text-align : center;
+            color      : $red-60;
+            font-size  : $font-size-4;
+            font-weight: 800;
+        }
+
+        button {
+            width     : $width-lg !important;
+            height    : $height-md !important;
+            text-align: center;
+        }
+
+        .details {
+            font-size: $font-size-2;
+            color    : $gray-50;
+        }
+
+        a {
+            font-size: $font-size-2;
+            color    : $red-80;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .time {
+            color      : $yellow-50;
+            font-size  : $font-size-6;
+            font-weight: 900;
+            padding    : 5px;
+        }
+
+        .tabbable {
+            width: 77%;
+        }
+
+        .nav-tabs li span {
+            font-size: $font-size-1;
+            cursor   : pointer;
+        }
+
+        .tab-pane {
+            display: none;
+
+            span {
+                font-size: $font-size-1;
+            }
+
+            table {
+                border    : none;
+                box-shadow: none;
+                color     : $black;
+
+                thead {
+                    color           : $gray-70;
+                    background-color: $white;
+                }
+
+                tbody {
+                    :hover {
+                        background-color: $white;
+                    }
+                }
+            }
+        }
+
+        .tab-pane.active {
+            height : 80px;
+            display: block;
+        }
+
+        .card-info {
+            display: flex;
+
+            .refund {
+                padding-left  : 1rem;
+                padding-right : 1rem;
+                padding-top   : 0;
+                padding-bottom: 0;
+                text-align    : center;
+
+                .refund__percent {
+                    text-align : center;
+                    font-size  : $font-size-4;
+                    font-weight: 900;
+                    color      : #dc3545;
+                }
+
+                .refund__text {
+                    font-size: .75rem;
+                    color    : #4b5259;
+                }
+            }
+        }
+    }
+
+    .content-items.active {
+        height: 210px;
+    }
+}
+
+////////////////////////////////Media //////////////////////////
+
+@media (max-width:540px) {
+
+    .content-card {
+        display       : flex;
+        align-items   : flex-start;
+        flex-direction: column-reverse;
+
+        .list-flight {
+            height    : 300px !important;
+            overflow-y: scroll !important;
+        }
+
+        .airline {
+            font-size     : 10px !important;
+            letter-spacing: -1px !important;
+        }
 
         .content-items {
-            background-color: $white;
-            border-radius   : $radius-sm;
-            height          : 160px;
-            display         : flex;
-            flex-direction  : row;
-            align-content   : center;
-            align-items     : center;
+            // min-height: 100px !important;
+            height: 130px !important;
 
-            .firstRow{
-                max-height: 55px;
-                margin-top: -35px;
-            }
-            i,
-            .line {
-                color: $cool-gray-30;
-            }
+            span {
+                font-size: $font-size-1;
 
-            .fa-circle {
-                font-weight: lighter;
-            }
-
-            .pric {
-                // margin-top: -40px;
-                text-align : center;
-                color      : $red-80;
-                font-size  : $font-size-4;
-                font-weight: 800;
-            }
-
-            .details {
-                font-size: $font-size-2;
-                color    : $gray-50;
-            }
-
-            a {
-                font-size: $font-size-2;
-                color    : $red-80;
-
-                &:hover {
-                    cursor: pointer;
+                .fa-exclamation-triangle {
+                    font-size: 12px !important;
                 }
+            }
+
+            button {
+                background-color: $yellow-40 !important;
+                color           : $black;
+                max-width       : 75px !important;
+                max-height      : 30px !important;
+                font-size       : 10px;
+                font-weight     : 600;
+                padding         : 7px;
+            }
+
+            #price-title {
+                font-size: 10px !important;
             }
 
             .time {
-                color      : darken($yellow-40, 7%);
-                font-size  : $font-size-6;
-                font-weight: 900;
-            }
-            .tabbable{
-                width: 77%;
-            }
-            .nav-tabs li span{
-                font-size: $font-size-1;
-                cursor: pointer;
+                font-size  : $font-size-3 !important;
+                font-weight: 600 !important;
+                padding    : 3px !important;
             }
 
-            .tab-pane {
-                display: none;
-                span{
-                    font-size: $font-size-1;
-                }
-                table {
-                    border    : none;
-                    box-shadow: none;
-                    color     : $black;
-
-                    thead {
-                        color           : $gray-70;
-                        background-color: $white;
-                    }
-
-                    tbody {
-                        :hover {
-                            background-color: $white;
-                        }
-                    }
-                }
+            i {
+                font-size: $font-size-1 !important;
+                padding  : 3px;
             }
 
-            .tab-pane.active {
-                height: 80px;
-                display: block;
+            .pric {
+                margin-top: -20px;
             }
 
-            .card-info {
-                display: flex;
 
-                .refund {
-                    padding-left  : 1rem;
-                    padding-right : 1rem;
-                    padding-top   : 0;
-                    padding-bottom: 0;
-                    text-align    : center;
-
-                    .refund__percent {
-                        text-align: center;
-                        font-size : $font-size-4;
-                        font-weight: 900;
-                        color     : #dc3545;
-                    }
-
-                    .refund__text {
-                        font-size: .75rem;
-                        color    : #4b5259;
-                    }
-                }
+            .tabbable {
+                width: 100% !important;
             }
-        }
-        .content-items.active{
-            height: 210px;
+
+            .nav {
+                margin-top: -17px;
+            }
+
+            .nav-tabs li span {
+                font-size  : $font-size-0 !important;
+                font-weight: 800;
+                color      : $magenta-80;
+            }
         }
     }
+
+    .tab-pane {
+        span {
+            font-size: 7px !important;
+        }
+
+    }
+
+    .tab-pane.active {
+        height       : 120px !important;
+        margin-bottom: -72px !important;
+
+        // margin-bottom: -70px !important;
+        display: block !important;
+    }
+
+    .card-info {
+        margin-top: -12px !important;
+
+        .refund {
+            line-height: 8px !important;
+        }
+    }
+
+    .content-items.active {
+        height: 210px !important;
+    }
+
+
+
+    .header-info {
+        background-color: $yellow-40 !important;
+        height          : 40px;
+
+        span {
+            font-size: $font-size-2 !important;
+        }
+    }
+
 }

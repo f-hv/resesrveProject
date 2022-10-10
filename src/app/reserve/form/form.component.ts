@@ -143,13 +143,13 @@ export class FormComponent implements OnInit {
 
     this.countPassengar = this.dataPassenger.adultCount + this.dataPassenger.childCount + this.dataPassenger.babyCount;
   }
-  changeDestinationSource() {
-    const itemDes = this.destination;
-    this.formReserve?.get('source')?.setValue(this.destination);
-    this.formReserve?.get('destination')?.setValue(this.source);
-    this.destination = this.source;
-    this.source = itemDes;
-  }
+  // changeDestinationSource() {
+  //   const itemDes = this.destination;
+  //   this.formReserve?.get('source')?.setValue(this.destination);
+  //   this.formReserve?.get('destination')?.setValue(this.source);
+  //   this.destination = this.source;
+  //   this.source = itemDes;
+  // }
 
 }
 

@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { passengersModel } from 'src/app/core/models/passengers.model';
 import { peymentModel } from 'src/app/core/models/peyment.model';
 import { ReservedModel } from 'src/app/core/models/reserved.model';
-import { reserveDataModel } from 'src/app/core/models/reserveData.model';
+
 import { AirlineService } from 'src/app/core/services/airline.service';
 import { CityService } from 'src/app/core/services/city.service';
 import { FlightService } from 'src/app/core/services/flight.service';
 import { PeymentService } from 'src/app/core/services/peyment.service';
 import { ReservedService } from 'src/app/core/services/reserved.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { genderEnum } from 'src/app/shared/enums/gender.enum';
 
 @Component({
   selector: 'app-list',
@@ -34,21 +35,22 @@ export class ListComponent implements OnInit {
     private cityService: CityService,
     private airlineService: AirlineService
   ) { }
-
+  get gender() {
+    return genderEnum;
+  }
   ngOnInit(): void {
     this.getData();
   }
 
   getData() {
-    debugger
-    this.reservedData = this.reservService.getData();
+     this.reservedData = this.reservService.getData();
     this.listPeyment = this.peymentService.getData();
     if (this.reservedData && this.listPeyment) {
       this.reservedData.map((reservItem: any) => {
         this.listPeyment.map((peyItem: any) => {
           if (reservItem.peymentId == peyItem.id) {
             const itemUserName = this.userService.getById(reservItem.userId);
-            var dataFlight = this.flightService.getById(reservItem.flightId);
+            var dataFlight = this.flightService.getByFlightNumber(reservItem.flightId);
             const itemSource = this.cityService.getById(dataFlight.source);
             const itemDestination = this.cityService.getById(dataFlight.destination);
             const itemAirline = this.airlineService.getById(dataFlight.airline)
@@ -69,15 +71,15 @@ export class ListComponent implements OnInit {
       })
     }
     this.listPassengers.map((item: any) => {
-      if (item.gender == 1)
-        item.gender = 'زن'
+      if (item.gender == this.gender.female)
+        item.gender = ' خانم'
       else
-        item.gender = 'مرد'
+        item.gender = 'آقا'
     })
   }
 
   onKeyup(key: any) {
-    debugger
+     
     if (key.keycode !== 13 || key.keycode !== 8) {
       this.searchKeyWord = key;
     }

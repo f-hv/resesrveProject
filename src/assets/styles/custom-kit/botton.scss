@@ -49,17 +49,14 @@
 }
 
 .buttonR-primary {
-  background-color: $blue-80;
+  background-color: $blue-60;
   color           : $white;
   box-shadow      : $box-shadow-sm;
   font-size       : $font-size-2;
   font-weight     : 800;
-  height    : $height-sm !important;
 
 
   &:hover {
-    // background-color: $yellow-50;
-    // color: $white;
     transition: transform 0.3s ease-out;
     transform : scale(1.1); 
   }
@@ -79,8 +76,8 @@
 
 .button-Del {
   background-color: $white;
-  color           : $red-70;
-  box-shadow      : $box-shadow-xs;
+  color           : $red-60;
+  // box-shadow      : $box-shadow-xs;
   font-size       : $font-size-1;
   font-weight     : 800;
 
@@ -100,6 +97,33 @@
     color           : $cool-gray-50 !important;
     cursor: not-allowed !important;     
   }
+}
+
+
+
+.btn-next{
+    background-color: $yellow-40;
+    color           : $black;
+    box-shadow      : $box-shadow-xs;
+    font-size       : $font-size-2;
+    font-weight     : 800;
+  
+  
+    &:hover {
+      transition: transform 0.5s ease-in;
+      transform : scale(1.1); 
+    }
+  
+    i {
+      color    : $black;
+      font-size: $font-size-3;
+    }
+  
+    &:disabled {
+      background-color: $gray-40 !important;
+      color           : $cool-gray-50 !important;
+      cursor: not-allowed !important;     
+    }
 }
 
 .button-sm-0 {
@@ -289,9 +313,3 @@
   font-size       : $font-size-4;
   color           : $gray-60;
 }
-
-// .responsive-btn{
-//   @extend .button;
-
-
-// }

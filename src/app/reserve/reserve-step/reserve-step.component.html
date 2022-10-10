@@ -1,13 +1,7 @@
 <div class="container">
     <div id="stepperPassenger" class="bs-stepper">
         <div class="bs-stepper-header">
-            <!-- <div class="line"></div>
-            <div class="step" data-target="#Confirm-information">
-                <label class="step-trigger">
-                    <span class="bs-stepper-circle">3</span>
-                    <span class="bs-stepper-label">تایید اطلاعات</span>
-                </label>
-            </div> -->
+           
             <div class="line"></div>
             <div class="step" data-target="#passengers">
                 <label class="step-trigger">
@@ -23,7 +17,7 @@
                 </label>
             </div>
             <div class="line"></div>
-            <div class="step" data-target="#Confirm-information">
+            <div class="step" data-target="#confirm-information">
                 <label class="step-trigger">
                     <span class="bs-stepper-circle">3</span>
                     <span class="bs-stepper-label">تایید اطلاعات</span>
@@ -37,48 +31,45 @@
                 </label>
             </div>
         </div>
-        <div class="bs-stepper-content card-design mt-2 p-4">
-
+        <div class="bs-stepper-content card-design mt-2">
             <div id="passengers" class="content">
                 <div [formGroup]="passengersForm">
-                    <div class="col-md-2 mt-2" style="text-align:center;">
-                        <h6> مشخصات مسافران</h6>
-                    </div>
-                    <div formArrayName="passengers">
+                    <div class=" scroll-div" formArrayName="passengers">
                         <div *ngFor="let item of passengersAsControls; let i= index "
-                            class="row content-passenger mt-1 p-2">
-                            <div class="d-flex" [formGroup]="item">
-                                <div class="row d-flex">
-                                    <!-- <span *ngIf="1 === flightType.OneWay">
-                                        بزرگسال
-                                    </span>  -->
-                                    <h6>{{passengerType[item.get('type').value]}} </h6>
-                                    <div class="col-md-3 ">
+                            class="row content-passenger pt-3 ">
+                            <div class="row d-flex" [formGroup]="item">
+                                <div class="row">
+                                    <h6 *ngIf="passengerType[item.get('type').value] === 'adult' ">بزرگسال </h6>
+                                    <h6 *ngIf="passengerType[item.get('type').value] == 'child' ">کودک </h6>
+                                    <h6 *ngIf="passengerType[item.get('type').value] == 'baby' ">نوزاد </h6>
+                                </div>
+                                <div class="row d-flex px-5 info ">
+                                    <div class="col-md-3 pt-4">
                                         <label class="col-form-label-sm col-2">نام</label>
                                         <input class="form-control" type="text" formControlName="fName"
                                             (ngModelChange)="onDataChange($event)"
                                             [ngClass]="{ error: (passengersForm.get('fName')?.invalid && isclickOnNext) }" />
                                         <div class="error-box">
                                             <app-error-message *ngIf="
-                                                    passengersForm.get('fName')?.invalid && isclickOnNext"
+                                                        passengersForm.get('fName')?.invalid && isclickOnNext"
                                                 [message]=" !passengersForm.get('fName')?.value ? 'این فیلد الزامی است' :'' ">
                                             </app-error-message>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 pt-4">
                                         <label class="col-form-label-sm ">نام خانوادگی </label>
                                         <input class="form-control" type="text" formControlName="lName"
                                             (ngModelChange)="onDataChange($event)"
                                             [ngClass]="{ error: passengersForm.get('lName')?.invalid  && isclickOnNext}" />
                                         <div class="error-box">
                                             <app-error-message *ngIf="
-                                                    passengersForm.get('lName')?.invalid && isclickOnNext"
+                                                        passengersForm.get('lName')?.invalid && isclickOnNext"
                                                 [message]="
-                                                        !passengersForm.get('lName')?.value ? ' این فیلد الزامی است' :''">
+                                                            !passengersForm.get('lName')?.value ? ' این فیلد الزامی است' :''">
                                             </app-error-message>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 pt-4">
                                         <label class="col-form-label-sm col-3">سن</label>
                                         <ng-container *ngIf="item.get('type').value ==1 ">
                                             <input type="number" class="form-control" formControlName="age"
@@ -97,136 +88,140 @@
                                         </ng-container>
                                         <div class="error-box">
                                             <app-error-message *ngIf="
-                                                    passengersForm.get('age')?.invalid && isclickOnNext"
+                                                        passengersForm.get('age')?.invalid && isclickOnNext"
                                                 [message]="
-                                                        !passengersForm.get('age')?.value ? ' این فیلد الزامی است' :''">
+                                                            !passengersForm.get('age')?.value ? ' این فیلد الزامی است' :''">
                                             </app-error-message>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 pt-4">
                                         <label class="col-form-label-sm col-2">جنسیت</label>
                                         <ng-multiselect-dropdown class="form-control-sm col-5 x"
                                             [settings]="dropdownSettings" [data]="Genderlist"
                                             (ngModelChange)="ongenderChange($event)"
                                             (onSelect)="onRoleSelectGender($event,item)" [ngClass]="{
-                                        error: passengersForm.get('gender')?.invalid && isclickOnNext
-                                    }">
+                                            error: passengersForm.get('gender')?.invalid && isclickOnNext
+                                        }">
 
                                         </ng-multiselect-dropdown>
                                         <div class="error-box-g">
                                             <app-error-message *ngIf="
-                                    passengersForm.get('gender')?.invalid && isclickOnNext" [message]="'فیلد خالی'">
+                                        passengersForm.get('gender')?.invalid && isclickOnNext"
+                                                [message]="'فیلد خالی'">
                                             </app-error-message>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row pt-2 mt-5">
-                                    <button type="button" class="button-Del button-sm-0 float-left "
-                                        (click)="deletePassenger(i)">
-                                        <span>حذف </span>
-                                        <i class="fa fa-trash p-2"></i>
-                                    </button>
+                                    <div class="col-sm-12 col-md-2 ">
+                                        <button type="button" class="button-Del button-sm-0 btn-small float-left mt-4 "
+                                            (click)="deletePassenger(i)">
+                                            <!-- <span>حذف </span> -->
+                                            <i class="fa fa-trash p-2"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{ passengersForm.value |json}}
-                <button (click)="next()" class="btn btn-primary mt-3">Next</button>
+                <button (click)="next()" class="btn-next  button-sm-1 mt-4">بعدی</button>
             </div>
             <div id="ticket" class="content">
                 <div class="row ">
-                    <span class="details mt-2">{{tripInfo.date}} تاریخ بلیط</span>
-                    <div class="col-md-2 align-text-center">{{airline.name}}</div>
-                    <div class="col-md-7">
-                        {{source.name}}
-                        <span class="p-2 time">{{tripInfo.time}}</span>
-                        <i class="fas fa-plane fa-rotate-180"></i>
-                        <span class="line">-----------------------</span>
-                        <i class="fas fa-circle"></i>
-                        {{destination.name}}
+                    <div class="col-9 pt-3">
+                        <div class="row d-flex fly-date">
+                            <div class="col-md-6">
+                                <span class="size-m mt-2"> تاریخ حرکت: <span class="color">{{date}}</span></span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="size-m ">شرکت هواپیمایی : <span class="size-m color">
+                                        {{airline.name}}</span></span>
+                            </div>
+                        </div>
+                        <div class="row fly-info ">
+                            <div class="col-md-12">
+                                <span> {{source.name}}</span>
+                                <span class="p-2 time color">{{ tripInfo.time}}</span>
+                                <i class="fas fa-plane fa-rotate-180"></i>
+                                <span class="line">----------- </span>
+                                <i class="fas fa-circle"></i>
+                                <span class="px-2 ">{{destination.name }} </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3 pric d-flex flex-column align-items-center">
-                        <span>ریال {{price}}</span>
-                        <span>بزرگسال ({{tripInfo.adult}}) {{ travelPrice.adultTicketPrice}}</span>
-                        <span>کودک ({{tripInfo.child}}) {{travelPrice.childTicketPrice}} </span>
-                        <span>نوزاد ({{tripInfo.baby}}) {{travelPrice.babyTicketPrice}} </span>
-                        <button class="button buttonR-primary button-md-1 mt-2" type="submit" (click)="changeTicket()">
-                            تغییر پرواز</button>
+                    <div class="col-3 p-0">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 p-4 pric d-flex flex-column align-items-center">
+                                <h5> <span class="price">ریال</span> {{price}}</h5>
+                                <span class="passenger">بزرگسال {{tripInfo.adult}} {{
+                                    travelPrice.adultTicketPrice}}</span>
+                                <span class="passenger">کودک {{tripInfo.child}} {{travelPrice.childTicketPrice}} </span>
+                                <span class="passenger">نوزاد {{tripInfo.baby}} {{travelPrice.babyTicketPrice}} </span>
+                                <button class="button buttonR-primary btn-changeFly mt-4" type="submit"
+                                    (click)="changeTicket()">
+                                    تغییر پرواز</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button (click)="next()" class="btn btn-primary mt-3">Next</button>
+                <button (click)="next()" class="btn-next button-sm-1 mt-3">بعدی</button>
             </div>
-            <div id="Confirm-information" class="content">
+            <div id="confirm-information" class="content scroll-div">
                 <div class="row">
-                    <table class="table-hover caption-top table align-middle ">
+                    <table class="table-flyInfo table table-striped table-hover caption-top align-middle ">
                         <caption class="">
                             <div class="header row flex-row justify-content-between align-items-center">
-                                <h7 class="col-md-2 ">اطلاعات </h7>
+                                <h7 class="col-md-2 "> اطلاعات پرواز </h7>
                             </div>
                         </caption>
                         <tbody>
-                            <td style="width:15%">
-                                <tr scope="col">مبدا</tr>
-                                <tr scope="col">مقصد</tr>
-                                <tr scope="col">شرکت هواپیمایی</tr>
-                                <tr scope="col">تاریخ و ساعت پرواز</tr>
-                                <tr scope="col">شماره پرواز</tr>
-                                <tr scope="col">قیمت</tr>
-                            </td>
-                            <td style="width:85%">
-                                <tr class="shrink">{{source.name}}</tr>
-                                <tr>{{ destination.name }}</tr>
-                                <tr>{{airline.name}}</tr>
-                                <tr>{{date}} {{time}}</tr>
-                                <tr>{{flightNumber}}</tr>
-                                <tr>{{price}}</tr>
-                            </td>
+                            <tr>
+                                <th scope="col" style="width:15%">مبدا</th>
+                                <th scope="col" style="width:15%">مقصد</th>
+                                <th scope="col" style="width:30%">شرکت هواپیمایی</th>
+                                <th scope="col" style="width:20%">زمان پرواز</th>
+                                <th scope="col" style="width:10%"> پرواز</th>
+                                <th scope="col" style="width:20%">قیمت</th>
+                            </tr>
+                            <tr>
+                                <td style="width:20%">{{source.name}}</td>
+                                <td style="width:20%">{{ destination.name }}</td>
+                                <td style="width:20%">{{airline.name}}</td>
+                                <td style="width:20%">{{date}} {{time}}</td>
+                                <td style="width:10%">{{flightNumber}}</td>
+                                <td style="width:20%">{{price}}</td>
+                            </tr>
                         </tbody>
-                        <!-- <tbody>
-                          <tr *ngFor="let city of listCity  ">
-                            <td class="shrink" style="width:10%">{{city.id}}</td>
-                            <td style="width:20%">{{ city.name }}</td>
-                            <td style="width:45%"> </td>
-                            <td id="detail-td" style="width:25%">
-                              <i class="fas fa-edit p-2" ></i>
-                              <i class="fas fa-trash p-2"></i>
-                            </td>
-                          </tr>
-                        </tbody> -->
                     </table>
                 </div>
                 <div class="row">
-                    <table class="table-hover caption-top table align-middle ">
+                    <table class="table-passengers table-hover caption-top table align-middle ">
                         <thead class="">
                             <tr>
-                                <th scope="col" style="width:5%">#</th>
-                                <th scope="col" style="width:10%">نام</th>
-                                <th scope="col" style="width:12%">نام خانوادگی</th>
+                                <th scope="col" style="width:25%">نام</th>
+                                <th scope="col" style="width:25%">نام خانوادگی</th>
                                 <th scope="col" style="width:10%"> جنسیت </th>
-                                <th scope="col" style="width:5%">سن </th>
-                                <th style="width:58"></th>
+                                <th scope="col" style="width:10%">سن </th>
+                                <th style="width:20"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 *ngFor="let item of listPassengersData  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage">
-                                <td scope="col" style="width:5%" class="overflow-hidden"></td>
-                                <td style="width:10%" class="overflow-hidden">{{item.fName}}</td>
-                                <td style="width:12%" class="overflow-hidden">{{item.lName}}</td>
-                                <td style="width:10%" class="overflow-hidden" *ngIf="item.gender== gender.female">خانم</td>
+                                <td style="width:25%" class="overflow-hidden">{{item.fName}}</td>
+                                <td style="width:25%" class="overflow-hidden">{{item.lName}}</td>
+                                <td style="width:10%" class="overflow-hidden" *ngIf="item.gender== gender.female">خانم
+                                </td>
                                 <td style="width:10%" class="overflow-hidden" *ngIf="item.gender== gender.male">آقا</td>
-                                <td style="width:5%" class="overflow-hidden">{{item.age}}</td>
-                                <td style="width:58"></td>
+                                <td style="width:10%" class="overflow-hidden">{{item.age}}</td>
+                                <td style="width:20"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <button (click)="next()" class="btn btn-primary mt-5">تایید اطلاعات</button>
+                <button (click)="next()" class="btn-next  button-sm-1 mt-5">تایید اطلاعات</button>
             </div>
             <div id="final-ticket" class="content text-center">
-                <label for="exampleInputPassword1">صدور بلیط</label>
-                <button class="button buttonR-primary button-md-1 mt-2" type="submit" (click)="reserveFlight()">
+                <button class="btn-next button-sm-1 mt-2" type="submit" (click)="reserveFlight()">
                     صدور بلیط</button>
             </div>
         </div>

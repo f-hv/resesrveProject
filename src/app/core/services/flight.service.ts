@@ -9,15 +9,28 @@ export class FlightService {
   flight: FlightModel[] = [];
   orginalListFlight = [...this.flight];
   resualt: Boolean = false;
-  stringList: any;
   constructor(
     private localStorageService: LocalStorageService
   ) { }
 
   getById(id: any) {
     this.getData();
-    // debugger
-    const findItem = this.stringList.find((item: any) => item.flightNumber == id);
+    const findItem = this.flight.find((item: any) => item.id == id);
+    return findItem ? findItem : {
+      id: null,
+      source: null,
+      destination: null,
+      airline: null,
+      date: null,
+      time: null,
+      flightNumber: null,
+      price:null,
+      deleted: null
+    };
+  }
+  getByFlightNumber(id: any) {
+    this.getData();
+    const findItem = this.flight.find((item: any) => item.flightNumber == id);
     return findItem ? findItem : {
       id: null,
       source: null,
@@ -32,8 +45,9 @@ export class FlightService {
   }
 
   getData() {
-    return this.stringList = JSON.parse(LocalStorageService.read("flights"));
+    return this.flight = JSON.parse(LocalStorageService.read("flights"));
   }
+
   create(data: FlightModel) {   
     this.flight = JSON.parse(LocalStorageService.read("flights"));
     if (this.flight == null) {

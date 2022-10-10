@@ -1,57 +1,290 @@
 @import "../../../assets/styles/custom-kit/variable.scss";
 
-.container{
+.container {
     height          : 100%;
     width           : 100%;
-    background-color:  $gray-20;
+    background-color: $gray-20;
+    overflow-y      : auto;
 }
 
-.bs-stepper-header{
-    border-radius: 8px;
-    box-shadow: $box-shadow-xs;
-    border: solid 1px $gray-30;
+.bs-stepper-header {
+    border-radius   : 8px;
+    box-shadow      : $box-shadow-xs;
+    border          : solid 1px $gray-30;
     background-color: $white;
-    border-radius: 8px;
-    
+    border-radius   : 8px;
+
+    span {
+        font-size: $font-size-2;
+    }
+
 }
 
-.card-design{
-    border-radius: 8px;
-    box-shadow: $box-shadow-xs;
-    border: solid 1px $gray-30;
+.card-design {
+    padding         : 10px;
+    border-radius   : 8px;
+    box-shadow      : $box-shadow-xs;
+    border          : solid 1px $gray-30;
     background-color: $white;
-    border-radius: 8px;
-    font-size: $font-size-2 !important;
+    border-radius   : 8px;
+    font-size       : $font-size-2 !important;
 }
-.pric{
+
+#passengers {
+    .info {
+        margin-top: -60px
+    }
+}
+
+.pric {
     border-right: 2px solid $gray-30;
 }
-.bs-stepper-content{
 
-    .title-btn{
+.bs-stepper-content {
+
+    .title-btn {
         border-radius: $radius-md;
     }
-    .a-card-title span{
-        font-size: $font-size-4 !important;
+
+    .a-card-title span {
+        font-size  : $font-size-4 !important;
         font-weight: 800;
     }
-    .error-box{
+
+    .error-box {
         margin-top: -18px;
     }
-    .error-box-g{
+
+    .error-box-g {
         margin-top: -36px;
 
     }
-    .content-passenger{
-        min-height: 180px;
-        max-height: 115px;
-        border-bottom: solid 1px $gray-30 ;
+
+    .content-passenger {
+        min-height   : 123px;
+        max-height   : 123px;
+        border-bottom: solid 1px $blue-20;
+    }
+
+}
+
+#ticket {
+    .btn-changeFly {
+        width     : $width-md;
+        height    : $height-sm;
+        text-align: center;
+    }
+
+    .fly-date {
+        flex-direction : row;
+        flex-wrap      : nowrap;
+        justify-content: start;
+    }
+
+    .fly-info {
+        margin-top: 20px;
+
+        span {
+            font-size  : $font-size-3;
+            font-weight: 900;
+        }
+
+        .time {
+            font-size: $font-size-5;
+        }
+    }
+
+    i {
+        color    : $gray-40;
+        font-size: $font-size-1;
+    }
+
+    .line {
+        color           : $gray-40;
+        background-color: $white;
+    }
+
+    .color {
+        color      : $red-50;
+        font-size  : $font-size-4;
+        font-weight: 900px !important;
     }
 }
 
-label{
+label {
     pointer-events: none;
 }
+
 p {
     font-family: Lato;
-  }
+}
+
+.scroll-div {
+    max-height: 320px;
+    min-height: 320px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+.size-m {
+    font-size   : $font-size-2;
+    // color    : $blue-40;
+}
+
+///////////////media ///////////////////////
+
+@media (max-width:540px) {
+    .bs-stepper-header {
+        span {
+            font-size: $font-size-0;
+        }
+    }
+
+    .bs-stepper-content {
+        span {
+            font-size: $font-size-2 !important;
+
+        }
+    }
+
+    .bs-stepper .step-trigger {
+        padding: 4px;
+    }
+
+    .bs-stepper .line,
+    .bs-stepper-line {
+        flex      : 1 0 27px;
+        min-width : 1px;
+        min-height: 2px;
+    }
+
+    .active .bs-stepper-circle {
+        background-color: $yellow-50 !important;
+    }
+    .btn-next {
+        width    : $width-xs !important;
+        height   : $height-xs !important;
+        font-size: $font-size-1 !important;
+    }
+
+    #ticket {
+        .btn-changeFly {
+            width      : $width-res;
+            height     : $height-xs;
+            text-align : center;
+            font-size  : $font-size-sm !important;
+            font-weight: 400;
+        }
+
+        .fly-date {
+            flex-wrap     : wrap !important;
+            flex-direction: column !important;
+            line-height   : 36px !important;
+        }
+
+        .fly-info {
+            margin-top: 8px !important;
+        }
+
+        .size-m {
+            font-size   : $font-size-1 !important;
+            font-weight : 600;
+            // color    : $blue-40;
+        }
+
+        i {
+            font-size: $font-size-sm;
+        }
+
+        .time {
+            font-size  : $font-size-3 !important;
+            font-weight: 800 !important;
+        }
+
+        h5 {
+            font-size  : $font-size-3 !important;
+            font-weight: 600 !important;
+            color      : $red-50;
+        }
+
+        .passenger {
+            font-size     : $font-size-sm !important;
+            font-weight   : 800;
+            // font-weight: bolder !important;
+
+        }
+    }
+
+    #Confirm-information {
+        table {
+            margin-right: 13px !important;
+            max-width   : 320px !important;
+        }
+    }
+
+    #passengers {
+        h6 {
+            font-size  : $font-size-1 !important;
+            font-weight: bolder !important;
+        }
+
+
+        label {
+            font-size  : $font-size-sm !important;
+            font-weight: bolder !important;
+
+        }
+
+        h6 {
+            background-color: $blue-20;
+            color           : $blue-100;
+            border-radius   : 20px;
+            max-width       : 70px !important;
+            max-height      : 30px !important;
+            padding         : 8px 14px 0px !important;
+            margin-right    : 20px !important;
+        }
+
+        .info {
+            display   : flex;
+            margin-top: -22px
+        }
+
+        .content-passenger {
+            min-height       : 355px;
+            // padding-bottom: 20px;
+            padding-top      : 10px !important;
+        }
+
+        .btn-small {
+            margin-left: -120px !important;
+        }
+    }
+
+    #confirm-information {
+
+        .table-flyInfo 
+        th {
+            font-size  : $font-size-0 !important;
+            font-weight: 1200 !important;
+        }
+        tr{
+            font-weight: 800 !important;
+
+        }
+        // .table-passengers
+        //     th{
+
+        //     }
+        
+    }
+
+    
+
+    .color {
+        font-weight: bolder !important;
+    }
+
+
+}

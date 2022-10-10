@@ -33,12 +33,11 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let flight of flightData  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:flightById">
+            *ngFor="let flight of listFlight  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage trackBy:flightById">
             <td scope="col" style="width:5%" class="overflow-hidden">{{flight.id}}</td>
             <td style="width:10%" class="overflow-hidden" >{{flight.source}}</td>
             <td style="width:10%" class="overflow-hidden" >{{flight.destination}}</td>
             <td style="width:15%" class="overflow-hidden">{{flight.date | date:'YYY/MM/dd' }}  {{ flight.time }}</td>
-            <!--  | jalali-->
             <td style="width:10%" class="overflow-hidden">{{flight.flightNumber}}</td>
             <td style="width:10%" class="overflow-hidden">{{flight.airline}}</td>
             <td style="width:10%" class="overflow-hidden">{{flight.price}}</td>

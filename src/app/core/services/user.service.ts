@@ -24,7 +24,7 @@ export class UserService {
     return this.users.find((user: any) => user.id === id)
   }
   create(data: UserModel) {
-    debugger
+     
     this.users = JSON.parse(LocalStorageService.read("users"));
     if (this.users == null) {
       const list: UserModel[] = [];

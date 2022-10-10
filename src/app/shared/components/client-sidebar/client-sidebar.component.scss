@@ -13,7 +13,6 @@
     height    : 100vh;
     min-height: 100vh;
 
-    // transition: 0.5s ease-out;
     .sidebar-items {
         padding-right: 15px;
 
@@ -101,7 +100,7 @@
   MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width:768px) {
+@media (max-width:540px) {
     #sidebar {
         min-width: 85px;
         max-width: 85px;

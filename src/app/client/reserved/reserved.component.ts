@@ -49,7 +49,7 @@ export class ReservedComponent implements OnInit {
         this.listPeyment.map((peyItem: any) => {
           if (reservItem.peymentId == peyItem.id && reservItem.userId == userIsLoged.id ) {
             const itemUserName = this.userService.getById(reservItem.userId);
-            var dataFlight = this.flightService.getById(reservItem.flightId);
+            var dataFlight = this.flightService.getByFlightNumber(reservItem.flightId);
             const itemSource = this.cityService.getById(dataFlight.source);
             const itemDestination = this.cityService.getById(dataFlight.destination);
             const itemAirline = this.airlineService.getById(dataFlight.airline)
@@ -71,14 +71,14 @@ export class ReservedComponent implements OnInit {
     }
     this.listPassengers.map((item: any) => {
       if (item.gender == 1)
-        item.gender = 'زن'
+        item.gender = ' خانم'
       else
-        item.gender = 'مرد'
+        item.gender = 'آقا'
     })
   }
 
   onKeyup(key: any) {
-    debugger
+     
     if (key.keycode !== 13 || key.keycode !== 8) {
       this.searchKeyWord = key;
     }

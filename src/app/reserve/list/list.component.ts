@@ -33,6 +33,9 @@ export class ListComponent implements OnInit {
   infoOpen: boolean[] = [];
   params: any
   source: any;
+   ////infifnit scroll
+   infiniteScrollDistance: any = 2;
+   infiniteScrollThrottle: any = 50;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -48,7 +51,7 @@ export class ListComponent implements OnInit {
     this.getData();
   }
   getData() {
-    debugger
+     
     this.activatedRoute.queryParamMap.subscribe(params => this.params = params);
     this.departingDate = this.params.get('departingDate');
     this.adultCount = Number(this.params.get('adult'));

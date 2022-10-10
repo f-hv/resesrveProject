@@ -1,8 +1,5 @@
 @import "../../../assets/styles/custom-kit/variable.scss";
 
-// .container{
-//     padding: 20px;
-// }
 .container,
 .content {
     padding-right     : 15px;
@@ -17,8 +14,6 @@ input {
     border       : 1px solid $gray-30;
     border-radius: $radius-sm;
     padding      : 20px 20px 30px;
-    // max-width: 380px;
-
 }
 
 .title {
@@ -32,10 +27,6 @@ input {
     font-weight     : bold;
     color           : $blue-30;
 }
-
-// .col-info{
-//     padding:25px 60px
-// }
 label,
 input {
     font-size: 13px;

@@ -26,7 +26,7 @@ export class ReservedService {
   }
 
   addReserved(data: ReservedModel) {
-    debugger
+     
     this.getData();
     if (this.Reserved == null) {
       data.id = 1;
@@ -40,13 +40,6 @@ export class ReservedService {
       return LocalStorageService.addToArray("reserved", data) && true;
     }
   }
-  // update(data: ReservedModel) {
-  //   const editItem = this.Reserved.find(item => item.id === data.id)
-  // }
-
-  // delete(id: any) {
-  //   this.Reserved = this.Reserved.filter(item => item.id === id)
-  // }
 
 
 }

@@ -5,7 +5,7 @@
         </div>
     </div>
     <div id="content" class="row pt-2">
-        <div class="col-sm-12" style="width: 100%; overflow-x: auto;">
+        <div class="col-sm-12" style="width: 100%; ">
             <table class="table-hover caption-top table align-middle ">
                 <caption>
                     <div id="header-card" class="X row p-0 ">
@@ -17,47 +17,48 @@
                 </caption>
                 <thead class="">
                     <tr>
-                        <th scope="col" style="width:2%">#</th>
-                        <th scope="col" style="width:8%"> کاربر</th>
-                        <th scope="col" style="width:8%">مبدا</th>
-                        <th scope="col" style="width:8%"> مقصد</th>
-                        <th scope="col" style="width:8%"> شماره پرواز</th>
-                        <th scope="col" style="width:10%"> هواپیمایی</th>
-                        <th scope="col" style="width:12%">تاریخ</th>
-                        <th scope="col" style="width:10%"> قیمت</th>
-                        <th scope="col" style="width:36%"> مسافرین</th>
+                        <th scope="col" class="overflow-hidden" style="width:4%"> #</th>
+                        <th scope="col" class="overflow-hidden" style="width:8%"> کاربر</th>
+                        <th scope="col" class="overflow-hidden" style="width:8%">مبدا</th>
+                        <th scope="col" class="overflow-hidden" style="width:8%"> مقصد</th>
+                        <th scope="col" class="overflow-hidden" style="width:8%"> شماره پرواز</th>
+                        <th scope="col" class="overflow-hidden" style="width:10%"> هواپیمایی</th>
+                        <th scope="col" class="overflow-hidden" style="width:12%">تاریخ</th>
+                        <th scope="col" class="overflow-hidden" style="width:10%"> قیمت</th>
+                        <th scope="col" class="overflow-hidden" style="width:34%"> مسافرین</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr
                         *ngFor="let item of listReserved  | slice: (currentPage-1) * elementPerpage : (currentPage-1) * elementPerpage + elementPerpage ">
-                        <td style="width: 2%">{{item.id}}</td>
-                        <td style="width: 8%">{{item.userName}}</td>
-                        <td style="width: 8%">{{item.source}}</td>
-                        <td style="width: 8%">{{item.destination}}</td>
-                        <td style="width: 8%">{{item.flightNumber}}</td>
-                        <td style="width: 10%">{{item.airline}}</td>
-                        <td style="width: 12%">{{item.date}} {{item.time}}</td>
-                        <td style="width: 10%">{{item.price}}</td>
-                        <td style="width: 36%">
+                        <td style="width: 4%">{{item.id}}</td>
+                        <td class="overflow-hidden" style="width: 8%">{{item.userName}}</td>
+                        <td class="overflow-hidden" style="width: 8%">{{item.source}}</td>
+                        <td class="overflow-hidden" style="width: 8%">{{item.destination}}</td>
+                        <td class="overflow-hidden" style="width: 8%">{{item.flightNumber}}</td>
+                        <td class="overflow-hidden" style="width: 10%">{{item.airline}}</td>
+                        <td class="overflow-hidden" style="width: 12%">{{item.date}} {{item.time}}</td>
+                        <td class="overflow-hidden" style="width: 10%">{{item.price}}</td>
+                        <td class="overflow-hidden" style="width: 34%">
                     <tr class="title">
-                        <th scope="col" style="width:10%">نام</th>
-                        <th scope="col" style="width:20%">نام خانوادگی</th>
+                        <th scope="col" style="width:40%">نام </th>
                         <th scope="col" style="width:15%"> جنسیت </th>
                         <th scope="col" style="width:10%">سن </th>
+                        <th scope="col" style="width:35%"> </th>
                     </tr>
                     <tr *ngFor="let data of item.listPassengers ">
-                        <td style="width:10%" class="overflow-hidden">{{data.fName}}</td>
-                        <td style="width:20%" class="overflow-hidden">{{data.lName}}</td>
-                        <td style="width:15%" class="overflow-hidden">{{data.gender}}</td>
+                        <td style="width:10%" class="overflow-hidden">{{data.fName}}{{data.lName}}</td>
+                        <td style="width:10%" class="overflow-hidden" *ngIf="data.gender== gender.female">خانم</td>                        
+                        <td style="width:10%" class="overflow-hidden" *ngIf="data.gender== gender.male">آقا</td>
                         <td style="width:10%" class="overflow-hidden">{{data.age}}</td>
+                        <td style="width:35%" ></td>
+
                     </tr>
                     </td>
                     </tr>
                 </tbody>
             </table>
-            <!-- {{passengers.value|json}} -->
             <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="5"
                 [boundaryLinks]="false" [pageSize]="elementPerpage" class="d-flex justify-content-end p-2">
             </ngb-pagination>

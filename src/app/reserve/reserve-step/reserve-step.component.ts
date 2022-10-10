@@ -48,7 +48,6 @@ export class ReserveStepComponent implements OnInit {
   date: any;
   time: any;
   //// dropdown/////
-  // dropdownSettings: IDropdownSettings;
   dropdownSettings = {
     singleSelection: true,
     idField: 'id',
@@ -58,8 +57,8 @@ export class ReserveStepComponent implements OnInit {
     itemsShowLimit: 2,
   };
   Genderlist = [
-    { id: 1, name: 'زن' },
-    { id: 2, name: ' مرد' },
+    { id: 1, name: ' خانم' },
+    { id: 2, name: ' آقا' },
   ];
   selectedItem: any;
   //////range age //////////
@@ -155,7 +154,6 @@ export class ReserveStepComponent implements OnInit {
   }
 
   private createPassengerFormGroup(type: number): FormGroup {
-    // const lenght = (this.passengersForm?.get('passengers') as FormArray).controls.length;    
     return new FormGroup({
       'id': new FormControl(''),
       'fName': new FormControl('', [Validators.required]),
@@ -183,12 +181,12 @@ export class ReserveStepComponent implements OnInit {
     this.age = item;
   }
   ongenderChange(item: any) {
-    debugger
+     
     this.listPassengersData.map((item: any) => {
-      if (item.gender == 1)
-        item.gender = 'زن'
+      if (item.gender == this.gender.female)
+        item.gender = ' خانم'
       else
-        item.gender = 'مرد'
+        item.gender = 'آقا'
     })
   }
 

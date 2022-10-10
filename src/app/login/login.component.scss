@@ -112,14 +112,11 @@
 }
 
 
-
-
-
 /* ---------------------------------------------------
   MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width:768px) {
+@media (max-width:540px) {
     .container-fluid {
         background-image     : url('../../assets/pic/mobileModee.jpg');
         background-repeat    : no-repeat;

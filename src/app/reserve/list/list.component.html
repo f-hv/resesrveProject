@@ -1,96 +1,112 @@
-<div class="container-fluid positionn-relative">
-    <div class="row header-info p-3 d-inline-block w-100 navbar-fixed-top navbar-expand-md'">
-        <span> بلیط هواپیما</span>
-        <span>{{source.name}}</span> -
-        <span>{{destination.name}} </span>
-        <i class="fas fa-calendar-alt"></i>
-        <span>{{departingDate}} </span>
+<div class="container-fluid">
+    <div class="row header-info p-3">
+        <div class="col-sm-1 col-md-4"></div>
+        <div class="col-4">
+            <span> {{source.name}}</span> -
+            <span>{{destination.name}} </span>
+        </div>
+        <div class="col-4">
+            <span><i class="fas fa-calendar-alt"></i> {{departingDate}} </span>
+        </div>
+
     </div>
-    <div class="row content-card">
+    <div class="row content-card ">
         <div class="col-md-3 menu-right pt-5 mt-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere iusto voluptas voluptatum natus, aliquid
             molestiae odit iste numquam vero dignissimos asperiores sed accusamus veniam velit soluta ipsa expedita
-            officia? Obcaecati beatae repudiandae veniam ex autem, laudantium eligendi ea alias sit eos. Nobis earum
-            velit accusantium! Voluptatibus iusto magni, dolorem doloribus laboriosam voluptates non hic cupiditate
-            porro id corrupti officiis dolor nemo illum esse! Amet, dolor placeat magnam voluptatem ex minima voluptates
+            officia? Obcaecati beatae repmet, dolor placeat magnam voluptatem ex minima voluptates
             obcaecati sit ut fuga illo cum reiciendis id iste sed. Suscipit ipsa quas doloremque! Quaerat id nemo cum.
             Nulla quas enim possimus eligendi maxime error soluta aperiam obcaecati eos.
         </div>
-        <div class="col-md-9 list-flight">
-            <div class="row content" *ngFor="let item of flightData;  let i = index">
-                <div class="row content-items mt-2 p-1 d-flex" [ngClass]="{'active':(detailsOpen[i] || infoOpen[i])}">
-                    <div class="row firstRow">
-                        <div class="col-md-2 align-text-center">{{item.airline.name}}</div>
-                        <div class="col-md-7">
-                            {{item.source}}
-                            <span class="p-2 time">{{ item.departingDate}}</span>
-                            <span class="p-2 time">{{item.time}}</span>
-                            <i class="fas fa-plane fa-rotate-180"></i>
-                            <span class="line">-----------------------</span>
-                            <i class="fas fa-circle"></i>
-                            {{item.destination}}
-                        </div>
-                        <div class="col-md-3 pric d-flex flex-column align-items-center">
-                            <span>ریال {{item.price}}</span>
-                            <button class="button buttonR-primary button-md-3 mt-2" type="submit" (click)="reserve(item)">
-                             انتخاب پرواز</button>                            
-                            <!-- de{{detailsOpen[i] }}info{{ infoOpen[i]}} -->
-                        </div>
-                    </div>
-                    <div class="row tabbable">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><span data-target="#details-{{i}}" data-toggle="tab" role="tab"
-                                    (click)="detailTabOpen(i)">اطلاعات پرواز</span></li>
-                            <li class="mx-5"><span data-target="#info-{{i}}" data-toggle="tab" role="tab"
-                                    (click)="infoTabOpen(i)">قوانین استرداد</span>
-                            </li>
-                        </ul>
-                        <!-- [ngStyle]="{'display':detailsOpen[i]?'block':'none' ;{ 'display':detailsOpen[i]?height:100px: height:0px} -->
-                        <div class="tab-content">
-                            <div class="tab-pane" id="details-{{i}}" [ngClass]="{'active':detailsOpen[i] }">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" style="width:10%"> شماره پرواز</th>
-                                            <th scope="col" style="width:5%"> بار مجاز</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:10%" class="overflow-hidden">{{item.flightNumber}}</td>
-                                            <td style="width:5%" class="overflow-hidden"> {{item.airline.loadWeight}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <div class="col-md-9 list-flight" infiniteScroll
+        [infiniteScrollDistance]="infiniteScrollDistance" [infiniteScrollThrottle]="infiniteScrollThrottle">
+            <ng-container *ngIf="flightData.length == 0">
+                <div class="row content-items mt-2 p-1 d-flex">
+                    <span class="d-flex justify-content-center " style="color: red;"> 
+                        <i class="fas fa-exclamation-triangle px-2" style="color: red;"></i>
+                        <span> متاسفانه نتیجه ای پیدا نشد</span>
+                         </span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="flightData.length != 0">
+                <div class="row content" *ngFor="let item of flightData;  let i = index">
+                    <div class="row content-items mt-2 p-1 d-flex"
+                        [ngClass]="{'active':(detailsOpen[i] || infoOpen[i])}">
+                        <div class="row firstRow d-flex flex-row justify-content-between">
+                            
+                            <div class="col-7">
+                                <span> {{item.source}}</span>                                
+                                <span class="time">{{ item.departingDate}}</span>
+                                <span class="time">{{item.time}}</span>
+                                <i class="fas fa-plane fa-rotate-180"></i>
+                                <span class="line">------</span>
+                                <i class="fas fa-circle"></i>
+                                <span>{{item.destination}} </span> 
                             </div>
-                            <div class="tab-pane" id="info-{{i}}" [ngClass]="{'active': infoOpen[i]}">
-                                <div class="flex w-full mb-2  text-2">
-                                    <i class="fas fa-exclamation-triangle"></i>
-
-                                    <span>درصد جریمه کسر شده بر اساس زمان اعلام کنسلی
-                                        قوانین استرداد</span>
+                            <div class="col-sm-1 col-2 align-text-center airline">
+                                <span> {{item.airline.name}} </span> 
+                              </div>
+                            <div class="col-2 pric d-flex flex-column align-items-center">
+                                <span> <span id="price-title">ریال</span>  {{item.price}}</span>
+                                <button class="button buttonR-primary  mt-2" type="submit"
+                                    (click)="reserve(item)">
+                                    انتخاب پرواز</button>
+                            </div>
+                        </div>
+                        <div class="row tabbable">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><span data-target="#details-{{i}}" data-toggle="tab" role="tab"
+                                        (click)="detailTabOpen(i)"> <span> اطلاعات پرواز</span> </span></li>
+                                <li class="mx-5"><span data-target="#info-{{i}}" data-toggle="tab" role="tab"
+                                        (click)="infoTabOpen(i)"> <span>قوانین استرداد </span> </span>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="details-{{i}}" [ngClass]="{'active':detailsOpen[i] }">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="width:10%"> شماره پرواز</th>
+                                                <th scope="col" style="width:5%"> بار مجاز</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:10%" class="overflow-hidden">{{item.flightNumber}}</td>
+                                                <td style="width:5%" class="overflow-hidden">
+                                                    {{item.airline.loadWeight}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="card-info">
-                                    <div class="refund">
-                                        <div class="refund__percent">60%</div>
-                                        <span class="refund__text">از زمان صدور بلیط تا 12:00 ظهر 1 روز قبل از
-                                            پرواز</span>
+                                <div class="tab-pane" id="info-{{i}}" [ngClass]="{'active': infoOpen[i]}">
+                                    <div class="flex w-full mb-2  text-2">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <span>درصد جریمه کسر شده بر اساس زمان اعلام کنسلی
+                                            قوانین استرداد</span>
                                     </div>
-                                    <div class="refund">
-                                        <div class="refund__percent">70%</div>
-                                        <span class="refund__text">از 12:00 ظهر 1 روز قبل از پرواز تا 4 ساعت قبل از
-                                            پرواز</span>
-                                    </div>
-                                    <div class="refund">
-                                        <div class="refund__percent">80%</div>
-                                        <span class="refund__text">از 4 ساعت قبل از پرواز به بعد</span>
+                                    <div class="card-info">
+                                        <div class="refund">
+                                            <div class="refund__percent"><span>60%</span></div>
+                                            <span class="refund__text">از زمان صدور بلیط تا 12:00 ظهر 1 روز قبل از
+                                                پرواز</span>
+                                        </div>
+                                        <div class="refund">
+                                            <div class="refund__percent"><span>70%</span></div>
+                                            <span class="refund__text">از 12:00 ظهر 1 روز قبل از پرواز تا 4 ساعت قبل از
+                                                پرواز</span>
+                                        </div>
+                                        <div class="refund">
+                                            <div class="refund__percent"><span>80%</span></div>
+                                            <span class="refund__text">از 4 ساعت قبل از پرواز به بعد</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
     </div>
 </div>

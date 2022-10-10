@@ -4,3 +4,13 @@
 .title{
     background-color: $gray-20;
 }
+
+///// media//////////
+ @media(max-width:540px){
+     table,
+         th{
+             font-size: $font-size-0 !important;
+             font-weight: lighter;
+         }
+
+ }

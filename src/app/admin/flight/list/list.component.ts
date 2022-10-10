@@ -30,25 +30,21 @@ export class ListComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.listFlight = this.flightService.getData();
-    this.listFlight = this.listFlight.filter(item => item.deleted == 0);
+     
+    const data = this.flightService.getData();
+    this.listFlight = data.filter((item: any) => item.deleted == 0);
     this.listFlight.map((item: any) => {
       const source = this.cityService.getById(item.source);
       const destination = this.cityService.getById(item.destination);
       const airline = this.airlineService.getById(item.airline);
-      this.flightData.push({
-        id: item.id,
-        source: source .name,
-        destination: destination.name,
-        airline: airline.name,
-        flightNumber: item.flightNumber,
-        time: item.time,
-        date: item.date,
-        price:item.price,
-      })
+      item.source = source.name,
+      item.destination = destination.name,
+      item.airline = airline.name,
+      item.flightNumber = item.flightNumber,
+      item.time = item.time,
+      item.date = item.date,
+      item.price = item.price
     })
-    console.log("list:", this.flightData);
-
     this.collectionSize = this.listFlight.length;
     // moment().locale('fa').format('YYYY/M/D');
 

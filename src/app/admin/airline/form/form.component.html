@@ -30,9 +30,9 @@
             </div>
           </div>
           <div class="col-md-4 ">
-            <label class="col-form-label-sm">وزن مجاز بار</label>
+            <label class="col-form-label-sm">و خانم مجاز بار</label>
             <ng-multiselect-dropdown class="form-control-sm" [settings]="dropdownSettingsLoad"
-              [placeholder]="'وزن مجاز بار'" [data]="listLoadWeight" (onSelect)="onLoadSelect($event)"
+              [placeholder]="'و خانم مجاز بار'" [data]="listLoadWeight" (onSelect)="onLoadSelect($event)"
               formControlName="loadWeight" [ngClass]="{
               error: (!formAirline.get('loadWeight')?.valid || formAirline.get('loadWeight')?.value === '') && isClickOnSaveBtn
             }">
@@ -41,7 +41,7 @@
               <app-error-message *ngIf="
             !formAirline.get('loadWeight')?.valid &&
             isClickOnSaveBtn &&
-            !formAirline.get('loadWeight')?.value" [message]="'کمترین وزن 20کیلو'">
+            !formAirline.get('loadWeight')?.value" [message]="'کمترین و خانم 20کیلو'">
               </app-error-message>
             </div>
           </div>
@@ -65,5 +65,4 @@
       <div class="col col-md-2"> </div>
     </div>
   </form>
-  {{formAirline.value |json}}
 </div>

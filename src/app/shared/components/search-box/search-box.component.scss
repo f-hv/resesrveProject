@@ -13,7 +13,6 @@ $btn-md-width: 25px;
   outline: none;
   outline: 2px solid transparent;
   width: 100%;
-  // padding-left: $spacing-05;
   font-size: $font-size-1;
   text-transform: uppercase;
 
@@ -100,5 +99,15 @@ $btn-md-width: 25px;
 
   i{
     color: $gray-50;
+  }
+}
+//////media//////////////@at-root
+@media (max-width:540px){
+  input {
+    font-size: $font-size-sm !important;
+  }
+  i{
+    font-size: $font-size-1 !important;
+
   }
 }

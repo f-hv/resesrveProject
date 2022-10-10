@@ -17,11 +17,10 @@ export class PeymentService {
 
   getData() {
     return this.peymentList = JSON.parse(LocalStorageService.read("peyment"));
-    //  data ? data : [];
   }
 
   addPeyment(data: any) {
-    debugger
+     
     this.getData();
     this.peymentList == null ? LocalStorageService.save("peyment", JSON.stringify(data)) : LocalStorageService.addToArray("peyment", data);
     return true;

@@ -38,7 +38,7 @@ export class AirlineService {
   }
 
   update(data: AirlineModel) {
-    debugger
+     
     this.getData();
     this.airline.find((item: any) => {
       if (item.id === data.id || item.name === data.name) {
